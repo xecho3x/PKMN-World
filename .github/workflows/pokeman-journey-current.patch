@@ -1,0 +1,380 @@
+--- a/Makefile
++++ b/Makefile
+@@ -1,5 +1,5 @@
+ GAME_VERSION ?= EMERALD
+-TITLE        ?= POKEMON WRLD
++TITLE        ?= POKEMAN JRNY
+ GAME_CODE    ?= BPEE
+ BUILD_NAME   ?= emerald
+ MAP_VERSION  ?= emerald
+@@ -37,7 +37,7 @@
+ KEEP_TEMPS  ?= 0
+ 
+ # `File name`.gba
+-FILE_NAME := pokemonworld
++FILE_NAME := pokeman_journey
+ BUILD_DIR := build
+ 
+ # Executes the Test Runner System that checks that all mechanics work as expected
+--- a/data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
++++ b/data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
+@@ -1070,7 +1070,7 @@
+ 	faceplayer
+ 	setvar PLAYER_STARTER_NUM, 0
+ 	setvar PLAYER_STARTER_SPECIES, SPECIES_BULBASAUR
+-	setvar RIVAL_STARTER_SPECIES, SPECIES_CHARMANDER
++	setvar RIVAL_STARTER_SPECIES, SPECIES_CYNDAQUIL
+ 	setvar RIVAL_STARTER_ID, LOCALID_CHARMANDER_BALL
+ 	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
+ 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2, PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice
+@@ -1215,8 +1215,8 @@
+ 	lock
+ 	faceplayer
+ 	setvar PLAYER_STARTER_NUM, 1
+-	setvar PLAYER_STARTER_SPECIES, SPECIES_SQUIRTLE
+-	setvar RIVAL_STARTER_SPECIES, SPECIES_BULBASAUR
++	setvar PLAYER_STARTER_SPECIES, SPECIES_CYNDAQUIL
++	setvar RIVAL_STARTER_SPECIES, SPECIES_MUDKIP
+ 	setvar RIVAL_STARTER_ID, LOCALID_BULBASAUR_BALL
+ 	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
+ 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2, PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice
+@@ -1228,8 +1228,8 @@
+ 	lock
+ 	faceplayer
+ 	setvar PLAYER_STARTER_NUM, 2
+-	setvar PLAYER_STARTER_SPECIES, SPECIES_CHARMANDER
+-	setvar RIVAL_STARTER_SPECIES, SPECIES_SQUIRTLE
++	setvar PLAYER_STARTER_SPECIES, SPECIES_MUDKIP
++	setvar RIVAL_STARTER_SPECIES, SPECIES_BULBASAUR
+ 	setvar RIVAL_STARTER_ID, LOCALID_SQUIRTLE_BALL
+ 	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
+ 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2, PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice
+@@ -1405,16 +1405,16 @@
+ 	.string "Don't go away yet!$"
+ 
+ PalletTown_ProfessorOaksLab_Text_OakChoosingCharmander::
+-	.string "Ah! CHARMANDER is your choice.\n"
+-	.string "You should raise it patiently.\p"
+-	.string "So, {PLAYER}, you're claiming the\n"
+-	.string "FIRE POKéMON CHARMANDER?$"
++	.string "Hm! MUDKIP is your choice.\n"
++	.string "It's sturdy and dependable.\p"
++	.string "So, {PLAYER}, you've decided on the\n"
++	.string "WATER POKéMON MUDKIP?$"
+ 
+ PalletTown_ProfessorOaksLab_Text_OakChoosingSquirtle::
+-	.string "Hm! SQUIRTLE is your choice.\n"
+-	.string "It's one worth raising.\p"
+-	.string "So, {PLAYER}, you've decided on the\n"
+-	.string "WATER POKéMON SQUIRTLE?$"
++	.string "Ah! CYNDAQUIL is your choice.\n"
++	.string "Raise it with patience and care.\p"
++	.string "So, {PLAYER}, you're choosing the\n"
++	.string "FIRE POKéMON CYNDAQUIL?$"
+ 
+ PalletTown_ProfessorOaksLab_Text_OakChoosingBulbasaur::
+ 	.string "I see! BULBASAUR is your choice.\n"
+--- a/data/maps/PewterCity_Mart_Frlg/scripts.inc
++++ b/data/maps/PewterCity_Mart_Frlg/scripts.inc
+@@ -29,6 +29,7 @@
+ 	.2byte ITEM_BURN_HEAL
+ 	.2byte ITEM_ESCAPE_ROPE
+ 	.2byte ITEM_REPEL
++	.2byte ITEM_MOON_STONE
+ 	.2byte ITEM_NONE
+ 	release
+ 	end
+--- a/src/data/items.h
++++ b/src/data/items.h
+@@ -4196,15 +4196,7 @@
+     [ITEM_MOON_STONE] =
+     {
+         .name = ITEM_NAME("Moon Stone"),
+-    #if I_PRICE >= GEN_7
+-        .price = 3000,
+-    #elif I_PRICE >= GEN_4
+-        .price = 2100,
+-    #elif I_PRICE == GEN_3
+-        .price = 0,
+-    #else
+-        .price = 1,
+-    #endif
++    .price = 1000,
+         .description = sEvolutionStoneDesc,
+         .pocket = POCKET_ITEMS,
+         .sortType = ITEM_TYPE_EVOLUTION_STONE,
+--- a/src/data/pokemon/species_info/gen_1_families.h
++++ b/src/data/pokemon/species_info/gen_1_families.h
+@@ -8299,6 +8299,7 @@
+         .evolutions = EVOLUTION({EVO_ITEM, ITEM_WATER_STONE, SPECIES_POLIWRATH}
+                             #if P_GEN_2_CROSS_EVOS
+                                 ,{EVO_TRADE, 0, SPECIES_POLITOED, CONDITIONS({IF_HOLD_ITEM, ITEM_KINGS_ROCK})},
++                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_POLITOED},
+                                 {EVO_ITEM, ITEM_KINGS_ROCK, SPECIES_POLITOED}
+                             #endif
+                             ),
+@@ -8635,7 +8636,7 @@
+         .levelUpLearnset = sKadabraLevelUpLearnset,
+         .teachableLearnset = sKadabraTeachableLearnset,
+         .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_ALAKAZAM},
+-                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_ALAKAZAM}),
++                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_ALAKAZAM}),
+     },
+ 
+ #if P_UPDATED_STATS >= GEN_6
+@@ -8974,7 +8975,7 @@
+         .levelUpLearnset = sMachokeLevelUpLearnset,
+         .teachableLearnset = sMachokeTeachableLearnset,
+         .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_MACHAMP},
+-                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_MACHAMP}),
++                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_MACHAMP}),
+     },
+ 
+ #if P_UPDATED_EXP_YIELDS >= GEN_8
+@@ -9716,7 +9717,7 @@
+         .teachableLearnset = sGravelerTeachableLearnset,
+         .formSpeciesIdTable = sGravelerFormSpeciesIdTable,
+         .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_GOLEM},
+-                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_GOLEM}),
++                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_GOLEM}),
+     },
+ 
+     [SPECIES_GOLEM] =
+@@ -10350,6 +10351,7 @@
+         .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_SLOWBRO}
+                             #if P_GEN_2_CROSS_EVOS
+                                 ,{EVO_TRADE, 0, SPECIES_SLOWKING, CONDITIONS({IF_HOLD_ITEM, ITEM_KINGS_ROCK})},
++                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_SLOWKING},
+                                 {EVO_ITEM, ITEM_KINGS_ROCK, SPECIES_SLOWKING}
+                             #endif
+                             ),
+@@ -12143,7 +12145,7 @@
+         .levelUpLearnset = sHaunterLevelUpLearnset,
+         .teachableLearnset = sHaunterTeachableLearnset,
+         .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_GENGAR},
+-                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_GENGAR}),
++                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_GENGAR}),
+     },
+ 
+ #define GENGAR_SP_DEF (P_UPDATED_STATS >= GEN_2 ? 75 : 130)
+--- a/src/data/pokemon/species_info/gen_3_families.h
++++ b/src/data/pokemon/species_info/gen_3_families.h
+@@ -11277,6 +11277,8 @@
+         .eggMoveLearnset = sClamperlEggMoveLearnset,
+         .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_HUNTAIL, CONDITIONS({IF_HOLD_ITEM, ITEM_DEEP_SEA_TOOTH})},
+                                 {EVO_TRADE, 0, SPECIES_GOREBYSS, CONDITIONS({IF_HOLD_ITEM, ITEM_DEEP_SEA_SCALE})},
++                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_HUNTAIL},
++                                {EVO_ITEM, ITEM_SUN_STONE, SPECIES_GOREBYSS},
+                                 {EVO_ITEM, ITEM_DEEP_SEA_TOOTH, SPECIES_HUNTAIL},
+                                 {EVO_ITEM, ITEM_DEEP_SEA_SCALE, SPECIES_GOREBYSS}),
+     },
+--- a/src/data/trainers_frlg.party
++++ b/src/data/trainers_frlg.party
+@@ -915,7 +915,7 @@
+ AI: Check Bad Move
+ 
+ Geodude
+-Level: 10
++Level: 12
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - Tackle
+ - Defense Curl
+@@ -4429,7 +4429,7 @@
+ Double Battle: No
+ AI: Check Bad Move / Try To Faint / Check Viability
+ 
+-Squirtle
++Bulbasaur
+ Level: 5
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - Tackle
+@@ -4444,7 +4444,7 @@
+ Double Battle: No
+ AI: Check Bad Move / Try To Faint / Check Viability
+ 
+-Bulbasaur
++Mudkip
+ Level: 5
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - Tackle
+@@ -4459,7 +4459,7 @@
+ Double Battle: No
+ AI: Check Bad Move / Try To Faint / Check Viability
+ 
+-Charmander
++Cyndaquil
+ Level: 5
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - Scratch
+@@ -4475,13 +4475,13 @@
+ AI: Check Bad Move / Try To Faint / Check Viability
+ 
+ Pidgey
+-Level: 9
++Level: 10
+ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ - Tackle
+ - Sand Attack
+ 
+-Squirtle
+-Level: 9
++Bulbasaur
++Level: 10
+ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ - Tackle
+ - Tail Whip
+@@ -4496,13 +4496,13 @@
+ AI: Check Bad Move / Try To Faint / Check Viability
+ 
+ Pidgey
+-Level: 9
++Level: 10
+ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ - Tackle
+ - Sand Attack
+ 
+-Bulbasaur
+-Level: 9
++Mudkip
++Level: 10
+ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ - Tackle
+ - Growl
+@@ -4517,13 +4517,13 @@
+ AI: Check Bad Move / Try To Faint / Check Viability
+ 
+ Pidgey
+-Level: 9
++Level: 10
+ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ - Tackle
+ - Sand Attack
+ 
+-Charmander
+-Level: 9
++Cyndaquil
++Level: 10
+ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ - Scratch
+ - Growl
+@@ -7101,13 +7101,14 @@
+ AI: Check Bad Move / Try To Faint / Check Viability
+ 
+ Geodude
+-Level: 12
++Level: 13
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - Tackle
+ - Defense Curl
++- Rock Throw
+ 
+ Onix
+-Level: 14
++Level: 15
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - Tackle
+ - Bind
+--- a/src/new_game.c
++++ b/src/new_game.c
+@@ -54,6 +54,7 @@
+ #include "follower_npc.h"
+ #include "regions.h"
+ #include "constants/johto_flags.h"
++#include "constants/heal_locations.h"
+ 
+ extern const u8 EventScript_ResetAllMapFlags[];
+ extern const u8 EventScript_ResetAllMapFlagsFrlg[];
+@@ -146,13 +147,12 @@
+ static void WarpToTruck(void)
+ {
+ #if ALL_REGIONS
+-    // Region-switch: every new game lands in the World Transit hub; the destination region is
+-    // chosen by talking to a gate attendant (data/maps/RegionHub). startRegion stays
+-    // REGION_NONE until then. Spawn on the departure-concourse crest at (16,4) via
+-    // WARP_ID_NONE + explicit coords (the FRLG new-game pattern above) - same tile as hub
+-    // warp 0, a plain floor anchor with no warp behavior, so the fade-in can never
+-    // re-trigger a warp.
+-    SetWarpDestination(MAP_GROUP(MAP_REGION_HUB), MAP_NUM(MAP_REGION_HUB), WARP_ID_NONE, 16, 4);
++    // PokeMan Journey begins as a single continuous adventure in Kanto.
++    // Start in the Pallet Town bedroom, preserve the shared three-region save architecture,
++    // and mark Kanto as the active campaign from the first frame.
++    SetCurrentRegion(REGION_KANTO);
++    SetLastHealLocationWarp(HEAL_LOCATION_PALLET_TOWN);
++    SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), WARP_ID_NONE, 6, 6);
+ #else
+     if (IS_FRLG)
+         SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), WARP_ID_NONE, 6, 6);
+@@ -213,7 +213,7 @@
+     // Region merge: stamp the save format; travel-pass / other intro bits and the
+     // per-region var/flag banks default clear (SaveBlock3 zeroed by ClearSav3 above).
+     gSaveBlock2Ptr->saveVersion = SAVE_FORMAT_VERSION;
+-    gSaveBlock2Ptr->hoennIntroDone = TRUE; // the truck intro IS the Hoenn intro; unset caused a stray hub-arrival MOM line + autosave block
++    gSaveBlock2Ptr->hoennIntroDone = FALSE; // Hoenn remains a future leg of the Journey.
+     // Stamp the obstacle table hash NOW, not on the first load. ClearSav3() just zeroed it, and
+     // the hash check only runs on load — so without this, every tree cut and rock smashed during
+     // the FIRST session would be wiped the first time the player reloads, as the 0 hash read as
+--- a/src/starter_choose.c
++++ b/src/starter_choose.c
+@@ -112,15 +112,15 @@
+ };
+ 
+ // Region-aware starter trios. VAR_STARTER_MON stores the chosen ball INDEX (0/1/2). Hoenn and
+-// Johto use the natural grass/fire/water order; KANTO follows the bundled FRLG champion room's
+-// convention (index 0 = Charmander, 1 = Bulbasaur, 2 = Squirtle) so Blue's VAR_STARTER_MON
+-// variant-select stays correct WITHOUT editing the champion battle scripts. Picked at runtime
++// Johto use the natural grass/fire/water order. PokeMan Journey gives Kanto a cross-region
++// trio: index 0 = Bulbasaur, 1 = Cyndaquil, 2 = Mudkip. Rival scripts are authored around
++// this same index order. Picked at runtime
+ // by GetCurrentRegion() (the player is on the region's start town when ChooseStarter runs).
+ // Unpopulated regions fall back to the Hoenn trio.
+ static const u16 sStarterMon[REGIONS_COUNT][STARTER_MON_COUNT] =
+ {
+     [REGION_HOENN] = { SPECIES_TREECKO,    SPECIES_TORCHIC,   SPECIES_MUDKIP   },
+-    [REGION_KANTO] = { SPECIES_CHARMANDER, SPECIES_BULBASAUR, SPECIES_SQUIRTLE },
++    [REGION_KANTO] = { SPECIES_BULBASAUR,  SPECIES_CYNDAQUIL, SPECIES_MUDKIP   },
+     [REGION_JOHTO] = { SPECIES_CHIKORITA,  SPECIES_CYNDAQUIL, SPECIES_TOTODILE },
+ };
+ 
+--- a/include/config/start_menu.h
++++ b/include/config/start_menu.h
+@@ -7,6 +7,6 @@
+ // scripted opens (Task_OpenStartMenu) always use the classic menu regardless.
+ // Note: SaveBlock3.usmSaved stays in the save layout in both settings, so flipping this
+ // never shifts save data.
+-#define PW_GRAPHICAL_START_MENU     TRUE
++#define PW_GRAPHICAL_START_MENU     FALSE
+ 
+ #endif // GUARD_CONFIG_START_MENU_H
+--- a/include/config/pokedex_plus_hgss.h
++++ b/include/config/pokedex_plus_hgss.h
+@@ -1,7 +1,7 @@
+ #ifndef GUARD_CONFIG_POKEDEX_PLUS_HGSS_H
+ #define GUARD_CONFIG_POKEDEX_PLUS_HGSS_H
+ 
+-#define POKEDEX_PLUS_HGSS                   TRUE  // If TRUE, enables the custom HGSS style Pokedex.
++#define POKEDEX_PLUS_HGSS                   FALSE  // If TRUE, enables the custom HGSS style Pokedex.
+ #define HGSS_DECAPPED                       TRUE  // If TRUE, uses decapped gfx and strings.
+ #define HGSS_DARK_MODE                      FALSE // If TRUE, enables dark mode.
+ #define HGSS_HIDE_UNSEEN_EVOLUTION_NAMES    FALSE // If TRUE, hides evolution mon names.
+--- a/include/config/swsh_item_menu.h
++++ b/include/config/swsh_item_menu.h
+@@ -1,7 +1,7 @@
+ #ifndef GUARD_CONFIG_SWSH_ITEM_MENU_H
+ #define GUARD_CONFIG_SWSH_ITEM_MENU_H
+ 
+-#define SWSH_ITEM_MENU                    TRUE  // Use SwSh bag menu
++#define SWSH_ITEM_MENU                    FALSE  // Use SwSh bag menu
+ 
+ #define SWSH_ITEM_MENU_TMHM_CONTEST_INFO  (SWSH_ITEM_MENU && TRUE)  // Show contest info for TMs/HMs in the item menu
+ #define SWSH_ITEM_MENU_BERRY_INFO         TRUE  // Show berry info in the item menu
+--- a/include/config/swsh_party_menu.h
++++ b/include/config/swsh_party_menu.h
+@@ -1,7 +1,7 @@
+ #ifndef GUARD_CONFIG_SWSH_PARTY_MENU_H
+ #define GUARD_CONFIG_SWSH_PARTY_MENU_H
+ 
+-#define SWSH_PARTY_MENU                   TRUE
++#define SWSH_PARTY_MENU                   FALSE
+ #define SWSH_PARTY_MENU_PC_ACCESS         TRUE
+ #define SWSH_PARTY_MON_IDLE_ANIMS         TRUE
+ #define SWSH_PARTY_MON_IDLE_ANIMS_FRAMES  300 // Number of frames before mon animation loops
