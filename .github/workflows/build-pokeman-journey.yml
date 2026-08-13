@@ -6,6 +6,7 @@ on:
     paths:
       - pokeman-journey-current.patch
       - pokeman-journey-v0.4.patch
+      - pokeman-journey-v0.4.1.patch
       - .github/workflows/build-pokeman-journey.yml
 
 permissions:
@@ -21,19 +22,19 @@ jobs:
       - name: Check out PKMN-World source
         uses: actions/checkout@v4
 
-      - name: Verify version 0.4 patch
+      - name: Verify version 0.4.1 patch
         run: git apply --check pokeman-journey-current.patch
 
-      - name: Apply PokeMan Journey version 0.4
+      - name: Apply PokeMan Journey version 0.4.1
         run: git apply --verbose pokeman-journey-current.patch
 
-      - name: Confirm v0.4 region progression
+      - name: Confirm v0.4.1 region progression and levels
         run: |
           grep -Eq '^#define PW_GRAPHICAL_START_MENU[[:space:]]+FALSE' include/config/start_menu.h
           grep -Eq '^#define POKEDEX_PLUS_HGSS[[:space:]]+FALSE' include/config/pokedex_plus_hgss.h
           grep -Eq '^#define SWSH_ITEM_MENU[[:space:]]+FALSE' include/config/swsh_item_menu.h
           grep -Eq '^#define SWSH_PARTY_MENU[[:space:]]+FALSE' include/config/swsh_party_menu.h
-          grep -Fq 'NEW GAME  V0.4' src/main_menu.c
+          grep -Fq 'NEW GAME  V0.4.1' src/main_menu.c
           grep -Fq 'goto_if_eq PLAYER_STARTER_NUM, 0, PalletTown_ProfessorOaksLab_EventScript_RivalWalksToSquirtle' data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
           grep -Fq 'goto_if_eq PLAYER_STARTER_NUM, 1, PalletTown_ProfessorOaksLab_EventScript_RivalWalksToCharmander' data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
           grep -Fq 'goto_if_eq PLAYER_STARTER_NUM, 2, PalletTown_ProfessorOaksLab_EventScript_RivalWalksToBulbasaur' data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
@@ -44,6 +45,9 @@ jobs:
           grep -Fq 'setvar PLAYER_STARTER_SPECIES, SPECIES_TOTODILE' data/maps/NewBarkTown_Lab/scripts.inc
           grep -Fq 'setvar PLAYER_STARTER_SPECIES, SPECIES_TREECKO' data/maps/NewBarkTown_Lab/scripts.inc
           grep -Fq 'MAP_NEW_BARK_TOWN_PLAYERS_HOUSE_2F' data/maps/TwoIsland_Frlg/scripts.inc
+          grep -Fq 'givemon VAR_0x8004, 25' data/maps/CeladonCity_Gym_Frlg/scripts.inc
+          grep -Fq 'givemon VAR_0x8004, 40' data/maps/CinnabarIsland_Gym_Frlg/scripts.inc
+          grep -Fq 'givemon SPECIES_AERODACTYL, 35' data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.inc
 
       - name: Install GBA compiler
         run: |
@@ -71,18 +75,18 @@ jobs:
           GAME_VERSION: EMERALD
         run: make -j$(nproc)
 
-      - name: Verify Android-compatible version 0.4 ROM
+      - name: Verify Android-compatible version 0.4.1 ROM
         run: |
-          test -f pokeman_journey_v04_fixed.gba
-          ls -lh pokeman_journey_v04_fixed.gba
-          sha256sum pokeman_journey_v04_fixed.gba
+          test -f pokeman_journey_v041_fixed.gba
+          ls -lh pokeman_journey_v041_fixed.gba
+          sha256sum pokeman_journey_v041_fixed.gba
           python3 - <<'PY'
           from pathlib import Path
-          rom = Path("pokeman_journey_v04_fixed.gba").read_bytes()
+          rom = Path("pokeman_journey_v041_fixed.gba").read_bytes()
           assert len(rom) == 32 * 1024 * 1024
-          assert rom[0xA0:0xAC].rstrip(b"\0 ") == b"POKEMAN V04"
+          assert rom[0xA0:0xAC].rstrip(b"\0 ") == b"POKEMAN V041"
           assert rom[0xAC:0xB0] == b"BPEE"
-          assert rom[0xBC] == 5
+          assert rom[0xBC] == 6
           assert b"FLASH1M_V" in rom
           expected = (-(sum(rom[0xA0:0xBD]) + 0x19)) & 0xFF
           assert rom[0xBD] == expected
@@ -92,7 +96,7 @@ jobs:
       - name: Upload playable ROM
         uses: actions/upload-artifact@v4
         with:
-          name: PokeMan-Journey-v0.4-Kanto-Johto
-          path: pokeman_journey_v04_fixed.gba
+          name: PokeMan-Journey-v0.4.1-Level-Scaling
+          path: pokeman_journey_v041_fixed.gba
           if-no-files-found: error
           retention-days: 7
