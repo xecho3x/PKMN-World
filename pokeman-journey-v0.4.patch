@@ -23,6 +23,19 @@ index 13a003ed..74ecab62 100644
  BUILD_DIR := build
  
  # Executes the Test Runner System that checks that all mechanics work as expected
+diff --git a/Testing/SavePatch.py b/Testing/SavePatch.py
+index 4069f858..72da5d87 100644
+--- a/Testing/SavePatch.py
++++ b/Testing/SavePatch.py
+@@ -146,7 +146,7 @@ PROBED = {
+     'RS.clearedObstacleBits': ('offsetof(struct RegionSave, clearedObstacleBits)', 1136),
+     'RS.johtoTrainerFlags': ('offsetof(struct RegionSave, johtoTrainerFlags)', 1200),
+     'NUM_JOHTO_TRAINER_FLAG_BYTES': ('NUM_JOHTO_TRAINER_FLAG_BYTES', 32),
+-    'CLEARED_OBSTACLE_TABLE_HASH': ('CLEARED_OBSTACLE_TABLE_HASH', 0x233ED09C),
++    'CLEARED_OBSTACLE_TABLE_HASH': ('CLEARED_OBSTACLE_TABLE_HASH', 0xAE105E58),
+ 
+     # v9 renumber/repoint inputs. Derived, never typed: MAP_NUM changes when a map group is
+     # reordered, and hard-coding it is the exact mistake sDeletedTwinMaps avoids.
 diff --git a/Testing/ValidateV04Kanto.py b/Testing/ValidateV04Kanto.py
 new file mode 100644
 index 00000000..5c19d902
@@ -1140,6 +1153,18 @@ index 3bddb6fe..926826f1 100644
  #define SWSH_PARTY_MENU_PC_ACCESS         TRUE
  #define SWSH_PARTY_MON_IDLE_ANIMS         TRUE
  #define SWSH_PARTY_MON_IDLE_ANIMS_FRAMES  300 // Number of frames before mon animation loops
+diff --git a/include/constants/cleared_obstacles.h b/include/constants/cleared_obstacles.h
+index 9e8f2dfb..710c9e87 100644
+--- a/include/constants/cleared_obstacles.h
++++ b/include/constants/cleared_obstacles.h
+@@ -17,6 +17,6 @@
+ // index after it, which would silently re-point saved bits at different obstacles. The save
+ // stores the hash it was written under; on a mismatch the bits are cleared and re-stamped, so
+ // every obstacle regrows exactly ONCE after a map edit instead of drifting invisibly.
+-#define CLEARED_OBSTACLE_TABLE_HASH 0x233ED09C
++#define CLEARED_OBSTACLE_TABLE_HASH 0xAE105E58
+ 
+ #endif // GUARD_CONSTANTS_CLEARED_OBSTACLES_H
 diff --git a/include/constants/flags.h b/include/constants/flags.h
 index b29495cd..4151b5df 100644
 --- a/include/constants/flags.h
@@ -1194,6 +1219,26 @@ index dd201b28..59c85a8a 100644
  #define VAR_MAP_SCENE_MT_MOON_B2F                                              0x408B
  
  
+diff --git a/src/data/cleared_obstacles.h b/src/data/cleared_obstacles.h
+index 6fa4e03c..16f9ab4a 100644
+--- a/src/data/cleared_obstacles.h
++++ b/src/data/cleared_obstacles.h
+@@ -126,7 +126,6 @@ static const u32 sClearedObstacleKeys[CLEARED_OBSTACLE_COUNT] =
+     0x23490C, // group 35, map 73, localId 12
+     0x23490D, // group 35, map 73, localId 13
+     // CeruleanCave_B1F_Frlg
+-    0x234A04, // group 35, map 74, localId 4
+     0x234A05, // group 35, map 74, localId 5
+     0x234A06, // group 35, map 74, localId 6
+     0x234A07, // group 35, map 74, localId 7
+@@ -135,6 +134,7 @@ static const u32 sClearedObstacleKeys[CLEARED_OBSTACLE_COUNT] =
+     0x234A0A, // group 35, map 74, localId 10
+     0x234A0B, // group 35, map 74, localId 11
+     0x234A0C, // group 35, map 74, localId 12
++    0x234A0D, // group 35, map 74, localId 13
+     // RockTunnel_B1F_Frlg
+     0x23520C, // group 35, map 82, localId 12
+     0x23520D, // group 35, map 82, localId 13
 diff --git a/src/data/items.h b/src/data/items.h
 index 5fd5518e..69919454 100644
 --- a/src/data/items.h
