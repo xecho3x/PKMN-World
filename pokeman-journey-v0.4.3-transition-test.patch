@@ -1,0 +1,991 @@
+diff --git a/Makefile b/Makefile
+index 13a003ed..247b8a89 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,5 +1,5 @@
+ GAME_VERSION ?= EMERALD
+-TITLE        ?= POKEMON WRLD
++TITLE        ?= PKMN TEST043
+ GAME_CODE    ?= BPEE
+ BUILD_NAME   ?= emerald
+ MAP_VERSION  ?= emerald
+@@ -33,11 +33,11 @@ endif
+ 
+ # GBA rom header
+ MAKER_CODE  := 01
+-REVISION    := 0
++REVISION    := 9
+ KEEP_TEMPS  ?= 0
+ 
+ # `File name`.gba
+-FILE_NAME := pokemonworld
++FILE_NAME := pokeman_journey_v043_transition_test
+ BUILD_DIR := build
+ 
+ # Executes the Test Runner System that checks that all mechanics work as expected
+diff --git a/Testing/SavePatch.py b/Testing/SavePatch.py
+index 4069f858..72da5d87 100644
+--- a/Testing/SavePatch.py
++++ b/Testing/SavePatch.py
+@@ -146,7 +146,7 @@ PROBED = {
+     'RS.clearedObstacleBits': ('offsetof(struct RegionSave, clearedObstacleBits)', 1136),
+     'RS.johtoTrainerFlags': ('offsetof(struct RegionSave, johtoTrainerFlags)', 1200),
+     'NUM_JOHTO_TRAINER_FLAG_BYTES': ('NUM_JOHTO_TRAINER_FLAG_BYTES', 32),
+-    'CLEARED_OBSTACLE_TABLE_HASH': ('CLEARED_OBSTACLE_TABLE_HASH', 0x233ED09C),
++    'CLEARED_OBSTACLE_TABLE_HASH': ('CLEARED_OBSTACLE_TABLE_HASH', 0xAE105E58),
+ 
+     # v9 renumber/repoint inputs. Derived, never typed: MAP_NUM changes when a map group is
+     # reordered, and hard-coding it is the exact mistake sDeletedTwinMaps avoids.
+diff --git a/Testing/ValidateTransitionTest.py b/Testing/ValidateTransitionTest.py
+new file mode 100644
+index 00000000..f9e37a86
+--- /dev/null
++++ b/Testing/ValidateTransitionTest.py
+@@ -0,0 +1,38 @@
++#!/usr/bin/env python3
++"""Validate the one-off Blaine -> Two Island -> Johto quick-test build."""
++
++from pathlib import Path
++
++
++ROOT = Path(__file__).resolve().parents[1]
++
++
++def read(path: str) -> str:
++    return (ROOT / path).read_text(encoding="utf-8")
++
++
++def require(condition: bool, message: str) -> None:
++    if not condition:
++        raise SystemExit(f"ERROR: {message}")
++
++
++new_game = read("src/new_game.c")
++gym = read("data/maps/CinnabarIsland_Gym_Frlg/scripts.inc")
++island = read("data/maps/TwoIsland_Frlg/scripts.inc")
++menu = read("src/main_menu.c")
++makefile = read("Makefile")
++
++require("MAP_CINNABAR_ISLAND_GYM" in new_game, "new game does not start in Blaine's Gym")
++for badge in range(1, 7):
++    require(f"FlagSet(FLAG_KANTO_BADGE_{badge})" in new_game, f"Kanto badge {badge} is not preloaded")
++for species in ("BLASTOISE", "VAPOREON", "GOLEM"):
++    require(f"SPECIES_{species}" in new_game, f"test party is missing {species}")
++require("CinnabarIsland_Gym_EventScript_TransitionTestWarp" in gym, "post-Blaine test warp is missing")
++require("warp MAP_TWO_ISLAND, 3" in gym, "test warp does not enter Two Island")
++for token in ("FLAG_KANTO_BADGE_7", "TwoIsland_EventScript_OfferJohto", "MAP_NEW_BARK_TOWN_PLAYERS_HOUSE_2F"):
++    require(token in island, f"Two Island handoff is missing {token}")
++require("NEW GAME  V0.4.3 TEST" in menu, "test build is not visibly labelled")
++require("TITLE        ?= PKMN TEST043" in makefile, "test ROM header title is wrong")
++require("REVISION    := 9" in makefile, "test ROM revision is wrong")
++
++print("Transition-test validation passed: Blaine quick start and Two Island Johto handoff are armed.")
+diff --git a/Testing/ValidateV04Kanto.py b/Testing/ValidateV04Kanto.py
+new file mode 100644
+index 00000000..070dea9d
+--- /dev/null
++++ b/Testing/ValidateV04Kanto.py
+@@ -0,0 +1,295 @@
++"""Validate PokeMan Journey v0.4.3's Kanto collection and Johto handoff."""
++
++import json
++import re
++from pathlib import Path
++
++
++ROOT = Path(__file__).resolve().parents[1]
++
++
++def read(path):
++    return (ROOT / path).read_text(encoding="utf-8", errors="ignore")
++
++
++def require(condition, message):
++    if not condition:
++        raise AssertionError(message)
++
++
++def balanced_evolution_targets(block):
++    marker = ".evolutions = EVOLUTION("
++    marker_pos = block.find(marker)
++    if marker_pos < 0:
++        return set()
++
++    start = marker_pos + len(marker)
++    depth = 1
++    pos = start
++    while pos < len(block) and depth:
++        depth += (block[pos] == "(") - (block[pos] == ")")
++        pos += 1
++    require(depth == 0, "Unbalanced EVOLUTION macro in Gen 1 species data")
++    return set(re.findall(r"SPECIES_([A-Z0-9_]+)", block[start : pos - 1]))
++
++
++def main():
++    kanto_map_ids = set()
++    kanto_map_dirs = []
++    for map_json in (ROOT / "data/maps").glob("*/map.json"):
++        try:
++            data = json.loads(map_json.read_text(encoding="utf-8"))
++        except (UnicodeDecodeError, json.JSONDecodeError):
++            continue
++        if data.get("region") == "REGION_KANTO":
++            kanto_map_ids.add(data["id"])
++            kanto_map_dirs.append(map_json.parent)
++
++    encounters = json.loads(read("src/data/wild_encounters.json"))
++    species_by_map = {}
++    levels_by_map_species = {}
++    levels_by_label_species = {}
++    direct_sources = set()
++    for group in encounters["wild_encounter_groups"]:
++        for encounter in group.get("encounters", []):
++            map_id = encounter.get("map")
++            if map_id not in kanto_map_ids:
++                continue
++            base_label = encounter.get("base_label")
++            map_species = species_by_map.setdefault(map_id, set())
++            for key, table in encounter.items():
++                if not key.endswith("_mons") or not isinstance(table, dict):
++                    continue
++                for mon in table.get("mons", []):
++                    species = mon["species"].removeprefix("SPECIES_")
++                    map_species.add(species)
++                    direct_sources.add(species)
++                    levels_by_map_species.setdefault((map_id, species), set()).add(
++                        (mon["min_level"], mon["max_level"])
++                    )
++                    levels_by_label_species.setdefault((base_label, species), set()).add(
++                        (mon["min_level"], mon["max_level"])
++                    )
++
++    for map_dir in kanto_map_dirs:
++        script_path = map_dir / "scripts.inc"
++        if script_path.exists():
++            script = script_path.read_text(encoding="utf-8", errors="ignore")
++            direct_sources.update(
++                re.findall(r"(?:givemon|setwildbattle)\s+SPECIES_([A-Z0-9_]+)", script)
++            )
++
++    # These are variable-driven gifts/prizes and therefore do not appear as literal
++    # givemon operands in the map scripts.
++    direct_sources.update({"BULBASAUR", "CYNDAQUIL", "MUDKIP", "PORYGON"})
++
++    dex_section = read("include/constants/pokedex.h").split("// Kanto", 1)[1].split("// Johto", 1)[0]
++    kanto_species = set(re.findall(r"NATIONAL_DEX_([A-Z0-9_]+)", dex_section))
++    require(len(kanto_species) == 151, f"Expected 151 Kanto species, found {len(kanto_species)}")
++
++    species_info = read("src/data/pokemon/species_info/gen_1_families.h")
++    headers = list(re.finditer(r"^\s*\[SPECIES_([A-Z0-9_]+)\]\s*=", species_info, re.MULTILINE))
++    evolution_edges = {}
++    for index, header in enumerate(headers):
++        block_end = headers[index + 1].start() if index + 1 < len(headers) else len(species_info)
++        block = species_info[header.end() : block_end]
++        evolution_edges[header.group(1)] = balanced_evolution_targets(block)
++
++    reachable = set(direct_sources)
++    while True:
++        expanded = reachable | {
++            target
++            for source, targets in evolution_edges.items()
++            if source in reachable
++            for target in targets
++        }
++        if expanded == reachable:
++            break
++        reachable = expanded
++
++    missing = sorted(kanto_species - reachable)
++    require(not missing, "Unobtainable Kanto species: " + ", ".join(missing))
++
++    expected_rare_encounters = {
++        "MAP_THREE_ISLAND_BERRY_FOREST": {"FARFETCHD": (37, 37), "MR_MIME": (35, 35)},
++        "MAP_SAFARI_ZONE_WEST": {"LICKITUNG": (23, 23)},
++        "MAP_SEAFOAM_ISLANDS_B4F": {"JYNX": (36, 36), "SQUIRTLE": (32, 32)},
++        "MAP_MT_EMBER_EXTERIOR": {"CHARMANDER": (38, 38)},
++        "MAP_VICTORY_ROAD_1F_FRLG": {"HITMONLEE": (46, 46), "HITMONCHAN": (46, 46)},
++    }
++    for map_id, expected_species in expected_rare_encounters.items():
++        missing_here = set(expected_species) - species_by_map.get(map_id, set())
++        require(not missing_here, f"{map_id} is missing rare encounters: {sorted(missing_here)}")
++        for species, expected_levels in expected_species.items():
++            actual_levels = levels_by_map_species.get((map_id, species), set())
++            require(
++                actual_levels == {expected_levels},
++                f"{map_id} {species} levels are {sorted(actual_levels)}, expected {expected_levels}",
++            )
++
++    expected_route_six = {
++        "sRoute6_FireRed": {"EEVEE": (16, 16), "DRATINI": (16, 16), "SCYTHER": (17, 17)},
++        "sRoute6_LeafGreen": {"EEVEE": (16, 16), "DRATINI": (16, 16), "PINSIR": (17, 17)},
++    }
++    for base_label, expected_species in expected_route_six.items():
++        for species, expected_levels in expected_species.items():
++            actual_levels = levels_by_label_species.get((base_label, species), set())
++            require(
++                actual_levels == {expected_levels},
++                f"{base_label} {species} levels are {sorted(actual_levels)}, expected {expected_levels}",
++            )
++
++    route_one_starters = {"BULBASAUR", "CHARMANDER", "SQUIRTLE"} & species_by_map.get("MAP_ROUTE1", set())
++    require(not route_one_starters, f"Route 1 still gives away starters: {sorted(route_one_starters)}")
++
++    for target in ("ALAKAZAM", "MACHAMP", "GOLEM", "GENGAR"):
++        require(
++            f"ITEM_MOON_STONE, SPECIES_{target}" in species_info,
++            f"{target} still lacks its no-trade Moon Stone evolution",
++        )
++
++    mew_script = read("data/maps/CeruleanCave_B1F_Frlg/scripts.inc")
++    for token in ("FLAG_FOUGHT_MEWTWO", "FLAG_V04_FOUGHT_MEW", "setwildbattle SPECIES_MEW, 50"):
++        require(token in mew_script, f"Mew challenge is missing {token}")
++
++    fossil_script = read("data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.inc")
++    for token in ("FLAG_V04_SECOND_FOSSIL_CLAIMED", "ITEM_HELIX_FOSSIL", "ITEM_DOME_FOSSIL"):
++        require(token in fossil_script, f"Dual-fossil path is missing {token}")
++
++    erika = read("data/maps/CeladonCity_Gym_Frlg/scripts.inc")
++    blaine = read("data/maps/CinnabarIsland_Gym_Frlg/scripts.inc")
++    require("FLAG_V04_KANTO_STARTER_BADGE4" in erika, "Erika's starter reward is missing")
++    require("FLAG_V04_KANTO_STARTER_BADGE7" in blaine, "Blaine's starter reward is missing")
++    require("givemon VAR_0x8004, 25" in erika, "Erika's starter reward is not level 25")
++    require("givemon VAR_0x8004, 40" in blaine, "Blaine's starter reward is not level 40")
++    require(
++        "goto_if_eq VAR_STARTER_MON_FRLG, 0, CeladonCity_Gym_EventScript_GiveMudkip" in erika
++        and "goto_if_eq VAR_STARTER_MON_FRLG, 1, CeladonCity_Gym_EventScript_GiveCyndaquil" in erika,
++        "Erika's rewards do not follow the Bulbasaur/Mudkip/Cyndaquil slot order",
++    )
++    require(
++        "goto_if_eq VAR_STARTER_MON_FRLG, 0, CinnabarIsland_Gym_EventScript_GiveCyndaquil" in blaine
++        and "goto_if_eq VAR_STARTER_MON_FRLG, 1, CinnabarIsland_Gym_EventScript_GiveBulbasaur" in blaine,
++        "Blaine's rewards do not give the remaining Kanto starter",
++    )
++
++    for species in ("OMANYTE", "KABUTO", "AERODACTYL"):
++        require(
++            f"givemon SPECIES_{species}, 35" in fossil_script,
++            f"Cinnabar's {species} fossil revival is not level 35",
++        )
++
++    island = read("data/maps/TwoIsland_Frlg/scripts.inc")
++    for token in (
++        "FLAG_KANTO_BADGE_7",
++        "FLAG_JOHTO_STARTER_CHOSEN",
++        "RegionHub_ScrCanDepositParty",
++        "RegionHub_ScrEnterRegion",
++        "MAP_NEW_BARK_TOWN_PLAYERS_HOUSE_2F",
++    ):
++        require(token in island, f"Island Two Johto transition is missing {token}")
++
++    kanto_starter_files = (
++        "data/maps/CeruleanCity_Frlg/scripts.inc",
++        "data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc",
++        "data/maps/PokemonLeague_ChampionsRoom_Frlg/scripts.inc",
++        "data/maps/PokemonTower_2F_Frlg/scripts.inc",
++        "data/maps/Route22_Frlg/scripts.inc",
++        "data/maps/SilphCo_7F_Frlg/scripts.inc",
++        "data/maps/SSAnne_2F_Corridor_Frlg/scripts.inc",
++    )
++    johto_starter_files = (
++        "data/maps/AzaleaTown/scripts.inc",
++        "data/maps/BurnedTower_1F/scripts.inc",
++        "data/maps/CherrygroveCity/scripts.inc",
++        "data/maps/GoldenrodCity_UndergroundSwitches/scripts.inc",
++        "data/maps/JohtoIndigoPlateau_PokemonCenter/scripts.inc",
++        "data/maps/NewBarkTown_Lab/scripts.inc",
++    )
++    for path in kanto_starter_files + johto_starter_files:
++        require(not re.search(r"\bVAR_STARTER_MON\b", read(path)), f"Shared starter var remains in {path}")
++
++    starter_choose = read("src/starter_choose.c")
++    require(
++        re.search(
++            r"\[REGION_KANTO\]\s*=\s*\{\s*SPECIES_BULBASAUR,\s*SPECIES_MUDKIP,\s*SPECIES_CYNDAQUIL\s*\}",
++            starter_choose,
++        ),
++        "Kanto starter order is not Bulbasaur, Mudkip, Cyndaquil",
++    )
++
++    pallet = read("data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc")
++    expected_ball_scripts = {
++        "BulbasaurBall": (0, "BULBASAUR", "MUDKIP", "SQUIRTLE"),
++        "SquirtleBall": (1, "MUDKIP", "CYNDAQUIL", "CHARMANDER"),
++        "CharmanderBall": (2, "CYNDAQUIL", "BULBASAUR", "BULBASAUR"),
++    }
++    for label, (slot, player_species, rival_species, rival_ball) in expected_ball_scripts.items():
++        pattern = (
++            rf"EventScript_{label}::.*?setvar PLAYER_STARTER_NUM, {slot}.*?"
++            rf"setvar PLAYER_STARTER_SPECIES, SPECIES_{player_species}.*?"
++            rf"setvar RIVAL_STARTER_SPECIES, SPECIES_{rival_species}.*?"
++            rf"setvar RIVAL_STARTER_ID, LOCALID_{rival_ball}_BALL"
++        )
++        require(re.search(pattern, pallet, re.DOTALL), f"{label} has an inconsistent player/rival mapping")
++
++    for slot, variant in ((0, "Squirtle"), (1, "Charmander"), (2, "Bulbasaur")):
++        require(
++            f"goto_if_eq PLAYER_STARTER_NUM, {slot}, PalletTown_ProfessorOaksLab_EventScript_RivalWalksTo{variant}" in pallet,
++            f"Gary does not walk to the correct ball for Kanto starter slot {slot}",
++        )
++
++    expected_variant_slots = {"Squirtle": 0, "Charmander": 1, "Bulbasaur": 2}
++    for path in kanto_starter_files:
++        script = read(path)
++        branches = re.findall(r"(?:goto|call)_if_eq VAR_STARTER_MON_FRLG, (\d), ([A-Za-z0-9_]+)", script)
++        for slot, target in branches:
++            for variant, expected_slot in expected_variant_slots.items():
++                if target.endswith(variant):
++                    require(
++                        int(slot) == expected_slot,
++                        f"{path} sends starter slot {slot} to Gary's {variant} team",
++                    )
++
++    rival_parties = read("src/data/trainers_frlg.party")
++    expected_rival_families = {
++        "SQUIRTLE": {"Mudkip", "Marshtomp", "Swampert"},
++        "BULBASAUR": {"Bulbasaur", "Ivysaur", "Venusaur"},
++        "CHARMANDER": {"Cyndaquil", "Quilava", "Typhlosion"},
++    }
++    rival_sections_checked = 0
++    for match in re.finditer(
++        r"^=== (TRAINER_(?:RIVAL|CHAMPION)[A-Z0-9_]+_(SQUIRTLE|BULBASAUR|CHARMANDER)) ===\n(.*?)(?=^=== |\Z)",
++        rival_parties,
++        re.MULTILINE | re.DOTALL,
++    ):
++        trainer_name, variant, section = match.groups()
++        mons = re.findall(r"^([A-Za-z][A-Za-z0-9 ._-]*?)(?: @ [^\n]+)?\nLevel:", section, re.MULTILINE)
++        require(mons, f"{trainer_name} has no party members")
++        require(
++            mons[-1] in expected_rival_families[variant],
++            f"{trainer_name} ends with {mons[-1]}, which does not match Gary's chosen starter",
++        )
++        move_blocks = re.findall(
++            r"^[A-Za-z][A-Za-z0-9 ._-]*?(?: @ [^\n]+)?\nLevel:.*?\nIVs:.*?\n(?:Ability:.*?\n)?((?:- [^\n]+\n)*)",
++            section,
++            re.MULTILINE,
++        )
++        for moves in move_blocks:
++            require(
++                len(moves.splitlines()) <= 4,
++                f"{trainer_name} has a PokÃ©mon with more than four moves",
++            )
++        rival_sections_checked += 1
++    require(rival_sections_checked >= 30, f"Only checked {rival_sections_checked} Gary starter teams")
++
++    new_bark = read("data/maps/NewBarkTown_Lab/scripts.inc")
++    for species in ("CHARMANDER", "TOTODILE", "TREECKO"):
++        require(f"SPECIES_{species}" in new_bark, f"Johto starter trio is missing {species}")
++    require("givemon PLAYER_STARTER_SPECIES, 5" in new_bark, "Johto starter is not level 5")
++
++    print("v0.4.3 Kanto validation passed: Gary, collection, encounters, and levels are correct.")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/data/maps/AzaleaTown/scripts.inc b/data/maps/AzaleaTown/scripts.inc
+index 2170fbf5..eeedf292 100644
+--- a/data/maps/AzaleaTown/scripts.inc
++++ b/data/maps/AzaleaTown/scripts.inc
+@@ -163,9 +163,9 @@ AzaleaTown_EventScript_SilverTriggerTop::
+ 	turnobject OBJ_EVENT_ID_PLAYER, DIR_EAST
+ 	msgbox AzaleaTown_Text_RivalBefore, MSGBOX_DEFAULT
+ 	closemessage
+-	call_if_eq VAR_STARTER_MON, 0, AzaleaTown_Silver_Battle_Cyndaquil
+-	call_if_eq VAR_STARTER_MON, 1, AzaleaTown_Silver_Battle_Totodile
+-	call_if_eq VAR_STARTER_MON, 2, AzaleaTown_Silver_Battle_Chikorita
++	call_if_eq VAR_STARTER_MON_JOHTO, 0, AzaleaTown_Silver_Battle_Cyndaquil
++	call_if_eq VAR_STARTER_MON_JOHTO, 1, AzaleaTown_Silver_Battle_Totodile
++	call_if_eq VAR_STARTER_MON_JOHTO, 2, AzaleaTown_Silver_Battle_Chikorita
+ 	msgbox AzaleaTown_Text_RivalAfter, MSGBOX_DEFAULT
+ 	closemessage
+ 	applymovement OBJ_EVENT_ID_PLAYER, AzaleaTown_Movement_Player_LeaveTop
+@@ -190,9 +190,9 @@ AzaleaTown_EventScript_SilverTriggerBot::
+ 	turnobject OBJ_EVENT_ID_PLAYER, DIR_EAST
+ 	msgbox AzaleaTown_Text_RivalBefore, MSGBOX_DEFAULT
+ 	closemessage
+-	call_if_eq VAR_STARTER_MON, 0, AzaleaTown_Silver_Battle_Cyndaquil
+-	call_if_eq VAR_STARTER_MON, 1, AzaleaTown_Silver_Battle_Totodile
+-	call_if_eq VAR_STARTER_MON, 2, AzaleaTown_Silver_Battle_Chikorita
++	call_if_eq VAR_STARTER_MON_JOHTO, 0, AzaleaTown_Silver_Battle_Cyndaquil
++	call_if_eq VAR_STARTER_MON_JOHTO, 1, AzaleaTown_Silver_Battle_Totodile
++	call_if_eq VAR_STARTER_MON_JOHTO, 2, AzaleaTown_Silver_Battle_Chikorita
+ 	playbgm MUS_HG_RIVAL_EXIT, TRUE
+ 	msgbox AzaleaTown_Text_RivalAfter, MSGBOX_DEFAULT
+ 	closemessage
+diff --git a/data/maps/BurnedTower_1F/scripts.inc b/data/maps/BurnedTower_1F/scripts.inc
+index 98ae164c..d74ff7af 100644
+--- a/data/maps/BurnedTower_1F/scripts.inc
++++ b/data/maps/BurnedTower_1F/scripts.inc
+@@ -110,9 +110,9 @@ BurnedTower_1F_EventScript_Silver::
+ 	waitmovement 0
+ 	waitmovement 0
+ 	msgbox BurnedTowerSilver_BeforeText, MSGBOX_DEFAULT
+-	call_if_eq VAR_STARTER_MON, 0, BurnedTower_1F_Silver_Battle_Cyndaquil
+-	call_if_eq VAR_STARTER_MON, 1, BurnedTower_1F_Silver_Battle_Totodile
+-	call_if_eq VAR_STARTER_MON, 2, BurnedTower_1F_Silver_Battle_Chikorita
++	call_if_eq VAR_STARTER_MON_JOHTO, 0, BurnedTower_1F_Silver_Battle_Cyndaquil
++	call_if_eq VAR_STARTER_MON_JOHTO, 1, BurnedTower_1F_Silver_Battle_Totodile
++	call_if_eq VAR_STARTER_MON_JOHTO, 2, BurnedTower_1F_Silver_Battle_Chikorita
+ 	playbgm MUS_HG_RIVAL_EXIT, TRUE
+ 	msgbox BurnedTowerSilver_AfterText1, MSGBOX_DEFAULT
+ 	closemessage
+diff --git a/data/maps/CeladonCity_Gym_Frlg/scripts.inc b/data/maps/CeladonCity_Gym_Frlg/scripts.inc
+index 8f4e2d8c..10a69aea 100644
+--- a/data/maps/CeladonCity_Gym_Frlg/scripts.inc
++++ b/data/maps/CeladonCity_Gym_Frlg/scripts.inc
+@@ -5,6 +5,7 @@ CeladonCity_Gym_EventScript_Erika::
+ 	famechecker FAMECHECKER_ERIKA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+ 	trainerba…16855 tokens truncated… "species": "SPECIES_SQUIRTLE"
+               }
+             ]
+           },
+@@ -22177,9 +22177,9 @@
+                 "species": "SPECIES_RAPIDASH"
+               },
+               {
+-                "min_level": 30,
+-                "max_level": 30,
+-                "species": "SPECIES_SPEAROW"
++                "min_level": 38,
++                "max_level": 38,
++                "species": "SPECIES_CHARMANDER"
+               },
+               {
+                 "min_level": 42,
+@@ -22296,9 +22296,9 @@
+                 "species": "SPECIES_RAPIDASH"
+               },
+               {
+-                "min_level": 40,
+-                "max_level": 40,
+-                "species": "SPECIES_MAGMAR"
++                "min_level": 38,
++                "max_level": 38,
++                "species": "SPECIES_CHARMANDER"
+               },
+               {
+                 "min_level": 42,
+@@ -24389,12 +24389,12 @@
+               {
+                 "min_level": 37,
+                 "max_level": 37,
+-                "species": "SPECIES_PIDGEOTTO"
++                "species": "SPECIES_FARFETCHD"
+               },
+               {
+                 "min_level": 35,
+                 "max_level": 35,
+-                "species": "SPECIES_GLOOM"
++                "species": "SPECIES_MR_MIME"
+               },
+               {
+                 "min_level": 32,
+@@ -24563,12 +24563,12 @@
+               {
+                 "min_level": 37,
+                 "max_level": 37,
+-                "species": "SPECIES_PIDGEOTTO"
++                "species": "SPECIES_FARFETCHD"
+               },
+               {
+                 "min_level": 35,
+                 "max_level": 35,
+-                "species": "SPECIES_WEEPINBELL"
++                "species": "SPECIES_MR_MIME"
+               },
+               {
+                 "min_level": 32,
+@@ -32975,17 +32975,17 @@
+               {
+                 "min_level": 3,
+                 "max_level": 3,
+-                "species": "SPECIES_BULBASAUR"
++                "species": "SPECIES_PIDGEY"
+               },
+               {
+                 "min_level": 3,
+                 "max_level": 3,
+-                "species": "SPECIES_CHARMANDER"
++                "species": "SPECIES_RATTATA"
+               },
+               {
+                 "min_level": 2,
+                 "max_level": 2,
+-                "species": "SPECIES_SQUIRTLE"
++                "species": "SPECIES_PIDGEY"
+               },
+               {
+                 "min_level": 2,
+@@ -33030,12 +33030,12 @@
+               {
+                 "min_level": 6,
+                 "max_level": 8,
+-                "species": "SPECIES_BULBASAUR"
++                "species": "SPECIES_WEEDLE"
+               },
+               {
+                 "min_level": 6,
+                 "max_level": 8,
+-                "species": "SPECIES_SQUIRTLE"
++                "species": "SPECIES_CATERPIE"
+               },
+               {
+                 "min_level": 6,
+@@ -33064,17 +33064,17 @@
+               {
+                 "min_level": 3,
+                 "max_level": 3,
+-                "species": "SPECIES_BULBASAUR"
++                "species": "SPECIES_PIDGEY"
+               },
+               {
+                 "min_level": 3,
+                 "max_level": 3,
+-                "species": "SPECIES_CHARMANDER"
++                "species": "SPECIES_RATTATA"
+               },
+               {
+                 "min_level": 2,
+                 "max_level": 2,
+-                "species": "SPECIES_SQUIRTLE"
++                "species": "SPECIES_PIDGEY"
+               },
+               {
+                 "min_level": 2,
+@@ -33119,12 +33119,12 @@
+               {
+                 "min_level": 6,
+                 "max_level": 8,
+-                "species": "SPECIES_BULBASAUR"
++                "species": "SPECIES_WEEDLE"
+               },
+               {
+                 "min_level": 6,
+                 "max_level": 8,
+-                "species": "SPECIES_SQUIRTLE"
++                "species": "SPECIES_CATERPIE"
+               },
+               {
+                 "min_level": 6,
+@@ -34068,19 +34068,19 @@
+                 "species": "SPECIES_PIDGEY"
+               },
+               {
+-                "min_level": 14,
+-                "max_level": 14,
+-                "species": "SPECIES_MEOWTH"
+-              },
+-              {
+-                "min_level": 15,
+-                "max_level": 15,
+-                "species": "SPECIES_PIDGEY"
++                "min_level": 16,
++                "max_level": 16,
++                "species": "SPECIES_EEVEE"
+               },
+               {
+                 "min_level": 16,
+                 "max_level": 16,
+-                "species": "SPECIES_MEOWTH"
++                "species": "SPECIES_DRATINI"
++              },
++              {
++                "min_level": 17,
++                "max_level": 17,
++                "species": "SPECIES_SCYTHER"
+               }
+             ]
+           },
+@@ -34242,19 +34242,19 @@
+                 "species": "SPECIES_PIDGEY"
+               },
+               {
+-                "min_level": 14,
+-                "max_level": 14,
+-                "species": "SPECIES_MEOWTH"
+-              },
+-              {
+-                "min_level": 15,
+-                "max_level": 15,
+-                "species": "SPECIES_PIDGEY"
++                "min_level": 16,
++                "max_level": 16,
++                "species": "SPECIES_EEVEE"
+               },
+               {
+                 "min_level": 16,
+                 "max_level": 16,
+-                "species": "SPECIES_MEOWTH"
++                "species": "SPECIES_DRATINI"
++              },
++              {
++                "min_level": 17,
++                "max_level": 17,
++                "species": "SPECIES_PINSIR"
+               }
+             ]
+           },
+diff --git a/src/main_menu.c b/src/main_menu.c
+index 36e10467..1fefc371 100644
+--- a/src/main_menu.c
++++ b/src/main_menu.c
+@@ -269,7 +269,9 @@ static const u8 gText_RegionSaveDamaged[] = _("Part of this save file's region\n
+ static const u8 gJPText_No1MSubCircuit[] = _("1Mã‚µãƒ–ãã°ã‚“ãŒ ã•ã•ã£ã¦ã„ã¾ã›ã‚“ï¼");
+ static const u8 gText_BatteryRunDry[] = _("The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.");
+ 
+-static const u8 gText_MainMenuNewGame[] = _("NEW GAME");
++// Keep the playtest version visible in-game so testers cannot mistake an older
++// cached ROM for the current build.
++static const u8 gText_MainMenuNewGame[] = _("NEW GAME  V0.4.3 TEST");
+ static const u8 gText_MainMenuContinue[] = _("CONTINUE");
+ static const u8 gText_MainMenuOption[] = _("OPTION");
+ static const u8 gText_MainMenuMysteryGift[] = _("MYSTERY GIFT");
+diff --git a/src/new_game.c b/src/new_game.c
+index baf24a97..85ee8872 100644
+--- a/src/new_game.c
++++ b/src/new_game.c
+@@ -54,6 +54,11 @@
+ #include "follower_npc.h"
+ #include "regions.h"
+ #include "constants/johto_flags.h"
++#include "constants/flags.h"
++#include "constants/heal_locations.h"
++#include "constants/region_flags.h"
++#include "constants/species.h"
++#include "constants/vars_frlg.h"
+ 
+ extern const u8 EventScript_ResetAllMapFlags[];
+ extern const u8 EventScript_ResetAllMapFlagsFrlg[];
+@@ -63,6 +68,9 @@ static void WarpToTruck(void);
+ static void ResetMiniGamesRecords(void);
+ static void ResetItemFlags(void);
+ static void ResetDexNav(void);
++#if ALL_REGIONS
++static void SetupBlaineJohtoTransitionTest(void);
++#endif
+ 
+ EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
+ EWRAM_DATA bool8 gEnableContestDebugging = FALSE;
+@@ -146,13 +154,11 @@ static void ClearFrontierRecord(void)
+ static void WarpToTruck(void)
+ {
+ #if ALL_REGIONS
+-    // Region-switch: every new game lands in the World Transit hub; the destination region is
+-    // chosen by talking to a gate attendant (data/maps/RegionHub). startRegion stays
+-    // REGION_NONE until then. Spawn on the departure-concourse crest at (16,4) via
+-    // WARP_ID_NONE + explicit coords (the FRLG new-game pattern above) - same tile as hub
+-    // warp 0, a plain floor anchor with no warp behavior, so the fade-in can never
+-    // re-trigger a warp.
+-    SetWarpDestination(MAP_GROUP(MAP_REGION_HUB), MAP_NUM(MAP_REGION_HUB), WARP_ID_NONE, 16, 4);
++    // Dedicated v0.4.3 transition-test build: begin beside Blaine so the
++    // Volcano Badge -> Two Island -> Johto handoff can be tested in minutes.
++    SetCurrentRegion(REGION_KANTO);
++    SetLastHealLocationWarp(HEAL_LOCATION_CINNABAR_ISLAND);
++    SetWarpDestination(MAP_GROUP(MAP_CINNABAR_ISLAND_GYM), MAP_NUM(MAP_CINNABAR_ISLAND_GYM), WARP_ID_NONE, 5, 6);
+ #else
+     if (IS_FRLG)
+         SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), WARP_ID_NONE, 6, 6);
+@@ -162,6 +168,35 @@ static void WarpToTruck(void)
+     WarpIntoMap();
+ }
+ 
++#if ALL_REGIONS
++static void SetupBlaineJohtoTransitionTest(void)
++{
++    // Model the six badges earned before Blaine and open every quiz door.
++    FlagSet(FLAG_KANTO_BADGE_1);
++    FlagSet(FLAG_KANTO_BADGE_2);
++    FlagSet(FLAG_KANTO_BADGE_3);
++    FlagSet(FLAG_KANTO_BADGE_4);
++    FlagSet(FLAG_KANTO_BADGE_5);
++    FlagSet(FLAG_KANTO_BADGE_6);
++    FlagSet(FLAG_CINNABAR_GYM_QUIZ_1);
++    FlagSet(FLAG_CINNABAR_GYM_QUIZ_2);
++    FlagSet(FLAG_CINNABAR_GYM_QUIZ_3);
++    FlagSet(FLAG_CINNABAR_GYM_QUIZ_4);
++    FlagSet(FLAG_CINNABAR_GYM_QUIZ_5);
++    FlagSet(FLAG_CINNABAR_GYM_QUIZ_6);
++
++    // Treat Bulbasaur as the Kanto choice so Blaine's normal remaining-starter
++    // reward stays testable, then supply an intentionally over-levelled team.
++    VarSet(VAR_STARTER_MON_FRLG, 0);
++    CreateMon(&gPlayerParty[0], SPECIES_BLASTOISE, 65, 0x12345678, OTID_STRUCT_PLAYER_ID);
++    CreateMon(&gPlayerParty[1], SPECIES_VAPOREON, 60, 0x23456789, OTID_STRUCT_PLAYER_ID);
++    CreateMon(&gPlayerParty[2], SPECIES_GOLEM, 60, 0x3456789A, OTID_STRUCT_PLAYER_ID);
++    CalculatePlayerPartyCount();
++    AddBagItem(ITEM_FULL_RESTORE, 10);
++    AddBagItem(ITEM_MAX_REVIVE, 10);
++}
++#endif
++
+ void Sav2_ClearSetDefault(void)
+ {
+     ClearSav2();
+@@ -213,7 +248,7 @@ void NewGameInitData(void)
+     // Region merge: stamp the save format; travel-pass / other intro bits and the
+     // per-region var/flag banks default clear (SaveBlock3 zeroed by ClearSav3 above).
+     gSaveBlock2Ptr->saveVersion = SAVE_FORMAT_VERSION;
+-    gSaveBlock2Ptr->hoennIntroDone = TRUE; // the truck intro IS the Hoenn intro; unset caused a stray hub-arrival MOM line + autosave block
++    gSaveBlock2Ptr->hoennIntroDone = FALSE; // Hoenn remains a future leg of the Journey.
+     // Stamp the obstacle table hash NOW, not on the first load. ClearSav3() just zeroed it, and
+     // the hash check only runs on load â€” so without this, every tree cut and rock smashed during
+     // the FIRST session would be wiped the first time the player reloads, as the 0 hash read as
+@@ -275,6 +310,7 @@ void NewGameInitData(void)
+     FlagSet(FLAG_HIDE_JOHTO_DECOR);
+     FlagSet(FLAG_HIDE_SILVER_CHERRYGROVE);
+     FlagSet(FLAG_HIDE_MRPOKEMON);
++    SetupBlaineJohtoTransitionTest();
+ #else
+     if (IS_FRLG)
+         RunScriptImmediately(EventScript_ResetAllMapFlagsFrlg);
+diff --git a/src/party_menu.c b/src/party_menu.c
+index ab4ea1f0..ba407a90 100644
+--- a/src/party_menu.c
++++ b/src/party_menu.c
+@@ -5468,6 +5468,219 @@ static void ReturnToUseOnWhichMon(u8 taskId)
+     DisplayPartyMenuStdMessage(PARTY_MSG_USE_ON_WHICH_MON);
+ }
+ 
++// EV/IV Changer support for the classic party menu. The equivalent callback in
++// swsh_party_menu.c is not compiled when SWSH_PARTY_MENU is disabled.
++static const u8 sEvIvChangerEvMonData[NUM_STATS] =
++{
++    MON_DATA_HP_EV,
++    MON_DATA_ATK_EV,
++    MON_DATA_DEF_EV,
++    MON_DATA_SPATK_EV,
++    MON_DATA_SPDEF_EV,
++    MON_DATA_SPEED_EV,
++};
++
++static const u8 sEvIvChangerIvMonData[NUM_STATS] =
++{
++    MON_DATA_HP_IV,
++    MON_DATA_ATK_IV,
++    MON_DATA_DEF_IV,
++    MON_DATA_SPATK_IV,
++    MON_DATA_SPDEF_IV,
++    MON_DATA_SPEED_IV,
++};
++
++static const u8 sEvIvChangerHtMonData[NUM_STATS] =
++{
++    MON_DATA_HYPER_TRAINED_HP,
++    MON_DATA_HYPER_TRAINED_ATK,
++    MON_DATA_HYPER_TRAINED_DEF,
++    MON_DATA_HYPER_TRAINED_SPATK,
++    MON_DATA_HYPER_TRAINED_SPDEF,
++    MON_DATA_HYPER_TRAINED_SPEED,
++};
++
++static const u8 *const sEvIvChangerStatNames[NUM_STATS] =
++{
++    gText_HP4,
++    gText_Attack,
++    gText_Defense,
++    gText_SpAtk,
++    gText_SpDef,
++    gText_Speed,
++};
++
++static const u8 sText_EvIvChangerTotal[] = _("TOTAL");
++static const u8 sText_EvIvChangerSlash510[] = _("/510");
++static const u8 sText_EvIvChangerPageEvs[] = _("EVs {R_BUTTON}/{START_BUTTON}IVs");
++static const u8 sText_EvIvChangerPageIvs[] = _("IVs {R_BUTTON}/{START_BUTTON}EVs");
++
++#define tEvCursor  data[0]
++#define tEvPage    data[1] // 0 = EVs, 1 = IVs
++
++static u16 EvIvChangerTotalEvs(struct Pokemon *mon)
++{
++    u8 i;
++    u16 total = 0;
++
++    for (i = 0; i < NUM_STATS; i++)
++        total += GetMonData(mon, sEvIvChangerEvMonData[i]);
++    return total;
++}
++
++static void EvIvChangerPrintStats(u8 taskId)
++{
++    u8 i;
++    u8 windowId = sPartyMenuInternal->windowId[0];
++    u8 cursor = gTasks[taskId].tEvCursor;
++    bool8 ivPage = gTasks[taskId].tEvPage;
++    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
++    u8 text[16];
++
++    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_WHITE));
++    AddTextPrinterParameterized(windowId, FONT_NORMAL, ivPage ? sText_EvIvChangerPageIvs : sText_EvIvChangerPageEvs, 9, 1, TEXT_SKIP_DRAW, NULL);
++    for (i = 0; i < NUM_STATS; i++)
++    {
++        u16 shown = GetMonData(mon, ivPage ? sEvIvChangerIvMonData[i] : sEvIvChangerEvMonData[i]);
++
++        if (ivPage && GetMonData(mon, sEvIvChangerHtMonData[i]))
++            shown = MAX_PER_STAT_IVS;
++        if (i == cursor)
++            AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_SelectorArrow2, 0, (i * 12) + 13, TEXT_SKIP_DRAW, NULL);
++        AddTextPrinterParameterized(windowId, FONT_NORMAL, sEvIvChangerStatNames[i], 9, (i * 12) + 13, TEXT_SKIP_DRAW, NULL);
++        ConvertIntToDecimalStringN(text, shown, STR_CONV_MODE_RIGHT_ALIGN, 3);
++        AddTextPrinterParameterized(windowId, FONT_NORMAL, text, 56, (i * 12) + 13, TEXT_SKIP_DRAW, NULL);
++    }
++    if (!ivPage)
++    {
++        ConvertIntToDecimalStringN(text, EvIvChangerTotalEvs(mon), STR_CONV_MODE_LEFT_ALIGN, 3);
++        StringAppend(text, sText_EvIvChangerSlash510);
++        AddTextPrinterParameterized(windowId, FONT_NORMAL, sText_EvIvChangerTotal, 4, (NUM_STATS * 12) + 14, TEXT_SKIP_DRAW, NULL);
++        AddTextPrinterParameterized(windowId, FONT_NORMAL, text, 37, (NUM_STATS * 12) + 14, TEXT_SKIP_DRAW, NULL);
++    }
++    CopyWindowToVram(windowId, COPYWIN_GFX);
++    ScheduleBgCopyTilemapToVram(2);
++}
++
++static void EvIvChangerAdjust(u8 taskId, bool8 increase)
++{
++    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
++    u8 cursor = gTasks[taskId].tEvCursor;
++    bool8 ivPage = gTasks[taskId].tEvPage;
++    u8 monDataId = ivPage ? sEvIvChangerIvMonData[cursor] : sEvIvChangerEvMonData[cursor];
++    u16 val = GetMonData(mon, monDataId);
++    u16 step = JOY_NEW(DPAD_LEFT | DPAD_RIGHT) ? 1 : 10;
++    u16 newVal;
++
++    if (ivPage && GetMonData(mon, sEvIvChangerHtMonData[cursor]))
++        val = MAX_PER_STAT_IVS;
++
++    if (increase)
++    {
++        u16 room;
++
++        if (ivPage)
++        {
++            room = MAX_PER_STAT_IVS - val;
++        }
++        else
++        {
++            u16 roomTotal = MAX_TOTAL_EVS - EvIvChangerTotalEvs(mon);
++            u16 roomStat = MAX_PER_STAT_EVS - val;
++
++            room = (roomStat < roomTotal) ? roomStat : roomTotal;
++        }
++        if (step > room)
++            step = room;
++        newVal = val + step;
++    }
++    else
++    {
++        if (step > val)
++            step = val;
++        newVal = val - step;
++    }
++
++    if (newVal == val)
++    {
++        PlaySE(SE_FAILURE);
++        return;
++    }
++    SetMonData(mon, monDataId, &newVal);
++    if (ivPage && GetMonData(mon, sEvIvChangerHtMonData[cursor]))
++    {
++        u8 htOff = FALSE;
++
++        SetMonData(mon, sEvIvChangerHtMonData[cursor], &htOff);
++    }
++    CalculateMonStats(mon);
++    PlaySE(SE_SELECT);
++    EvIvChangerPrintStats(taskId);
++}
++
++static void Task_EvIvChangerHandleInput(u8 taskId)
++{
++    u8 cursor = gTasks[taskId].tEvCursor;
++
++    if (JOY_NEW(DPAD_UP))
++    {
++        PlaySE(SE_SELECT);
++        gTasks[taskId].tEvCursor = (cursor == 0) ? NUM_STATS - 1 : cursor - 1;
++        EvIvChangerPrintStats(taskId);
++    }
++    else if (JOY_NEW(DPAD_DOWN))
++    {
++        PlaySE(SE_SELECT);
++        gTasks[taskId].tEvCursor = (cursor == NUM_STATS - 1) ? 0 : cursor + 1;
++        EvIvChangerPrintStats(taskId);
++    }
++    else if (JOY_NEW(R_BUTTON) || JOY_NEW(L_BUTTON) || JOY_NEW(START_BUTTON))
++    {
++        PlaySE(SE_SELECT);
++        gTasks[taskId].tEvPage ^= 1;
++        EvIvChangerPrintStats(taskId);
++    }
++    else if (JOY_REPEAT(DPAD_RIGHT))
++    {
++        EvIvChangerAdjust(taskId, TRUE);
++    }
++    else if (JOY_REPEAT(DPAD_LEFT))
++    {
++        EvIvChangerAdjust(taskId, FALSE);
++    }
++    else if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
++    {
++        PlaySE(SE_SELECT);
++        ClearWindowTilemap(sPartyMenuInternal->windowId[0]);
++        PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
++        UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId]);
++        ReturnToUseOnWhichMon(taskId);
++    }
++}
++
++void ItemUseCB_EvIvChanger(u8 taskId, TaskFunc task)
++{
++    if (GetMonData(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], MON_DATA_IS_EGG))
++    {
++        gPartyMenuUseExitCallback = FALSE;
++        PlaySE(SE_SELECT);
++        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
++        ScheduleBgCopyTilemapToVram(2);
++        gTasks[taskId].func = task;
++        return;
++    }
++    PlaySE(SE_SELECT);
++    sPartyMenuInternal->windowId[0] = AddWindow(&sEvIvChangerWindowTemplate);
++    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x4F, 13);
++    gTasks[taskId].tEvCursor = 0;
++    gTasks[taskId].tEvPage = 0;
++    EvIvChangerPrintStats(taskId);
++    gTasks[taskId].func = Task_EvIvChangerHandleInput;
++}
++
++#undef tEvCursor
++#undef tEvPage
++
+ static void TryUseItemOnMove(u8 taskId)
+ {
+     struct PartyMenu *ptr = &gPartyMenu;
+diff --git a/src/starter_choose.c b/src/starter_choose.c
+index ba37126b..af96068b 100644
+--- a/src/starter_choose.c
++++ b/src/starter_choose.c
+@@ -111,17 +111,16 @@ static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
+     {8, 4},
+ };
+ 
+-// Region-aware starter trios. VAR_STARTER_MON stores the chosen ball INDEX (0/1/2). Hoenn and
+-// Johto use the natural grass/fire/water order; KANTO follows the bundled FRLG champion room's
+-// convention (index 0 = Charmander, 1 = Bulbasaur, 2 = Squirtle) so Blue's VAR_STARTER_MON
+-// variant-select stays correct WITHOUT editing the champion battle scripts. Picked at runtime
++// Region-aware starter trios. Each region stores the chosen ball INDEX (0/1/2) in its own
++// save variable. PokeMan Journey gives Kanto and Johto cross-region trios; rival scripts are
++// authored around the same index order. Picked at runtime
+ // by GetCurrentRegion() (the player is on the region's start town when ChooseStarter runs).
+ // Unpopulated regions fall back to the Hoenn trio.
+ static const u16 sStarterMon[REGIONS_COUNT][STARTER_MON_COUNT] =
+ {
+     [REGION_HOENN] = { SPECIES_TREECKO,    SPECIES_TORCHIC,   SPECIES_MUDKIP   },
+-    [REGION_KANTO] = { SPECIES_CHARMANDER, SPECIES_BULBASAUR, SPECIES_SQUIRTLE },
+-    [REGION_JOHTO] = { SPECIES_CHIKORITA,  SPECIES_CYNDAQUIL, SPECIES_TOTODILE },
++    [REGION_KANTO] = { SPECIES_BULBASAUR,  SPECIES_MUDKIP,    SPECIES_CYNDAQUIL},
++    [REGION_JOHTO] = { SPECIES_CHARMANDER, SPECIES_TOTODILE,  SPECIES_TREECKO   },
+ };
+ 
+ static const struct BgTemplate sBgTemplates[3] =
+
