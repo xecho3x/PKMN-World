@@ -1,16 +1,14 @@
 diff --git a/Makefile b/Makefile
-index 13a003ed..770eed06 100644
+index 13a003ed..0e4b6de5 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -1,6 +1,6 @@
+@@ -1,5 +1,5 @@
  GAME_VERSION ?= EMERALD
 -TITLE        ?= POKEMON WRLD
--GAME_CODE    ?= BPEE
 +TITLE        ?= POKEMAN V03
-+GAME_CODE    ?= PJ3E
+ GAME_CODE    ?= BPEE
  BUILD_NAME   ?= emerald
  MAP_VERSION  ?= emerald
- 
 @@ -33,11 +33,11 @@ endif
  
  # GBA rom header
@@ -21,7 +19,7 @@ index 13a003ed..770eed06 100644
  
  # `File name`.gba
 -FILE_NAME := pokemonworld
-+FILE_NAME := pokeman_journey_v03
++FILE_NAME := pokeman_journey_v03_fixed
  BUILD_DIR := build
  
  # Executes the Test Runner System that checks that all mechanics work as expected

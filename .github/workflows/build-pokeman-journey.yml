@@ -60,27 +60,28 @@ jobs:
           GAME_VERSION: EMERALD
         run: make -j$(nproc)
 
-      - name: Verify version 3 ROM
+      - name: Verify Android-compatible version 3 ROM
         run: |
-          test -f pokeman_journey_v03.gba
-          ls -lh pokeman_journey_v03.gba
-          sha256sum pokeman_journey_v03.gba
+          test -f pokeman_journey_v03_fixed.gba
+          ls -lh pokeman_journey_v03_fixed.gba
+          sha256sum pokeman_journey_v03_fixed.gba
           python3 - <<'PY'
           from pathlib import Path
-          rom = Path("pokeman_journey_v03.gba").read_bytes()
+          rom = Path("pokeman_journey_v03_fixed.gba").read_bytes()
           assert len(rom) == 32 * 1024 * 1024
           assert rom[0xA0:0xAC].rstrip(b"\0 ") == b"POKEMAN V03"
-          assert rom[0xAC:0xB0] == b"PJ3E"
+          assert rom[0xAC:0xB0] == b"BPEE"
           assert rom[0xBC] == 3
+          assert b"FLASH1M_V" in rom
           expected = (-(sum(rom[0xA0:0xBD]) + 0x19)) & 0xFF
           assert rom[0xBD] == expected
-          print("Verified v0.3 GBA header and checksum")
+          print("Verified Emerald ID, Flash1M signature, revision, and checksum")
           PY
 
       - name: Upload playable ROM
         uses: actions/upload-artifact@v4
         with:
-          name: PokeMan-Journey-v0.3
-          path: pokeman_journey_v03.gba
+          name: PokeMan-Journey-v0.3-Android-Fix
+          path: pokeman_journey_v03_fixed.gba
           if-no-files-found: error
           retention-days: 7
