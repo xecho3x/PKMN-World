@@ -403,6 +403,7 @@ index ba37126b..8489677b 100644
 +    [REGION_KANTO] = { SPECIES_BULBASAUR,  SPECIES_CYNDAQUIL, SPECIES_MUDKIP   },
      [REGION_JOHTO] = { SPECIES_CHIKORITA,  SPECIES_CYNDAQUIL, SPECIES_TOTODILE },
  };
+ 
 diff --git a/src/data/party_menu.h b/src/data/party_menu.h
 index 4faf8a6a..4bdee280 100644
 --- a/src/data/party_menu.h
