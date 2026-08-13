@@ -1,11 +1,11 @@
 diff --git a/Makefile b/Makefile
-index 13a003ed..71b5986f 100644
+index 13a003ed..9b38d66d 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -1,5 +1,5 @@
  GAME_VERSION ?= EMERALD
 -TITLE        ?= POKEMON WRLD
-+TITLE        ?= POKEMAN V043
++TITLE        ?= POKEMAN V042
  GAME_CODE    ?= BPEE
  BUILD_NAME   ?= emerald
  MAP_VERSION  ?= emerald
@@ -14,12 +14,12 @@ index 13a003ed..71b5986f 100644
  # GBA rom header
  MAKER_CODE  := 01
 -REVISION    := 0
-+REVISION    := 8
++REVISION    := 7
  KEEP_TEMPS  ?= 0
  
  # `File name`.gba
 -FILE_NAME := pokemonworld
-+FILE_NAME := pokeman_journey_v043_fixed
++FILE_NAME := pokeman_journey_v042_fixed
  BUILD_DIR := build
  
  # Executes the Test Runner System that checks that all mechanics work as expected
@@ -38,11 +38,11 @@ index 4069f858..72da5d87 100644
      # reordered, and hard-coding it is the exact mistake sDeletedTwinMaps avoids.
 diff --git a/Testing/ValidateV04Kanto.py b/Testing/ValidateV04Kanto.py
 new file mode 100644
-index 00000000..070dea9d
+index 00000000..68fb6358
 --- /dev/null
 +++ b/Testing/ValidateV04Kanto.py
-@@ -0,0 +1,295 @@
-+"""Validate PokeMan Journey v0.4.3's Kanto collection and Johto handoff."""
+@@ -0,0 +1,211 @@
++"""Validate PokeMan Journey v0.4.2's Kanto collection and Johto handoff."""
 +
 +import json
 +import re
@@ -206,16 +206,6 @@ index 00000000..070dea9d
 +    require("FLAG_V04_KANTO_STARTER_BADGE7" in blaine, "Blaine's starter reward is missing")
 +    require("givemon VAR_0x8004, 25" in erika, "Erika's starter reward is not level 25")
 +    require("givemon VAR_0x8004, 40" in blaine, "Blaine's starter reward is not level 40")
-+    require(
-+        "goto_if_eq VAR_STARTER_MON_FRLG, 0, CeladonCity_Gym_EventScript_GiveMudkip" in erika
-+        and "goto_if_eq VAR_STARTER_MON_FRLG, 1, CeladonCity_Gym_EventScript_GiveCyndaquil" in erika,
-+        "Erika's rewards do not follow the Bulbasaur/Mudkip/Cyndaquil slot order",
-+    )
-+    require(
-+        "goto_if_eq VAR_STARTER_MON_FRLG, 0, CinnabarIsland_Gym_EventScript_GiveCyndaquil" in blaine
-+        and "goto_if_eq VAR_STARTER_MON_FRLG, 1, CinnabarIsland_Gym_EventScript_GiveBulbasaur" in blaine,
-+        "Blaine's rewards do not give the remaining Kanto starter",
-+    )
 +
 +    for species in ("OMANYTE", "KABUTO", "AERODACTYL"):
 +        require(
@@ -253,86 +243,12 @@ index 00000000..070dea9d
 +    for path in kanto_starter_files + johto_starter_files:
 +        require(not re.search(r"\bVAR_STARTER_MON\b", read(path)), f"Shared starter var remains in {path}")
 +
-+    starter_choose = read("src/starter_choose.c")
-+    require(
-+        re.search(
-+            r"\[REGION_KANTO\]\s*=\s*\{\s*SPECIES_BULBASAUR,\s*SPECIES_MUDKIP,\s*SPECIES_CYNDAQUIL\s*\}",
-+            starter_choose,
-+        ),
-+        "Kanto starter order is not Bulbasaur, Mudkip, Cyndaquil",
-+    )
-+
-+    pallet = read("data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc")
-+    expected_ball_scripts = {
-+        "BulbasaurBall": (0, "BULBASAUR", "MUDKIP", "SQUIRTLE"),
-+        "SquirtleBall": (1, "MUDKIP", "CYNDAQUIL", "CHARMANDER"),
-+        "CharmanderBall": (2, "CYNDAQUIL", "BULBASAUR", "BULBASAUR"),
-+    }
-+    for label, (slot, player_species, rival_species, rival_ball) in expected_ball_scripts.items():
-+        pattern = (
-+            rf"EventScript_{label}::.*?setvar PLAYER_STARTER_NUM, {slot}.*?"
-+            rf"setvar PLAYER_STARTER_SPECIES, SPECIES_{player_species}.*?"
-+            rf"setvar RIVAL_STARTER_SPECIES, SPECIES_{rival_species}.*?"
-+            rf"setvar RIVAL_STARTER_ID, LOCALID_{rival_ball}_BALL"
-+        )
-+        require(re.search(pattern, pallet, re.DOTALL), f"{label} has an inconsistent player/rival mapping")
-+
-+    for slot, variant in ((0, "Squirtle"), (1, "Charmander"), (2, "Bulbasaur")):
-+        require(
-+            f"goto_if_eq PLAYER_STARTER_NUM, {slot}, PalletTown_ProfessorOaksLab_EventScript_RivalWalksTo{variant}" in pallet,
-+            f"Gary does not walk to the correct ball for Kanto starter slot {slot}",
-+        )
-+
-+    expected_variant_slots = {"Squirtle": 0, "Charmander": 1, "Bulbasaur": 2}
-+    for path in kanto_starter_files:
-+        script = read(path)
-+        branches = re.findall(r"(?:goto|call)_if_eq VAR_STARTER_MON_FRLG, (\d), ([A-Za-z0-9_]+)", script)
-+        for slot, target in branches:
-+            for variant, expected_slot in expected_variant_slots.items():
-+                if target.endswith(variant):
-+                    require(
-+                        int(slot) == expected_slot,
-+                        f"{path} sends starter slot {slot} to Gary's {variant} team",
-+                    )
-+
-+    rival_parties = read("src/data/trainers_frlg.party")
-+    expected_rival_families = {
-+        "SQUIRTLE": {"Mudkip", "Marshtomp", "Swampert"},
-+        "BULBASAUR": {"Bulbasaur", "Ivysaur", "Venusaur"},
-+        "CHARMANDER": {"Cyndaquil", "Quilava", "Typhlosion"},
-+    }
-+    rival_sections_checked = 0
-+    for match in re.finditer(
-+        r"^=== (TRAINER_(?:RIVAL|CHAMPION)[A-Z0-9_]+_(SQUIRTLE|BULBASAUR|CHARMANDER)) ===\n(.*?)(?=^=== |\Z)",
-+        rival_parties,
-+        re.MULTILINE | re.DOTALL,
-+    ):
-+        trainer_name, variant, section = match.groups()
-+        mons = re.findall(r"^([A-Za-z][A-Za-z0-9 ._-]*?)(?: @ [^\n]+)?\nLevel:", section, re.MULTILINE)
-+        require(mons, f"{trainer_name} has no party members")
-+        require(
-+            mons[-1] in expected_rival_families[variant],
-+            f"{trainer_name} ends with {mons[-1]}, which does not match Gary's chosen starter",
-+        )
-+        move_blocks = re.findall(
-+            r"^[A-Za-z][A-Za-z0-9 ._-]*?(?: @ [^\n]+)?\nLevel:.*?\nIVs:.*?\n(?:Ability:.*?\n)?((?:- [^\n]+\n)*)",
-+            section,
-+            re.MULTILINE,
-+        )
-+        for moves in move_blocks:
-+            require(
-+                len(moves.splitlines()) <= 4,
-+                f"{trainer_name} has a Pokémon with more than four moves",
-+            )
-+        rival_sections_checked += 1
-+    require(rival_sections_checked >= 30, f"Only checked {rival_sections_checked} Gary starter teams")
-+
 +    new_bark = read("data/maps/NewBarkTown_Lab/scripts.inc")
 +    for species in ("CHARMANDER", "TOTODILE", "TREECKO"):
 +        require(f"SPECIES_{species}" in new_bark, f"Johto starter trio is missing {species}")
 +    require("givemon PLAYER_STARTER_SPECIES, 5" in new_bark, "Johto starter is not level 5")
 +
-+    print("v0.4.3 Kanto validation passed: Gary, collection, encounters, and levels are correct.")
++    print("v0.4.2 Kanto validation passed: collection, rare encounters, and levels are correct.")
 +
 +
 +if __name__ == "__main__":
@@ -385,7 +301,7 @@ index 98ae164c..d74ff7af 100644
  	msgbox BurnedTowerSilver_AfterText1, MSGBOX_DEFAULT
  	closemessage
 diff --git a/data/maps/CeladonCity_Gym_Frlg/scripts.inc b/data/maps/CeladonCity_Gym_Frlg/scripts.inc
-index 8f4e2d8c..10a69aea 100644
+index 8f4e2d8c..dc55c359 100644
 --- a/data/maps/CeladonCity_Gym_Frlg/scripts.inc
 +++ b/data/maps/CeladonCity_Gym_Frlg/scripts.inc
 @@ -5,6 +5,7 @@ CeladonCity_Gym_EventScript_Erika::
@@ -404,17 +320,17 @@ index 8f4e2d8c..10a69aea 100644
 +	end
 +
 +CeladonCity_Gym_EventScript_GiveStarter::
-+	goto_if_eq VAR_STARTER_MON_FRLG, 0, CeladonCity_Gym_EventScript_GiveMudkip
-+	goto_if_eq VAR_STARTER_MON_FRLG, 1, CeladonCity_Gym_EventScript_GiveCyndaquil
++	goto_if_eq VAR_STARTER_MON_FRLG, 0, CeladonCity_Gym_EventScript_GiveCyndaquil
++	goto_if_eq VAR_STARTER_MON_FRLG, 1, CeladonCity_Gym_EventScript_GiveMudkip
 +	setvar VAR_0x8004, SPECIES_BULBASAUR
-+	goto CeladonCity_Gym_EventScript_GiveStarterMon
-+
-+CeladonCity_Gym_EventScript_GiveMudkip::
-+	setvar VAR_0x8004, SPECIES_MUDKIP
 +	goto CeladonCity_Gym_EventScript_GiveStarterMon
 +
 +CeladonCity_Gym_EventScript_GiveCyndaquil::
 +	setvar VAR_0x8004, SPECIES_CYNDAQUIL
++	goto CeladonCity_Gym_EventScript_GiveStarterMon
++
++CeladonCity_Gym_EventScript_GiveMudkip::
++	setvar VAR_0x8004, SPECIES_MUDKIP
 +
 +CeladonCity_Gym_EventScript_GiveStarterMon::
 +	bufferspeciesname STR_VAR_1, VAR_0x8004
@@ -544,7 +460,7 @@ index bbfaa1b4..cca67775 100644
 +CeruleanCave_B1F_Text_MewAppeared::
 +	.string "Mew...$"
 diff --git a/data/maps/CeruleanCity_Frlg/scripts.inc b/data/maps/CeruleanCity_Frlg/scripts.inc
-index 30136e4a..3c449c60 100644
+index 30136e4a..14cc0b46 100644
 --- a/data/maps/CeruleanCity_Frlg/scripts.inc
 +++ b/data/maps/CeruleanCity_Frlg/scripts.inc
 @@ -42,9 +42,9 @@ CeruleanCity_EventScript_Rival::
@@ -554,9 +470,9 @@ index 30136e4a..3c449c60 100644
 -	call_if_eq VAR_STARTER_MON, 2, CeruleanCity_EventScript_RivalSquirtle
 -	call_if_eq VAR_STARTER_MON, 1, CeruleanCity_EventScript_RivalBulbasaur
 -	call_if_eq VAR_STARTER_MON, 0, CeruleanCity_EventScript_RivalCharmander
-+	call_if_eq VAR_STARTER_MON_FRLG, 0, CeruleanCity_EventScript_RivalSquirtle
-+	call_if_eq VAR_STARTER_MON_FRLG, 2, CeruleanCity_EventScript_RivalBulbasaur
-+	call_if_eq VAR_STARTER_MON_FRLG, 1, CeruleanCity_EventScript_RivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 2, CeruleanCity_EventScript_RivalSquirtle
++	call_if_eq VAR_STARTER_MON_FRLG, 1, CeruleanCity_EventScript_RivalBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 0, CeruleanCity_EventScript_RivalCharmander
  	famechecker FAMECHECKER_BILL, 0
  	msgbox CeruleanCity_Text_RivalPostBattle
  	closemessage
@@ -583,7 +499,7 @@ index df16d25d..4a336002 100644
  	end
  
 diff --git a/data/maps/CinnabarIsland_Gym_Frlg/scripts.inc b/data/maps/CinnabarIsland_Gym_Frlg/scripts.inc
-index 8426b1cb..640787a9 100644
+index 8426b1cb..4e6daa48 100644
 --- a/data/maps/CinnabarIsland_Gym_Frlg/scripts.inc
 +++ b/data/maps/CinnabarIsland_Gym_Frlg/scripts.inc
 @@ -49,6 +49,7 @@ CinnabarIsland_Gym_EventScript_Blaine::
@@ -602,13 +518,13 @@ index 8426b1cb..640787a9 100644
 +	end
 +
 +CinnabarIsland_Gym_EventScript_GiveStarter::
-+	goto_if_eq VAR_STARTER_MON_FRLG, 0, CinnabarIsland_Gym_EventScript_GiveCyndaquil
++	goto_if_eq VAR_STARTER_MON_FRLG, 0, CinnabarIsland_Gym_EventScript_GiveMudkip
 +	goto_if_eq VAR_STARTER_MON_FRLG, 1, CinnabarIsland_Gym_EventScript_GiveBulbasaur
-+	setvar VAR_0x8004, SPECIES_MUDKIP
++	setvar VAR_0x8004, SPECIES_CYNDAQUIL
 +	goto CinnabarIsland_Gym_EventScript_GiveStarterMon
 +
-+CinnabarIsland_Gym_EventScript_GiveCyndaquil::
-+	setvar VAR_0x8004, SPECIES_CYNDAQUIL
++CinnabarIsland_Gym_EventScript_GiveMudkip::
++	setvar VAR_0x8004, SPECIES_MUDKIP
 +	goto CinnabarIsland_Gym_EventScript_GiveStarterMon
 +
 +CinnabarIsland_Gym_EventScript_GiveBulbasaur::
@@ -855,7 +771,7 @@ index 227b930b..24e634a5 100644
  	waitmovement 0
  	setflag FLAG_HIDE_LAB_POLICEMAN
 diff --git a/data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc b/data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
-index f337da4e..a40bd797 100644
+index f337da4e..96ad793b 100644
 --- a/data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
 +++ b/data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
 @@ -296,9 +296,9 @@ PalletTown_ProfessorOaksLab_EventScript_RivalBattle::
@@ -865,9 +781,9 @@ index f337da4e..a40bd797 100644
 -	goto_if_eq VAR_STARTER_MON, 0, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmander
 -	goto_if_eq VAR_STARTER_MON, 1, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaur
 -	goto_if_eq VAR_STARTER_MON, 2, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtle
-+	goto_if_eq VAR_STARTER_MON_FRLG, 0, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtle
-+	goto_if_eq VAR_STARTER_MON_FRLG, 1, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmander
-+	goto_if_eq VAR_STARTER_MON_FRLG, 2, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaur
++	goto_if_eq VAR_STARTER_MON_FRLG, 0, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmander
++	goto_if_eq VAR_STARTER_MON_FRLG, 1, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaur
++	goto_if_eq VAR_STARTER_MON_FRLG, 2, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtle
  	end
  
  @ The scripts for the rival approaching the player for battle are a bit bloated because
@@ -877,7 +793,7 @@ index f337da4e..a40bd797 100644
  	setvar PLAYER_STARTER_SPECIES, SPECIES_BULBASAUR
 -	setvar RIVAL_STARTER_SPECIES, SPECIES_CHARMANDER
 -	setvar RIVAL_STARTER_ID, LOCALID_CHARMANDER_BALL
-+	setvar RIVAL_STARTER_SPECIES, SPECIES_MUDKIP
++	setvar RIVAL_STARTER_SPECIES, SPECIES_CYNDAQUIL
 +	setvar RIVAL_STARTER_ID, LOCALID_SQUIRTLE_BALL
  	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
  	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2, PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice
@@ -914,8 +830,8 @@ index f337da4e..a40bd797 100644
 -	setvar PLAYER_STARTER_SPECIES, SPECIES_SQUIRTLE
 -	setvar RIVAL_STARTER_SPECIES, SPECIES_BULBASAUR
 -	setvar RIVAL_STARTER_ID, LOCALID_BULBASAUR_BALL
-+	setvar PLAYER_STARTER_SPECIES, SPECIES_MUDKIP
-+	setvar RIVAL_STARTER_SPECIES, SPECIES_CYNDAQUIL
++	setvar PLAYER_STARTER_SPECIES, SPECIES_CYNDAQUIL
++	setvar RIVAL_STARTER_SPECIES, SPECIES_MUDKIP
 +	setvar RIVAL_STARTER_ID, LOCALID_CHARMANDER_BALL
  	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
  	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2, PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice
@@ -927,7 +843,7 @@ index f337da4e..a40bd797 100644
 -	setvar PLAYER_STARTER_SPECIES, SPECIES_CHARMANDER
 -	setvar RIVAL_STARTER_SPECIES, SPECIES_SQUIRTLE
 -	setvar RIVAL_STARTER_ID, LOCALID_SQUIRTLE_BALL
-+	setvar PLAYER_STARTER_SPECIES, SPECIES_CYNDAQUIL
++	setvar PLAYER_STARTER_SPECIES, SPECIES_MUDKIP
 +	setvar RIVAL_STARTER_SPECIES, SPECIES_BULBASAUR
 +	setvar RIVAL_STARTER_ID, LOCALID_BULBASAUR_BALL
  	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
@@ -941,19 +857,20 @@ index f337da4e..a40bd797 100644
 -	.string "You should raise it patiently.\p"
 -	.string "So, {PLAYER}, you're claiming the\n"
 -	.string "FIRE POKéMON CHARMANDER?$"
-+	.string "Ah! CYNDAQUIL is your choice.\n"
-+	.string "Raise it with patience and care.\p"
-+	.string "So, {PLAYER}, you're choosing the\n"
-+	.string "FIRE POKéMON CYNDAQUIL?$"
++	.string "Hm! MUDKIP is your choice.\n"
++	.string "It's sturdy and dependable.\p"
++	.string "So, {PLAYER}, you've decided on the\n"
++	.string "WATER POKéMON MUDKIP?$"
  
  PalletTown_ProfessorOaksLab_Text_OakChoosingSquirtle::
 -	.string "Hm! SQUIRTLE is your choice.\n"
 -	.string "It's one worth raising.\p"
-+	.string "Hm! MUDKIP is your choice.\n"
-+	.string "It's sturdy and dependable.\p"
- 	.string "So, {PLAYER}, you've decided on the\n"
+-	.string "So, {PLAYER}, you've decided on the\n"
 -	.string "WATER POKéMON SQUIRTLE?$"
-+	.string "WATER POKéMON MUDKIP?$"
++	.string "Ah! CYNDAQUIL is your choice.\n"
++	.string "Raise it with patience and care.\p"
++	.string "So, {PLAYER}, you're choosing the\n"
++	.string "FIRE POKéMON CYNDAQUIL?$"
  
  PalletTown_ProfessorOaksLab_Text_OakChoosingBulbasaur::
  	.string "I see! BULBASAUR is your choice.\n"
@@ -980,7 +897,7 @@ index 2fa94240..80f90ae1 100644
  	.string "you if you don't give up on them.$"
 -
 diff --git a/data/maps/PokemonLeague_ChampionsRoom_Frlg/scripts.inc b/data/maps/PokemonLeague_ChampionsRoom_Frlg/scripts.inc
-index 10fb1d31..e56b0f79 100644
+index 10fb1d31..788b4146 100644
 --- a/data/maps/PokemonLeague_ChampionsRoom_Frlg/scripts.inc
 +++ b/data/maps/PokemonLeague_ChampionsRoom_Frlg/scripts.inc
 @@ -7,9 +7,9 @@ PokemonLeague_ChampionsRoom_Frlg_MapScripts::
@@ -990,9 +907,9 @@ index 10fb1d31..e56b0f79 100644
 -	call_if_eq VAR_STARTER_MON, 2, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle
 -	call_if_eq VAR_STARTER_MON, 1, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerBulbasaur
 -	call_if_eq VAR_STARTER_MON, 0, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerCharmander
-+	call_if_eq VAR_STARTER_MON_FRLG, 0, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle
-+	call_if_eq VAR_STARTER_MON_FRLG, 2, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerBulbasaur
-+	call_if_eq VAR_STARTER_MON_FRLG, 1, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 2, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle
++	call_if_eq VAR_STARTER_MON_FRLG, 1, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 0, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerCharmander
  	end
  
  PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle::
@@ -1003,18 +920,18 @@ index 10fb1d31..e56b0f79 100644
 -	call_if_eq VAR_STARTER_MON, 2, PokemonLeague_ChampionsRoom_EventScript_BattleSquirtle
 -	call_if_eq VAR_STARTER_MON, 1, PokemonLeague_ChampionsRoom_EventScript_BattleBulbasaur
 -	call_if_eq VAR_STARTER_MON, 0, PokemonLeague_ChampionsRoom_EventScript_BattleCharmander
-+	call_if_eq VAR_STARTER_MON_FRLG, 0, PokemonLeague_ChampionsRoom_EventScript_BattleSquirtle
-+	call_if_eq VAR_STARTER_MON_FRLG, 2, PokemonLeague_ChampionsRoom_EventScript_BattleBulbasaur
-+	call_if_eq VAR_STARTER_MON_FRLG, 1, PokemonLeague_ChampionsRoom_EventScript_BattleCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 2, PokemonLeague_ChampionsRoom_EventScript_BattleSquirtle
++	call_if_eq VAR_STARTER_MON_FRLG, 1, PokemonLeague_ChampionsRoom_EventScript_BattleBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 0, PokemonLeague_ChampionsRoom_EventScript_BattleCharmander
  	return
  
  PokemonLeague_ChampionsRoom_EventScript_Rematch::
 -	call_if_eq VAR_STARTER_MON, 2, PokemonLeague_ChampionsRoom_EventScript_RematchSquirtle
 -	call_if_eq VAR_STARTER_MON, 1, PokemonLeague_ChampionsRoom_EventScript_RematchBulbasaur
 -	call_if_eq VAR_STARTER_MON, 0, PokemonLeague_ChampionsRoom_EventScript_RematchCharmander
-+	call_if_eq VAR_STARTER_MON_FRLG, 0, PokemonLeague_ChampionsRoom_EventScript_RematchSquirtle
-+	call_if_eq VAR_STARTER_MON_FRLG, 2, PokemonLeague_ChampionsRoom_EventScript_RematchBulbasaur
-+	call_if_eq VAR_STARTER_MON_FRLG, 1, PokemonLeague_ChampionsRoom_EventScript_RematchCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 2, PokemonLeague_ChampionsRoom_EventScript_RematchSquirtle
++	call_if_eq VAR_STARTER_MON_FRLG, 1, PokemonLeague_ChampionsRoom_EventScript_RematchBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 0, PokemonLeague_ChampionsRoom_EventScript_RematchCharmander
  	return
  
  PokemonLeague_ChampionsRoom_EventScript_Intro::
@@ -1024,7 +941,7 @@ index 10fb1d31..e56b0f79 100644
  	.string "Come with me!$"
 -
 diff --git a/data/maps/PokemonTower_2F_Frlg/scripts.inc b/data/maps/PokemonTower_2F_Frlg/scripts.inc
-index 5c0d880b..38a7043e 100644
+index 5c0d880b..c802c06c 100644
 --- a/data/maps/PokemonTower_2F_Frlg/scripts.inc
 +++ b/data/maps/PokemonTower_2F_Frlg/scripts.inc
 @@ -28,9 +28,9 @@ PokemonTower_2F_EventScript_Rival::
@@ -1034,9 +951,9 @@ index 5c0d880b..38a7043e 100644
 -	call_if_eq VAR_STARTER_MON, 2, PokemonTower_2F_EventScript_RivalSquirtle
 -	call_if_eq VAR_STARTER_MON, 1, PokemonTower_2F_EventScript_RivalBulbasaur
 -	call_if_eq VAR_STARTER_MON, 0, PokemonTower_2F_EventScript_RivalCharmander
-+	call_if_eq VAR_STARTER_MON_FRLG, 0, PokemonTower_2F_EventScript_RivalSquirtle
-+	call_if_eq VAR_STARTER_MON_FRLG, 2, PokemonTower_2F_EventScript_RivalBulbasaur
-+	call_if_eq VAR_STARTER_MON_FRLG, 1, PokemonTower_2F_EventScript_RivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 2, PokemonTower_2F_EventScript_RivalSquirtle
++	call_if_eq VAR_STARTER_MON_FRLG, 1, PokemonTower_2F_EventScript_RivalBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 0, PokemonTower_2F_EventScript_RivalCharmander
  	msgbox PokemonTower_2F_Text_RivalPostBattle
  	closemessage
  	playbgm MUS_RG_RIVAL_EXIT, 0
@@ -1046,7 +963,7 @@ index 5c0d880b..38a7043e 100644
  	.string "unmask them.$"
 -
 diff --git a/data/maps/Route22_Frlg/scripts.inc b/data/maps/Route22_Frlg/scripts.inc
-index 0497ab4d..3f9e0952 100644
+index 0497ab4d..beb5113c 100644
 --- a/data/maps/Route22_Frlg/scripts.inc
 +++ b/data/maps/Route22_Frlg/scripts.inc
 @@ -30,9 +30,9 @@ Route22_EventScript_EarlyRival::
@@ -1056,9 +973,9 @@ index 0497ab4d..3f9e0952 100644
 -	call_if_eq VAR_STARTER_MON, 2, Route22_EventScript_EarlyRivalSquirtle
 -	call_if_eq VAR_STARTER_MON, 1, Route22_EventScript_EarlyRivalBulbasaur
 -	call_if_eq VAR_STARTER_MON, 0, Route22_EventScript_EarlyRivalCharmander
-+	call_if_eq VAR_STARTER_MON_FRLG, 0, Route22_EventScript_EarlyRivalSquirtle
-+	call_if_eq VAR_STARTER_MON_FRLG, 2, Route22_EventScript_EarlyRivalBulbasaur
-+	call_if_eq VAR_STARTER_MON_FRLG, 1, Route22_EventScript_EarlyRivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 2, Route22_EventScript_EarlyRivalSquirtle
++	call_if_eq VAR_STARTER_MON_FRLG, 1, Route22_EventScript_EarlyRivalBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 0, Route22_EventScript_EarlyRivalCharmander
  	msgbox Route22_Text_EarlyRivalPostBattle
  	closemessage
  	delay 10
@@ -1069,9 +986,9 @@ index 0497ab4d..3f9e0952 100644
 -	call_if_eq VAR_STARTER_MON, 2, Route22_EventScript_LateRivalSquirtle
 -	call_if_eq VAR_STARTER_MON, 1, Route22_EventScript_LateRivalBulbasaur
 -	call_if_eq VAR_STARTER_MON, 0, Route22_EventScript_LateRivalCharmander
-+	call_if_eq VAR_STARTER_MON_FRLG, 0, Route22_EventScript_LateRivalSquirtle
-+	call_if_eq VAR_STARTER_MON_FRLG, 2, Route22_EventScript_LateRivalBulbasaur
-+	call_if_eq VAR_STARTER_MON_FRLG, 1, Route22_EventScript_LateRivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 2, Route22_EventScript_LateRivalSquirtle
++	call_if_eq VAR_STARTER_MON_FRLG, 1, Route22_EventScript_LateRivalBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 0, Route22_EventScript_LateRivalCharmander
  	msgbox Route22_Text_LateRivalPostBattle
  	closemessage
  	delay 10
@@ -1081,7 +998,7 @@ index 0497ab4d..3f9e0952 100644
  	.string "Front Gate$"
 -
 diff --git a/data/maps/SSAnne_2F_Corridor_Frlg/scripts.inc b/data/maps/SSAnne_2F_Corridor_Frlg/scripts.inc
-index ba17c89a..547a4c38 100644
+index ba17c89a..b20228c4 100644
 --- a/data/maps/SSAnne_2F_Corridor_Frlg/scripts.inc
 +++ b/data/maps/SSAnne_2F_Corridor_Frlg/scripts.inc
 @@ -34,9 +34,9 @@ SSAnne_2F_Corridor_EventScript_RivalTrigger::
@@ -1091,9 +1008,9 @@ index ba17c89a..547a4c38 100644
 -	call_if_eq VAR_STARTER_MON, 2, SSAnne_2F_Corridor_EventScript_RivalSquirtle
 -	call_if_eq VAR_STARTER_MON, 1, SSAnne_2F_Corridor_EventScript_RivalBulbasaur
 -	call_if_eq VAR_STARTER_MON, 0, SSAnne_2F_Corridor_EventScript_RivalCharmander
-+	call_if_eq VAR_STARTER_MON_FRLG, 0, SSAnne_2F_Corridor_EventScript_RivalSquirtle
-+	call_if_eq VAR_STARTER_MON_FRLG, 2, SSAnne_2F_Corridor_EventScript_RivalBulbasaur
-+	call_if_eq VAR_STARTER_MON_FRLG, 1, SSAnne_2F_Corridor_EventScript_RivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 2, SSAnne_2F_Corridor_EventScript_RivalSquirtle
++	call_if_eq VAR_STARTER_MON_FRLG, 1, SSAnne_2F_Corridor_EventScript_RivalBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 0, SSAnne_2F_Corridor_EventScript_RivalCharmander
  	msgbox SSAnne_2F_Corridor_Text_RivalPostBattle
  	closemessage
  	delay 10
@@ -1103,7 +1020,7 @@ index ba17c89a..547a4c38 100644
  	.string "Smell ya!$"
 -
 diff --git a/data/maps/SilphCo_7F_Frlg/scripts.inc b/data/maps/SilphCo_7F_Frlg/scripts.inc
-index 6fd7c1a8..d433ffb1 100644
+index 6fd7c1a8..307b4bf5 100644
 --- a/data/maps/SilphCo_7F_Frlg/scripts.inc
 +++ b/data/maps/SilphCo_7F_Frlg/scripts.inc
 @@ -42,9 +42,9 @@ SilphCo_7F_EventScript_RivalScene::
@@ -1113,9 +1030,9 @@ index 6fd7c1a8..d433ffb1 100644
 -	call_if_eq VAR_STARTER_MON, 2, SilphCo_7F_EventScript_RivalSquirtle
 -	call_if_eq VAR_STARTER_MON, 1, SilphCo_7F_EventScript_RivalBulbasaur
 -	call_if_eq VAR_STARTER_MON, 0, SilphCo_7F_EventScript_RivalCharmander
-+	call_if_eq VAR_STARTER_MON_FRLG, 0, SilphCo_7F_EventScript_RivalSquirtle
-+	call_if_eq VAR_STARTER_MON_FRLG, 2, SilphCo_7F_EventScript_RivalBulbasaur
-+	call_if_eq VAR_STARTER_MON_FRLG, 1, SilphCo_7F_EventScript_RivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 2, SilphCo_7F_EventScript_RivalSquirtle
++	call_if_eq VAR_STARTER_MON_FRLG, 1, SilphCo_7F_EventScript_RivalBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 0, SilphCo_7F_EventScript_RivalCharmander
  	msgbox SilphCo_7F_Text_RivalPostBattle
  	closemessage
  	playbgm MUS_RG_RIVAL_EXIT, 0
@@ -1345,7 +1262,7 @@ index 4bb859c1..d25d4790 100644
 +
  #endif // GUARD_CONSTANTS_JOHTO_VARS_H
 diff --git a/include/constants/vars_frlg.h b/include/constants/vars_frlg.h
-index dd201b28..307e98b8 100644
+index dd201b28..59c85a8a 100644
 --- a/include/constants/vars_frlg.h
 +++ b/include/constants/vars_frlg.h
 @@ -68,7 +68,7 @@
@@ -1353,7 +1270,7 @@ index dd201b28..307e98b8 100644
  
  #define VAR_ICE_STEP_COUNT_FRLG            VAR_KANTO_SLICE(0x0B)
 -#define VAR_STARTER_MON_FRLG               VAR_KANTO_SLICE(0x0C) // 0: Bulbasaur, 1: Squirtle, 2: Charmander
-+#define VAR_STARTER_MON_FRLG               VAR_KANTO_SLICE(0x0C) // 0: Bulbasaur, 1: Mudkip, 2: Cyndaquil
++#define VAR_STARTER_MON_FRLG               VAR_KANTO_SLICE(0x0C) // 0: Bulbasaur, 1: Cyndaquil, 2: Mudkip
  #define VAR_RESET_RTC_ENABLE_FRLG          VAR_KANTO_SLICE(0x0D)
  #define VAR_ENIGMA_BERRY_AVAILABLE_FRLG    VAR_KANTO_SLICE(0x0E)
  
@@ -1704,7 +1621,7 @@ index 60ffe29f..806a29cb 100644
  IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 -
 diff --git a/src/data/trainers_frlg.party b/src/data/trainers_frlg.party
-index c7b4c053..19912f6a 100644
+index c7b4c053..ba074eb9 100644
 --- a/src/data/trainers_frlg.party
 +++ b/src/data/trainers_frlg.party
 @@ -915,7 +915,7 @@ Double Battle: No
@@ -1716,21 +1633,25 @@ index c7b4c053..19912f6a 100644
  IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
  - Tackle
  - Defense Curl
-@@ -4429,11 +4429,11 @@ Music: Male
+@@ -4429,7 +4429,7 @@ Music: Male
  Double Battle: No
  AI: Check Bad Move / Try To Faint / Check Viability
  
 -Squirtle
++Bulbasaur
+ Level: 5
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - Tackle
+@@ -4444,7 +4444,7 @@ Music: Male
+ Double Battle: No
+ AI: Check Bad Move / Try To Faint / Check Viability
+ 
+-Bulbasaur
 +Mudkip
  Level: 5
  IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
  - Tackle
--- Tail Whip
-+- Growl
- 
- === TRAINER_RIVAL_OAKS_LAB_BULBASAUR ===
- Name: BLUE
-@@ -4459,11 +4459,11 @@ Music: Male
+@@ -4459,7 +4459,7 @@ Music: Male
  Double Battle: No
  AI: Check Bad Move / Try To Faint / Check Viability
  
@@ -1738,14 +1659,8 @@ index c7b4c053..19912f6a 100644
 +Cyndaquil
  Level: 5
  IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
--- Scratch
--- Growl
-+- Tackle
-+- Leer
- 
- === TRAINER_RIVAL_ROUTE22_EARLY_SQUIRTLE ===
- Name: BLUE
-@@ -4475,16 +4475,18 @@ Double Battle: No
+ - Scratch
+@@ -4475,13 +4475,13 @@ Double Battle: No
  AI: Check Bad Move / Try To Faint / Check Viability
  
  Pidgey
@@ -1757,18 +1672,12 @@ index c7b4c053..19912f6a 100644
  
 -Squirtle
 -Level: 9
-+Mudkip
++Bulbasaur
 +Level: 10
  IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
  - Tackle
--- Tail Whip
-+- Growl
-+- Mud-Slap
-+- Water Gun
- 
- === TRAINER_RIVAL_ROUTE22_EARLY_BULBASAUR ===
- Name: BLUE
-@@ -4496,16 +4498,18 @@ Double Battle: No
+ - Tail Whip
+@@ -4496,13 +4496,13 @@ Double Battle: No
  AI: Check Bad Move / Try To Faint / Check Viability
  
  Pidgey
@@ -1778,18 +1687,14 @@ index c7b4c053..19912f6a 100644
  - Tackle
  - Sand Attack
  
- Bulbasaur
+-Bulbasaur
 -Level: 9
++Mudkip
 +Level: 10
  IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
  - Tackle
  - Growl
-+- Leech Seed
-+- Vine Whip
- 
- === TRAINER_RIVAL_ROUTE22_EARLY_CHARMANDER ===
- Name: BLUE
-@@ -4517,16 +4521,18 @@ Double Battle: No
+@@ -4517,13 +4517,13 @@ Double Battle: No
  AI: Check Bad Move / Try To Faint / Check Viability
  
  Pidgey
@@ -1804,50 +1709,9 @@ index c7b4c053..19912f6a 100644
 +Cyndaquil
 +Level: 10
  IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
--- Scratch
--- Growl
-+- Tackle
-+- Leer
-+- Smokescreen
-+- Ember
- 
- === TRAINER_RIVAL_CERULEAN_SQUIRTLE ===
- Name: BLUE
-@@ -4557,12 +4563,12 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
- - Tail Whip
- - Quick Attack
- 
--Squirtle
-+Mudkip
- Level: 18
- IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
- - Tackle
--- Tail Whip
--- Withdraw
-+- Growl
-+- Mud-Slap
- - Water Gun
- 
- === TRAINER_RIVAL_CERULEAN_BULBASAUR ===
-@@ -4631,13 +4637,13 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
- - Tail Whip
- - Quick Attack
- 
--Charmander
-+Cyndaquil
- Level: 18
- IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
--- Metal Claw
-+- Tackle
-+- Leer
-+- Smokescreen
- - Ember
--- Growl
--- Scratch
- 
- === TRAINER_SCIENTIST_TED ===
- Name: TED
-@@ -7101,13 +7107,14 @@ Double Battle: No
+ - Scratch
+ - Growl
+@@ -7101,13 +7101,14 @@ Double Battle: No
  AI: Check Bad Move / Try To Faint / Check Viability
  
  Geodude
@@ -1864,190 +1728,6 @@ index c7b4c053..19912f6a 100644
  IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
  - Tackle
  - Bind
-@@ -7885,7 +7892,7 @@ Kadabra
- Level: 18
- IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
- 
--Wartortle
-+Marshtomp
- Level: 20
- IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
- 
-@@ -7935,7 +7942,7 @@ Kadabra
- Level: 18
- IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
- 
--Charmeleon
-+Quilava
- Level: 20
- IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
- 
-@@ -7964,7 +7971,7 @@ Kadabra
- Level: 20
- IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
- 
--Wartortle
-+Marshtomp
- Level: 25
- IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
- 
-@@ -8022,7 +8029,7 @@ Kadabra
- Level: 20
- IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
- 
--Charmeleon
-+Quilava
- Level: 25
- IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
- 
-@@ -8051,7 +8058,7 @@ Alakazam
- Level: 35
- IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
- 
--Blastoise
-+Swampert
- Level: 40
- IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
- 
-@@ -8109,7 +8116,7 @@ Alakazam
- Level: 35
- IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
- 
--Charizard
-+Typhlosion
- Level: 40
- IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
- 
-@@ -8162,13 +8169,13 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
- - Future Sight
- - Disable
- 
--Blastoise
-+Swampert
- Level: 53
- IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
--- Water Gun
--- Rain Dance
--- Bite
--- Rapid Spin
-+- Surf
-+- Earthquake
-+- Ice Beam
-+- Protect
- 
- === TRAINER_RIVAL_ROUTE22_LATE_BULBASAUR ===
- Name: BLUE
-@@ -8276,13 +8283,13 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
- - Future Sight
- - Disable
- 
--Charizard
-+Typhlosion
- Level: 53
- IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
- - Flamethrower
--- Wing Attack
--- Slash
--- Scary Face
-+- Thunder Punch
-+- Swift
-+- Smokescreen
- 
- === TRAINER_CHAMPION_FIRST_SQUIRTLE ===
- Name: BLUE
-@@ -8335,13 +8342,13 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
- - Sleep Powder
- - Light Screen
- 
--Blastoise @ Sitrus Berry
-+Swampert @ Sitrus Berry
- Level: 63
- IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
--- Hydro Pump
--- Rain Dance
--- Skull Bash
--- Bite
-+- Surf
-+- Earthquake
-+- Ice Beam
-+- Protect
- 
- === TRAINER_CHAMPION_FIRST_BULBASAUR ===
- Name: BLUE
-@@ -8453,13 +8460,13 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
- - Bite
- - Thrash
- 
--Charizard @ Sitrus Berry
-+Typhlosion @ Sitrus Berry
- Level: 63
- IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
--- Fire Blast
--- Aerial Ace
--- Slash
--- Fire Spin
-+- Flamethrower
-+- Thunder Punch
-+- Brick Break
-+- Smokescreen
- 
- === TRAINER_CHANNELER_PATRICIA ===
- Name: PATRICIA
-@@ -14420,7 +14427,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
- - Sleep Powder
- - Light Screen
- 
--Blastoise @ Sitrus Berry
-+Swampert @ Sitrus Berry
- Level: 75
- IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
- - Hydro Pump
-@@ -14485,11 +14492,11 @@ Ability: Chlorophyll
- - Sludge Bomb
- - Sleep Powder
- 
--Blastoise @ Sitrus Berry
-+Swampert @ Sitrus Berry
- Level: 80
- IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
- Ability: Torrent
--- Shell Smash
-+- Waterfall
- - Hydro Pump
- - Ice Beam
- - Earthquake
-@@ -14670,11 +14677,11 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
- - Earthquake
- - Hyper Beam
- 
--Charizard @ Sitrus Berry
-+Typhlosion @ Sitrus Berry
- Level: 75
- IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
- - Fire Blast
--- Dragon Claw
-+- Thunder Punch
- - Aerial Ace
- - Earthquake
- 
-@@ -14735,13 +14742,13 @@ Ability: Moxie
- - Earthquake
- - Ice Fang
- 
--Charizard @ Sitrus Berry
-+Typhlosion @ Sitrus Berry
- Level: 80
- IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
- Ability: Blaze
--- Dragon Dance
--- Flare Blitz
--- Dragon Claw
-+- Eruption
-+- Flamethrower
-+- Thunder Punch
- - Earthquake
- 
- === TRAINER_CUE_BALL_PAXTON ===
 diff --git a/src/data/wild_encounters.json b/src/data/wild_encounters.json
 index 84046ec1..4e3d0ed1 100755
 --- a/src/data/wild_encounters.json
@@ -2321,7 +2001,7 @@ index 84046ec1..4e3d0ed1 100755
              ]
            },
 diff --git a/src/main_menu.c b/src/main_menu.c
-index 36e10467..090ccfc5 100644
+index 36e10467..30eb506c 100644
 --- a/src/main_menu.c
 +++ b/src/main_menu.c
 @@ -269,7 +269,9 @@ static const u8 gText_RegionSaveDamaged[] = _("Part of this save file's region\n
@@ -2331,7 +2011,7 @@ index 36e10467..090ccfc5 100644
 -static const u8 gText_MainMenuNewGame[] = _("NEW GAME");
 +// Keep the playtest version visible in-game so testers cannot mistake an older
 +// cached ROM for the current build.
-+static const u8 gText_MainMenuNewGame[] = _("NEW GAME  V0.4.3");
++static const u8 gText_MainMenuNewGame[] = _("NEW GAME  V0.4.2");
  static const u8 gText_MainMenuContinue[] = _("CONTINUE");
  static const u8 gText_MainMenuOption[] = _("OPTION");
  static const u8 gText_MainMenuMysteryGift[] = _("MYSTERY GIFT");
@@ -2601,7 +2281,7 @@ index ab4ea1f0..ba407a90 100644
  {
      struct PartyMenu *ptr = &gPartyMenu;
 diff --git a/src/starter_choose.c b/src/starter_choose.c
-index ba37126b..af96068b 100644
+index ba37126b..191a5c27 100644
 --- a/src/starter_choose.c
 +++ b/src/starter_choose.c
 @@ -111,17 +111,16 @@ static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
@@ -2622,7 +2302,7 @@ index ba37126b..af96068b 100644
      [REGION_HOENN] = { SPECIES_TREECKO,    SPECIES_TORCHIC,   SPECIES_MUDKIP   },
 -    [REGION_KANTO] = { SPECIES_CHARMANDER, SPECIES_BULBASAUR, SPECIES_SQUIRTLE },
 -    [REGION_JOHTO] = { SPECIES_CHIKORITA,  SPECIES_CYNDAQUIL, SPECIES_TOTODILE },
-+    [REGION_KANTO] = { SPECIES_BULBASAUR,  SPECIES_MUDKIP,    SPECIES_CYNDAQUIL},
++    [REGION_KANTO] = { SPECIES_BULBASAUR,  SPECIES_CYNDAQUIL, SPECIES_MUDKIP   },
 +    [REGION_JOHTO] = { SPECIES_CHARMANDER, SPECIES_TOTODILE,  SPECIES_TREECKO   },
  };
  
