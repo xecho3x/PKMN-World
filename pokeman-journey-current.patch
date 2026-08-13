@@ -330,4 +330,3057 @@ index 00000000..60f5d5fc
 +    new_bark = read("data/maps/NewBarkTown_Lab/scripts.inc")
 +    for species in ("CHARMANDER", "TOTODILE", "TREECKO"):
 +        require(f"SPECIES_{species}" in new_bark, f"Johto starter trio is missing {species}")
-+    require("givemon PLAYER_STARTER_SPßzÒÚ$z{-®éÜj×÷'G•öÖVçRæ0¢²²²"÷7&2÷'G•öÖVçRæ0¤ÓSCc‚Ãb³SCc‚Ã#’7FF–2fö–B&WGW&åFõW6Töåv†–6„Ööâ‡S‚F6´–B¢F—7Æ•'G”ÖVçU7FDÖW76vR…%E•ôÕ4uõU4Uôôåõt„”4…ôÔôâ“°¢Ð¢ ¢²òòUbô•b6†ævW"7W÷'Bf÷"F†R6Æ76–2'G’ÖVçRâF†RWV—fÆVçB6ÆÆ&6²–à¢²òò7w6…÷'G•öÖVçRæ2—2æ÷B6ö×–ÆVBv†Vâ5u4…õ%E•ôÔTåR—2F—6&ÆVBà¢·7FF–26öç7BS‚4Wd—d6†ævW$WdÖöäFF´åTÕõ5DE5ÒÐ¢·°¢²ÔôåôDDô…ôUbÀ¢²ÔôåôDDôDµôUbÀ¢²ÔôåôDDôDTeôUbÀ¢²ÔôåôDDõ5DµôUbÀ¢²ÔôåôDDõ5DTeôUbÀ¢²ÔôåôDDõ5TTEôUbÀ¢·Ó°¢°¢·7FF–26öç7BS‚4Wd—d6†ævW$—dÖöäFF´åTÕõ5DE5ÒÐ¢·°¢²ÔôåôDDô…ô•bÀ¢²ÔôåôDDôDµô•bÀ¢²ÔôåôDDôDTeô•bÀ¢²ÔôåôDDõ5Dµô•bÀ¢²ÔôåôDDõ5DTeô•bÀ¢²ÔôåôDDõ5TTEô•bÀ¢·Ó°¢°¢·7FF–26öç7BS‚4Wd—d6†ævW$‡DÖöäFF´åTÕõ5DE5ÒÐ¢·°¢²ÔôåôDDô…•U%õE$”äTEô…À¢²ÔôåôDDô…•U%õE$”äTEôD²À¢²ÔôåôDDô…•U%õE$”äTEôDTbÀ¢²ÔôåôDDô…•U%õE$”äTEõ5D²À¢²ÔôåôDDô…•U%õE$”äTEõ5DTbÀ¢²ÔôåôDDô…•U%õE$”äTEõ5TTBÀ¢·Ó°¢°¢·7FF–26öç7BS‚¦6öç7B4Wd—d6†ævW%7FDæÖW5´åTÕõ5DE5ÒÐ¢·°¢²uFW‡Eô…BÀ¢²uFW‡EôGF6²À¢²uFW‡EôFVfVç6RÀ¢²uFW‡Eõ7F²À¢²uFW‡Eõ7FVbÀ¢²uFW‡Eõ7VVBÀ¢·Ó°¢°¢·7FF–26öç7BS‚5FW‡EôWd—d6†ævW%F÷FÅµÒÒò‚%DõDÂ"“°¢·7FF–26öç7BS‚5FW‡EôWd—d6†ævW%6Æ6ƒSµÒÒò‚"óS"“°¢·7FF–26öç7BS‚5FW‡EôWd—d6†ævW%vTWg5µÒÒò‚$Ug2µ%ô%UEDôçÒ÷µ5D%Eô%UEDôçÔ•g2"“°¢·7FF–26öç7BS‚5FW‡EôWd—d6†ævW%vT—g5µÒÒò‚$•g2µ%ô%UEDôçÒ÷µ5D%Eô%UEDôçÔUg2"“°¢°¢²6FVf–æRDWd7W'6÷"FF³Ð¢²6FVf–æRDWevRFF³ÒòòÒUg2ÂÒ•g0¢°¢·7FF–2SbWd—d6†ævW%F÷FÄWg2‡7G'V7Bö¶VÖöâ¦Ööâ¢·°¢²S‚“°¢²SbF÷FÂÒ°¢°¢²f÷"†’Ò²’ÂåTÕõ5DE3²’²²¢²F÷FÂ³ÒvWDÖöäFF†ÖöâÂ4Wd—d6†ævW$WdÖöäFF¶•Ò“°¢²&WGW&âF÷FÃ°¢·Ð¢°¢·7FF–2fö–BWd—d6†ævW%&–çE7FG2‡S‚F6´–B¢·°¢²S‚“°¢²S‚v–æF÷t–BÒ5'G”ÖVçT–çFW&æÂÓçv–æF÷t–E³Ó°¢²S‚7W'6÷"ÒuF6·5·F6´–EÒçDWd7W'6÷#°¢²&ööÃ‚—evRÒuF6·5·F6´–EÒçDWevS°¢²7G'V7Bö¶VÖöâ¦ÖöâÒfu'F–W5´%õE$”äU%õÄ”U%Õ¶u'G”ÖVçRç6Æ÷D–EÓ°¢²S‚FW‡E³eÓ°¢°¢²f–ÆÅv–æF÷u—†VÄ'VffW"‡v–æF÷t–BÂ•„TÅôd”ÄÂ…DU…Eô4ôÄõ%õt„•DR’“°¢²FEFW‡E&–çFW%&ÖWFW&—¦VB‡v–æF÷t–BÂdôåEôäõ$ÔÂÂ—evRò5FW‡EôWd—d6†ævW%vT—g2¢5FW‡EôWd—d6†ævW%vTWg2Â’ÂÂDU…Eõ4´•ôE$rÂåTÄÂ“°¢²f÷"†’Ò²’ÂåTÕõ5DE3²’²²¢²°¢²Sb6†÷vâÒvWDÖöäFF†ÖöâÂ—evRò4Wd—d6†ævW$—dÖöäFF¶•Ò¢4Wd—d6†ævW$WdÖöäFF¶•Ò“°¢°¢²–b†—evRbbvWDÖöäFF†ÖöâÂ4Wd—d6†ævW$‡DÖöäFF¶•Ò’¢²6†÷vâÒÔ…õU%õ5DEô•e3°¢²–b†’ÓÒ7W'6÷"¢²FEFW‡E&–çFW%&ÖWFW&—¦VB‡v–æF÷t–BÂdôåEôäõ$ÔÂÂuFW‡Eõ6VÆV7F÷$'&÷s"ÂÂ†’¢"’²2ÂDU…Eõ4´•ôE$rÂåTÄÂ“°¢²FEFW‡E&–çFW%&ÖWFW&—¦VB‡v–æF÷t–BÂdôåEôäõ$ÔÂÂ4Wd—d6†ævW%7FDæÖW5¶•ÒÂ’Â†’¢"’²2ÂDU…Eõ4´•ôE$rÂåTÄÂ“°¢²6öçfW'D–çEFôFV6–ÖÅ7G&–ætâ‡FW‡BÂ6†÷vâÂ5E%ô4ôåeôÔôDUõ$”t…EôÄ”tâÂ2“°¢²FEFW‡E&–çFW%&ÖWFW&—¦VB‡v–æF÷t–BÂdôåEôäõ$ÔÂÂFW‡BÂSbÂ†’¢"’²2ÂDU…Eõ4´•ôE$rÂåTÄÂ“°¢²Ð¢²–b‚—evR¢²°¢²6öçfW'D–çEFôFV6–ÖÅ7G&–ætâ‡FW‡BÂWd—d6†ævW%F÷FÄWg2†Ööâ’Â5E%ô4ôåeôÔôDUôÄTeEôÄ”tâÂ2“°¢²7G&–ætVæB‡FW‡BÂ5FW‡EôWd—d6†ævW%6Æ6ƒS“°¢²FEFW‡E&–çFW%&ÖWFW&—¦VB‡v–æF÷t–BÂdôåEôäõ$ÔÂÂ5FW‡EôWd—d6†ævW%F÷FÂÂBÂ„åTÕõ5DE2¢"’²BÂDU…Eõ4´•ôE$rÂåTÄÂ“°¢²FEFW‡E&–çFW%&ÖWFW&—¦VB‡v–æF÷t–BÂdôåEôäõ$ÔÂÂFW‡BÂ3rÂ„åTÕõ5DE2¢"’²BÂDU…Eõ4´•ôE$rÂåTÄÂ“°¢²Ð¢²6÷•v–æF÷uFõg&Ò‡v–æF÷t–BÂ4õ•t”åôte‚“°¢²66†VGVÆT&t6÷•F–ÆVÖFõg&Òƒ"“°¢·Ð¢°¢·7FF–2fö–BWd—d6†ævW$F§W7B‡S‚F6´–BÂ&ööÃ‚–æ7&V6R¢·°¢²7G'V7Bö¶VÖöâ¦ÖöâÒfu'F–W5´%õE$”äU%õÄ”U%Õ¶u'G”ÖVçRç6Æ÷D–EÓ°¢²S‚7W'6÷"ÒuF6·5·F6´–EÒçDWd7W'6÷#°¢²&ööÃ‚—evRÒuF6·5·F6´–EÒçDWevS°¢²S‚ÖöäFF–BÒ—evRò4Wd—d6†ævW$—dÖöäFF¶7W'6÷%Ò¢4Wd—d6†ævW$WdÖöäFF¶7W'6÷%Ó°¢²SbfÂÒvWDÖöäFF†ÖöâÂÖöäFF–B“°¢²Sb7FWÒ¤õ•ôäUr„EEôÄTeBÂEEõ$”t…B’ò¢°¢²SbæWufÃ°¢°¢²–b†—evRbbvWDÖöäFF†ÖöâÂ4Wd—d6†ævW$‡DÖöäFF¶7W'6÷%Ò’¢²fÂÒÔ…õU%õ5DEô•e3°¢°¢²–b†–æ7&V6R¢²°¢²Sb&ööÓ°¢°¢²–b†—evR¢²°¢²&ööÒÒÔ…õU%õ5DEô•e2ÒfÃ°¢²Ð¢²VÇ6P¢²°¢²Sb&ööÕF÷FÂÒÔ…õDõDÅôUe2ÒWd—d6†ævW%F÷FÄWg2†Ööâ“°¢²Sb&ööÕ7FBÒÔ…õU%õ5DEôUe2ÒfÃ°¢°¢²&ööÒÒ‡&ööÕ7FBÂ&ööÕF÷FÂ’ò&ööÕ7FB¢&ööÕF÷FÃ°¢²Ð¢²–b‡7FWâ&ööÒ¢²7FWÒ&ööÓ°¢²æWufÂÒfÂ²7FW°¢²Ð¢²VÇ6P¢²°¢²–b‡7FWâfÂ¢²7FWÒfÃ°¢²æWufÂÒfÂÒ7FW°¢²Ð¢°¢²–b†æWufÂÓÒfÂ¢²°¢²Æ•4R…4Uôd”ÅU$R“°¢²&WGW&ã°¢²Ð¢²6WDÖöäFF†ÖöâÂÖöäFF–BÂfæWufÂ“°¢²–b†—evRbbvWDÖöäFF†ÖöâÂ4Wd—d6†ævW$‡DÖöäFF¶7W'6÷%Ò’¢²°¢²S‚‡DöfbÒdÅ4S°¢°¢²6WDÖöäFF†ÖöâÂ4Wd—d6†ævW$‡DÖöäFF¶7W'6÷%ÒÂf‡Döfb“°¢²Ð¢²6Æ7VÆFTÖöå7FG2†Ööâ“°¢²Æ•4R…4Uõ4TÄT5B“°¢²Wd—d6†ævW%&–çE7FG2‡F6´–B“°¢·Ð¢°¢·7FF–2fö–BF6µôWd—d6†ævW$†æFÆT–çWB‡S‚F6´–B¢·°¢²S‚7W'6÷"ÒuF6·5·F6´–EÒçDWd7W'6÷#°¢°¢²–b„¤õ•ôäUr„EEõU’¢²°¢²Æ•4R…4Uõ4TÄT5B“°¢²uF6·5·F6´–EÒçDWd7W'6÷"Ò†7W'6÷"ÓÒ’òåTÕõ5DE2Ò¢7W'6÷"Ò°¢²Wd—d6†ævW%&–çE7FG2‡F6´–B“°¢²Ð¢²VÇ6R–b„¤õ•ôäUr„EEôDõtâ’¢²°¢²Æ•4R…4Uõ4TÄT5B“°¢²uF6·5·F6´–EÒçDWd7W'6÷"Ò†7W'6÷"ÓÒåTÕõ5DE2Ò’ò¢7W'6÷"²°¢²Wd—d6†ævW%&–çE7FG2‡F6´–B“°¢²Ð¢²VÇ6R–b„¤õ•ôäUr…%ô%UEDôâ’ÇÂ¤õ•ôäUr„Åô%UEDôâ’ÇÂ¤õ•ôäUr…5D%Eô%UEDôâ’¢²°¢²Æ•4R…4Uõ4TÄT5B“°¢²uF6·5·F6´–EÒçDWevRãÒ°¢²Wd—d6†ævW%&–çE7FG2‡F6´–B“°¢²Ð¢²VÇ6R–b„¤õ•õ$UTB„EEõ$”t…B’¢²°¢²Wd—d6†ævW$F§W7B‡F6´–BÂE%TR“°¢²Ð¢²VÇ6R–b„¤õ•õ$UTB„EEôÄTeB’¢²°¢²Wd—d6†ævW$F§W7B‡F6´–BÂdÅ4R“°¢²Ð¢²VÇ6R–b„¤õ•ôäUr„ô%UEDôâ’ÇÂ¤õ•ôäUr„%ô%UEDôâ’¢²°¢²Æ•4R…4Uõ4TÄT5B“°¢²6ÆV%v–æF÷uF–ÆVÖ‡5'G”ÖVçT–çFW&æÂÓçv–æF÷t–E³Ò“°¢²'G”ÖVçU&VÖ÷fUv–æF÷r‚g5'G”ÖVçT–çFW&æÂÓçv–æF÷t–E³Ò“°¢²WFFTÖöäF—7Æ”–æfôgFW%&&T6æG’†u'G”ÖVçRç6Æ÷D–BÂfu'F–W5´%õE$”äU%õÄ”U%Õ¶u'G”ÖVçRç6Æ÷D–EÒ“°¢²&WGW&åFõW6Töåv†–6„Ööâ‡F6´–B“°¢²Ð¢·Ð¢°¢·fö–B—FVÕW6T4%ôWd—d6†ævW"‡S‚F6´–BÂF6´gVæ2F6²¢·°¢²–b„vWDÖöäFF‚fu'F–W5´%õE$”äU%õÄ”U%Õ¶u'G”ÖVçRç6Æ÷D–EÒÂÔôåôDDô•5ôTtr’¢²°¢²u'G”ÖVçUW6TW†—D6ÆÆ&6²ÒdÅ4S°¢²Æ•4R…4Uõ4TÄT5B“°¢²F—7Æ•'G”ÖVçTÖW76vR†uFW‡EõvöçD†fTVffV7BÂE%TR“°¢²66†VGVÆT&t6÷•F–ÆVÖFõg&Òƒ"“°¢²uF6·5·F6´–EÒægVæ2ÒF6³°¢²&WGW&ã°¢²Ð¢²Æ•4R…4Uõ4TÄT5B“°¢²5'G”ÖVçT–çFW&æÂÓçv–æF÷t–E³ÒÒFEv–æF÷r‚g4Wd—d6†ævW%v–æF÷uFV×ÆFR“°¢²G&u7FDg&ÖUv—F„7W7FöÕF–ÆTæEÆWGFR‡5'G”ÖVçT–çFW&æÂÓçv–æF÷t–E³ÒÂdÅ4RÂƒDbÂ2“°¢²uF6·5·F6´–EÒçDWd7W'6÷"Ò°¢²uF6·5·F6´–EÒçDWevRÒ°¢²Wd—d6†ævW%&–çE7FG2‡F6´–B“°¢²uF6·5·F6´–EÒægVæ2ÒF6µôWd—d6†ævW$†æFÆT–çWC°¢·Ð¢°¢²7VæFVbDWd7W'6÷ ¢²7VæFVbDWevP¢°¢7FF–2fö–BG'•W6T—FVÔöäÖ÷fR‡S‚F6´–B¢°¢7G'V7B'G”ÖVçR§G"Òfu'G”ÖVçS°¦F–fbÒÖv—B÷7&2÷ö¶VÖöâæ2"÷7&2÷ö¶VÖöâæ0¦–æFW‚“s†SC’âæSv–&Fc"cC@¢ÒÒÒ÷7&2÷ö¶VÖöâæ0¢²²²"÷7&2÷ö¶VÖöâæ0¤ÓcS2Ãb³cS2Ã32fö–Bv—fT&÷„ÖöäFVfVÇDÖ÷fR‡7G'V7B&÷…ö¶VÖöâ¦&÷„ÖöâÂS3"6Æ÷B¢6WD&÷„ÖöäFF†&÷„ÖöâÂÔôåôDDõ²6Æ÷BÂg“°¢Ð¢ ¢·7FF–2VçVÒÖ÷fRG'”ÆV&æ–æu&Vv–öæÄÖ–ÆW7FöæTÖ÷fR‡7G'V7Bö¶VÖöâ¦ÖöâÂ6öç7B7G'V7BÆWfVÅWÖ÷fR¦ÆV&ç6WBÂS3"ÆWfVÂ¢·°¢²S3"6÷VçBÒ°¢²S3"f—'7DÆFTÖ÷fS°¢²S3"Ö–ÆW7FöæS°¢²S3"F&vWC°¢°¢²òò†öVæâö67W–W2ÆWfVÇ2sÓâ&RÖöffW"6WfVâöbF†R7V6–W2rÆFW7@¢²òòæGW&ÂÖ÷fW2Bf—fRÖÆWfVÂ–çFW'fÇ26òw&÷wF‚FöW2æ÷Bvò6–ÆVçBF†W&Rà¢²–b†ÆWfVÂÂsÇÂÆWfVÂâÔ…ôÄUdTÂÇÂ†ÆWfVÂÒs’RRÒ¢²&WGW&âÔõdUôäôäS°¢°¢²v†–ÆR†ÆV&ç6WE¶6÷VçEÒæÖ÷fRÒÄUdTÅõUôÔõdUôTäB¢²6÷VçB²³°¢²–b†6÷VçBÓÒ¢²&WGW&âÔõdUôäôäS°¢°¢²f—'7DÆFTÖ÷fRÒ†6÷VçBâr’ò6÷VçBÒr¢°¢²Ö–ÆW7FöæRÒ†ÆWfVÂÒs’òS°¢²F&vWBÒf—'7DÆFTÖ÷fR²‚†6÷VçBÒf—'7DÆFTÖ÷fRÒ’¢Ö–ÆW7FöæR’òc°¢°¢²tÖ÷fUFôÆV&âÒÆV&ç6WE·F&vWEÒæÖ÷fS°¢²–b„Ööä¶æ÷w4Ö÷fR†ÖöâÂtÖ÷fUFôÆV&â’¢²&WGW&âÔõdUôäôäS°¢²&WGW&âv—fTÖ÷fUFôÖöâ†ÖöâÂtÖ÷fUFôÆV&â“°¢·Ð¢°¢VçVÒÖ÷fRÖöåG'”ÆV&æ–ætæWtÖ÷fTDÆWfVÂ‡7G'V7Bö¶VÖöâ¦ÖöâÂ&ööÃ3"f—'7DÖ÷fRÂS3"ÆWfVÂ¢°¢VçVÒÖ÷fR&WEfÂÒÔõdUôäôäS°¤ÓcsÃr³c“‚ÃrVçVÒÖ÷fRÖöåG'”ÆV&æ–ætæWtÖ÷fTDÆWfVÂ‡7G'V7Bö¶VÖöâ¦ÖöâÂ&ööÃ3"f—'7DÖ÷fRÂS0¢°¢4ÆV&æ–ætÖ÷fUF&ÆT”B²³°¢–b†ÆV&ç6WE·4ÆV&æ–ætÖ÷fUF&ÆT”EÒæÖ÷fRÓÒÄUdTÅõUôÔõdUôTäB¢Ò&WGW&âÔõdUôäôäS°¢²&WGW&âG'”ÆV&æ–æu&Vv–öæÄÖ–ÆW7FöæTÖ÷fR†ÖöâÂÆV&ç6WBÂÆWfVÂ“°¢Ð¢Ð¢ ¦F–fbÒÖv—B÷7&2÷&Vv–öå÷7v—F6‚æ2"÷7&2÷&Vv–öå÷7v—F6‚æ0¦–æFW‚fSsfsf2âãScs6F#‚cC@¢ÒÒÒ÷7&2÷&Vv–öå÷7v—F6‚æ0¢²²²"÷7&2÷&Vv–öå÷7v—F6‚æ0¤Ó33"Ãb³33"Ã2fö–B&Vv–öä‡V%õ67%F&vWD–çG&ôFöæR‡7G'V7B67&—D6öçFW‡B¦7G‚¢u7V6–Åf%õ&W7VÇBÒFöæS°¢Ð¢ ¢²òòöÆ—f–æRw2÷7BÔÆVwVR6–Æ÷"W6W2F†—2&Vf÷&R6†æv–ærF†R7F—fR&Vv–öâ6ð¢²òòF†RöæR×F–ÖR¦ö‡FòÓâ†öVæâf÷–vR6â6öW†—7Bv—F‚F†R&VwVÆ"2å2âVÖVçRà¢·fö–B&Vv–öä‡V%õ67$†öVæä–çG&ôFöæR‡7G'V7B67&—D6öçFW‡B¦7G‚¢·°¢²u7V6–Åf%õ&W7VÇBÒu6fT&Æö6³%G"Óæ†öVæä–çG&ôFöæS°¢·Ð¢°¢òòv÷&ÆB×F÷W"&ö&B…#‚’â6÷VçG2F†RÆ–W"w2w–Ò&FvW27&÷72ÆÂF‡&VR&Vv–öç2r&FvP¢òò&æ·2ƒ‚V6‚Â6WBW"×&Vv–öâ'’³’’æBW‡÷6W2F†VÒFòF†R‡V"&ö&B67&—C ¢òòd%óƒƒÒF÷FÂó#BÂd%óƒƒÒ†öVæâÂd%óƒƒ"Ò¶çFòÂd%óƒƒ2Ò¦ö‡Fòà¦F–fbÒÖv—B÷7&2÷&Vv–öæÅ÷&öw&W76–öâæ2"÷7&2÷&Vv–öæÅ÷&öw&W76–öâæ0¦æWrf–ÆRÖöFRcC@¦–æFW‚âã#Fƒƒ¢ÒÒÒöFWböçVÆÀ¢²²²"÷7&2÷&Vv–öæÅ÷&öw&W76–öâæ0¤ÓÃ³ÃCB ¢²6–æ6ÇVFR&vÆö&Âæ‚ ¢²6–æ6ÇVFR'&Vv–öæÅ÷&öw&W76–öâæ‚ ¢²6–æ6ÇVFR'&Vv–öç2æ‚ ¢°¢·7FF–2S‚66ÆTÆWfVÄ–çFô&æB‡S‚ÆWfVÂÂS‚6÷W&6TfÆö÷"ÂS‚6÷W&6T6V–Æ–ærÂS‚F&vWDfÆö÷"ÂS‚F&vWD6V–Æ–ær¢·°¢²S3"66ÆVC°¢°¢²–b†ÆWfVÂÃÒ6÷W&6TfÆö÷"¢²&WGW&âF&vWDfÆö÷#°¢²–b†ÆWfVÂãÒ6÷W&6T6V–Æ–ær¢²&WGW&âF&vWD6V–Æ–æs°¢°¢²66ÆVBÒF&vWDfÆö÷ ¢²²‚‡S3"’†ÆWfVÂÒ6÷W&6TfÆö÷"’¢‡F&vWD6V–Æ–ærÒF&vWDfÆö÷"¢²²‡6÷W&6T6V–Æ–ærÒ6÷W&6TfÆö÷"’ò"¢²ò‡6÷W&6T6V–Æ–ærÒ6÷W&6TfÆö÷"“°¢²&WGW&â‡66ÆVBâF&vWD6V–Æ–ær’òF&vWD6V–Æ–ær¢66ÆVC°¢·Ð¢°¢·S‚66ÆTÆWfVÄf÷$7F—fU&Vv–öâ‡S‚ÆWfVÂ¢·°¢²VçVÒ&Vv–öâ&Vv–öâÒvWD7F—fU&Vv–öâ‚“°¢°¢²òòöÆFW"6fW26â&VFFRF†RW'6—7FVB6×–vâ&Vv–öââF†RÖ&VÖ–ç0¢²òòG'W7Gv÷'F‡’fÆÆ&6²WfW'—v†W&RW†6WBF†R&GFÆRÖg&VRG&ç6—B‡V"à¢²–b‡&Vv–öâÓÒ$Tt”ôåôäôäR¢²&Vv–öâÒvWD7W'&VçE&Vv–öâ‚“°¢°¢²7v—F6‚‡&Vv–öâ¢²°¢²66R$Tt”ôåô´åDó ¢²òò&W6W'fRF†RÆWfVÂ"ÓR÷Væ–ærÂF†Vâ6ö×&W72F†RæF—fRe$Är7W'fRà¢²–b†ÆWfVÂÃÒR¢²&WGW&âÆWfVÃ°¢²&WGW&â66ÆTÆWfVÄ–çFô&æB†ÆWfVÂÂRÂc2ÂRÂ3R“°¢²66R$Tt”ôåô¤ô…Dó ¢²&WGW&â66ÆTÆWfVÄ–çFô&æB†ÆWfVÂÂ"ÂS‚Â32Âs“°¢²66R$Tt”ôåô„ôTäã ¢²&WGW&â66ÆTÆWfVÄ–çFô&æB†ÆWfVÂÂ"ÂS‚ÂsÂ“°¢²FVfVÇC ¢²&WGW&âÆWfVÃ°¢²Ð¢·Ð¦F–fbÒÖv—B÷7&2÷67&—E÷ö¶VÖöå÷WF–Âæ2"÷7&2÷67&—E÷ö¶VÖöå÷WF–Âæ0¦–æFW‚–VS66#vbâæ6ccƒ#srcC@¢ÒÒÒ÷7&2÷67&—E÷ö¶VÖöå÷WF–Âæ0¢²²²"÷7&2÷67&—E÷ö¶VÖöå÷WF–Âæ0¤Ó#"Ãb³#"Ãr ¢6–æ6ÇVFR'ö¶VÖöå÷7F÷&vU÷7—7FVÒæ‚ ¢6–æ6ÇVFR'&æFöÒæ‚ ¢6–æ6ÇVFR'&æFöÕöÖöåövVæW&F–öâæ‚ ¢²6–æ6ÇVFR'&Vv–öæÅ÷&öw&W76–öâæ‚ ¢6–æ6ÇVFR'67&—Bæ‚ ¢6–æ6ÇVFR'7&—FRæ‚ ¢6–æ6ÇVFR'7G&–æu÷WF–Âæ‚ ¤Ó‚Ãb³’Ãrfö–B7&VFU67&—FVEv–ÆDÖöâ†VçVÒ7V6–W27V6–W2ÂS‚ÆWfVÂÂVçVÒ—FVÒ—FVÒ¢°¢S‚†VÆD—FVÕ³%Ó°¢ ¢²ÆWfVÂÒ66ÆTÆWfVÄf÷$7F—fU&Vv–öâ†ÆWfVÂ“°¢¦W&ôVæV×•'G”Ööç2‚“°¢S3"W'6öæÆ—G’ÒvWDÖöåW'6öæÆ—G’‡7V6–W2À¢vWE7–æ6‡&öæ—¦VDvVæFW"…5DD”5õt”ÄDÔôåôõ$”t”âÂ7V6–W2’À¤Ó3rÃb³3’Ã‚fö–B7&VFU67&—FVDF÷V&ÆUv–ÆDÖöâ†VçVÒ7V6–W27V6–W3ÂS‚ÆWfVÃÂVçVÒ—FVÒ—FP¢S‚†VÆD—FVÓ³%Ó°¢S‚†VÆD—FVÓ%³%Ó°¢ ¢²ÆWfVÃÒ66ÆTÆWfVÄf÷$7F—fU&Vv–öâ†ÆWfVÃ“°¢²ÆWfVÃ"Ò66ÆTÆWfVÄf÷$7F—fU&Vv–öâ†ÆWfVÃ"“°¢¦W&ôVæV×•'G”Ööç2‚“°¢S3"W'6öæÆ—G’ÒvWDÖöåW'6öæÆ—G’‡7V6–W3À¢vWE7–æ6‡&öæ—¦VDvVæFW"…5DD”5õt”ÄDÔôåôõ$”t”âÂ7V6–W3’À¤Ó3cRÃb³3c’Ãr7FF–2S3"67&—Dv—fTÖöå&ÖWFW&—¦VB‡S‚6–FRÂS‚6Æ÷BÂVçVÒ7V6–W27V6–W2ÂS€¢S3"“°¢&ööÃ3"—56†–ç“°¢ ¢²ÆWfVÂÒ66ÆTÆWfVÄf÷$7F—fU&Vv–öâ†ÆWfVÂ“°¢&W6öÇfU&æFöÔÖöävVæW&F–öâ‡7V6–W2Âf&ÆÂÂÖ÷fW2“°¢ ¢S3"W'6öæÆ—G’ÒvWDÖöåW'6öæÆ—G’‡7V6–W2ÂvVæFW"ÂæGW&RÂ$äDôÕõTäõtåôÄUEDU"“°¦F–fbÒÖv—B÷7&2÷7F'FW%ö6†ö÷6Ræ2"÷7&2÷7F'FW%ö6†ö÷6Ræ0¦–æFW‚&3s#f"âæ#Cc3–3BcC@¢ÒÒÒ÷7&2÷7F'FW%ö6†ö÷6Ræ0¢²²²"÷7&2÷7F'FW%ö6†ö÷6Ræ0¤ÓÃr³Ãb7FF–26öç7BS‚57F'FW$Æ&VÄ6ö÷&G5µ5D%DU%ôÔôåô4õTåEÕ³%ÒÐ¢³‚ÂGÒÀ¢Ó°¢ ¢Òòò&Vv–öâÖv&R7F'FW"G&–÷2âd%õ5D%DU%ôÔôâ7F÷&W2F†R6†÷6Vâ&ÆÂ”äDU‚ƒóó"’â†öVæâæ@¢Òòò¦ö‡FòW6RF†RæGW&Âw&72öf—&R÷vFW"÷&FW#²´åDòföÆÆ÷w2F†R'VæFÆVBe$Är6†×–öâ&ööÒw0¢Òòò6öçfVçF–öâ†–æFW‚Ò6†&ÖæFW"ÂÒ'VÆ&6W"Â"Ò7V—'FÆR’6ò&ÇVRw2d%õ5D%DU%ôÔôà¢Òòòf&–çB×6VÆV7B7F—26÷'&V7Bt•D„õUBVF—F–ærF†R6†×–öâ&GFÆR67&—G2â–6¶VBB'VçF–ÖP¢²òò&Vv–öâÖv&R7F'FW"G&–÷2âV6‚&Vv–öâ7F÷&W2F†R6†÷6Vâ&ÆÂ”äDU‚ƒóó"’–â—G2÷và¢²òò6fRf&–&ÆRâö¶TÖâ¦÷W&æW’v—fW2¶çFòæB¦ö‡Fò7&÷72×&Vv–öâG&–÷3²&—fÂ67&—G2&P¢²òòWF†÷&VB&÷VæBF†R6ÖR–æFW‚÷&FW"â–6¶VBB'VçF–ÖP¢òò'’vWD7W'&VçE&Vv–öâ‚’‡F†RÆ–W"—2öâF†R&Vv–öâw27F'BF÷vâv†Vâ6†ö÷6U7F'FW"'Vç2’à¢òòVç÷VÆFVB&Vv–öç2fÆÂ&6²FòF†R†öVæâG&–òà¢7FF–26öç7BSb57F'FW$Ööåµ$Tt”ôå5ô4õTåEÕµ5D%DU%ôÔôåô4õTåEÒÐ¢°¢Òµ$Tt”ôåô„ôTäåÒÒ²5T4”U5õE$TT4´òÂ5T4”U5õDõ$4„”2Â5T4”U5ôÕTD´•ÒÀ¢Òµ$Tt”ôåô´åDõÒÒ²5T4”U5ô4„$ÔäDU"Â5T4”U5ô%TÄ$4U"Â5T4”U5õ5T•%DÄRÒÀ¢Òµ$Tt”ôåô¤ô…DõÒÒ²5T4”U5ô4„”´õ$•DÂ5T4”U5ô5”äDT”ÂÂ5T4”U5õDõDôD”ÄRÒÀ¢²µ$Tt”ôåô„ôTäåÒÒ²5T4”U5ô4„”´õ$•DÂ5T4”U5õDõ$4„”2Â5T4”U5õ5T•%DÄRÒÀ¢²µ$Tt”ôåô´åDõÒÒ²5T4”U5ô%TÄ$4U"Â5T4”U5ôÕTD´•Â5T4”U5ô5”äDT”ÇÒÀ¢²µ$Tt”ôåô¤ô…DõÒÒ²5T4”U5ô4„$ÔäDU"Â5T4”U5õDõDôD”ÄRÂ5T4”U5õE$TT4´òÒÀ¢Ó°¢ ¢7FF–26öç7B7G'V7B&uFV×ÆFR4&uFV×ÆFW5³5ÒÐ¦F–fbÒÖv—B÷7&2÷v–ÆEöVæ6÷VçFW"æ2"÷7&2÷v–ÆEöVæ6÷VçFW"æ0¦–æFW‚#&“âã6–S–3“rcC@¢ÒÒÒ÷7&2÷v–ÆEöVæ6÷VçFW"æ0¢²²²"÷7&2÷v–ÆEöVæ6÷VçFW"æ0¤Ó‚Ãb³‚Ãr ¢6–æ6ÇVFR&föÆÆ÷vW%öç2æ‚ ¢6–æ6ÇVFR&—FVÒæ‚ ¢6–æ6ÇVFR'&æFöÒæ‚ ¢²6–æ6ÇVFR'&Vv–öæÅ÷&öw&W76–öâæ‚ ¢6–æ6ÇVFR&f–VÆE÷Æ–W%öfF"æ‚ ¢6–æ6ÇVFR&Æ–æ²æ‚ ¢6–æ6ÇVFR&ÖWFF–ÆUö&V†f–÷"æ‚ ¤ÓC“Ãb³C“"Ãr7FF–2S‚–6µv–ÆDÖöäæGW&R†VçVÒ7V6–W27V6–W2¢ ¢fö–B7&VFUv–ÆDÖöâ†VçVÒ7V6–W27V6–W2ÂS‚ÆWfVÂ¢°¢²ÆWfVÂÒ66ÆTÆWfVÄf÷$7F—fU&Vv–öâ†ÆWfVÂ“°¢¦W&ôVæV×•'G”Ööç2‚“°¢S3"W'6öæÆ—G’ÒvWDÖöåW'6öæÆ—G’‡7V6–W2ÂvWE7–æ6‡&öæ—¦VDvVæFW"…t”ÄDÔôåôõ$”t”âÂ7V6–W2’Â–6µv–ÆDÖöäæGW&R‡7V6–W2’Â$äDôÕõTäõtåôÄUEDU"“°¢7&VFTÖöåv—F„•g2‚fu'F–W5´%õE$”äU%ôõôäTåEôÕ³ÒÂ7V6–W2ÂÆWfVÂÂW'6öæÆ—G’ÂõD”Eõ5E%T5EõÄ”U%ô”BÂU4Uõ$äDôÕô•e2“° 
++    require("givemon PLAYER_STARTER_SPECIES, 5" in new_bark, "Johto starter is not level 5")
++
++    route29 = next(
++        encounter
++        for group in encounters["wild_encounter_groups"]
++        for encounter in group.get("encounters", [])
++        if encounter.get("map") == "MAP_ROUTE29"
++    )
++    route29_species = {
++        mon["species"]
++        for table_name, table in route29.items()
++        if table_name.endswith("_mons") and isinstance(table, dict)
++        for mon in table.get("mons", [])
++    }
++    require(
++        not route29_species & {"SPECIES_CHARMANDER", "SPECIES_TOTODILE", "SPECIES_TREECKO", "SPECIES_CHIKORITA", "SPECIES_CYNDAQUIL", "SPECIES_SQUIRTLE", "SPECIES_TORCHIC", "SPECIES_MUDKIP", "SPECIES_BULBASAUR"},
++        "Route 29 still gives away a regional starter",
++    )
++
++    starter_choose = read("src/starter_choose.c")
++    require(
++        "[REGION_HOENN] = { SPECIES_CHIKORITA,  SPECIES_TORCHIC,   SPECIES_SQUIRTLE }" in starter_choose,
++        "Hoenn does not use the final Chikorita/Torchic/Squirtle trio",
++    )
++    for path, first_flag, second_flag in (
++        ("data/maps/AzaleaTown_Gym/scripts.inc", "FLAG_GOT_JOHTO_STARTER_REWARD_1", None),
++        ("data/maps/OlivineCity_Gym/scripts.inc", "FLAG_GOT_JOHTO_STARTER_REWARD_2", None),
++        ("data/maps/LavaridgeTown_Gym_1F/scripts.inc", "FLAG_HOENN_STARTER_REWARD_1", None),
++        ("data/maps/FortreeCity_Gym/scripts.inc", "FLAG_HOENN_STARTER_REWARD_2", None),
++    ):
++        require(first_flag in read(path), f"Regional starter reward is missing from {path}")
++
++    olivine_port = read("data/maps/OlivineCity_PortInside/scripts.inc")
++    for token in (
++        "FLAG_JOHTO_CHAMPION",
++        "RegionHub_ScrHoennIntroDone",
++        "RegionHub_ScrEnterRegion",
++        "MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F",
++        "MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F",
++    ):
++        require(token in olivine_port, f"Johto-to-Hoenn transition is missing {token}")
++
++    progression = read("src/regional_progression.c")
++    for token in ("REGION_KANTO", "REGION_JOHTO", "REGION_HOENN", "5, 35", "33, 70", "70, 100"):
++        require(token in progression, f"Regional level scaling is missing {token}")
++
++    caps = read("src/caps.c")
++    for token in ("10, 13, 16", "37, 41, 45", "73, 77, 81", "leagueCap = 35", "leagueCap = 70"):
++        require(token in caps, f"Regional cap curve is missing {token}")
++
++    pokemon = read("src/pokemon.c")
++    require("TryLearningRegionalMilestoneMove" in pokemon, "High-level milestone moves are disabled")
++    require(
++        "#define P_ENABLE_ALL_LEVEL_UP_MOVES      TRUE" in read("include/config/summary_screen.h"),
++        "The move reminder cannot recover missed high-level moves",
++    )
++
++    print("v0.4.4 validation passed: starters, transitions, collection, and regional progression are correct.")
++
++
++if __name__ == "__main__":
++    main()
+diff --git a/data/maps/AzaleaTown/scripts.inc b/data/maps/AzaleaTown/scripts.inc
+index 2170fbf5..eeedf292 100644
+--- a/data/maps/AzaleaTown/scripts.inc
++++ b/data/maps/AzaleaTown/scripts.inc
+@@ -163,9 +163,9 @@ AzaleaTown_EventScript_SilverTriggerTop::
+ 	turnobject OBJ_EVENT_ID_PLAYER, DIR_EAST
+ 	msgbox AzaleaTown_Text_RivalBefore, MSGBOX_DEFAULT
+ 	closemessage
+-	call_if_eq VAR_STARTER_MON, 0, AzaleaTown_Silver_Battle_Cyndaquil
+-	call_if_eq VAR_STARTER_MON, 1, AzaleaTown_Silver_Battle_Totodile
+-	call_if_eq VAR_STARTER_MON, 2, AzaleaTown_Silver_Battle_Chikorita
++	call_if_eq VAR_STARTER_MON_JOHTO, 0, AzaleaTown_Silver_Battle_Cyndaquil
++	call_if_eq VAR_STARTER_MON_JOHTO, 1, AzaleaTown_Silver_Battle_Totodile
++	call_if_eq VAR_STARTER_MON_JOHTO, 2, AzaleaTown_Silver_Battle_Chikorita
+ 	msgbox AzaleaTown_Text_RivalAfter, MSGBOX_DEFAULT
+ 	closemessage
+ 	applymovement OBJ_EVENT_ID_PLAYER, AzaleaTown_Movement_Player_LeaveTop
+@@ -190,9 +190,9 @@ AzaleaTown_EventScript_SilverTriggerBot::
+ 	turnobject OBJ_EVENT_ID_PLAYER, DIR_EAST
+ 	msgbox AzaleaTown_Text_RivalBefore, MSGBOX_DEFAULT
+ 	closemessage
+-	call_if_eq VAR_STARTER_MON, 0, AzaleaTown_Silver_Battle_Cyndaquil
+-	call_if_eq VAR_STARTER_MON, 1, AzaleaTown_Silver_Battle_Totodile
+-	call_if_eq VAR_STARTER_MON, 2, AzaleaTown_Silver_Battle_Chikorita
++	call_if_eq VAR_STARTER_MON_JOHTO, 0, AzaleaTown_Silver_Battle_Cyndaquil
++	call_if_eq VAR_STARTER_MON_JOHTO, 1, AzaleaTown_Silver_Battle_Totodile
++	call_if_eq VAR_STARTER_MON_JOHTO, 2, AzaleaTown_Silver_Battle_Chikorita
+ 	playbgm MUS_HG_RIVAL_EXIT, TRUE
+ 	msgbox AzaleaTown_Text_RivalAfter, MSGBOX_DEFAULT
+ 	closemessage
+diff --git a/data/maps/AzaleaTown_Gym/scripts.inc b/data/maps/AzaleaTown_Gym/scripts.inc
+index 09308d82..099d529f 100644
+--- a/data/maps/AzaleaTown_Gym/scripts.inc
++++ b/data/maps/AzaleaTown_Gym/scripts.inc
+@@ -557,6 +557,7 @@ AzaleaTown_Gym_EventScript_GiveTM::
+ 	giveitem ITEM_TM_BULLET_SEED
+ 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+ 	setflag FLAG_GOT_TM_BULLET_SEED
++	call AzaleaTown_Gym_EventScript_TryGiveStarterReward
+ 	msgbox AzaleaTown_Gym_Text_FuryCutterSpeech, MSGBOX_DEFAULT
+ 	closemessage
+ 	release
+@@ -564,12 +565,47 @@ AzaleaTown_Gym_EventScript_GiveTM::
+ 
+ AzaleaTown_Gym_EventScript_Bugsy_Defeated::
+ 	goto_if_unset FLAG_GOT_TM_BULLET_SEED, AzaleaTown_Gym_EventScript_GiveTM
++	goto_if_unset FLAG_GOT_JOHTO_STARTER_REWARD_1, AzaleaTown_Gym_EventScript_GiveStarterReward
+ 	goto_if_set FLAG_JOHTO_CHAMPION, AzaleaTown_Gym_EventScript_OfferRematch
+ 	msgbox AzaleaTown_Gym_Text_BugsyAdvice, MSGBOX_DEFAULT
+ 	closemessage
+ 	release
+ 	end
+ 
++AzaleaTown_Gym_EventScript_GiveStarterReward::
++	call AzaleaTown_Gym_EventScript_TryGiveStarterReward
++	goto AzaleaTown_Gym_EventScript_Bugsy_Defeated
++
++AzaleaTown_Gym_EventScript_TryGiveStarterReward::
++	goto_if_set FLAG_GOT_JOHTO_STARTER_REWARD_1, AzaleaTown_Gym_EventScript_StarterRewardDone
++	msgbox AzaleaTown_Gym_Text_StarterReward, MSGBOX_DEFAULT
++	goto_if_eq VAR_STARTER_MON_JOHTO, 0, AzaleaTown_Gym_EventScript_RewardTotodile
++	goto_if_eq VAR_STARTER_MON_JOHTO, 1, AzaleaTown_Gym_EventScript_RewardTreecko
++	setvar VAR_0x8004, SPECIES_CHARMANDER
++	goto AzaleaTown_Gym_EventScript_GiveSelectedStarter
++AzaleaTown_Gym_EventScript_RewardTotodile::
++	setvar VAR_0x8004, SPECIES_TOTODILE
++	goto AzaleaTown_Gym_EventScript_GiveSelectedStarter
++AzaleaTown_Gym_EventScript_RewardTreecko::
++	setvar VAR_0x8004, SPECIES_TREECKO
++AzaleaTown_Gym_EventScript_GiveSelectedStarter::
++	givemon VAR_0x8004, 20
++	goto_if_eq VAR_RESULT, MON_CANT_GIVE, Common_EventScript_NoMoreRoomForPokemon
++	setflag FLAG_GOT_JOHTO_STARTER_REWARD_1
++	bufferspeciesname STR_VAR_1, VAR_0x8004
++	msgbox AzaleaTown_Gym_Text_ReceivedStarterReward, MSGBOX_DEFAULT
++AzaleaTown_Gym_EventScript_StarterRewardDone::
++	return
++
++AzaleaTown_Gym_Text_StarterReward:
++	.string "BUGSY: ELM asked me to help you\n"
++	.string "study rare starter POKÃ©MON.\p"
++	.string "This one should travel with a\n"
++	.string "proven trainer like you.$"
++
++AzaleaTown_Gym_Text_ReceivedStarterReward:
++	.string "{PLAYER} received {STR_VAR_1}!$"
++
+ AzaleaTown_Gym_EventScript_OfferRematch::
+ 	msgbox AzaleaTown_Gym_Text_BugsyRematch, MSGBOX_YESNO
+ 	goto_if_eq VAR_RESULT, NO, AzaleaTown_Gym_EventScript_RematchDecline
+diff --git a/data/maps/BurnedTower_1F/scripts.inc b/data/maps/BurnedTower_1F/scripts.inc
+index 98ae164c..d74ff7af 100644
+--- a/data/maps/BurnedTower_1F/scripts.inc
++++ b/data/maps/BurnedTower_1F/scripts.inc
+@@ -110,9 +110,9 @@ BurnedTower_1F_EventScript_Silver::
+ 	waitmovement 0
+ 	waitmovement 0
+ 	msgbox BurnedTowerSilver_BeforeText, MSGBOX_DEFAULT
+-	call_if_eq VAR_STARTER_MON, 0, BurnedTower_1F_Silver_Battle_Cyndaquil
+-	call_if_eq VAR_STARTER_MON, 1, BurnedTower_1F_Silver_Battle_Totodile
+-	call_if_eq VAR_STARTER_MON, 2, BurnedTower_1F_Silver_Battle_Chikorita
++	call_if_eq VAR_STARTER_MON_JOHTO, 0, BurnedTower_1F_Silver_Battle_Cyndaquil
++	call_if_eq VAR_STARTER_MON_JOHTO, 1, BurnedTower_1F_Silver_Battle_Totodile
++	call_if_eq VAR_STARTER_MON_JOHTO, 2, BurnedTower_1F_Silver_Battle_Chikorita
+ 	playbgm MUS_HG_RIVAL_EXIT, TRUE
+ 	msgbox BurnedTowerSilver_AfterText1, MSGBOX_DEFAULT
+ 	closemessage
+diff --git a/data/maps/CeladonCity_Gym_Frlg/scripts.inc b/data/maps/CeladonCity_Gym_Frlg/scripts.inc
+index 8f4e2d8c..10a69aea 100644
+--- a/data/maps/CeladonCity_Gym_Frlg/scripts.inc
++++ b/data/maps/CeladonCity_Gym_Frlg/scripts.inc
+@@ -5,6 +5,7 @@ CeladonCity_Gym_EventScript_Erika::
+ 	famechecker FAMECHECKER_ERIKA, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+ 	trainerbattle_single TRAINER_LEADER_ERIKA, CeladonCity_Gym_Text_ErikaIntro, CeladonCity_Gym_Text_ErikaDefeat, CeladonCity_Gym_EventScript_DefeatedErika, NO_MUSIC
+ 	goto_if_unset FLAG_GOT_TM19_FROM_ERIKA, CeladonCity_Gym_EventScript_GiveTM19
++	goto_if_unset FLAG_V04_KANTO_STARTER_BADGE4, CeladonCity_Gym_EventScript_GiveStarter
+ 	famechecker FAMECHECKER_ERIKA, 4
+ 	goto_if_set FLAG_KANTO_CHAMPION, CeladonCity_Gym_EventScript_OfferRematch
+ 	msgbox CeladonCity_Gym_Text_ErikaPostBattle
+@@ -27,6 +28,29 @@ CeladonCity_Gym_EventScript_GiveTM19::
+ 	giveitem_msg CeladonCity_Gym_Text_ReceivedTM19FromErika, ITEM_TM19
+ 	setflag FLAG_GOT_TM19_FROM_ERIKA
+ 	msgbox CeladonCity_Gym_Text_ExplainTM19
++	goto CeladonCity_Gym_EventScript_GiveStarter
++	end
++
++CeladonCity_Gym_EventScript_GiveStarter::
++	goto_if_eq VAR_STARTER_MON_FRLG, 0, CeladonCity_Gym_EventScript_GiveMudkip
++	goto_if_eq VAR_STARTER_MON_FRLG, 1, CeladonCity_Gym_EventScript_GiveCyndaquil
++	setvar VAR_0x8004, SPECIES_BULBASAUR
++	goto CeladonCity_Gym_EventScript_GiveStarterMon
++
++CeladonCity_Gym_EventScript_GiveMudkip::
++	setvar VAR_0x8004, SPECIES_MUDKIP
++	goto CeladonCity_Gym_EventScript_GiveStarterMon
++
++CeladonCity_Gym_EventScript_GiveCyndaquil::
++	setvar VAR_0x8004, SPECIES_CYNDAQUIL
++
++CeladonCity_Gym_EventScript_GiveStarterMon::
++	bufferspeciesname STR_VAR_1, VAR_0x8004
++	msgbox CeladonCity_Gym_Text_StarterGift
++	givemon VAR_0x8004, 25
++	goto_if_eq VAR_RESULT, MON_CANT_GIVE, Common_EventScript_NoMoreRoomForPokemon
++	setflag FLAG_V04_KANTO_STARTER_BADGE4
++	msgbox CeladonCity_Gym_Text_StarterEntrusted
+ 	release
+ 	end
+ 
+@@ -134,6 +158,14 @@ CeladonCity_Gym_Text_ExplainTM19::
+ CeladonCity_Gym_Text_ShouldMakeRoomForThis::
+ 	.string "You should make room for this.$"
+ 
++CeladonCity_Gym_Text_StarterGift::
++	.string "Your bond with POKÃ©MON has bloomed.\p"
++	.string "Please care for this {STR_VAR_1}, too.$"
++
++CeladonCity_Gym_Text_StarterEntrusted::
++	.string "ERIKA entrusted {STR_VAR_1}\n"
++	.string "to {PLAYER}.$"
++
+ CeladonCity_Gym_Text_KayIntro::
+ 	.string "I should tell you about this GYM.\p"
+ 	.string "Only real ladies are allowed in\n"
+@@ -269,4 +301,3 @@ CeladonCity_Gym_Text_RematchPost::
+ CeladonCity_Gym_Text_RematchDecline::
+ 	.string "The flowers and I shall\n"
+ 	.string "await your return.$"
+-
+diff --git a/data/maps/CeruleanCave_B1F_Frlg/map.json b/data/maps/CeruleanCave_B1F_Frlg/map.json
+index d204d58d..22220d00 100644
+--- a/data/maps/CeruleanCave_B1F_Frlg/map.json
++++ b/data/maps/CeruleanCave_B1F_Frlg/map.json
+@@ -58,6 +58,20 @@
+       "script": "CeruleanCave_B1F_EventScript_Mewtwo",
+       "flag": "FLAG_HIDE_MEWTWO"
+     },
++    {
++      "type": "object",
++      "graphics_id": "OBJ_EVENT_GFX_MEW",
++      "x": 7,
++      "y": 12,
++      "elevation": 3,
++      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
++      "movement_range_x": 1,
++      "movement_range_y": 1,
++      "trainer_type": "TRAINER_TYPE_NONE",
++      "trainer_sight_or_berry_tree_id": "0",
++      "script": "CeruleanCave_B1F_EventScript_Mew",
++      "flag": "FLAG_V04_HIDE_MEW"
++    },
+     {
+       "type": "object",
+       "graphics_id": "OBJ_EVENT_GFX_BREAKABLE_ROCK_FRLG",
+diff --git a/data/maps/CeruleanCave_B1F_Frlg/scripts.inc b/data/maps/CeruleanCave_B1F_Frlg/scripts.inc
+index bbfaa1b4..cca67775 100644
+--- a/data/maps/CeruleanCave_B1F_Frlg/scripts.inc
++++ b/data/maps/CeruleanCave_B1F_Frlg/scripts.inc
+@@ -15,12 +15,24 @@ CeruleanCave_B1F_EventScript_TryRemoveMewtwo::
+ 
+ CeruleanCave_B1F_OnTransition::
+ 	call_if_unset FLAG_FOUGHT_MEWTWO, CeruleanCave_B1F_EventScript_ShowMewtwo
++	call_if_set FLAG_FOUGHT_MEWTWO, CeruleanCave_B1F_EventScript_TryShowMew
+ 	end
+ 
+ CeruleanCave_B1F_EventScript_ShowMewtwo::
++	setflag FLAG_V04_HIDE_MEW
+ 	clearflag FLAG_HIDE_MEWTWO
+ 	return
+ 
++CeruleanCave_B1F_EventScript_TryShowMew::
++	setflag FLAG_HIDE_MEWTWO
++	goto_if_set FLAG_V04_FOUGHT_MEW, CeruleanCave_B1F_EventScript_KeepMewHidden
++	clearflag FLAG_V04_HIDE_MEW
++	return
++
++CeruleanCave_B1F_EventScript_KeepMewHidden::
++	setflag FLAG_V04_HIDE_MEW
++	return
++
+ CeruleanCave_B1F_EventScript_Mewtwo::
+ 	lock
+ 	faceplayer
+@@ -54,6 +66,42 @@ CeruleanCave_B1F_EventScript_RanFromMewtwo::
+ 	goto EventScript_MonFlewAway
+ 	end
+ 
++@ Mew only reveals itself after the player has found and battled Mewtwo.
++CeruleanCave_B1F_EventScript_Mew::
++	lock
++	faceplayer
++	waitse
++	playmoncry SPECIES_MEW, CRY_MODE_ENCOUNTER
++	message CeruleanCave_B1F_Text_MewAppeared
++	waitmessage
++	waitmoncry
++	delay 20
++	playbgm MUS_RG_ENCOUNTER_GYM_LEADER, 0
++	waitbuttonpress
++	setwildbattle SPECIES_MEW, 50
++	setflag FLAG_SYS_CTRL_OBJ_DELETE
++	special BattleSetup_StartLegendaryBattle
++	clearflag FLAG_SYS_CTRL_OBJ_DELETE
++	specialvar VAR_RESULT, GetBattleOutcome
++	goto_if_eq VAR_RESULT, B_OUTCOME_WON, CeruleanCave_B1F_EventScript_DefeatedMew
++	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, CeruleanCave_B1F_EventScript_RanFromMew
++	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, CeruleanCave_B1F_EventScript_RanFromMew
++	setflag FLAG_V04_FOUGHT_MEW
++	release
++	end
++
++CeruleanCave_B1F_EventScript_DefeatedMew::
++	setflag FLAG_V04_FOUGHT_MEW
++	goto EventScript_RemoveStaticMon
++	end
++
++CeruleanCave_B1F_EventScript_RanFromMew::
++	setvar VAR_0x8004, SPECIES_MEW
++	goto EventScript_MonFlewAway
++	end
++
+ CeruleanCave_B1F_Text_Mew::
+ 	.string "Mew!$"
+ 
++CeruleanCave_B1F_Text_MewAppeared::
++	.string "Mew...$"
+diff --git a/data/maps/CeruleanCity_Frlg/scripts.inc b/data/maps/CeruleanCity_Frlg/scripts.inc
+index 30136e4a..47c4fd29 100644
+--- a/data/maps/CeruleanCity_Frlg/scripts.inc
++++ b/data/maps/CeruleanCity_Frlg/scripts.inc
+@@ -42,9 +42,9 @@ CeruleanCity_EventScript_Rival::
+ 	waitmovement 0
+ 	msgbox CeruleanCity_Text_RivalIntro
+ 	setvar VAR_LAST_TALKED, LOCALID_CERULEAN_RIVAL
+-	call_if_eq VAR_STARTER_MON, 2, CeruleanCity_EventScript_RivalSquirtle
+-	call_if_eq VAR_STARTER_MON, 1, CeruleanCity_EventScript_RivalBulbasaur
+-	call_if_eq VAR_STARTER_MON, 0, CeruleanCity_EventScript_RivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 0, CeruleanCity_EventScript_RivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 1, CeruleanCity_EventScript_RivalBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 2, CeruleanCity_EventScript_RivalSquirtle
+ 	famechecker FAMECHECKER_BILL, 0
+ 	msgbox CeruleanCity_Text_RivalPostBattle
+ 	closemessage
+@@ -528,4 +528,3 @@ CeruleanCity_Text_GymSign::
+ 	.string "CERULEAN CITY POKÃ©MON GYM\n"
+ 	.string "LEADER: MISTY\l"
+ 	.string "The Tomboyish Mermaid!$"
+-
+diff --git a/data/maps/CherrygroveCity/scripts.inc b/data/maps/CherrygroveCity/scripts.inc
+index df16d25d..4a336002 100644
+--- a/data/maps/CherrygroveCity/scripts.inc
++++ b/data/maps/CherrygroveCity/scripts.inc
+@@ -230,9 +230,9 @@ CherryGroveCity_EventScript_TriggerSilver::
+ 	waitmovement 0
+ 	msgbox CherrygroveCity_Text_RivalSeen, MSGBOX_DEFAULT
+ 	closemessage
+-	goto_if_eq VAR_STARTER_MON, 0, CherryGroveCity_Silver_Battle_Cyndaquil
+-	goto_if_eq VAR_STARTER_MON, 1, CherryGroveCity_Silver_Battle_Totodile
+-	goto_if_eq VAR_STARTER_MON, 2, CherryGroveCity_Silver_Battle_Chikorita
++	goto_if_eq VAR_STARTER_MON_JOHTO, 0, CherryGroveCity_Silver_Battle_Cyndaquil
++	goto_if_eq VAR_STARTER_MON_JOHTO, 1, CherryGroveCity_Silver_Battle_Totodile
++	goto_if_eq VAR_STARTER_MON_JOHTO, 2, CherryGroveCity_Silver_Battle_Chikorita
+ 	release
+ 	end
+ 
+diff --git a/data/maps/CinnabarIsland_Gym_Frlg/scripts.inc b/data/maps/CinnabarIsland_Gym_Frlg/scripts.inc
+index 8426b1cb..640787a9 100644
+--- a/data/maps/CinnabarIsland_Gym_Frlg/scripts.inc
++++ b/data/maps/CinnabarIsland_Gym_Frlg/scripts.inc
+@@ -49,6 +49,7 @@ CinnabarIsland_Gym_EventScript_Blaine::
+ 	famechecker FAMECHECKER_BLAINE, FCPICKSTATE_COLORED, UpdatePickStateFromSpecialVar8005
+ 	trainerbattle_single TRAINER_LEADER_BLAINE, CinnabarIsland_Gym_Text_BlaineIntro, CinnabarIsland_Gym_Text_BlaineDefeat, CinnabarIsland_Gym_EventScript_DefeatedBlaine, NO_MUSIC
+ 	goto_if_unset FLAG_GOT_TM38_FROM_BLAINE, CinnabarIsland_Gym_EventScript_GiveTM38
++	goto_if_unset FLAG_V04_KANTO_STARTER_BADGE7, CinnabarIsland_Gym_EventScript_GiveStarter
+ 	goto_if_set FLAG_KANTO_CHAMPION, CinnabarIsland_Gym_EventScript_OfferRematch
+ 	msgbox CinnabarIsland_Gym_Text_BlainePostBattle
+ 	release
+@@ -72,6 +73,29 @@ CinnabarIsland_Gym_EventScript_GiveTM38::
+ 	giveitem_msg CinnabarIsland_Gym_Text_ReceivedTM38FromBlaine, ITEM_TM38
+ 	setflag FLAG_GOT_TM38_FROM_BLAINE
+ 	msgbox CinnabarIsland_Gym_Text_FireBlastIsUltimateFireMove
++	goto CinnabarIsland_Gym_EventScript_GiveStarter
++	end
++
++CinnabarIsland_Gym_EventScript_GiveStarter::
++	goto_if_eq VAR_STARTER_MON_FRLG, 0, CinnabarIsland_Gym_EventScript_GiveCyndaquil
++	goto_if_eq VAR_STARTER_MON_FRLG, 1, CinnabarIsland_Gym_EventScript_GiveBulbasaur
++	setvar VAR_0x8004, SPECIES_MUDKIP
++	goto CinnabarIsland_Gym_EventScript_GiveStarterMon
++
++CinnabarIsland_Gym_EventScript_GiveCyndaquil::
++	setvar VAR_0x8004, SPECIES_CYNDAQUIL
++	goto CinnabarIsland_Gym_EventScript_GiveStarterMon
++
++CinnabarIsland_Gym_EventScript_GiveBulbasaur::
++	setvar VAR_0x8004, SPECIES_BULBASAUR
++
++CinnabarIsland_Gym_EventScript_GiveStarterMon::
++	bufferspeciesname STR_VAR_1, VAR_0x8004
++	msgbox CinnabarIsland_Gym_Text_StarterGift
++	givemon VAR_0x8004, 40
++	goto_if_eq VAR_RESULT, MON_CANT_GIVE, Common_EventScript_NoMoreRoomForPokemon
++	setflag FLAG_V04_KANTO_STARTER_BADGE7
++	msgbox CinnabarIsland_Gym_Text_StarterEntrusted
+ 	release
+ 	end
+ 
+@@ -749,6 +773,15 @@ CinnabarIsland_Gym_Text_BlainePostBattle::
+ CinnabarIsland_Gym_Text_MakeSpaceForThis::
+ 	.string "Make space for this, child!$"
+ 
++CinnabarIsland_Gym_Text_StarterGift::
++	.string "Your VOLCANOBADGE proves your fire!\p"
++	.string "Raise this {STR_VAR_1} with that\n"
++	.string "same burning spirit!$"
++
++CinnabarIsland_Gym_Text_StarterEntrusted::
++	.string "BLAINE entrusted {STR_VAR_1}\n"
++	.string "to {PLAYER}.$"
++
+ CinnabarIsland_Gym_Text_ErikIntro::
+ 	.string "Do you know how hot POKÃ©MON fire\n"
+ 	.string "breath can get?$"
+@@ -933,4 +966,3 @@ CinnabarIsland_Gym_Text_RematchPost::
+ CinnabarIsland_Gym_Text_RematchDecline::
+ 	.string "Cooled your feet, hm?\n"
+ 	.string "My fire will wait!$"
+-
+diff --git a/data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.inc b/data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.inc
+index 24a0e853..9984bfbf 100644
+--- a/data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.inc
++++ b/data/maps/CinnabarIsland_PokemonLab_ExperimentRoom_Frlg/scripts.inc
+@@ -42,6 +42,8 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_AlreadyTraded::
+ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist::
+ 	lock
+ 	faceplayer
++	goto_if_unset FLAG_V04_SECOND_FOSSIL_CLAIMED, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckSecondFossil
++CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ContinueFossilScientist::
+ 	setvar VAR_RESULT, FALSE
+ 	call_if_set FLAG_REVIVED_AMBER, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil
+ 	goto_if_eq VAR_RESULT, TRUE, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_RevivedAllFossils
+@@ -57,6 +59,38 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_FossilScientist::
+ 	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_DontShowFossil
+ 	end
+ 
++@ After the first Mt. Moon fossil has been revived, the scientist returns the
++@ complementary fossil. This keeps both Omanyte and Kabuto obtainable in one save.
++CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckSecondFossil::
++	goto_if_set FLAG_REVIVED_HELIX, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveDomeFossil
++	goto_if_set FLAG_REVIVED_DOME, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveHelixFossil
++	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_ContinueFossilScientist
++
++CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveDomeFossil::
++	checkitemspace ITEM_DOME_FOSSIL
++	goto_if_eq VAR_RESULT, FALSE, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NoRoomForSecondFossil
++	giveitem_msg CinnabarIsland_PokemonLab_ExperimentRoom_Text_SecondFossil, ITEM_DOME_FOSSIL
++	setflag FLAG_GOT_DOME_FOSSIL
++	setflag FLAG_V04_SECOND_FOSSIL_CLAIMED
++	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReviveSecondFossil
++	release
++	end
++
++CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveHelixFossil::
++	checkitemspace ITEM_HELIX_FOSSIL
++	goto_if_eq VAR_RESULT, FALSE, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NoRoomForSecondFossil
++	giveitem_msg CinnabarIsland_PokemonLab_ExperimentRoom_Text_SecondFossil, ITEM_HELIX_FOSSIL
++	setflag FLAG_GOT_HELIX_FOSSIL
++	setflag FLAG_V04_SECOND_FOSSIL_CLAIMED
++	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReviveSecondFossil
++	release
++	end
++
++CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NoRoomForSecondFossil::
++	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_MakeRoomForSecondFossil
++	release
++	end
++
+ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckAddHelixFossilToList::
+ 	goto_if_unset FLAG_GOT_HELIX_FOSSIL, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+ 	goto_if_set FLAG_REVIVED_HELIX, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+@@ -198,7 +232,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveOmanyte::
+ 	setvar VAR_TEMP_1, SPECIES_OMANYTE
+ 	bufferspeciesname STR_VAR_1, SPECIES_OMANYTE
+ 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife
+-	givemon SPECIES_OMANYTE, 5
++	givemon SPECIES_OMANYTE, 35
+ 	goto_if_eq VAR_RESULT, 2, Common_EventScript_NoMoreRoomForPokemon
+ 	setflag FLAG_REVIVED_HELIX
+ 	goto_if_eq VAR_RESULT, 0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty
+@@ -209,7 +243,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveKabuto::
+ 	setvar VAR_TEMP_1, SPECIES_KABUTO
+ 	bufferspeciesname STR_VAR_1, SPECIES_KABUTO
+ 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife
+-	givemon SPECIES_KABUTO, 5
++	givemon SPECIES_KABUTO, 35
+ 	goto_if_eq VAR_RESULT, 2, Common_EventScript_NoMoreRoomForPokemon
+ 	setflag FLAG_REVIVED_DOME
+ 	goto_if_eq VAR_RESULT, 0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty
+@@ -220,7 +254,7 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_GiveAerodactyl::
+ 	setvar VAR_TEMP_1, SPECIES_AERODACTYL
+ 	bufferspeciesname STR_VAR_1, SPECIES_AERODACTYL
+ 	msgbox CinnabarIsland_PokemonLab_ExperimentRoom_Text_FossilMonBackToLife
+-	givemon SPECIES_AERODACTYL, 5
++	givemon SPECIES_AERODACTYL, 35
+ 	goto_if_eq VAR_RESULT, 2, Common_EventScript_NoMoreRoomForPokemon
+ 	setflag FLAG_REVIVED_AMBER
+ 	goto_if_eq VAR_RESULT, 0, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_NicknameMonParty
+@@ -269,10 +303,12 @@ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_RevivedAllFossils::
+ 	end
+ 
+ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedMtMoonFossil::
+-	goto_if_set FLAG_GOT_HELIX_FOSSIL, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix
+-	goto_if_set FLAG_GOT_DOME_FOSSIL, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedDome
+-	goto CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+-	end
++	goto_if_unset FLAG_GOT_HELIX_FOSSIL, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
++	goto_if_unset FLAG_REVIVED_HELIX, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
++	goto_if_unset FLAG_GOT_DOME_FOSSIL, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
++	goto_if_unset FLAG_REVIVED_DOME, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
++	setvar VAR_RESULT, TRUE
++	return
+ 
+ CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_CheckRevivedHelix::
+ 	goto_if_unset FLAG_REVIVED_HELIX, CinnabarIsland_PokemonLab_ExperimentRoom_EventScript_SetResultFalse
+@@ -361,3 +397,15 @@ CinnabarIsland_PokemonLab_ExperimentRoom_Text_YouComeAgain::
+ 	.string "Aiyah!\n"
+ 	.string "You come again!$"
+ 
++CinnabarIsland_PokemonLab_ExperimentRoom_Text_SecondFossil::
++	.string "Aiyah! Reviving your fossil taught\n"
++	.string "me where its twin was hidden!\p"
++	.string "You take this one, too!$"
++
++CinnabarIsland_PokemonLab_ExperimentRoom_Text_ReviveSecondFossil::
++	.string "Bring it back to me and I make its\n"
++	.string "POKÃ©MON live again, too!$"
++
++CinnabarIsland_PokemonLab_ExperimentRoom_Text_MakeRoomForSecondFossil::
++	.string "Your BAG is full! Make room, then\n"
++	.string "come back for the other fossil!$"
+diff --git a/data/maps/FortreeCity_Gym/scripts.inc b/data/maps/FortreeCity_Gym/scripts.inc
+index 1101eaab..1d77fc38 100644
+--- a/data/maps/FortreeCity_Gym/scripts.inc
++++ b/data/maps/FortreeCity_Gym/scripts.inc
+@@ -20,6 +20,7 @@ FortreeCity_Gym_EventScript_InitRotatingGates::
+ FortreeCity_Gym_EventScript_Winona::
+ 	trainerbattle_single TRAINER_WINONA_1, FortreeCity_Gym_Text_WinonaIntro, FortreeCity_Gym_Text_WinonaDefeat, FortreeCity_Gym_EventScript_WinonaDefeated, NO_MUSIC
+ 	goto_if_unset FLAG_RECEIVED_TM_AERIAL_ACE, FortreeCity_Gym_EventScript_GiveAerialAce2
++	goto_if_unset FLAG_HOENN_STARTER_REWARD_2, FortreeCity_Gym_EventScript_GiveStarterReward
+ 	goto_if_set FLAG_HOENN_CHAMPION, FortreeCity_Gym_EventScript_OfferRematch
+ 	specialvar VAR_RESULT, ShouldTryRematchBattle
+ 	goto_if_eq VAR_RESULT, TRUE, FortreeCity_Gym_EventScript_WinonaRematch
+@@ -37,6 +38,7 @@ FortreeCity_Gym_EventScript_WinonaDefeated::
+ 	setvar VAR_0x8008, 6
+ 	call Common_EventScript_SetGymTrainers
+ 	call FortreeCity_Gym_EventScript_GiveAerialAce
++	call FortreeCity_Gym_EventScript_TryGiveStarterReward
+ 	closemessage
+ 	delay 30
+ 	playfanfare MUS_REGISTER_MATCH_CALL
+@@ -58,6 +60,41 @@ FortreeCity_Gym_EventScript_GiveAerialAce2::
+ 	release
+ 	end
+ 
++FortreeCity_Gym_EventScript_GiveStarterReward::
++	call FortreeCity_Gym_EventScript_TryGiveStarterReward
++	msgbox FortreeCity_Gym_Text_WinonaPostBattle, MSGBOX_DEFAULT
++	release
++	end
++
++FortreeCity_Gym_EventScript_TryGiveStarterReward::
++	goto_if_set FLAG_HOENN_STARTER_REWARD_2, FortreeCity_Gym_EventScript_StarterRewardDone
++	msgbox FortreeCity_Gym_Text_StarterReward, MSGBOX_DEFAULT
++	goto_if_eq VAR_STARTER_MON, 0, FortreeCity_Gym_EventScript_RewardSquirtle
++	goto_if_eq VAR_STARTER_MON, 1, FortreeCity_Gym_EventScript_RewardChikorita
++	setvar VAR_0x8004, SPECIES_TORCHIC
++	goto FortreeCity_Gym_EventScript_GiveSelectedStarter
++FortreeCity_Gym_EventScript_RewardSquirtle::
++	setvar VAR_0x8004, SPECIES_SQUIRTLE
++	goto FortreeCity_Gym_EventScript_GiveSelectedStarter
++FortreeCity_Gym_EventScript_RewardChikorita::
++	setvar VAR_0x8004, SPECIES_CHIKORITA
++FortreeCity_Gym_EventScript_GiveSelectedStarter::
++	givemon VAR_0x8004, 40
++	goto_if_eq VAR_RESULT, MON_CANT_GIVE, Common_EventScript_NoMoreRoomForPokemon
++	setflag FLAG_HOENN_STARTER_REWARD_2
++	bufferspeciesname STR_VAR_1, VAR_0x8004
++	msgbox FortreeCity_Gym_Text_ReceivedStarterReward, MSGBOX_DEFAULT
++FortreeCity_Gym_EventScript_StarterRewardDone::
++	return
++
++FortreeCity_Gym_Text_StarterReward:
++	.string "WINONA: PROF. BIRCH entrusted this\n"
++	.string "rare POKÃ©MON to the skies.\p"
++	.string "It has chosen to soar with you.$"
++
++FortreeCity_Gym_Text_ReceivedStarterReward:
++	.string "{PLAYER} received {STR_VAR_1}!$"
++
+ FortreeCity_Gym_EventScript_GiveAerialAce::
+ 	giveitem ITEM_TM_AERIAL_ACE
+ 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+diff --git a/data/maps/GoldenrodCity_UndergroundSwitches/scripts.inc b/data/maps/GoldenrodCity_UndergroundSwitches/scripts.inc
+index 0f73dbf4..e7f4e705 100644
+--- a/data/maps/GoldenrodCity_UndergroundSwitches/scripts.inc
++++ b/data/maps/GoldenrodCity_UndergroundSwitches/scripts.inc
+@@ -325,9 +325,9 @@ GoldenrodCity_UndergroundSwitches_EventScript_SilverTriggerTop::
+ 	waitmovement 0
+ 	msgbox GoldenrodUnderground_Text_SilverBefore, MSGBOX_DEFAULT
+ 	closemessage
+-	call_if_eq VAR_STARTER_MON, 0, GoldenrodCity_UndergroundSwitches_EventScript_Cyndaquil
+-	call_if_eq VAR_STARTER_MON, 1, GoldenrodCity_UndergroundSwitches_EventScript_Totodile
+-	call_if_eq VAR_STARTER_MON, 2, GoldenrodCity_UndergroundSwitches_EventScript_Chikorita
++	call_if_eq VAR_STARTER_MON_JOHTO, 0, GoldenrodCity_UndergroundSwitches_EventScript_Cyndaquil
++	call_if_eq VAR_STARTER_MON_JOHTO, 1, GoldenrodCity_UndergroundSwitches_EventScript_Totodile
++	call_if_eq VAR_STARTER_MON_JOHTO, 2, GoldenrodCity_UndergroundSwitches_EventScript_Chikorita
+ 	playbgm MUS_HG_RIVAL_EXIT, TRUE
+ 	msgbox GoldenrodUnderground_Text_SilverAfter, MSGBOX_DEFAULT
+ 	closemessage
+@@ -358,9 +358,9 @@ GoldenrodCity_UndergroundSwitches_EventScript_SilverTriggerBot::
+ 	waitmovement 0
+ 	msgbox GoldenrodUnderground_Text_SilverBefore, MSGBOX_DEFAULT
+ 	closemessage
+-	call_if_eq VAR_STARTER_MON, 0, GoldenrodCity_UndergroundSwitches_EventScript_Cyndaquil
+-	call_if_eq VAR_STARTER_MON, 1, GoldenrodCity_UndergroundSwitches_EventScript_Totodile
+-	call_if_eq VAR_STARTER_MON, 2, GoldenrodCity_UndergroundSwitches_EventScript_Chikorita
++	call_if_eq VAR_STARTER_MON_JOHTO, 0, GoldenrodCity_UndergroundSwitches_EventScript_Cyndaquil
++	call_if_eq VAR_STARTER_MON_JOHTO, 1, GoldenrodCity_UndergroundSwitches_EventScript_Totodile
++	call_if_eq VAR_STARTER_MON_JOHTO, 2, GoldenrodCity_UndergroundSwitches_EventScript_Chikorita
+ 	playbgm MUS_HG_RIVAL_EXIT, TRUE
+ 	msgbox GoldenrodUnderground_Text_SilverAfter, MSGBOX_DEFAULT
+ 	closemessage
+diff --git a/data/maps/JohtoIndigoPlateau_PokemonCenter/scripts.inc b/data/maps/JohtoIndigoPlateau_PokemonCenter/scripts.inc
+index 1e2d90f5..94615c97 100644
+--- a/data/maps/JohtoIndigoPlateau_PokemonCenter/scripts.inc
++++ b/data/maps/JohtoIndigoPlateau_PokemonCenter/scripts.inc
+@@ -62,9 +62,9 @@ JohtoIndigoPlateau_EventScript_Silver::
+ 	faceplayer 
+ 	goto_if_set FLAG_DAILY_BEAT_SILVER, JohtoIndigoPlateau_EventScript_SilverBeat
+ 	msgbox JohtoIndigoPlateau_Text_RivalEntrance1, MSGBOX_DEFAULT
+-	call_if_eq VAR_STARTER_MON, 0, JohtoIndigoPlateau_Silver_Battle_Cyndaquil
+-	call_if_eq VAR_STARTER_MON, 1, JohtoIndigoPlateau_Silver_Battle_Totodile
+-	call_if_eq VAR_STARTER_MON, 2, JohtoIndigoPlateau_Silver_Battle_Chikorita
++	call_if_eq VAR_STARTER_MON_JOHTO, 0, JohtoIndigoPlateau_Silver_Battle_Cyndaquil
++	call_if_eq VAR_STARTER_MON_JOHTO, 1, JohtoIndigoPlateau_Silver_Battle_Totodile
++	call_if_eq VAR_STARTER_MON_JOHTO, 2, JohtoIndigoPlateau_Silver_Battle_Chikorita
+ 	msgbox JohtoIndigoPlateau_Text_RivalAfter, MSGBOX_DEFAULT
+ 	setflag FLAG_DAILY_BEAT_SILVER
+ 	release
+diff --git a/data/maps/LavaridgeTown_Gym_1F/scripts.inc b/data/maps/LavaridgeTown_Gym_1F/scripts.inc
+index 4648f58c..7c7cdfa3 100644
+--- a/data/maps/LavaridgeTown_Gym_1F/scripts.inc
++++ b/data/maps/LavaridgeTown_Gym_1F/scripts.inc
+@@ -46,6 +46,7 @@ LavaridgeTown_Gym_1F_EventScript_EndCheckBuryTrainers::
+ LavaridgeTown_Gym_1F_EventScript_Flannery::
+ 	trainerbattle_single TRAINER_FLANNERY_1, LavaridgeTown_Gym_1F_Text_FlanneryIntro, LavaridgeTown_Gym_1F_Text_FlanneryDefeat, LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated, NO_MUSIC
+ 	goto_if_unset FLAG_RECEIVED_TM_OVERHEAT, LavaridgeTown_Gym_1F_EventScript_GiveOverheat2
++	goto_if_unset FLAG_HOENN_STARTER_REWARD_1, LavaridgeTown_Gym_1F_EventScript_GiveStarterReward
+ 	goto_if_set FLAG_HOENN_CHAMPION, LavaridgeTown_Gym_1F_EventScript_OfferRematch
+ 	specialvar VAR_RESULT, ShouldTryRematchBattle
+ 	goto_if_eq VAR_RESULT, TRUE, LavaridgeTown_Gym_1F_EventScript_FlanneryRematch
+@@ -68,6 +69,7 @@ LavaridgeTown_Gym_1F_EventScript_FlanneryDefeated::
+ 	setflag FLAG_HIDE_VERDANTURF_TOWN_WANDAS_HOUSE_WALLY
+ 	setvar VAR_LAVARIDGE_TOWN_STATE, 1
+ 	call LavaridgeTown_Gym_1F_EventScript_GiveOverheat
++	call LavaridgeTown_Gym_1F_EventScript_TryGiveStarterReward
+ 	closemessage
+ 	delay 30
+ 	playfanfare MUS_REGISTER_MATCH_CALL
+@@ -87,6 +89,41 @@ LavaridgeTown_Gym_1F_EventScript_GiveOverheat2::
+ 	release
+ 	end
+ 
++LavaridgeTown_Gym_1F_EventScript_GiveStarterReward::
++	call LavaridgeTown_Gym_1F_EventScript_TryGiveStarterReward
++	msgbox LavaridgeTown_Gym_1F_Text_FlanneryPostBattle, MSGBOX_DEFAULT
++	release
++	end
++
++LavaridgeTown_Gym_1F_EventScript_TryGiveStarterReward::
++	goto_if_set FLAG_HOENN_STARTER_REWARD_1, LavaridgeTown_Gym_1F_EventScript_StarterRewardDone
++	msgbox LavaridgeTown_Gym_1F_Text_StarterReward, MSGBOX_DEFAULT
++	goto_if_eq VAR_STARTER_MON, 0, LavaridgeTown_Gym_1F_EventScript_RewardTorchic
++	goto_if_eq VAR_STARTER_MON, 1, LavaridgeTown_Gym_1F_EventScript_RewardSquirtle
++	setvar VAR_0x8004, SPECIES_CHIKORITA
++	goto LavaridgeTown_Gym_1F_EventScript_GiveSelectedStarter
++LavaridgeTown_Gym_1F_EventScript_RewardTorchic::
++	setvar VAR_0x8004, SPECIES_TORCHIC
++	goto LavaridgeTown_Gym_1F_EventScript_GiveSelectedStarter
++LavaridgeTown_Gym_1F_EventScript_RewardSquirtle::
++	setvar VAR_0x8004, SPECIES_SQUIRTLE
++LavaridgeTown_Gym_1F_EventScript_GiveSelectedStarter::
++	givemon VAR_0x8004, 20
++	goto_if_eq VAR_RESULT, MON_CANT_GIVE, Common_EventScript_NoMoreRoomForPokemon
++	setflag FLAG_HOENN_STARTER_REWARD_1
++	bufferspeciesname STR_VAR_1, VAR_0x8004
++	msgbox LavaridgeTown_Gym_1F_Text_ReceivedStarterReward, MSGBOX_DEFAULT
++LavaridgeTown_Gym_1F_EventScript_StarterRewardDone::
++	return
++
++LavaridgeTown_Gym_1F_Text_StarterReward:
++	.string "FLANNERY: BIRCH left a rare starter\n"
++	.string "POKÃ©MON here for a strong trainer.\p"
++	.string "Your HEAT BADGE proves it's yours!$"
++
++LavaridgeTown_Gym_1F_Text_ReceivedStarterReward:
++	.string "{PLAYER} received {STR_VAR_1}!$"
++
+ LavaridgeTown_Gym_1F_EventScript_GiveOverheat::
+ 	giveitem ITEM_TM_OVERHEAT
+ 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_BagIsFull
+diff --git a/data/maps/NewBarkTown_Lab/scripts.inc b/data/maps/NewBarkTown_Lab/scripts.inc
+index 227b930b..24e634a5 100644
+--- a/data/maps/NewBarkTown_Lab/scripts.inc
++++ b/data/maps/NewBarkTown_Lab/scripts.inc
+@@ -178,8 +178,8 @@ NewBarkTown_Lab_EventScript_ChikoritaBall::
+ 
+ NewBarkTown_Lab_EventScript_ChikoritaBall_Choice::
+ 	callnative DisableStaticRandomizer
+-	setvar VAR_STARTER_MON, 0
+-	setvar PLAYER_STARTER_SPECIES, SPECIES_CHIKORITA
++	setvar VAR_STARTER_MON_JOHTO, 0
++	setvar PLAYER_STARTER_SPECIES, SPECIES_CHARMANDER
+ 	showmonpic PLAYER_STARTER_SPECIES, 10, 3
+ 	playmoncry PLAYER_STARTER_SPECIES, CRY_MODE_NORMAL
+ 	bufferspeciesname STR_VAR_1, PLAYER_STARTER_SPECIES
+@@ -200,8 +200,8 @@ NewBarkTown_Lab_EventScript_CyndaquilBall::
+ 
+ NewBarkTown_Lab_EventScript_CyndaquilBall_Choice::
+ 	callnative DisableStaticRandomizer
+-	setvar VAR_STARTER_MON, 1
+-	setvar PLAYER_STARTER_SPECIES, SPECIES_CYNDAQUIL
++	setvar VAR_STARTER_MON_JOHTO, 1
++	setvar PLAYER_STARTER_SPECIES, SPECIES_TOTODILE
+ 	showmonpic PLAYER_STARTER_SPECIES, 10, 3
+ 	playmoncry PLAYER_STARTER_SPECIES, CRY_MODE_NORMAL
+ 	bufferspeciesname STR_VAR_1, PLAYER_STARTER_SPECIES
+@@ -222,8 +222,8 @@ NewBarkTown_Lab_EventScript_TotodileBall::
+ 
+ NewBarkTown_Lab_EventScript_TotodileBall_Choice::
+ 	callnative DisableStaticRandomizer
+-	setvar VAR_STARTER_MON, 2
+-	setvar PLAYER_STARTER_SPECIES, SPECIES_TOTODILE
++	setvar VAR_STARTER_MON_JOHTO, 2
++	setvar PLAYER_STARTER_SPECIES, SPECIES_TREECKO
+ 	showmonpic PLAYER_STARTER_SPECIES, 10, 3
+ 	playmoncry PLAYER_STARTER_SPECIES, CRY_MODE_NORMAL
+ 	bufferspeciesname STR_VAR_1, PLAYER_STARTER_SPECIES
+@@ -356,9 +356,9 @@ NewBarkTown_Lab_EventScript_HideChikorita::
+ NewBarkTown_Lab_EventScript_PoliceEpisode::
+ 	lock
+ 	setmetatile 7, 1, METATILE_R26_21_Broken_Window, TRUE
+-	call_if_eq VAR_STARTER_MON, 0 NewBarkTown_Lab_EventScript_HideCyndaquil
+-	call_if_eq VAR_STARTER_MON, 1 NewBarkTown_Lab_EventScript_HideTotodile
+-	call_if_eq VAR_STARTER_MON, 2 NewBarkTown_Lab_EventScript_HideChikorita
++	call_if_eq VAR_STARTER_MON_JOHTO, 0 NewBarkTown_Lab_EventScript_HideCyndaquil
++	call_if_eq VAR_STARTER_MON_JOHTO, 1 NewBarkTown_Lab_EventScript_HideTotodile
++	call_if_eq VAR_STARTER_MON_JOHTO, 2 NewBarkTown_Lab_EventScript_HideChikorita
+ 	applymovement OBJ_EVENT_ID_PLAYER, NeBarkTownLab_Movement_PlayerWalkToCop
+ 	waitmovement 0
+ 	setflag FLAG_HIDE_LAB_POLICEMAN
+diff --git a/data/maps/OlivineCity_Gym/scripts.inc b/data/maps/OlivineCity_Gym/scripts.inc
+index a303d35e..76f138d2 100644
+--- a/data/maps/OlivineCity_Gym/scripts.inc
++++ b/data/maps/OlivineCity_Gym/scripts.inc
+@@ -248,6 +248,7 @@ OlivineCity_Gym_EventScript_GiveTM::
+ 	giveitem ITEM_TM_IRON_TAIL
+ 	goto_if_eq VAR_RESULT, FALSE, Common_EventScript_ShowBagIsFull
+ 	setflag FLAG_GOT_TM_IRON_TAIL
++	call OlivineCity_Gym_EventScript_TryGiveStarterReward
+ 	msgbox OlivineCity_Gym_Text_JasmineIronTailSpeech, MSGBOX_DEFAULT
+ 	closemessage
+ 	release
+@@ -275,12 +276,46 @@ OlivineCity_Gym_EventScript_Jasmine_Battle3::
+ 
+ OlivineCity_Gym_EventScript_Jasmine_Defeated::
+ 	goto_if_unset FLAG_GOT_TM_IRON_TAIL, OlivineCity_Gym_EventScript_GiveTM
++	goto_if_unset FLAG_GOT_JOHTO_STARTER_REWARD_2, OlivineCity_Gym_EventScript_GiveStarterReward
+ 	goto_if_set FLAG_JOHTO_CHAMPION, OlivineCity_Gym_EventScript_OfferRematch
+ 	msgbox OlivineCity_Gym_Text_JasmineGoodLuck, MSGBOX_DEFAULT
+ 	closemessage
+ 	release
+ 	end
+ 
++OlivineCity_Gym_EventScript_GiveStarterReward::
++	call OlivineCity_Gym_EventScript_TryGiveStarterReward
++	goto OlivineCity_Gym_EventScript_Jasmine_Defeated
++
++OlivineCity_Gym_EventScript_TryGiveStarterReward::
++	goto_if_set FLAG_GOT_JOHTO_STARTER_REWARD_2, OlivineCity_Gym_EventScript_StarterRewardDone
++	msgbox OlivineCity_Gym_Text_StarterReward, MSGBOX_DEFAULT
++	goto_if_eq VAR_STARTER_MON_JOHTO, 0, OlivineCity_Gym_EventScript_RewardTreecko
++	goto_if_eq VAR_STARTER_MON_JOHTO, 1, OlivineCity_Gym_EventScript_RewardCharmander
++	setvar VAR_0x8004, SPECIES_TOTODILE
++	goto OlivineCity_Gym_EventScript_GiveSelectedStarter
++OlivineCity_Gym_EventScript_RewardTreecko::
++	setvar VAR_0x8004, SPECIES_TREECKO
++	goto OlivineCity_Gym_EventScript_GiveSelectedStarter
++OlivineCity_Gym_EventScript_RewardCharmander::
++	setvar VAR_0x8004, SPECIES_CHARMANDER
++OlivineCity_Gym_EventScript_GiveSelectedStarter::
++	givemon VAR_0x8004, 40
++	goto_if_eq VAR_RESULT, MON_CANT_GIVE, Common_EventScript_NoMoreRoomForPokemon
++	setflag FLAG_GOT_JOHTO_STARTER_REWARD_2
++	bufferspeciesname STR_VAR_1, VAR_0x8004
++	msgbox OlivineCity_Gym_Text_ReceivedStarterReward, MSGBOX_DEFAULT
++OlivineCity_Gym_EventScript_StarterRewardDone::
++	return
++
++OlivineCity_Gym_Text_StarterReward:
++	.string "JASMINE: PROF. ELM left another\n"
++	.string "rare POKÃ©MON in my care.\p"
++	.string "You have earned its trust.$"
++
++OlivineCity_Gym_Text_ReceivedStarterReward:
++	.string "{PLAYER} received {STR_VAR_1}!$"
++
+ OlivineCity_Gym_EventScript_OfferRematch::
+ 	msgbox OlivineCity_Gym_Text_JasmineRematchText, MSGBOX_YESNO
+ 	goto_if_eq VAR_RESULT, NO, OlivineCity_Gym_EventScript_RematchDecline
+diff --git a/data/maps/OlivineCity_PortInside/scripts.inc b/data/maps/OlivineCity_PortInside/scripts.inc
+index aad09576..c2a07539 100644
+--- a/data/maps/OlivineCity_PortInside/scripts.inc
++++ b/data/maps/OlivineCity_PortInside/scripts.inc
+@@ -109,10 +109,12 @@ OlivinePort_EventScript_Youngster::
+ OlivinePort_EventScript_Sailor::
+ 	lock
+ 	faceplayer
+-	goto_if_ge VAR_SSAQUA_STATE, 7, OlivinePort_EventScript_Sailor_AfterKanto
+ 	@ A1 gate policy: the maiden voyage is Johto's post-League beat (Elm's
+ 	@ S.S.TICKET). Norman's Hoenn ticket must not launch it mid-Johto.
+ 	goto_if_lt VAR_NEWBARKTOWN_LABSTATE, 11, OlivinePort_EventScript_Sailor_NotSailingYet
++	goto_if_set FLAG_JOHTO_CHAMPION, OlivinePort_EventScript_CheckHoennVoyage
++OlivinePort_EventScript_Sailor_RegularRoutes::
++	goto_if_ge VAR_SSAQUA_STATE, 7, OlivinePort_EventScript_Sailor_AfterKanto
+ 	msgbox OlivinePort_Text_AskBoard, MSGBOX_YESNO
+ 	goto_if_eq VAR_RESULT, FALSE, OlivinePort_EventScript_Sailor_Refused
+ 	checkitem ITEM_SS_TICKET
+@@ -122,6 +124,35 @@ OlivinePort_EventScript_Sailor::
+ 	release
+ 	end
+ 
++OlivinePort_EventScript_CheckHoennVoyage::
++	callnative RegionHub_ScrHoennIntroDone
++	goto_if_eq VAR_RESULT, TRUE, OlivinePort_EventScript_Sailor_RegularRoutes
++	msgbox OlivinePort_Text_AskSailHoenn, MSGBOX_YESNO
++	goto_if_eq VAR_RESULT, NO, OlivinePort_EventScript_Sailor_RegularRoutes
++	setvar VAR_0x8008, 2
++	call RegionHub_EventScript_TryGiveHubPass
++	goto_if_eq VAR_RESULT, FALSE, OlivinePort_EventScript_Sailor_Refused
++	callnative RegionHub_ScrCanDepositParty
++	goto_if_eq VAR_RESULT, FALSE, RegionHub_EventScript_TravelNoRoom
++	msgbox OlivinePort_Text_FlashTicket, MSGBOX_DEFAULT
++	call OlivinePort_EventScript_EnterShip
++	setvar VAR_RESULT, 2
++	callnative RegionHub_ScrEnterRegion
++	setflag FLAG_HIDE_LITTLEROOT_TOWN_BRENDANS_HOUSE_TRUCK
++	setflag FLAG_HIDE_LITTLEROOT_TOWN_MAYS_HOUSE_TRUCK
++	checkplayergender
++	goto_if_eq VAR_RESULT, FEMALE, OlivinePort_EventScript_ArriveHoennFemale
++	warpsilent MAP_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F, 4, 4
++	waitstate
++	release
++	end
++
++OlivinePort_EventScript_ArriveHoennFemale::
++	warpsilent MAP_LITTLEROOT_TOWN_MAYS_HOUSE_2F, 4, 4
++	waitstate
++	release
++	end
++
+ OlivinePort_EventScript_Sailor_NotSailingYet::
+ 	msgbox OlivinePort_Text_NotSailingYet, MSGBOX_DEFAULT
+ 	closemessage
+@@ -364,6 +395,11 @@ OlivinePort_Text_AskBoard:
+     .string "Welcome to FAST SHIP S.S.AQUA.\p"
+     .string "Will you be boarding today?$"
+ 
++OlivinePort_Text_AskSailHoenn:
++    .string "PROF. ELM arranged a voyage for\n"
++    .string "you to meet PROF. BIRCH in HOENN.\p"
++    .string "Sail to HOENN now?$"
++
+ OlivinePort_Text_AskTicket:
+     .string "May I see your S.S.TICKET?$"
+ 
+diff --git a/data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc b/data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
+index f337da4e..614b5df0 100644
+--- a/data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
++++ b/data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
+@@ -296,9 +296,9 @@ PalletTown_ProfessorOaksLab_EventScript_RivalBattle::
+ 	closemessage
+ 	applymovement LOCALID_OAKS_LAB_PROF_OAK, Common_Movement_FaceDown
+ 	waitmovement 0
+-	goto_if_eq VAR_STARTER_MON, 0, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmander
+-	goto_if_eq VAR_STARTER_MON, 1, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaur
+-	goto_if_eq VAR_STARTER_MON, 2, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtle
++	goto_if_eq VAR_STARTER_MON_FRLG, 0, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleCharmander
++	goto_if_eq VAR_STARTER_MON_FRLG, 1, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleBulbasaur
++	goto_if_eq VAR_STARTER_MON_FRLG, 2, PalletTown_ProfessorOaksLab_EventScript_RivalApproachForBattleSquirtle
+ 	end
+ 
+ @ The scripts for the rival approaching the player for battle are a bit bloated because
+@@ -1070,7 +1070,7 @@ PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall::
+ 	faceplayer
+ 	setvar PLAYER_STARTER_NUM, 0
+ 	setvar PLAYER_STARTER_SPECIES, SPECIES_BULBASAUR
+-	setvar RIVAL_STARTER_SPECIES, SPECIES_CHARMANDER
++	setvar RIVAL_STARTER_SPECIES, SPECIES_CYNDAQUIL
+ 	setvar RIVAL_STARTER_ID, LOCALID_CHARMANDER_BALL
+ 	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
+ 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2, PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice
+@@ -1120,9 +1120,9 @@ PalletTown_ProfessorOaksLab_EventScript_ChoseStarter::
+ 	setflag FLAG_PALLET_LADY_NOT_BLOCKING_SIGN
+ 	givemon PLAYER_STARTER_SPECIES, 5
+ 	@ Defensive: unreachable while the region-cross boxes the party â€” but on a failed give, bail
+-	@ before VAR_STARTER_MON/nickname flow; MAP_SCENE stays 2 so the pick is retriable.
++	@ before VAR_STARTER_MON_FRLG/nickname flow; MAP_SCENE stays 2 so the pick is retriable.
+ 	goto_if_ne VAR_RESULT, MON_GIVEN_TO_PARTY, Common_EventScript_NoMoreRoomForPokemon
+-	copyvar VAR_STARTER_MON, PLAYER_STARTER_NUM
++	copyvar VAR_STARTER_MON_FRLG, PLAYER_STARTER_NUM
+ 	bufferspeciesname STR_VAR_1, PLAYER_STARTER_SPECIES
+ 	message PalletTown_ProfessorOaksLab_Text_ReceivedMonFromOak
+ 	waitmessage
+@@ -1215,7 +1215,7 @@ PalletTown_ProfessorOaksLab_EventScript_SquirtleBall::
+ 	lock
+ 	faceplayer
+ 	setvar PLAYER_STARTER_NUM, 1
+-	setvar PLAYER_STARTER_SPECIES, SPECIES_SQUIRTLE
++	setvar PLAYER_STARTER_SPECIES, SPECIES_MUDKIP
+ 	setvar RIVAL_STARTER_SPECIES, SPECIES_BULBASAUR
+ 	setvar RIVAL_STARTER_ID, LOCALID_BULBASAUR_BALL
+ 	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
+@@ -1228,8 +1228,8 @@ PalletTown_ProfessorOaksLab_EventScript_CharmanderBall::
+ 	lock
+ 	faceplayer
+ 	setvar PLAYER_STARTER_NUM, 2
+-	setvar PLAYER_STARTER_SPECIES, SPECIES_CHARMANDER
+-	setvar RIVAL_STARTER_SPECIES, SPECIES_SQUIRTLE
++	setvar PLAYER_STARTER_SPECIES, SPECIES_CYNDAQUIL
++	setvar RIVAL_STARTER_SPECIES, SPECIES_MUDKIP
+ 	setvar RIVAL_STARTER_ID, LOCALID_SQUIRTLE_BALL
+ 	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
+ 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2, PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice
+@@ -1405,16 +1405,16 @@ PalletTown_ProfessorOaksLab_Text_OakHeyDontGoAwayYet::
+ 	.string "Don't go away yet!$"
+ 
+ PalletTown_ProfessorOaksLab_Text_OakChoosingCharmander::
+-	.string "Ah! CHARMANDER is your choice.\n"
+-	.string "You should raise it patiently.\p"
+-	.string "So, {PLAYER}, you're claiming the\n"
+-	.string "FIRE POKÃ©MON CHARMANDER?$"
++	.string "Ah! CYNDAQUIL is your choice.\n"
++	.string "Raise it with patience and care.\p"
++	.string "So, {PLAYER}, you're choosing the\n"
++	.string "FIRE POKÃ©MON CYNDAQUIL?$"
+ 
+ PalletTown_ProfessorOaksLab_Text_OakChoosingSquirtle::
+-	.string "Hm! SQUIRTLE is your choice.\n"
+-	.string "It's one worth raising.\p"
++	.string "Hm! MUDKIP is your choice.\n"
++	.string "It's sturdy and dependable.\p"
+ 	.string "So, {PLAYER}, you've decided on the\n"
+-	.string "WATER POKÃ©MON SQUIRTLE?$"
++	.string "WATER POKÃ©MON MUDKIP?$"
+ 
+ PalletTown_ProfessorOaksLab_Text_OakChoosingBulbasaur::
+ 	.string "I see! BULBASAUR is your choice.\n"
+@@ -1660,4 +1660,3 @@ PalletTown_ProfessorOaksLab_Text_RivalIllCompleteThePokedex::
+ 	.string "I think I'll try looking around\n"
+ 	.string "ONE ISLAND firstâ€¦\p"
+ 	.string "Anyways, I'm outta here!$"
+-
+diff --git a/data/maps/PewterCity_Mart_Frlg/scripts.inc b/data/maps/PewterCity_Mart_Frlg/scripts.inc
+index 2fa94240..80f90ae1 100644
+--- a/data/maps/PewterCity_Mart_Frlg/scripts.inc
++++ b/data/maps/PewterCity_Mart_Frlg/scripts.inc
+@@ -29,6 +29,7 @@ PewterCity_Mart_Items::
+ 	.2byte ITEM_BURN_HEAL
+ 	.2byte ITEM_ESCAPE_ROPE
+ 	.2byte ITEM_REPEL
++	.2byte ITEM_MOON_STONE
+ 	.2byte ITEM_NONE
+ 	release
+ 	end
+@@ -43,4 +44,3 @@ PewterCity_Mart_Text_GoodThingsIfRaiseMonsDiligently::
+ 	.string "POKÃ©MON diligently.\p"
+ 	.string "Even the weak ones can surprise\n"
+ 	.string "you if you don't give up on them.$"
+-
+diff --git a/data/maps/PokemonLeague_ChampionsRoom_Frlg/scripts.inc b/data/maps/PokemonLeague_ChampionsRoom_Frlg/scripts.inc
+index 10fb1d31..acfe2d2a 100644
+--- a/data/maps/PokemonLeague_ChampionsRoom_Frlg/scripts.inc
++++ b/data/maps/PokemonLeague_ChampionsRoom_Frlg/scripts.inc
+@@ -7,9 +7,9 @@ PokemonLeague_ChampionsRoom_Frlg_MapScripts::
+ PokemonLeague_ChampionsRoom_OnResume::
+ 	setvar VAR_0x8004, 4
+ 	call PokemonLeague_EventScript_DoLightingEffect
+-	call_if_eq VAR_STARTER_MON, 2, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle
+-	call_if_eq VAR_STARTER_MON, 1, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerBulbasaur
+-	call_if_eq VAR_STARTER_MON, 0, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 0, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 1, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 2, PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle
+ 	end
+ 
+ PokemonLeague_ChampionsRoom_EventScript_CheckStopTriggerSquirtle::
+@@ -100,15 +100,15 @@ PokemonLeague_ChampionsRoom_EventScript_QuestLogEnd::
+ 	end
+ 
+ PokemonLeague_ChampionsRoom_EventScript_Battle::
+-	call_if_eq VAR_STARTER_MON, 2, PokemonLeague_ChampionsRoom_EventScript_BattleSquirtle
+-	call_if_eq VAR_STARTER_MON, 1, PokemonLeague_ChampionsRoom_EventScript_BattleBulbasaur
+-	call_if_eq VAR_STARTER_MON, 0, PokemonLeague_ChampionsRoom_EventScript_BattleCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 0, PokemonLeague_ChampionsRoom_EventScript_BattleCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 1, PokemonLeague_ChampionsRoom_EventScript_BattleBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 2, PokemonLeague_ChampionsRoom_EventScript_BattleSquirtle
+ 	return
+ 
+ PokemonLeague_ChampionsRoom_EventScript_Rematch::
+-	call_if_eq VAR_STARTER_MON, 2, PokemonLeague_ChampionsRoom_EventScript_RematchSquirtle
+-	call_if_eq VAR_STARTER_MON, 1, PokemonLeague_ChampionsRoom_EventScript_RematchBulbasaur
+-	call_if_eq VAR_STARTER_MON, 0, PokemonLeague_ChampionsRoom_EventScript_RematchCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 0, PokemonLeague_ChampionsRoom_EventScript_RematchCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 1, PokemonLeague_ChampionsRoom_EventScript_RematchBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 2, PokemonLeague_ChampionsRoom_EventScript_RematchSquirtle
+ 	return
+ 
+ PokemonLeague_ChampionsRoom_EventScript_Intro::
+@@ -330,4 +330,3 @@ PokemonLeague_ChampionsRoom_Text_OakPlayerComeWithMe::
+ 	.string "POKÃ©MON is marvelous.\p"
+ 	.string "{PLAYER}!\n"
+ 	.string "Come with me!$"
+-
+diff --git a/data/maps/PokemonTower_2F_Frlg/scripts.inc b/data/maps/PokemonTower_2F_Frlg/scripts.inc
+index 5c0d880b..c64a2982 100644
+--- a/data/maps/PokemonTower_2F_Frlg/scripts.inc
++++ b/data/maps/PokemonTower_2F_Frlg/scripts.inc
+@@ -28,9 +28,9 @@ PokemonTower_2F_EventScript_Rival::
+ 	waitmovement 0
+ 	msgbox PokemonTower_2F_Text_RivalIntro
+ 	setvar VAR_LAST_TALKED, LOCALID_POKEMON_TOWER_RIVAL
+-	call_if_eq VAR_STARTER_MON, 2, PokemonTower_2F_EventScript_RivalSquirtle
+-	call_if_eq VAR_STARTER_MON, 1, PokemonTower_2F_EventScript_RivalBulbasaur
+-	call_if_eq VAR_STARTER_MON, 0, PokemonTower_2F_EventScript_RivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 0, PokemonTower_2F_EventScript_RivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 1, PokemonTower_2F_EventScript_RivalBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 2, PokemonTower_2F_EventScript_RivalSquirtle
+ 	msgbox PokemonTower_2F_Text_RivalPostBattle
+ 	closemessage
+ 	playbgm MUS_RG_RIVAL_EXIT, 0
+@@ -129,4 +129,3 @@ PokemonTower_2F_Text_SilphScopeCouldUnmaskGhosts::
+ 	.string "wayward ghosts.\p"
+ 	.string "A SILPH SCOPE might be able to\n"
+ 	.string "unmask them.$"
+-
+diff --git a/data/maps/Route22_Frlg/scripts.inc b/data/maps/Route22_Frlg/scripts.inc
+index 0497ab4d..567d2bef 100644
+--- a/data/maps/Route22_Frlg/scripts.inc
++++ b/data/maps/Route22_Frlg/scripts.inc
+@@ -30,9 +30,9 @@ Route22_EventScript_EarlyRival::
+ 	call_if_eq VAR_TEMP_1, 2, Route22_EventScript_EarlyRivalApproachBottom
+ 	delay 6
+ 	msgbox Route22_Text_EarlyRivalIntro
+-	call_if_eq VAR_STARTER_MON, 2, Route22_EventScript_EarlyRivalSquirtle
+-	call_if_eq VAR_STARTER_MON, 1, Route22_EventScript_EarlyRivalBulbasaur
+-	call_if_eq VAR_STARTER_MON, 0, Route22_EventScript_EarlyRivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 0, Route22_EventScript_EarlyRivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 1, Route22_EventScript_EarlyRivalBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 2, Route22_EventScript_EarlyRivalSquirtle
+ 	msgbox Route22_Text_EarlyRivalPostBattle
+ 	closemessage
+ 	delay 10
+@@ -181,9 +181,9 @@ Route22_EventScript_LateRival::
+ 	call_if_eq VAR_TEMP_1, 2, Route22_EventScript_LateRivalApproachBottom
+ 	msgbox Route22_Text_LateRivalIntro
+ 	setvar VAR_LAST_TALKED, LOCALID_ROUTE22_RIVAL
+-	call_if_eq VAR_STARTER_MON, 2, Route22_EventScript_LateRivalSquirtle
+-	call_if_eq VAR_STARTER_MON, 1, Route22_EventScript_LateRivalBulbasaur
+-	call_if_eq VAR_STARTER_MON, 0, Route22_EventScript_LateRivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 0, Route22_EventScript_LateRivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 1, Route22_EventScript_LateRivalBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 2, Route22_EventScript_LateRivalSquirtle
+ 	msgbox Route22_Text_LateRivalPostBattle
+ 	closemessage
+ 	delay 10
+@@ -298,4 +298,3 @@ Route22_Text_LateRivalVictory::
+ Route22_Text_LeagueGateSign::
+ 	.string "POKÃ©MON LEAGUE\n"
+ 	.string "Front Gate$"
+-
+diff --git a/data/maps/SSAnne_2F_Corridor_Frlg/scripts.inc b/data/maps/SSAnne_2F_Corridor_Frlg/scripts.inc
+index ba17c89a..fbce7a94 100644
+--- a/data/maps/SSAnne_2F_Corridor_Frlg/scripts.inc
++++ b/data/maps/SSAnne_2F_Corridor_Frlg/scripts.inc
+@@ -34,9 +34,9 @@ SSAnne_2F_Corridor_EventScript_RivalTrigger::
+ 	call_if_eq VAR_TEMP_1, 2, SSAnne_2F_Corridor_EventScript_RivalApproachRight
+ 	msgbox SSAnne_2F_Corridor_Text_RivalIntro
+ 	setvar VAR_LAST_TALKED, LOCALID_SS_ANNE_RIVAL
+-	call_if_eq VAR_STARTER_MON, 2, SSAnne_2F_Corridor_EventScript_RivalSquirtle
+-	call_if_eq VAR_STARTER_MON, 1, SSAnne_2F_Corridor_EventScript_RivalBulbasaur
+-	call_if_eq VAR_STARTER_MON, 0, SSAnne_2F_Corridor_EventScript_RivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 0, SSAnne_2F_Corridor_EventScript_RivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 1, SSAnne_2F_Corridor_EventScript_RivalBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 2, SSAnne_2F_Corridor_EventScript_RivalSquirtle
+ 	msgbox SSAnne_2F_Corridor_Text_RivalPostBattle
+ 	closemessage
+ 	delay 10
+@@ -204,4 +204,3 @@ SSAnne_2F_Corridor_Text_RivalPostBattle::
+ 	.string "Yup, it'll be handy.\p"
+ 	.string "You should go see him, too.\n"
+ 	.string "Smell ya!$"
+-
+diff --git a/data/maps/SilphCo_7F_Frlg/scripts.inc b/data/maps/SilphCo_7F_Frlg/scripts.inc
+index 6fd7c1a8..a2c22e91 100644
+--- a/data/maps/SilphCo_7F_Frlg/scripts.inc
++++ b/data/maps/SilphCo_7F_Frlg/scripts.inc
+@@ -42,9 +42,9 @@ SilphCo_7F_EventScript_RivalScene::
+ 	call_if_eq VAR_TEMP_1, 1, SilphCo_7F_EventScript_RivalApproachBottom
+ 	msgbox SilphCo_7F_Text_RivalIntro
+ 	setvar VAR_LAST_TALKED, LOCALID_SILPH_CO_RIVAL
+-	call_if_eq VAR_STARTER_MON, 2, SilphCo_7F_EventScript_RivalSquirtle
+-	call_if_eq VAR_STARTER_MON, 1, SilphCo_7F_EventScript_RivalBulbasaur
+-	call_if_eq VAR_STARTER_MON, 0, SilphCo_7F_EventScript_RivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 0, SilphCo_7F_EventScript_RivalCharmander
++	call_if_eq VAR_STARTER_MON_FRLG, 1, SilphCo_7F_EventScript_RivalBulbasaur
++	call_if_eq VAR_STARTER_MON_FRLG, 2, SilphCo_7F_EventScript_RivalSquirtle
+ 	msgbox SilphCo_7F_Text_RivalPostBattle
+ 	closemessage
+ 	playbgm MUS_RG_RIVAL_EXIT, 0
+@@ -365,4 +365,3 @@ SilphCo_7F_Text_RivalPostBattle::
+ SilphCo_7F_Text_FloorSign::
+ 	.string "SILPH CO. HEAD OFFICE\n"
+ 	.string "7F$"
+-
+diff --git a/data/maps/TwoIsland_Frlg/scripts.inc b/data/maps/TwoIsland_Frlg/scripts.inc
+index e263bf0b..c2b0969d 100644
+--- a/data/maps/TwoIsland_Frlg/scripts.inc
++++ b/data/maps/TwoIsland_Frlg/scripts.inc
+@@ -1,13 +1,32 @@
+ TwoIsland_Frlg_MapScripts::
+ 	map_script MAP_SCRIPT_ON_TRANSITION, TwoIsland_OnTransition
++	map_script MAP_SCRIPT_ON_FRAME_TABLE, TwoIsland_OnFrame
+ 	.byte 0
+ 
+ TwoIsland_OnTransition::
+ 	setworldmapflag FLAG_WORLD_MAP_TWO_ISLAND
+ 	setflag FLAG_VISITED_TWO_ISLAND
+ 	call TwoIsland_EventScript_SetShopState
++	call_if_set FLAG_KANTO_BADGE_7, TwoIsland_EventScript_ArmJohtoArrival
+ 	end
+ 
++TwoIsland_EventScript_ArmJohtoArrival::
++	goto_if_set FLAG_JOHTO_STARTER_CHOSEN, TwoIsland_EventScript_JohtoArrivalNotArmed
++	goto_if_set FLAG_V04_JOHTO_GATE_OFFERED, TwoIsland_EventScript_JohtoArrivalNotArmed
++	setvar VAR_V04_TWO_ISLAND_JOHTO_GATE, 1
++TwoIsland_EventScript_JohtoArrivalNotArmed::
++	return
++
++TwoIsland_OnFrame::
++	map_script_2 VAR_V04_TWO_ISLAND_JOHTO_GATE, 1, TwoIsland_EventScript_JohtoArrivalOffer
++	.2byte 0
++
++TwoIsland_EventScript_JohtoArrivalOffer::
++	setvar VAR_V04_TWO_ISLAND_JOHTO_GATE, 0
++	setflag FLAG_V04_JOHTO_GATE_OFFERED
++	lockall
++	goto TwoIsland_EventScript_OfferJohto
++
+ TwoIsland_EventScript_SetShopState::
+ 	goto_if_set FLAG_IS_CHAMPION, TwoIsland_EventScript_SetShopStateAfterHoennLink
+ 	goto_if_set FLAG_SYS_GAME_CLEAR, TwoIsland_EventScript_SetShopStateAfterChampion
+@@ -176,9 +195,52 @@ TwoIsland_Items_ShopExpanded3::
+ 	end
+ 
+ TwoIsland_EventScript_Sailor::
++	goto_if_unset FLAG_KANTO_BADGE_7, TwoIsland_EventScript_SailorOldText
++	lockall
++	faceplayer
++	goto_if_set FLAG_JOHTO_STARTER_CHOSEN, TwoIsland_EventScript_JohtoRouteOpen
++	goto TwoIsland_EventScript_OfferJohto
++
++TwoIsland_EventScript_SailorOldText::
+ 	msgbox TwoIsland_Text_FellowMovedFromCeladonCity, MSGBOX_NPC
+ 	end
+ 
++TwoIsland_EventScript_OfferJohto::
++	msgbox TwoIsland_Text_JohtoPassage, MSGBOX_YESNO
++	goto_if_eq VAR_RESULT, NO, TwoIsland_EventScript_DeclineJohto
++	setvar VAR_0x8008, 1
++	call RegionHub_EventScript_TryGiveHubPass
++	goto_if_eq VAR_RESULT, FALSE, TwoIsland_EventScript_HubPassBlocked
++	callnative RegionHub_ScrCanDepositParty
++	goto_if_eq VAR_RESULT, FALSE, TwoIsland_EventScript_JohtoNoRoom
++	setvar VAR_RESULT, 1
++	callnative RegionHub_ScrEnterRegion
++	closemessage
++	warp MAP_NEW_BARK_TOWN_PLAYERS_HOUSE_2F, 1
++	waitstate
++	releaseall
++	end
++
++TwoIsland_EventScript_DeclineJohto::
++	msgbox TwoIsland_Text_JohtoDeclined
++	releaseall
++	end
++
++TwoIsland_EventScript_JohtoNoRoom::
++	msgbox TwoIsland_Text_JohtoNoRoom
++	releaseall
++	end
++
++TwoIsland_EventScript_HubPassBlocked::
++	closemessage
++	releaseall
++	end
++
++TwoIsland_EventScript_JohtoRouteOpen::
++	msgbox TwoIsland_Text_JohtoRouteOpen
++	releaseall
++	end
++
+ TwoIsland_EventScript_Woman::
+ 	msgbox TwoIsland_Text_ShopkeepersBrotherWorksGameCorner, MSGBOX_NPC
+ 	end
+@@ -264,6 +326,28 @@ TwoIsland_Text_FellowMovedFromCeladonCity::
+ 	.string "You have to wonder if he knew what\n"
+ 	.string "he was getting into.$"
+ 
++TwoIsland_Text_JohtoPassage::
++	.string "VOLCANOBADGE? Then you're ready.\p"
++	.string "A passage from TWO ISLAND now runs\n"
++	.string "to the JOHTO region.\p"
++	.string "Your KANTO team will wait safely in\n"
++	.string "the PC while you begin there.\p"
++	.string "Travel to JOHTO now?$"
++
++TwoIsland_Text_JohtoDeclined::
++	.string "No rush. Speak to the SAILOR here\n"
++	.string "whenever you're ready for JOHTO.$"
++
++TwoIsland_Text_JohtoNoRoom::
++	.string "Your PC BOXES or MAILBOX cannot hold\n"
++	.string "your whole team yet.\p"
++	.string "Make room, then speak to the SAILOR.$"
++
++TwoIsland_Text_JohtoRouteOpen::
++	.string "The JOHTO passage is open.\n"
++	.string "The WORLD TRANSIT HUB can take you\l"
++	.string "between regions from here on.$"
++
+ TwoIsland_Text_ShopkeepersBrotherWorksGameCorner::
+ 	.string "The shopkeeper's brother took\n"
+ 	.string "a job at the GAME CORNER.\p"
+@@ -300,4 +384,3 @@ TwoIsland_Text_HaveYouTriedJumpingGame::
+ 	.string "And some go boooooooing!\p"
+ 	.string "Did you know that?\n"
+ 	.string "Boing!$"
+-
+diff --git a/include/config/caps.h b/include/config/caps.h
+index 7e3626ef..ec8cb425 100644
+--- a/include/config/caps.h
++++ b/include/config/caps.h
+@@ -11,9 +11,8 @@
+ #define LEVEL_CAP_VARIABLE              2 // Level cap is chosen according to the contents of the event variable specified by B_LEVEL_CAP_VARIABLE
+ 
+ // Level Cap Configs
+-// QoL #16: the three caps below are compiled in but runtime-gated on the HARD MODE
+-// option (gSaveBlock2Ptr->optionsHardMode) inside src/caps.c - with the option OFF,
+-// GetCurrentLevelCap() returns MAX_LEVEL and behavior is vanilla.
++// v0.4.4: regional badge caps are always active. Normal Mode soft-caps EXP;
++// Hard Mode stops EXP at the same cap.
+ #define B_EXP_CAP_TYPE                  EXP_CAP_HARD   // [EXP_CAP_NONE, EXP_CAP_HARD, EXP_CAP_SOFT] choose the type of level cap to apply
+ #define B_LEVEL_CAP_TYPE                LEVEL_CAP_FLAG_LIST // [LEVEL_CAP_NONE, LEVEL_CAP_FLAG_LIST, LEVEL_CAP_VARIABLE] choose the method to derive the level cap
+ // TRAP if you ever switch B_LEVEL_CAP_TYPE to LEVEL_CAP_VARIABLE: 0 is not a valid var id.
+diff --git a/include/config/pokedex_plus_hgss.h b/include/config/pokedex_plus_hgss.h
+index 4064075a..054d6315 100644
+--- a/include/config/pokedex_plus_hgss.h
++++ b/include/config/pokedex_plus_hgss.h
+@@ -1,7 +1,7 @@
+ #ifndef GUARD_CONFIG_POKEDEX_PLUS_HGSS_H
+ #define GUARD_CONFIG_POKEDEX_PLUS_HGSS_H
+ 
+-#define POKEDEX_PLUS_HGSS                   TRUE  // If TRUE, enables the custom HGSS style Pokedex.
++#define POKEDEX_PLUS_HGSS                   FALSE  // If TRUE, enables the custom HGSS style Pokedex.
+ #define HGSS_DECAPPED                       TRUE  // If TRUE, uses decapped gfx and strings.
+ #define HGSS_DARK_MODE                      FALSE // If TRUE, enables dark mode.
+ #define HGSS_HIDE_UNSEEN_EVOLUTION_NAMES    FALSE // If TRUE, hides evolution mon names.
+diff --git a/include/config/start_menu.h b/include/config/start_menu.h
+index c20b4bc9..96788a40 100644
+--- a/include/config/start_menu.h
++++ b/include/config/start_menu.h
+@@ -7,6 +7,6 @@
+ // scripted opens (Task_OpenStartMenu) always use the classic menu regardless.
+ // Note: SaveBlock3.usmSaved stays in the save layout in both settings, so flipping this
+ // never shifts save data.
+-#define PW_GRAPHICAL_START_MENU     TRUE
++#define PW_GRAPHICAL_START_MENU     FALSE
+ 
+ #endif // GUARD_CONFIG_START_MENU_H
+diff --git a/include/config/summary_screen.h b/include/config/summary_screen.h
+index 6f5f8d4d..f317c497 100644
+--- a/include/config/summary_screen.h
++++ b/include/config/summary_screen.h
+@@ -35,7 +35,7 @@ Info taken from https://bulbapedia.bulbagarden.net/wiki/Stats_judge.
+ 
+ // Level up Relearner
+ #define P_PRE_EVO_MOVES                  FALSE   // If TRUE, it enables the PokÃ©mon to learn moves from it's pre evolution.
+-#define P_ENABLE_ALL_LEVEL_UP_MOVES      FALSE   // If TRUE, it enables the PokÃ©mon to learn all level up moves, regardless of its level.
++#define P_ENABLE_ALL_LEVEL_UP_MOVES      TRUE    // Regional high-level gifts/catches can recover every missed level-up move.
+ 
+ // TM Relearner
+ #define P_TM_MOVES_RELEARNER             TRUE   // If TRUE, enables machine move relearner.
+diff --git a/include/config/swsh_item_menu.h b/include/config/swsh_item_menu.h
+index 62baa018..6e33cd82 100644
+--- a/include/config/swsh_item_menu.h
++++ b/include/config/swsh_item_menu.h
+@@ -1,7 +1,7 @@
+ #ifndef GUARD_CONFIG_SWSH_ITEM_MENU_H
+ #define GUARD_CONFIG_SWSH_ITEM_MENU_H
+ 
+-#define SWSH_ITEM_MENU                    TRUE  // Use SwSh bag menu
++#define SWSH_ITEM_MENU                    FALSE  // Use SwSh bag menu
+ 
+ #define SWSH_ITEM_MENU_TMHM_CONTEST_INFO  (SWSH_ITEM_MENU && TRUE)  // Show contest info for TMs/HMs in the item menu
+ #define SWSH_ITEM_MENU_BERRY_INFO         TRUE  // Show berry info in the item menu
+diff --git a/include/config/swsh_party_menu.h b/include/config/swsh_party_menu.h
+index 3bddb6fe..926826f1 100644
+--- a/include/config/swsh_party_menu.h
++++ b/include/config/swsh_party_menu.h
+@@ -1,7 +1,7 @@
+ #ifndef GUARD_CONFIG_SWSH_PARTY_MENU_H
+ #define GUARD_CONFIG_SWSH_PARTY_MENU_H
+ 
+-#define SWSH_PARTY_MENU                   TRUE
++#define SWSH_PARTY_MENU                   FALSE
+ #define SWSH_PARTY_MENU_PC_ACCESS         TRUE
+ #define SWSH_PARTY_MON_IDLE_ANIMS         TRUE
+ #define SWSH_PARTY_MON_IDLE_ANIMS_FRAMES  300 // Number of frames before mon animation loops
+diff --git a/include/constants/cleared_obstacles.h b/include/constants/cleared_obstacles.h
+index 9e8f2dfb..710c9e87 100644
+--- a/include/constants/cleared_obstacles.h
++++ b/include/constants/cleared_obstacles.h
+@@ -17,6 +17,6 @@
+ // index after it, which would silently re-point saved bits at different obstacles. The save
+ // stores the hash it was written under; on a mismatch the bits are cleared and re-stamped, so
+ // every obstacle regrows exactly ONCE after a map edit instead of drifting invisibly.
+-#define CLEARED_OBSTACLE_TABLE_HASH 0x233ED09C
++#define CLEARED_OBSTACLE_TABLE_HASH 0xAE105E58
+ 
+ #endif // GUARD_CONSTANTS_CLEARED_OBSTACLES_H
+diff --git a/include/constants/flags.h b/include/constants/flags.h
+index b29495cd..064e7c3a 100644
+--- a/include/constants/flags.h
++++ b/include/constants/flags.h
+@@ -49,8 +49,8 @@
+ 
+ #define FLAG_SYS_VS_SEEKER_CHARGING 0x20 // Kanto VS Seeker recharge window (assigned to I_VS_SEEKER_CHARGING, config/item.h). Same name as the IS_FRLG branch. Was FLAG_UNUSED_0x020.
+ #define FLAG_QOL_SHARED_EXP  0x21 // Party-wide Exp Share toggle (SHARED EXP options entry; read via I_EXP_SHARE_FLAG). Was FLAG_UNUSED_0x021. NOTE: distinct from the Johto FLAG_EXP_SHARE (johto_flags.h).
+-#define FLAG_UNUSED_0x022    0x22 // Unused Flag
+-#define FLAG_UNUSED_0x023    0x23 // Unused Flag
++#define FLAG_HOENN_STARTER_REWARD_1 0x22 // v0.4.4: first unchosen Hoenn starter
++#define FLAG_HOENN_STARTER_REWARD_2 0x23 // v0.4.4: second unchosen Hoenn starter
+ #define FLAG_UNUSED_0x024    0x24 // Unused Flag
+ #define FLAG_UNUSED_0x025    0x25 // Unused Flag
+ #define FLAG_UNUSED_0x026    0x26 // Unused Flag
+@@ -4181,7 +4181,14 @@
+ // FlagGet() when the trigger id is not a var, so the crest events self-disable on the same flag
+ // instead of burning a temp var. The Charm Curator re-offers the tour regardless of this flag.
+ #define FLAG_HUB_INTRO_TOUR_DONE              (FLAG_WORLD_MAP_BANK + 0x8F) // 0xDCF
+-// Next free in the world-map window: 0xDD0.
++// PokeMan Journey v0.4 progression and one-time collection rewards.
++#define FLAG_V04_KANTO_STARTER_BADGE4          (FLAG_WORLD_MAP_BANK + 0x90) // 0xDD0
++#define FLAG_V04_KANTO_STARTER_BADGE7          (FLAG_WORLD_MAP_BANK + 0x91) // 0xDD1
++#define FLAG_V04_JOHTO_GATE_OFFERED            (FLAG_WORLD_MAP_BANK + 0x92) // 0xDD2
++#define FLAG_V04_SECOND_FOSSIL_CLAIMED         (FLAG_WORLD_MAP_BANK + 0x93) // 0xDD3
++#define FLAG_V04_HIDE_MEW                       (FLAG_WORLD_MAP_BANK + 0x94) // 0xDD4
++#define FLAG_V04_FOUGHT_MEW                     (FLAG_WORLD_MAP_BANK + 0x95) // 0xDD5
++// Next free in the world-map window: 0xDD6.
+ 
+ #undef FLAGS_COUNT
+ #define FLAGS_COUNT 0x1030
+diff --git a/include/constants/johto_flags.h b/include/constants/johto_flags.h
+index d3772cea..9817a4cf 100644
+--- a/include/constants/johto_flags.h
++++ b/include/constants/johto_flags.h
+@@ -574,4 +574,9 @@
+ // it is set in Azalea's flag heap so he stays hidden until the cutscene.
+ #define FLAG_HIDE_SLOWPOKE_WELL_KURT_STANDING       FLAG_JOHTO_SLICE(0x25b)
+ 
++// v0.4.4 regional starter rewards. Only the two starters not chosen in New
++// Bark are handed out, one in early Johto and one in late Johto.
++#define FLAG_GOT_JOHTO_STARTER_REWARD_1              FLAG_JOHTO_SLICE(0x25c)
++#define FLAG_GOT_JOHTO_STARTER_REWARD_2              FLAG_JOHTO_SLICE(0x25d)
++
+ #endif // GUARD_CONSTANTS_JOHTO_FLAGS_H
+diff --git a/include/constants/johto_vars.h b/include/constants/johto_vars.h
+index 4bb859c1..d25d4790 100644
+--- a/include/constants/johto_vars.h
++++ b/include/constants/johto_vars.h
+@@ -81,4 +81,8 @@
+ // === Johto Pokemon League (region merge) â€” Elite Four gauntlet progress state ===
+ #define VAR_LEAGUE_STATE               VAR_JOHTO_SLICE(0x3b)
+ 
++// The starter index must be region-local. Reusing Hoenn's VAR_STARTER_MON here
++// would rewrite Kanto/Hoenn rival teams as soon as the player entered Johto.
++#define VAR_STARTER_MON_JOHTO           VAR_JOHTO_SLICE(0x3c)
++
+ #endif // GUARD_CONSTANTS_JOHTO_VARS_H
+diff --git a/include/constants/vars_frlg.h b/include/constants/vars_frlg.h
+index dd201b28..307e98b8 100644
+--- a/include/constants/vars_frlg.h
++++ b/include/constants/vars_frlg.h
+@@ -68,7 +68,7 @@
+ #define VAR_0x402F                         VAR_KANTO_SLICE(0x0A)
+ 
+ #define VAR_ICE_STEP_COUNT_FRLG            VAR_KANTO_SLICE(0x0B)
+-#define VAR_STARTER_MON_FRLG               VAR_KANTO_SLICE(0x0C) // 0: Bulbasaur, 1: Squirtle, 2: Charmander
++#define VAR_STARTER_MON_FRLG               VAR_KANTO_SLICE(0x0C) // 0: Bulbasaur, 1: Mudkip, 2: Cyndaquil
+ #define VAR_RESET_RTC_ENABLE_FRLG          VAR_KANTO_SLICE(0x0D)
+ #define VAR_ENIGMA_BERRY_AVAILABLE_FRLG    VAR_KANTO_SLICE(0x0E)
+ 
+@@ -161,6 +161,7 @@
+ #define VAR_MAP_SCENE_ROCKET_WAREHOUSE                                         VAR_KANTO_SLICE(0x61)
+ #define VAR_MAP_SCENE_SIX_ISLAND_POKEMON_CENTER_1F                             VAR_KANTO_SLICE(0x62)
+ #define VAR_MAP_SCENE_CINNABAR_ISLAND_2                                        VAR_KANTO_SLICE(0x63)
++#define VAR_V04_TWO_ISLAND_JOHTO_GATE                                          VAR_KANTO_SLICE(0x64)
+ #define VAR_MAP_SCENE_MT_MOON_B2F                                              0x408B
+ 
+ 
+diff --git a/include/regional_progression.h b/include/regional_progression.h
+new file mode 100644
+index 00000000..169dd13d
+--- /dev/null
++++ b/include/regional_progression.h
+@@ -0,0 +1,10 @@
++#ifndef GUARD_REGIONAL_PROGRESSION_H
++#define GUARD_REGIONAL_PROGRESSION_H
++
++#include "global.h"
++
++// Convert the merged games' original encounter levels into the continuous
++// Kanto (1-35), Johto (33-70), and Hoenn (70-100) campaign bands.
++u8 ScaleLevelForActiveRegion(u8 level);
++
++#endif // GUARD_REGIONAL_PROGRESSION_H
+diff --git a/src/battle_main.c b/src/battle_main.c
+index aaa8c795..8e78a9e0 100644
+--- a/src/battle_main.c
++++ b/src/battle_main.c
+@@ -47,6 +47,8 @@
+ #include "pokemon.h"
+ #include "pokerus.h"
+ #include "random.h"
++#include "regional_progression.h"
++#include "regions.h"
+ #include "recorded_battle.h"
+ #include "regions.h"
+ #include "roamer.h"
+@@ -1895,9 +1897,28 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer
+             s32 ball = -1;
+             u32 personalityHash = GeneratePartyHash(trainer, i);
+             const struct TrainerMon *partyData = trainer->party;
++            enum Species trainerSpecies = partyData[monIndex].species;
+             struct OriginalTrainerId otId = OTID_STRUCT_RANDOM_NO_SHINY;
+             u32 abilityNum = 0;
+ 
++            // Hoenn uses the last unclaimed starter from each of Gens 1-3.
++            // Keep the stock rival-team dispatch, but replace the two old
++            // starter families in Brendan/May's actual parties.
++            if (GetActiveRegion() == REGION_HOENN
++             && (trainer->trainerPic == TRAINER_PIC_BRENDAN || trainer->trainerPic == TRAINER_PIC_MAY))
++            {
++                switch (trainerSpecies)
++                {
++                case SPECIES_TREECKO:   trainerSpecies = SPECIES_CHIKORITA; break;
++                case SPECIES_GROVYLE:   trainerSpecies = SPECIES_BAYLEEF; break;
++                case SPECIES_SCEPTILE:  trainerSpecies = SPECIES_MEGANIUM; break;
++                case SPECIES_MUDKIP:    trainerSpecies = SPECIES_SQUIRTLE; break;
++                case SPECIES_MARSHTOMP: trainerSpecies = SPECIES_WARTORTLE; break;
++                case SPECIES_SWAMPERT:  trainerSpecies = SPECIES_BLASTOISE; break;
++                default: break;
++                }
++            }
++
+             if (trainer->battleType != TRAINER_BATTLE_TYPE_SINGLES)
+                 personalityValue = 0x80;
+             else if (trainer->gender == TRAINER_GENDER_FEMALE)
+@@ -1918,7 +1939,8 @@ u8 CreateNPCTrainerPartyFromTrainer(struct Pokemon *party, const struct Trainer
+                 otId.method = OT_ID_PRESET;
+                 otId.value = HIHALF(personalityValue) ^ LOHALF(personalityValue);
+             }
+-            CreateMon(&party[i], partyData[monIndex].species, partyData[monIndex].lvl, personalityValue, otId);
++            CreateMon(&party[i], trainerSpecies,
++                      ScaleLevelForActiveRegion(partyData[monIndex].lvl), personalityValue, otId);
+             SetMonData(&party[i], MON_DATA_HELD_ITEM, &partyData[monIndex].heldItem);
+ 
+             CustomTrainerPartyAssignMoves(&party[i], &partyData[monIndex]);
+diff --git a/src/caps.c b/src/caps.c
+index 0886f3f2..5ca3cb18 100644
+--- a/src/caps.c
++++ b/src/caps.c
+@@ -11,22 +11,43 @@ u32 GetCurrentLevelCap(void)
+     // Region merge: caps follow the ACTIVE campaign region's badge progression (per-region
+     // bank) â€” active, not map-derived, so hub Battle Net fights keep the campaign's cap, and
+     // the champion tier is per-region so a title in one region never lifts another's cap.
+-    static const u32 sLevelCapPerBadge[NUM_BADGES] = { 15, 19, 24, 29, 31, 33, 42, 46 };
+-
++    static const u8 sKantoLevelCapPerBadge[NUM_BADGES] = { 10, 13, 16, 19, 22, 25, 28, 32 };
++    static const u8 sJohtoLevelCapPerBadge[NUM_BADGES] = { 37, 41, 45, 49, 53, 57, 61, 65 };
++    static const u8 sHoennLevelCapPerBadge[NUM_BADGES] = { 73, 77, 81, 85, 89, 92, 95, 98 };
++    const u8 *levelCaps;
++    enum Region region = GetActiveRegion();
++    u32 leagueCap;
+     u32 i;
+ 
+-    if (!gSaveBlock2Ptr->optionsHardMode) // QoL #16: caps only bind in Hard Mode
+-        return MAX_LEVEL;
++    if (region == REGION_NONE)
++        region = GetCurrentRegion();
++
++    switch (region)
++    {
++    case REGION_KANTO:
++        levelCaps = sKantoLevelCapPerBadge;
++        leagueCap = 35;
++        break;
++    case REGION_JOHTO:
++        levelCaps = sJohtoLevelCapPerBadge;
++        leagueCap = 70;
++        break;
++    case REGION_HOENN:
++    default:
++        levelCaps = sHoennLevelCapPerBadge;
++        leagueCap = MAX_LEVEL;
++        break;
++    }
+ 
+     if (B_LEVEL_CAP_TYPE == LEVEL_CAP_FLAG_LIST)
+     {
+         for (i = 0; i < NUM_BADGES; i++)
+         {
+             if (!HasActiveRegionBadge(i))
+-                return sLevelCapPerBadge[i];
++                return levelCaps[i];
+         }
+-        if (!IsRegionChampion(GetActiveRegion()))
+-            return 58;
++        if (!IsRegionChampion(region))
++            return leagueCap;
+     }
+     else if (B_LEVEL_CAP_TYPE == LEVEL_CAP_VARIABLE)
+     {
+@@ -44,9 +65,6 @@ u32 GetSoftLevelCapExpValue(u32 level, u32 expValue)
+     u32 levelDifference;
+     u32 currentLevelCap = GetCurrentLevelCap();
+ 
+-    if (!gSaveBlock2Ptr->optionsHardMode) // QoL #16: no EXP cap outside Hard Mode
+-        return expValue;
+-
+     if (B_EXP_CAP_TYPE == EXP_CAP_NONE)
+         return expValue;
+ 
+@@ -65,11 +83,11 @@ u32 GetSoftLevelCapExpValue(u32 level, u32 expValue)
+             return expValue;
+         }
+     }
+-    else if (B_EXP_CAP_TYPE == EXP_CAP_HARD)
++    else if (gSaveBlock2Ptr->optionsHardMode && B_EXP_CAP_TYPE == EXP_CAP_HARD)
+     {
+         return 0;
+     }
+-    else if (B_EXP_CAP_TYPE == EXP_CAP_SOFT)
++    else if (B_EXP_CAP_TYPE == EXP_CAP_SOFT || B_EXP_CAP_TYPE == EXP_CAP_HARD)
+     {
+         levelDifference = level - currentLevelCap;
+         if (levelDifference > ARRAY_COUNT(sExpScalingDown) - 1)
+diff --git a/src/data/cleared_obstacles.h b/src/data/cleared_obstacles.h
+index 6fa4e03c..16f9ab4a 100644
+--- a/src/data/cleared_obstacles.h
++++ b/src/data/cleared_obstacles.h
+@@ -126,7 +126,6 @@ static const u32 sClearedObstacleKeys[CLEARED_OBSTACLE_COUNT] =
+     0x23490C, // group 35, map 73, localId 12
+     0x23490D, // group 35, map 73, localId 13
+     // CeruleanCave_B1F_Frlg
+-    0x234A04, // group 35, map 74, localId 4
+     0x234A05, // group 35, map 74, localId 5
+     0x234A06, // group 35, map 74, localId 6
+     0x234A07, // group 35, map 74, localId 7
+@@ -135,6 +134,7 @@ static const u32 sClearedObstacleKeys[CLEARED_OBSTACLE_COUNT] =
+     0x234A0A, // group 35, map 74, localId 10
+     0x234A0B, // group 35, map 74, localId 11
+     0x234A0C, // group 35, map 74, localId 12
++    0x234A0D, // group 35, map 74, localId 13
+     // RockTunnel_B1F_Frlg
+     0x23520C, // group 35, map 82, localId 12
+     0x23520D, // group 35, map 82, localId 13
+diff --git a/src/data/items.h b/src/data/items.h
+index 5fd5518e..69919454 100644
+--- a/src/data/items.h
++++ b/src/data/items.h
+@@ -4196,15 +4196,7 @@ const struct ItemInfo gItemsInfo[] =
+     [ITEM_MOON_STONE] =
+     {
+         .name = ITEM_NAME("Moon Stone"),
+-    #if I_PRICE >= GEN_7
+-        .price = 3000,
+-    #elif I_PRICE >= GEN_4
+-        .price = 2100,
+-    #elif I_PRICE == GEN_3
+-        .price = 0,
+-    #else
+-        .price = 1,
+-    #endif
++    .price = 1000,
+         .description = sEvolutionStoneDesc,
+         .pocket = POCKET_ITEMS,
+         .sortType = ITEM_TYPE_EVOLUTION_STONE,
+diff --git a/src/data/party_menu.h b/src/data/party_menu.h
+index 4faf8a6a..4bdee280 100644
+--- a/src/data/party_menu.h
++++ b/src/data/party_menu.h
+@@ -666,6 +666,19 @@ static const struct WindowTemplate sLevelUpStatsWindowTemplate =
+     .baseBlock = 0x2E9,
+ };
+ 
++// EV/IV Changer popup. It is never shown at the same time as the level-up stats
++// window, so the two windows can safely share the same tile allocation.
++static const struct WindowTemplate sEvIvChangerWindowTemplate =
++{
++    .bg = 2,
++    .tilemapLeft = 19,
++    .tilemapTop = 1,
++    .width = 10,
++    .height = 13,
++    .paletteNum = 14,
++    .baseBlock = 0x2E9,
++};
++
+ static const struct WindowTemplate sWindowTemplate_FirstBattleOakVoiceover =
+ {
+     .bg = 2,
+diff --git a/src/data/pokemon/species_info/gen_1_families.h b/src/data/pokemon/species_info/gen_1_families.h
+index 4f28eecd..5cd18fd1 100644
+--- a/src/data/pokemon/species_info/gen_1_families.h
++++ b/src/data/pokemon/species_info/gen_1_families.h
+@@ -8299,6 +8299,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
+         .evolutions = EVOLUTION({EVO_ITEM, ITEM_WATER_STONE, SPECIES_POLIWRATH}
+                             #if P_GEN_2_CROSS_EVOS
+                                 ,{EVO_TRADE, 0, SPECIES_POLITOED, CONDITIONS({IF_HOLD_ITEM, ITEM_KINGS_ROCK})},
++                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_POLITOED},
+                                 {EVO_ITEM, ITEM_KINGS_ROCK, SPECIES_POLITOED}
+                             #endif
+                             ),
+@@ -8635,7 +8636,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
+         .levelUpLearnset = sKadabraLevelUpLearnset,
+         .teachableLearnset = sKadabraTeachableLearnset,
+         .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_ALAKAZAM},
+-                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_ALAKAZAM}),
++                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_ALAKAZAM}),
+     },
+ 
+ #if P_UPDATED_STATS >= GEN_6
+@@ -8974,7 +8975,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
+         .levelUpLearnset = sMachokeLevelUpLearnset,
+         .teachableLearnset = sMachokeTeachableLearnset,
+         .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_MACHAMP},
+-                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_MACHAMP}),
++                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_MACHAMP}),
+     },
+ 
+ #if P_UPDATED_EXP_YIELDS >= GEN_8
+@@ -9716,7 +9717,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
+         .teachableLearnset = sGravelerTeachableLearnset,
+         .formSpeciesIdTable = sGravelerFormSpeciesIdTable,
+         .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_GOLEM},
+-                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_GOLEM}),
++                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_GOLEM}),
+     },
+ 
+     [SPECIES_GOLEM] =
+@@ -10350,6 +10351,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
+         .evolutions = EVOLUTION({EVO_LEVEL, 37, SPECIES_SLOWBRO}
+                             #if P_GEN_2_CROSS_EVOS
+                                 ,{EVO_TRADE, 0, SPECIES_SLOWKING, CONDITIONS({IF_HOLD_ITEM, ITEM_KINGS_ROCK})},
++                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_SLOWKING},
+                                 {EVO_ITEM, ITEM_KINGS_ROCK, SPECIES_SLOWKING}
+                             #endif
+                             ),
+@@ -12143,7 +12145,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
+         .levelUpLearnset = sHaunterLevelUpLearnset,
+         .teachableLearnset = sHaunterTeachableLearnset,
+         .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_GENGAR},
+-                                {EVO_ITEM, ITEM_LINKING_CORD, SPECIES_GENGAR}),
++                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_GENGAR}),
+     },
+ 
+ #define GENGAR_SP_DEF (P_UPDATED_STATS >= GEN_2 ? 75 : 130)
+diff --git a/src/data/pokemon/species_info/gen_3_families.h b/src/data/pokemon/species_info/gen_3_families.h
+index d4f9f3ea..91255d99 100644
+--- a/src/data/pokemon/species_info/gen_3_families.h
++++ b/src/data/pokemon/species_info/gen_3_families.h
+@@ -11277,6 +11277,8 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
+         .eggMoveLearnset = sClamperlEggMoveLearnset,
+         .evolutions = EVOLUTION({EVO_TRADE, 0, SPECIES_HUNTAIL, CONDITIONS({IF_HOLD_ITEM, ITEM_DEEP_SEA_TOOTH})},
+                                 {EVO_TRADE, 0, SPECIES_GOREBYSS, CONDITIONS({IF_HOLD_ITEM, ITEM_DEEP_SEA_SCALE})},
++                                {EVO_ITEM, ITEM_MOON_STONE, SPECIES_HUNTAIL},
++                                {EVO_ITEM, ITEM_SUN_STONE, SPECIES_GOREBYSS},
+                                 {EVO_ITEM, ITEM_DEEP_SEA_TOOTH, SPECIES_HUNTAIL},
+                                 {EVO_ITEM, ITEM_DEEP_SEA_SCALE, SPECIES_GOREBYSS}),
+     },
+diff --git a/src/data/trainers.party b/src/data/trainers.party
+index 60ffe29f..806a29cb 100644
+--- a/src/data/trainers.party
++++ b/src/data/trainers.party
+@@ -18469,13 +18469,13 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - MOVE_SCREECH
+ - MOVE_SANDSTORM
+ 
+-SPECIES_BAYLEEF
++SPECIES_CHARMELEON
+ Level: 18
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+-- MOVE_RAZOR_LEAF
+-- MOVE_REFLECT
+-- MOVE_POISON_POWDER
+-- MOVE_TACKLE
++- MOVE_EMBER
++- MOVE_SMOKESCREEN
++- MOVE_SCRATCH
++- MOVE_GROWL
+ 
+ === TRAINER_RIVAL_CYNDAQUIL_2 ===
+ Name: GARY
+@@ -18503,13 +18503,13 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - MOVE_SCREECH
+ - MOVE_SANDSTORM
+ 
+-SPECIES_QUILAVA
++SPECIES_CROCONAW
+ Level: 18
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
++- MOVE_RAGE
++- MOVE_BITE
++- MOVE_WATER_GUN
+ - MOVE_LEER
+-- MOVE_SMOKESCREEN
+-- MOVE_EMBER
+-- MOVE_TACKLE
+ 
+ === TRAINER_RIVAL_TOTODILE_2 ===
+ Name: GARY
+@@ -18537,12 +18537,12 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - MOVE_SCREECH
+ - MOVE_SANDSTORM
+ 
+-SPECIES_CROCONAW
++SPECIES_GROVYLE
+ Level: 18
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+-- MOVE_SCRATCH
+-- MOVE_RAGE
+-- MOVE_BUBBLE_BEAM
++- MOVE_QUICK_ATTACK
++- MOVE_ABSORB
++- MOVE_PURSUIT
+ - MOVE_LEER
+ 
+ === TRAINER_RUSSELL ===
+@@ -19312,13 +19312,13 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+ - MOVE_CONFUSE_RAY
+ - MOVE_WING_ATTACK
+ 
+-SPECIES_MEGANIUM
++SPECIES_CHARIZARD
+ Level: 40
+ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+-- MOVE_SYNTHESIS
+-- MOVE_RAZOR_LEAF
+-- MOVE_SUNNY_DAY
+-- MOVE_BODY_SLAM
++- MOVE_FLAMETHROWER
++- MOVE_WING_ATTACK
++- MOVE_SLASH
++- MOVE_SMOKESCREEN
+ 
+ === TRAINER_RIVAL_CYNDAQUIL_4 ===
+ Name: GARY
+@@ -19361,13 +19361,13 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+ - MOVE_CONFUSE_RAY
+ - MOVE_WING_ATTACK
+ 
+-SPECIES_TYPHLOSION
++SPECIES_FERALIGATR
+ Level: 40
+ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+-- MOVE_THUNDER_PUNCH
+-- MOVE_FLAMETHROWER
+-- MOVE_QUICK_ATTACK
+-- MOVE_IRON_TAIL
++- MOVE_ICE_PUNCH
++- MOVE_SURF
++- MOVE_SLASH
++- MOVE_BITE
+ 
+ === TRAINER_RIVAL_TOTODILE_4 ===
+ Name: GARY
+@@ -19411,13 +19411,13 @@ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+ - MOVE_CONFUSE_RAY
+ - MOVE_WING_ATTACK
+ 
+-SPECIES_FERALIGATR
++SPECIES_SCEPTILE
+ Level: 40
+ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+-- MOVE_ICE_PUNCH
+-- MOVE_SURF
+-- MOVE_SLASH
+-- MOVE_BITE
++- MOVE_LEAF_BLADE
++- MOVE_DRAGON_CLAW
++- MOVE_QUICK_ATTACK
++- MOVE_DETECT
+ 
+ === TRAINER_TERU ===
+ Name: TERU
+@@ -19868,13 +19868,13 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - MOVE_POISON_STING
+ - MOVE_GUST
+ 
+-SPECIES_BAYLEEF
++SPECIES_CHARMELEON
+ Level: 24
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+-- MOVE_MEGA_DRAIN
+-- MOVE_RAZOR_LEAF
+-- MOVE_TACKLE
+-- MOVE_LEECH_SEED
++- MOVE_SLASH
++- MOVE_EMBER
++- MOVE_SMOKESCREEN
++- MOVE_SCARY_FACE
+ 
+ === TRAINER_RIVAL_CYNDAQUIL_3 ===
+ Name: GARY
+@@ -19910,13 +19910,13 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - MOVE_POISON_STING
+ - MOVE_GUST
+ 
+-SPECIES_QUILAVA
++SPECIES_CROCONAW
+ Level: 24
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+-- MOVE_FLAME_WHEEL
+-- MOVE_DIG
+-- MOVE_QUICK_ATTACK
+-- MOVE_SMOKESCREEN
++- MOVE_BITE
++- MOVE_ICE_FANG
++- MOVE_WATER_GUN
++- MOVE_SCARY_FACE
+ 
+ === TRAINER_RIVAL_TOTODILE_3 ===
+ Name: GARY
+@@ -19952,13 +19952,13 @@ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - MOVE_POISON_STING
+ - MOVE_GUST
+ 
+-SPECIES_CROCONAW
++SPECIES_GROVYLE
+ Level: 24
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+-- MOVE_BITE
+-- MOVE_ICE_PUNCH
+-- MOVE_BUBBLE_BEAM
+-- MOVE_MUD_SLAP
++- MOVE_MEGA_DRAIN
++- MOVE_QUICK_ATTACK
++- MOVE_PURSUIT
++- MOVE_SCREECH
+ 
+ === TRAINER_RUTH ===
+ Name: RUTH
+@@ -23141,7 +23141,7 @@ Music: TRAINER_ENCOUNTER_MUSIC_INTENSE
+ Double Battle: No
+ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY
+ 
+-SPECIES_CHIKORITA
++SPECIES_CHARMANDER
+ Level: 5
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ 
+@@ -23154,7 +23154,7 @@ Music: TRAINER_ENCOUNTER_MUSIC_INTENSE
+ Double Battle: No
+ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY
+ 
+-SPECIES_CYNDAQUIL
++SPECIES_TOTODILE
+ Level: 5
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ 
+@@ -23167,7 +23167,7 @@ Music: TRAINER_ENCOUNTER_MUSIC_INTENSE
+ Double Battle: No
+ AI: AI_FLAG_CHECK_BAD_MOVE / AI_FLAG_TRY_TO_FAINT / AI_FLAG_CHECK_VIABILITY
+ 
+-SPECIES_TOTODILE
++SPECIES_TREECKO
+ Level: 5
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ 
+@@ -25105,4 +25105,3 @@ AI: AI_FLAG_CHECK_BAD_MOVE
+ SPECIES_DEWGONG
+ Level: 28
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+-
+diff --git a/src/data/trainers_frlg.party b/src/data/trainers_frlg.party
+index c7b4c053..19912f6a 100644
+--- a/src/data/trainers_frlg.party
++++ b/src/data/trainers_frlg.party
+@@ -915,7 +915,7 @@ Double Battle: No
+ AI: Check Bad Move
+ 
+ Geodude
+-Level: 10
++Level: 12
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - Tackle
+ - Defense Curl
+@@ -4429,11 +4429,11 @@ Music: Male
+ Double Battle: No
+ AI: Check Bad Move / Try To Faint / Check Viability
+ 
+-Squirtle
++Mudkip
+ Level: 5
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - Tackle
+-- Tail Whip
++- Growl
+ 
+ === TRAINER_RIVAL_OAKS_LAB_BULBASAUR ===
+ Name: BLUE
+@@ -4459,11 +4459,11 @@ Music: Male
+ Double Battle: No
+ AI: Check Bad Move / Try To Faint / Check Viability
+ 
+-Charmander
++Cyndaquil
+ Level: 5
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+-- Scratch
+-- Growl
++- Tackle
++- Leer
+ 
+ === TRAINER_RIVAL_ROUTE22_EARLY_SQUIRTLE ===
+ Name: BLUE
+@@ -4475,16 +4475,18 @@ Double Battle: No
+ AI: Check Bad Move / Try To Faint / Check Viability
+ 
+ Pidgey
+-Level: 9
++Level: 10
+ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ - Tackle
+ - Sand Attack
+ 
+-Squirtle
+-Level: 9
++Mudkip
++Level: 10
+ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ - Tackle
+-- Tail Whip
++- Growl
++- Mud-Slap
++- Water Gun
+ 
+ === TRAINER_RIVAL_ROUTE22_EARLY_BULBASAUR ===
+ Name: BLUE
+@@ -4496,16 +4498,18 @@ Double Battle: No
+ AI: Check Bad Move / Try To Faint / Check Viability
+ 
+ Pidgey
+-Level: 9
++Level: 10
+ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ - Tackle
+ - Sand Attack
+ 
+ Bulbasaur
+-Level: 9
++Level: 10
+ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ - Tackle
+ - Growl
++- Leech Seed
++- Vine Whip
+ 
+ === TRAINER_RIVAL_ROUTE22_EARLY_CHARMANDER ===
+ Name: BLUE
+@@ -4517,16 +4521,18 @@ Double Battle: No
+ AI: Check Bad Move / Try To Faint / Check Viability
+ 
+ Pidgey
+-Level: 9
++Level: 10
+ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ - Tackle
+ - Sand Attack
+ 
+-Charmander
+-Level: 9
++Cyndaquil
++Level: 10
+ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+-- Scratch
+-- Growl
++- Tackle
++- Leer
++- Smokescreen
++- Ember
+ 
+ === TRAINER_RIVAL_CERULEAN_SQUIRTLE ===
+ Name: BLUE
+@@ -4557,12 +4563,12 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ - Tail Whip
+ - Quick Attack
+ 
+-Squirtle
++Mudkip
+ Level: 18
+ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+ - Tackle
+-- Tail Whip
+-- Withdraw
++- Growl
++- Mud-Slap
+ - Water Gun
+ 
+ === TRAINER_RIVAL_CERULEAN_BULBASAUR ===
+@@ -4631,13 +4637,13 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ - Tail Whip
+ - Quick Attack
+ 
+-Charmander
++Cyndaquil
+ Level: 18
+ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+-- Metal Claw
++- Tackle
++- Leer
++- Smokescreen
+ - Ember
+-- Growl
+-- Scratch
+ 
+ === TRAINER_SCIENTIST_TED ===
+ Name: TED
+@@ -7101,13 +7107,14 @@ Double Battle: No
+ AI: Check Bad Move / Try To Faint / Check Viability
+ 
+ Geodude
+-Level: 12
++Level: 13
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - Tackle
+ - Defense Curl
++- Rock Throw
+ 
+ Onix
+-Level: 14
++Level: 15
+ IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+ - Tackle
+ - Bind
+@@ -7885,7 +7892,7 @@ Kadabra
+ Level: 18
+ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ 
+-Wartortle
++Marshtomp
+ Level: 20
+ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+ 
+@@ -7935,7 +7942,7 @@ Kadabra
+ Level: 18
+ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+ 
+-Charmeleon
++Quilava
+ Level: 20
+ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+ 
+@@ -7964,7 +7971,7 @@ Kadabra
+ Level: 20
+ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+ 
+-Wartortle
++Marshtomp
+ Level: 25
+ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+ 
+@@ -8022,7 +8029,7 @@ Kadabra
+ Level: 20
+ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+ 
+-Charmeleon
++Quilava
+ Level: 25
+ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+ 
+@@ -8051,7 +8058,7 @@ Alakazam
+ Level: 35
+ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+ 
+-Blastoise
++Swampert
+ Level: 40
+ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+ 
+@@ -8109,7 +8116,7 @@ Alakazam
+ Level: 35
+ IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
+ 
+-Charizard
++Typhlosion
+ Level: 40
+ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+ 
+@@ -8162,13 +8169,13 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+ - Future Sight
+ - Disable
+ 
+-Blastoise
++Swampert
+ Level: 53
+ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+-- Water Gun
+-- Rain Dance
+-- Bite
+-- Rapid Spin
++- Surf
++- Earthquake
++- Ice Beam
++- Protect
+ 
+ === TRAINER_RIVAL_ROUTE22_LATE_BULBASAUR ===
+ Name: BLUE
+@@ -8276,13 +8283,13 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+ - Future Sight
+ - Disable
+ 
+-Charizard
++Typhlosion
+ Level: 53
+ IVs: 30 HP / 30 Atk / 30 Def / 30 SpA / 30 SpD / 30 Spe
+ - Flamethrower
+-- Wing Attack
+-- Slash
+-- Scary Face
++- Thunder Punch
++- Swift
++- Smokescreen
+ 
+ === TRAINER_CHAMPION_FIRST_SQUIRTLE ===
+ Name: BLUE
+@@ -8335,13 +8342,13 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+ - Sleep Powder
+ - Light Screen
+ 
+-Blastoise @ Sitrus Berry
++Swampert @ Sitrus Berry
+ Level: 63
+ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+-- Hydro Pump
+-- Rain Dance
+-- Skull Bash
+-- Bite
++- Surf
++- Earthquake
++- Ice Beam
++- Protect
+ 
+ === TRAINER_CHAMPION_FIRST_BULBASAUR ===
+ Name: BLUE
+@@ -8453,13 +8460,13 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+ - Bite
+ - Thrash
+ 
+-Charizard @ Sitrus Berry
++Typhlosion @ Sitrus Berry
+ Level: 63
+ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+-- Fire Blast
+-- Aerial Ace
+-- Slash
+-- Fire Spin
++- Flamethrower
++- Thunder Punch
++- Brick Break
++- Smokescreen
+ 
+ === TRAINER_CHANNELER_PATRICIA ===
+ Name: PATRICIA
+@@ -14420,7 +14427,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+ - Sleep Powder
+ - Light Screen
+ 
+-Blastoise @ Sitrus Berry
++Swampert @ Sitrus Berry
+ Level: 75
+ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+ - Hydro Pump
+@@ -14485,11 +14492,11 @@ Ability: Chlorophyll
+ - Sludge Bomb
+ - Sleep Powder
+ 
+-Blastoise @ Sitrus Berry
++Swampert @ Sitrus Berry
+ Level: 80
+ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+ Ability: Torrent
+-- Shell Smash
++- Waterfall
+ - Hydro Pump
+ - Ice Beam
+ - Earthquake
+@@ -14670,11 +14677,11 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+ - Earthquake
+ - Hyper Beam
+ 
+-Charizard @ Sitrus Berry
++Typhlosion @ Sitrus Berry
+ Level: 75
+ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+ - Fire Blast
+-- Dragon Claw
++- Thunder Punch
+ - Aerial Ace
+ - Earthquake
+ 
+@@ -14735,13 +14742,13 @@ Ability: Moxie
+ - Earthquake
+ - Ice Fang
+ 
+-Charizard @ Sitrus Berry
++Typhlosion @ Sitrus Berry
+ Level: 80
+ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+ Ability: Blaze
+-- Dragon Dance
+-- Flare Blitz
+-- Dragon Claw
++- Eruption
++- Flamethrower
++- Thunder Punch
+ - Earthquake
+ 
+ === TRAINER_CUE_BALL_PAXTON ===
+diff --git a/src/data/wild_encounters.json b/src/data/wild_encounters.json
+index 84046ec1..309e205a 100755
+--- a/src/data/wild_encounters.json
++++ b/src/data/wild_encounters.json
+@@ -15773,12 +15773,12 @@
+               {
+                 "min_level": 46,
+                 "max_level": 46,
+-                "species": "SPECIES_MACHOKE"
++                "species": "SPECIES_HITMONLEE"
+               },
+               {
+                 "min_level": 46,
+                 "max_level": 46,
+-                "species": "SPECIES_MAROWAK"
++                "species": "SPECIES_HITMONCHAN"
+               }
+             ]
+           },
+@@ -15862,12 +15862,12 @@
+               {
+                 "min_level": 46,
+                 "max_level": 46,
+-                "species": "SPECIES_MACHOKE"
++                "species": "SPECIES_HITMONLEE"
+               },
+               {
+                 "min_level": 46,
+                 "max_level": 46,
+-                "species": "SPECIES_MAROWAK"
++                "species": "SPECIES_HITMONCHAN"
+               }
+             ]
+           },
+@@ -18063,7 +18063,7 @@
+               {
+                 "min_level": 23,
+                 "max_level": 23,
+-                "species": "SPECIES_VENONAT"
++                "species": "SPECIES_LICKITUNG"
+               },
+               {
+                 "min_level": 28,
+@@ -18237,7 +18237,7 @@
+               {
+                 "min_level": 23,
+                 "max_level": 23,
+-                "species": "SPECIES_VENONAT"
++                "species": "SPECIES_LICKITUNG"
+               },
+               {
+                 "min_level": 28,
+@@ -20763,12 +20763,12 @@
+               {
+                 "min_level": 36,
+                 "max_level": 36,
+-                "species": "SPECIES_DEWGONG"
++                "species": "SPECIES_JYNX"
+               },
+               {
+-                "min_level": 30,
+-                "max_level": 30,
+-                "species": "SPECIES_GOLBAT"
++                "min_level": 32,
++                "max_level": 32,
++                "species": "SPECIES_SQUIRTLE"
+               }
+             ]
+           },
+@@ -20937,12 +20937,12 @@
+               {
+                 "min_level": 36,
+                 "max_level": 36,
+-                "species": "SPECIES_DEWGONG"
++                "species": "SPECIES_JYNX"
+               },
+               {
+-                "min_level": 30,
+-                "max_level": 30,
+-                "species": "SPECIES_GOLBAT"
++                "min_level": 32,
++                "max_level": 32,
++                "species": "SPECIES_SQUIRTLE"
+               }
+             ]
+           },
+@@ -22177,9 +22177,9 @@
+                 "species": "SPECIES_RAPIDASH"
+               },
+               {
+-                "min_level": 30,
+-                "max_level": 30,
+-                "species": "SPECIES_SPEAROW"
++                "min_level": 38,
++                "max_level": 38,
++                "species": "SPECIES_CHARMANDER"
+               },
+               {
+                 "min_level": 42,
+@@ -22296,9 +22296,9 @@
+                 "species": "SPECIES_RAPIDASH"
+               },
+               {
+-                "min_level": 40,
+-                "max_level": 40,
+-                "species": "SPECIES_MAGMAR"
++                "min_level": 38,
++                "max_level": 38,
++                "species": "SPECIES_CHARMANDER"
+               },
+               {
+                 "min_level": 42,
+@@ -24389,12 +24389,12 @@
+               {
+                 "min_level": 37,
+                 "max_level": 37,
+-                "species": "SPECIES_PIDGEOTTO"
++                "species": "SPECIES_FARFETCHD"
+               },
+               {
+                 "min_level": 35,
+                 "max_level": 35,
+-                "species": "SPECIES_GLOOM"
++                "species": "SPECIES_MR_MIME"
+               },
+               {
+                 "min_level": 32,
+@@ -24563,12 +24563,12 @@
+               {
+                 "min_level": 37,
+                 "max_level": 37,
+-                "species": "SPECIES_PIDGEOTTO"
++                "species": "SPECIES_FARFETCHD"
+               },
+               {
+                 "min_level": 35,
+                 "max_level": 35,
+-                "species": "SPECIES_WEEPINBELL"
++                "species": "SPECIES_MR_MIME"
+               },
+               {
+                 "min_level": 32,
+@@ -32975,17 +32975,17 @@
+               {
+                 "min_level": 3,
+                 "max_level": 3,
+-                "species": "SPECIES_BULBASAUR"
++                "species": "SPECIES_PIDGEY"
+               },
+               {
+                 "min_level": 3,
+                 "max_level": 3,
+-                "species": "SPECIES_CHARMANDER"
++                "species": "SPECIES_RATTATA"
+               },
+               {
+                 "min_level": 2,
+                 "max_level": 2,
+-                "species": "SPECIES_SQUIRTLE"
++                "species": "SPECIES_PIDGEY"
+               },
+               {
+                 "min_level": 2,
+@@ -33030,12 +33030,12 @@
+               {
+                 "min_level": 6,
+                 "max_level": 8,
+-                "species": "SPECIES_BULBASAUR"
++                "species": "SPECIES_WEEDLE"
+               },
+               {
+                 "min_level": 6,
+                 "max_level": 8,
+-                "species": "SPECIES_SQUIRTLE"
++                "species": "SPECIES_CATERPIE"
+               },
+               {
+                 "min_level": 6,
+@@ -33064,17 +33064,17 @@
+               {
+                 "min_level": 3,
+                 "max_level": 3,
+-                "species": "SPECIES_BULBASAUR"
++                "species": "SPECIES_PIDGEY"
+               },
+               {
+                 "min_level": 3,
+                 "max_level": 3,
+-                "species": "SPECIES_CHARMANDER"
++                "species": "SPECIES_RATTATA"
+               },
+               {
+                 "min_level": 2,
+                 "max_level": 2,
+-                "species": "SPECIES_SQUIRTLE"
++                "species": "SPECIES_PIDGEY"
+               },
+               {
+                 "min_level": 2,
+@@ -33119,12 +33119,12 @@
+               {
+                 "min_level": 6,
+                 "max_level": 8,
+-                "species": "SPECIES_BULBASAUR"
++                "species": "SPECIES_WEEDLE"
+               },
+               {
+                 "min_level": 6,
+                 "max_level": 8,
+-                "species": "SPECIES_SQUIRTLE"
++                "species": "SPECIES_CATERPIE"
+               },
+               {
+                 "min_level": 6,
+@@ -34068,19 +34068,19 @@
+                 "species": "SPECIES_PIDGEY"
+               },
+               {
+-                "min_level": 14,
+-                "max_level": 14,
+-                "species": "SPECIES_MEOWTH"
+-              },
+-              {
+-                "min_level": 15,
+-                "max_level": 15,
+-                "species": "SPECIES_PIDGEY"
++                "min_level": 16,
++                "max_level": 16,
++                "species": "SPECIES_EEVEE"
+               },
+               {
+                 "min_level": 16,
+                 "max_level": 16,
+-                "species": "SPECIES_MEOWTH"
++                "species": "SPECIES_DRATINI"
++              },
++              {
++                "min_level": 17,
++                "max_level": 17,
++                "species": "SPECIES_SCYTHER"
+               }
+             ]
+           },
+@@ -34242,19 +34242,19 @@
+                 "species": "SPECIES_PIDGEY"
+               },
+               {
+-                "min_level": 14,
+-                "max_level": 14,
+-                "species": "SPECIES_MEOWTH"
+-              },
+-              {
+-                "min_level": 15,
+-                "max_level": 15,
+-                "species": "SPECIES_PIDGEY"
++                "min_level": 16,
++                "max_level": 16,
++                "species": "SPECIES_EEVEE"
+               },
+               {
+                 "min_level": 16,
+                 "max_level": 16,
+-                "species": "SPECIES_MEOWTH"
++                "species": "SPECIES_DRATINI"
++              },
++              {
++                "min_level": 17,
++                "max_level": 17,
++                "species": "SPECIES_PINSIR"
+               }
+             ]
+           },
+@@ -48574,17 +48574,17 @@
+               {
+                 "min_level": 2,
+                 "max_level": 3,
+-                "species": "SPECIES_CHIKORITA"
++                "species": "SPECIES_SENTRET"
+               },
+               {
+                 "min_level": 2,
+                 "max_level": 3,
+-                "species": "SPECIES_CYNDAQUIL"
++                "species": "SPECIES_SPINARAK"
+               },
+               {
+                 "min_level": 2,
+                 "max_level": 3,
+-                "species": "SPECIES_TOTODILE"
++                "species": "SPECIES_LEDYBA"
+               },
+               {
+                 "min_level": 2,
+@@ -48659,7 +48659,7 @@
+               {
+                 "min_level": 4,
+                 "max_level": 6,
+-                "species": "SPECIES_TOTODILE"
++                "species": "SPECIES_PHANPY"
+               },
+               {
+                 "min_level": 4,
+diff --git a/src/main_menu.c b/src/main_menu.c
+index 36e10467..9dac2a5c 100644
+--- a/src/main_menu.c
++++ b/src/main_menu.c
+@@ -269,7 +269,9 @@ static const u8 gText_RegionSaveDamaged[] = _("Part of this save file's region\n
+ static const u8 gJPText_No1MSubCircuit[] = _("1Mã‚µãƒ–ãã°ã‚“ãŒ ã•ã•ã£ã¦ã„ã¾ã›ã‚“ï¼");
+ static const u8 gText_BatteryRunDry[] = _("The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.");
+ 
+-static const u8 gText_MainMenuNewGame[] = _("NEW GAME");
++// Keep the playtest version visible in-game so testers cannot mistake an older
++// cached ROM for the current build.
++static const u8 gText_MainMenuNewGame[] = _("NEW GAME  V0.4.4");
+ static const u8 gText_MainMenuContinue[] = _("CONTINUE");
+ static const u8 gText_MainMenuOption[] = _("OPTION");
+ static const u8 gText_MainMenuMysteryGift[] = _("MYSTERY GIFT");
+diff --git a/src/new_game.c b/src/new_game.c
+index baf24a97..8f3fec4c 100644
+--- a/src/new_game.c
++++ b/src/new_game.c
+@@ -54,6 +54,7 @@
+ #include "follower_npc.h"
+ #include "regions.h"
+ #include "constants/johto_flags.h"
++#include "constants/heal_locations.h"
+ 
+ extern const u8 EventScript_ResetAllMapFlags[];
+ extern const u8 EventScript_ResetAllMapFlagsFrlg[];
+@@ -111,7 +112,8 @@ static void SetDefaultOptions(void)
+     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
+     gSaveBlock2Ptr->optionsAutosave = FALSE;
+     gSaveBlock2Ptr->optionsRunShortcut = OPTIONS_RUN_SHORTCUT_CURSOR;
+-    gSaveBlock2Ptr->optionsExpMultiplier = OPTIONS_EXP_MULT_1X;
++    // The three-region campaign is tuned around slower growth.
++    gSaveBlock2Ptr->optionsExpMultiplier = OPTIONS_EXP_MULT_0_5X;
+     gSaveBlock2Ptr->optionsCatchMultiplier = OPTIONS_CATCH_MULT_1X;
+     gSaveBlock2Ptr->optionsHardMode = FALSE;
+     gSaveBlock2Ptr->optionsNicknames = OPTIONS_NICKNAMES_ON;
+@@ -146,13 +148,12 @@ static void ClearFrontierRecord(void)
+ static void WarpToTruck(void)
+ {
+ #if ALL_REGIONS
+-    // Region-switch: every new game lands in the World Transit hub; the destination region is
+-    // chosen by talking to a gate attendant (data/maps/RegionHub). startRegion stays
+-    // REGION_NONE until then. Spawn on the departure-concourse crest at (16,4) via
+-    // WARP_ID_NONE + explicit coords (the FRLG new-game pattern above) - same tile as hub
+-    // warp 0, a plain floor anchor with no warp behavior, so the fade-in can never
+-    // re-trigger a warp.
+-    SetWarpDestination(MAP_GROUP(MAP_REGION_HUB), MAP_NUM(MAP_REGION_HUB), WARP_ID_NONE, 16, 4);
++    // PokeMan Journey begins as a single continuous adventure in Kanto.
++    // Start in the Pallet Town bedroom, preserve the shared three-region save architecture,
++    // and mark Kanto as the active campaign from the first frame.
++    SetCurrentRegion(REGION_KANTO);
++    SetLastHealLocationWarp(HEAL_LOCATION_PALLET_TOWN);
++    SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), WARP_ID_NONE, 6, 6);
+ #else
+     if (IS_FRLG)
+         SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), WARP_ID_NONE, 6, 6);
+@@ -213,7 +214,7 @@ void NewGameInitData(void)
+     // Region merge: stamp the save format; travel-pass / other intro bits and the
+     // per-region var/flag banks default clear (SaveBlock3 zeroed by ClearSav3 above).
+     gSaveBlock2Ptr->saveVersion = SAVE_FORMAT_VERSION;
+-    gSaveBlock2Ptr->hoennIntroDone = TRUE; // the truck intro IS the Hoenn intro; unset caused a stray hub-arrival MOM line + autosave block
++    gSaveBlock2Ptr->hoennIntroDone = FALSE; // Hoenn remains a future leg of the Journey.
+     // Stamp the obstacle table hash NOW, not on the first load. ClearSav3() just zeroed it, and
+     // the hash check only runs on load â€” so without this, every tree cut and rock smashed during
+     // the FIRST session would be wiped the first time the player reloads, as the 0 hash read as
+diff --git a/src/party_menu.c b/src/party_menu.c
+index ab4ea1f0..ba407a90 100644
+--- a/src/party_menu.c
++++ b/src/party_menu.c
+@@ -5468,6 +5468,219 @@ static void ReturnToUseOnWhichMon(u8 taskId)
+     DisplayPartyMenuStdMessage(PARTY_MSG_USE_ON_WHICH_MON);
+ }
+ 
++// EV/IV Changer support for the classic party menu. The equivalent callback in
++// swsh_party_menu.c is not compiled when SWSH_PARTY_MENU is disabled.
++static const u8 sEvIvChangerEvMonData[NUM_STATS] =
++{
++    MON_DATA_HP_EV,
++    MON_DATA_ATK_EV,
++    MON_DATA_DEF_EV,
++    MON_DATA_SPATK_EV,
++    MON_DATA_SPDEF_EV,
++    MON_DATA_SPEED_EV,
++};
++
++static const u8 sEvIvChangerIvMonData[NUM_STATS] =
++{
++    MON_DATA_HP_IV,
++    MON_DATA_ATK_IV,
++    MON_DATA_DEF_IV,
++    MON_DATA_SPATK_IV,
++    MON_DATA_SPDEF_IV,
++    MON_DATA_SPEED_IV,
++};
++
++static const u8 sEvIvChangerHtMonData[NUM_STATS] =
++{
++    MON_DATA_HYPER_TRAINED_HP,
++    MON_DATA_HYPER_TRAINED_ATK,
++    MON_DATA_HYPER_TRAINED_DEF,
++    MON_DATA_HYPER_TRAINED_SPATK,
++    MON_DATA_HYPER_TRAINED_SPDEF,
++    MON_DATA_HYPER_TRAINED_SPEED,
++};
++
++static const u8 *const sEvIvChangerStatNames[NUM_STATS] =
++{
++    gText_HP4,
++    gText_Attack,
++    gText_Defense,
++    gText_SpAtk,
++    gText_SpDef,
++    gText_Speed,
++};
++
++static const u8 sText_EvIvChangerTotal[] = _("TOTAL");
++static const u8 sText_EvIvChangerSlash510[] = _("/510");
++static const u8 sText_EvIvChangerPageEvs[] = _("EVs {R_BUTTON}/{START_BUTTON}IVs");
++static const u8 sText_EvIvChangerPageIvs[] = _("IVs {R_BUTTON}/{START_BUTTON}EVs");
++
++#define tEvCursor  data[0]
++#define tEvPage    data[1] // 0 = EVs, 1 = IVs
++
++static u16 EvIvChangerTotalEvs(struct Pokemon *mon)
++{
++    u8 i;
++    u16 total = 0;
++
++    for (i = 0; i < NUM_STATS; i++)
++        total += GetMonData(mon, sEvIvChangerEvMonData[i]);
++    return total;
++}
++
++static void EvIvChangerPrintStats(u8 taskId)
++{
++    u8 i;
++    u8 windowId = sPartyMenuInternal->windowId[0];
++    u8 cursor = gTasks[taskId].tEvCursor;
++    bool8 ivPage = gTasks[taskId].tEvPage;
++    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
++    u8 text[16];
++
++    FillWindowPixelBuffer(windowId, PIXEL_FILL(TEXT_COLOR_WHITE));
++    AddTextPrinterParameterized(windowId, FONT_NORMAL, ivPage ? sText_EvIvChangerPageIvs : sText_EvIvChangerPageEvs, 9, 1, TEXT_SKIP_DRAW, NULL);
++    for (i = 0; i < NUM_STATS; i++)
++    {
++        u16 shown = GetMonData(mon, ivPage ? sEvIvChangerIvMonData[i] : sEvIvChangerEvMonData[i]);
++
++        if (ivPage && GetMonData(mon, sEvIvChangerHtMonData[i]))
++            shown = MAX_PER_STAT_IVS;
++        if (i == cursor)
++            AddTextPrinterParameterized(windowId, FONT_NORMAL, gText_SelectorArrow2, 0, (i * 12) + 13, TEXT_SKIP_DRAW, NULL);
++        AddTextPrinterParameterized(windowId, FONT_NORMAL, sEvIvChangerStatNames[i], 9, (i * 12) + 13, TEXT_SKIP_DRAW, NULL);
++        ConvertIntToDecimalStringN(text, shown, STR_CONV_MODE_RIGHT_ALIGN, 3);
++        AddTextPrinterParameterized(windowId, FONT_NORMAL, text, 56, (i * 12) + 13, TEXT_SKIP_DRAW, NULL);
++    }
++    if (!ivPage)
++    {
++        ConvertIntToDecimalStringN(text, EvIvChangerTotalEvs(mon), STR_CONV_MODE_LEFT_ALIGN, 3);
++        StringAppend(text, sText_EvIvChangerSlash510);
++        AddTextPrinterParameterized(windowId, FONT_NORMAL, sText_EvIvChangerTotal, 4, (NUM_STATS * 12) + 14, TEXT_SKIP_DRAW, NULL);
++        AddTextPrinterParameterized(windowId, FONT_NORMAL, text, 37, (NUM_STATS * 12) + 14, TEXT_SKIP_DRAW, NULL);
++    }
++    CopyWindowToVram(windowId, COPYWIN_GFX);
++    ScheduleBgCopyTilemapToVram(2);
++}
++
++static void EvIvChangerAdjust(u8 taskId, bool8 increase)
++{
++    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
++    u8 cursor = gTasks[taskId].tEvCursor;
++    bool8 ivPage = gTasks[taskId].tEvPage;
++    u8 monDataId = ivPage ? sEvIvChangerIvMonData[cursor] : sEvIvChangerEvMonData[cursor];
++    u16 val = GetMonData(mon, monDataId);
++    u16 step = JOY_NEW(DPAD_LEFT | DPAD_RIGHT) ? 1 : 10;
++    u16 newVal;
++
++    if (ivPage && GetMonData(mon, sEvIvChangerHtMonData[cursor]))
++        val = MAX_PER_STAT_IVS;
++
++    if (increase)
++    {
++        u16 room;
++
++        if (ivPage)
++        {
++            room = MAX_PER_STAT_IVS - val;
++        }
++        else
++        {
++            u16 roomTotal = MAX_TOTAL_EVS - EvIvChangerTotalEvs(mon);
++            u16 roomStat = MAX_PER_STAT_EVS - val;
++
++            room = (roomStat < roomTotal) ? roomStat : roomTotal;
++        }
++        if (step > room)
++            step = room;
++        newVal = val + step;
++    }
++    else
++    {
++        if (step > val)
++            step = val;
++        newVal = val - step;
++    }
++
++    if (newVal == val)
++    {
++        PlaySE(SE_FAILURE);
++        return;
++    }
++    SetMonData(mon, monDataId, &newVal);
++    if (ivPage && GetMonData(mon, sEvIvChangerHtMonData[cursor]))
++    {
++        u8 htOff = FALSE;
++
++        SetMonData(mon, sEvIvChangerHtMonData[cursor], &htOff);
++    }
++    CalculateMonStats(mon);
++    PlaySE(SE_SELECT);
++    EvIvChangerPrintStats(taskId);
++}
++
++static void Task_EvIvChangerHandleInput(u8 taskId)
++{
++    u8 cursor = gTasks[taskId].tEvCursor;
++
++    if (JOY_NEW(DPAD_UP))
++    {
++        PlaySE(SE_SELECT);
++        gTasks[taskId].tEvCursor = (cursor == 0) ? NUM_STATS - 1 : cursor - 1;
++        EvIvChangerPrintStats(taskId);
++    }
++    else if (JOY_NEW(DPAD_DOWN))
++    {
++        PlaySE(SE_SELECT);
++        gTasks[taskId].tEvCursor = (cursor == NUM_STATS - 1) ? 0 : cursor + 1;
++        EvIvChangerPrintStats(taskId);
++    }
++    else if (JOY_NEW(R_BUTTON) || JOY_NEW(L_BUTTON) || JOY_NEW(START_BUTTON))
++    {
++        PlaySE(SE_SELECT);
++        gTasks[taskId].tEvPage ^= 1;
++        EvIvChangerPrintStats(taskId);
++    }
++    else if (JOY_REPEAT(DPAD_RIGHT))
++    {
++        EvIvChangerAdjust(taskId, TRUE);
++    }
++    else if (JOY_REPEAT(DPAD_LEFT))
++    {
++        EvIvChangerAdjust(taskId, FALSE);
++    }
++    else if (JOY_NEW(A_BUTTON) || JOY_NEW(B_BUTTON))
++    {
++        PlaySE(SE_SELECT);
++        ClearWindowTilemap(sPartyMenuInternal->windowId[0]);
++        PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
++        UpdateMonDisplayInfoAfterRareCandy(gPartyMenu.slotId, &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId]);
++        ReturnToUseOnWhichMon(taskId);
++    }
++}
++
++void ItemUseCB_EvIvChanger(u8 taskId, TaskFunc task)
++{
++    if (GetMonData(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], MON_DATA_IS_EGG))
++    {
++        gPartyMenuUseExitCallback = FALSE;
++        PlaySE(SE_SELECT);
++        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
++        ScheduleBgCopyTilemapToVram(2);
++        gTasks[taskId].func = task;
++        return;
++    }
++    PlaySE(SE_SELECT);
++    sPartyMenuInternal->windowId[0] = AddWindow(&sEvIvChangerWindowTemplate);
++    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x4F, 13);
++    gTasks[taskId].tEvCursor = 0;
++    gTasks[taskId].tEvPage = 0;
++    EvIvChangerPrintStats(taskId);
++    gTasks[taskId].func = Task_EvIvChangerHandleInput;
++}
++
++#undef tEvCursor
++#undef tEvPage
++
+ static void TryUseItemOnMove(u8 taskId)
+ {
+     struct PartyMenu *ptr = &gPartyMenu;
+diff --git a/src/pokemon.c b/src/pokemon.c
+index 90708e49..e7a9bdf2 100644
+--- a/src/pokemon.c
++++ b/src/pokemon.c
+@@ -1653,6 +1653,33 @@ void GiveBoxMonDefaultMove(struct BoxPokemon *boxMon, u32 slot)
+     SetBoxMonData(boxMon, MON_DATA_PP1 + slot, &pp);
+ }
+ 
++static enum Move TryLearningRegionalMilestoneMove(struct Pokemon *mon, const struct LevelUpMove *learnset, u32 level)
++{
++    u32 count = 0;
++    u32 firstLateMove;
++    u32 milestone;
++    u32 target;
++
++    // Hoenn occupies levels 70-100. Re-offer seven of the species' latest
++    // natural moves at five-level intervals so growth does not go silent there.
++    if (level < 70 || level > MAX_LEVEL || (level - 70) % 5 != 0)
++        return MOVE_NONE;
++
++    while (learnset[count].move != LEVEL_UP_MOVE_END)
++        count++;
++    if (count == 0)
++        return MOVE_NONE;
++
++    firstLateMove = (count > 7) ? count - 7 : 0;
++    milestone = (level - 70) / 5;
++    target = firstLateMove + ((count - firstLateMove - 1) * milestone) / 6;
++
++    gMoveToLearn = learnset[target].move;
++    if (MonKnowsMove(mon, gMoveToLearn))
++        return MOVE_NONE;
++    return GiveMoveToMon(mon, gMoveToLearn);
++}
++
+ enum Move MonTryLearningNewMoveAtLevel(struct Pokemon *mon, bool32 firstMove, u32 level)
+ {
+     enum Move retVal = MOVE_NONE;
+@@ -1671,7 +1698,7 @@ enum Move MonTryLearningNewMoveAtLevel(struct Pokemon *mon, bool32 firstMove, u3
+         {
+             sLearningMoveTableID++;
+             if (learnset[sLearningMoveTableID].move == LEVEL_UP_MOVE_END)
+-                return MOVE_NONE;
++                return TryLearningRegionalMilestoneMove(mon, learnset, level);
+         }
+     }
+ 
+diff --git a/src/region_switch.c b/src/region_switch.c
+index fe76a76c..56703db8 100644
+--- a/src/region_switch.c
++++ b/src/region_switch.c
+@@ -332,6 +332,13 @@ void RegionHub_ScrTargetIntroDone(struct ScriptContext *ctx)
+     gSpecialVar_Result = done;
+ }
+ 
++// Olivine's post-League sailor uses this before changing the active region so
++// the one-time Johto -> Hoenn voyage can coexist with the regular S.S. Aqua menu.
++void RegionHub_ScrHoennIntroDone(struct ScriptContext *ctx)
++{
++    gSpecialVar_Result = gSaveBlock2Ptr->hoennIntroDone;
++}
++
+ // World-tour board (R8). Counts the player's gym badges across all three regions' badge
+ // banks (8 each, set per-region by K9) and exposes them to the hub board script:
+ //   VAR_0x8000 = total /24, VAR_0x8001 = Hoenn, VAR_0x8002 = Kanto, VAR_0x8003 = Johto.
+diff --git a/src/regional_progression.c b/src/regional_progression.c
+new file mode 100644
+index 00000000..204a881a
+--- /dev/null
++++ b/src/regional_progression.c
+@@ -0,0 +1,44 @@
++#include "global.h"
++#include "regional_progression.h"
++#include "regions.h"
++
++static u8 ScaleLevelIntoBand(u8 level, u8 sourceFloor, u8 sourceCeiling, u8 targetFloor, u8 targetCeiling)
++{
++    u32 scaled;
++
++    if (level <= sourceFloor)
++        return targetFloor;
++    if (level >= sourceCeiling)
++        return targetCeiling;
++
++    scaled = targetFloor
++           + ((u32)(level - sourceFloor) * (targetCeiling - targetFloor)
++           + (sourceCeiling - sourceFloor) / 2)
++           / (sourceCeiling - sourceFloor);
++    return (scaled > targetCeiling) ? targetCeiling : scaled;
++}
++
++u8 ScaleLevelForActiveRegion(u8 level)
++{
++    enum Region region = GetActiveRegion();
++
++    // Older saves can predate the persisted campaign region. The map remains
++    // a trustworthy fallback everywhere except the battle-free Transit Hub.
++    if (region == REGION_NONE)
++        region = GetCurrentRegion();
++
++    switch (region)
++    {
++    case REGION_KANTO:
++        // Preserve the level 2-5 opening, then compress the native FRLG curve.
++        if (level <= 5)
++            return level;
++        return ScaleLevelIntoBand(level, 5, 63, 5, 35);
++    case REGION_JOHTO:
++        return ScaleLevelIntoBand(level, 2, 58, 33, 70);
++    case REGION_HOENN:
++        return ScaleLevelIntoBand(level, 2, 58, 70, 100);
++    default:
++        return level;
++    }
++}
+diff --git a/src/script_pokemon_util.c b/src/script_pokemon_util.c
+index 9ee3cb7f..cf068277 100644
+--- a/src/script_pokemon_util.c
++++ b/src/script_pokemon_util.c
+@@ -22,6 +22,7 @@
+ #include "pokemon_storage_system.h"
+ #include "random.h"
+ #include "random_mon_generation.h"
++#include "regional_progression.h"
+ #include "script.h"
+ #include "sprite.h"
+ #include "string_util.h"
+@@ -118,6 +119,7 @@ void CreateScriptedWildMon(enum Species species, u8 level, enum Item item)
+ {
+     u8 heldItem[2];
+ 
++    level = ScaleLevelForActiveRegion(level);
+     ZeroEnemyPartyMons();
+     u32 personality = GetMonPersonality(species,
+         GetSynchronizedGender(STATIC_WILDMON_ORIGIN, species),
+@@ -137,6 +139,8 @@ void CreateScriptedDoubleWildMon(enum Species species1, u8 level1, enum Item ite
+     u8 heldItem1[2];
+     u8 heldItem2[2];
+ 
++    level1 = ScaleLevelForActiveRegion(level1);
++    level2 = ScaleLevelForActiveRegion(level2);
+     ZeroEnemyPartyMons();
+     u32 personality = GetMonPersonality(species1,
+         GetSynchronizedGender(STATIC_WILDMON_ORIGIN, species1),
+@@ -365,6 +369,7 @@ static u32 ScriptGiveMonParameterized(u8 side, u8 slot, enum Species species, u8
+     u32 i;
+     bool32 isShiny;
+ 
++    level = ScaleLevelForActiveRegion(level);
+     ResolveRandomMonGeneration(species, &ball, moves);
+ 
+     u32 personality = GetMonPersonality(species, gender, nature, RANDOM_UNOWN_LETTER);
+diff --git a/src/starter_choose.c b/src/starter_choose.c
+index ba37126b..b4639a34 100644
+--- a/src/starter_choose.c
++++ b/src/starter_choose.c
+@@ -111,17 +111,16 @@ static const u8 sStarterLabelCoords[STARTER_MON_COUNT][2] =
+     {8, 4},
+ };
+ 
+-// Region-aware starter trios. VAR_STARTER_MON stores the chosen ball INDEX (0/1/2). Hoenn and
+-// Johto use the natural grass/fire/water order; KANTO follows the bundled FRLG champion room's
+-// convention (index 0 = Charmander, 1 = Bulbasaur, 2 = Squirtle) so Blue's VAR_STARTER_MON
+-// variant-select stays correct WITHOUT editing the champion battle scripts. Picked at runtime
++// Region-aware starter trios. Each region stores the chosen ball INDEX (0/1/2) in its own
++// save variable. PokeMan Journey gives Kanto and Johto cross-region trios; rival scripts are
++// authored around the same index order. Picked at runtime
+ // by GetCurrentRegion() (the player is on the region's start town when ChooseStarter runs).
+ // Unpopulated regions fall back to the Hoenn trio.
+ static const u16 sStarterMon[REGIONS_COUNT][STARTER_MON_COUNT] =
+ {
+-    [REGION_HOENN] = { SPECIES_TREECKO,    SPECIES_TORCHIC,   SPECIES_MUDKIP   },
+-    [REGION_KANTO] = { SPECIES_CHARMANDER, SPECIES_BULBASAUR, SPECIES_SQUIRTLE },
+-    [REGION_JOHTO] = { SPECIES_CHIKORITA,  SPECIES_CYNDAQUIL, SPECIES_TOTODILE },
++    [REGION_HOENN] = { SPECIES_CHIKORITA,  SPECIES_TORCHIC,   SPECIES_SQUIRTLE },
++    [REGION_KANTO] = { SPECIES_BULBASAUR,  SPECIES_MUDKIP,    SPECIES_CYNDAQUIL},
++    [REGION_JOHTO] = { SPECIES_CHARMANDER, SPECIES_TOTODILE,  SPECIES_TREECKO   },
+ };
+ 
+ static const struct BgTemplate sBgTemplates[3] =
+diff --git a/src/wild_encounter.c b/src/wild_encounter.c
+index b02aa901..3a9e9c97 100644
+--- a/src/wild_encounter.c
++++ b/src/wild_encounter.c
+@@ -8,6 +8,7 @@
+ #include "follower_npc.h"
+ #include "item.h"
+ #include "random.h"
++#include "regional_progression.h"
+ #include "field_player_avatar.h"
+ #include "link.h"
+ #include "metatile_behavior.h"
+@@ -491,6 +492,7 @@ static u8 PickWildMonNature(enum Species species)
+ 
+ void CreateWildMon(enum Species species, u8 level)
+ {
++    level = ScaleLevelForActiveRegion(level);
+     ZeroEnemyPartyMons();
+     u32 personality = GetMonPersonality(species, GetSynchronizedGender(WILDMON_ORIGIN, species), PickWildMonNature(species), RANDOM_UNOWN_LETTER);
+     CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][0], species, level, personality, OTID_STRUCT_PLAYER_ID, USE_RANDOM_IVS);
