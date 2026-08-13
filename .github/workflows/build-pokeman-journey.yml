@@ -2,6 +2,10 @@ name: Build PokeMan Journey
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - pokeman-journey-current.patch
+      - .github/workflows/build-pokeman-journey.yml
 
 permissions:
   contents: read
