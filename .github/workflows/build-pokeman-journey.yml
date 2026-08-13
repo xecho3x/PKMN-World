@@ -16,8 +16,11 @@ jobs:
       - name: Check out PKMN-World source
         uses: actions/checkout@v4
 
-      - name: Apply PokeMan Journey v0.1 changes
-        run: git apply --verbose pokeman-journey-v0.1.patch
+      - name: Verify version 2 patch
+        run: git apply --check pokeman-journey-current.patch
+
+      - name: Apply PokeMan Journey version 2
+        run: git apply --verbose pokeman-journey-current.patch
 
       - name: Install GBA compiler
         run: |
@@ -51,7 +54,7 @@ jobs:
       - name: Upload playable ROM
         uses: actions/upload-artifact@v4
         with:
-          name: PokeMan-Journey-v0.1
+          name: PokeMan-Journey-v0.2
           path: pokeman_journey.gba
           if-no-files-found: error
           retention-days: 7
