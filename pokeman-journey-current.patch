@@ -38,10 +38,10 @@ index 4069f858..72da5d87 100644
      # reordered, and hard-coding it is the exact mistake sDeletedTwinMaps avoids.
 diff --git a/Testing/ValidateV04Kanto.py b/Testing/ValidateV04Kanto.py
 new file mode 100644
-index 00000000..5bbdf202
+index 00000000..070dea9d
 --- /dev/null
 +++ b/Testing/ValidateV04Kanto.py
-@@ -0,0 +1,285 @@
+@@ -0,0 +1,295 @@
 +"""Validate PokeMan Journey v0.4.3's Kanto collection and Johto handoff."""
 +
 +import json
@@ -314,6 +314,16 @@ index 00000000..5bbdf202
 +            mons[-1] in expected_rival_families[variant],
 +            f"{trainer_name} ends with {mons[-1]}, which does not match Gary's chosen starter",
 +        )
++        move_blocks = re.findall(
++            r"^[A-Za-z][A-Za-z0-9 ._-]*?(?: @ [^\n]+)?\nLevel:.*?\nIVs:.*?\n(?:Ability:.*?\n)?((?:- [^\n]+\n)*)",
++            section,
++            re.MULTILINE,
++        )
++        for moves in move_blocks:
++            require(
++                len(moves.splitlines()) <= 4,
++                f"{trainer_name} has a Pokémon with more than four moves",
++            )
 +        rival_sections_checked += 1
 +    require(rival_sections_checked >= 30, f"Only checked {rival_sections_checked} Gary starter teams")
 +
@@ -1694,7 +1704,7 @@ index 60ffe29f..806a29cb 100644
  IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 -
 diff --git a/src/data/trainers_frlg.party b/src/data/trainers_frlg.party
-index c7b4c053..5fc9bdf1 100644
+index c7b4c053..19912f6a 100644
 --- a/src/data/trainers_frlg.party
 +++ b/src/data/trainers_frlg.party
 @@ -915,7 +915,7 @@ Double Battle: No
@@ -1819,7 +1829,7 @@ index c7b4c053..5fc9bdf1 100644
  - Water Gun
  
  === TRAINER_RIVAL_CERULEAN_BULBASAUR ===
-@@ -4631,10 +4637,12 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
+@@ -4631,13 +4637,13 @@ IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
  - Tail Whip
  - Quick Attack
  
@@ -1832,9 +1842,12 @@ index c7b4c053..5fc9bdf1 100644
 +- Leer
 +- Smokescreen
  - Ember
- - Growl
- - Scratch
-@@ -7101,13 +7109,14 @@ Double Battle: No
+-- Growl
+-- Scratch
+ 
+ === TRAINER_SCIENTIST_TED ===
+ Name: TED
+@@ -7101,13 +7107,14 @@ Double Battle: No
  AI: Check Bad Move / Try To Faint / Check Viability
  
  Geodude
@@ -1851,7 +1864,7 @@ index c7b4c053..5fc9bdf1 100644
  IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
  - Tackle
  - Bind
-@@ -7885,7 +7894,7 @@ Kadabra
+@@ -7885,7 +7892,7 @@ Kadabra
  Level: 18
  IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
  
@@ -1860,7 +1873,7 @@ index c7b4c053..5fc9bdf1 100644
  Level: 20
  IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
  
-@@ -7935,7 +7944,7 @@ Kadabra
+@@ -7935,7 +7942,7 @@ Kadabra
  Level: 18
  IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
  
@@ -1869,7 +1882,7 @@ index c7b4c053..5fc9bdf1 100644
  Level: 20
  IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
  
-@@ -7964,7 +7973,7 @@ Kadabra
+@@ -7964,7 +7971,7 @@ Kadabra
  Level: 20
  IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
  
@@ -1878,7 +1891,7 @@ index c7b4c053..5fc9bdf1 100644
  Level: 25
  IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
  
-@@ -8022,7 +8031,7 @@ Kadabra
+@@ -8022,7 +8029,7 @@ Kadabra
  Level: 20
  IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
  
@@ -1887,7 +1900,7 @@ index c7b4c053..5fc9bdf1 100644
  Level: 25
  IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
  
-@@ -8051,7 +8060,7 @@ Alakazam
+@@ -8051,7 +8058,7 @@ Alakazam
  Level: 35
  IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
  
@@ -1896,7 +1909,7 @@ index c7b4c053..5fc9bdf1 100644
  Level: 40
  IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
  
-@@ -8109,7 +8118,7 @@ Alakazam
+@@ -8109,7 +8116,7 @@ Alakazam
  Level: 35
  IVs: 12 HP / 12 Atk / 12 Def / 12 SpA / 12 SpD / 12 Spe
  
@@ -1905,7 +1918,7 @@ index c7b4c053..5fc9bdf1 100644
  Level: 40
  IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
  
-@@ -8162,13 +8171,13 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+@@ -8162,13 +8169,13 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
  - Future Sight
  - Disable
  
@@ -1924,7 +1937,7 @@ index c7b4c053..5fc9bdf1 100644
  
  === TRAINER_RIVAL_ROUTE22_LATE_BULBASAUR ===
  Name: BLUE
-@@ -8276,13 +8285,13 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
+@@ -8276,13 +8283,13 @@ IVs: 18 HP / 18 Atk / 18 Def / 18 SpA / 18 SpD / 18 Spe
  - Future Sight
  - Disable
  
@@ -1942,7 +1955,7 @@ index c7b4c053..5fc9bdf1 100644
  
  === TRAINER_CHAMPION_FIRST_SQUIRTLE ===
  Name: BLUE
-@@ -8335,13 +8344,13 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+@@ -8335,13 +8342,13 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
  - Sleep Powder
  - Light Screen
  
@@ -1961,7 +1974,7 @@ index c7b4c053..5fc9bdf1 100644
  
  === TRAINER_CHAMPION_FIRST_BULBASAUR ===
  Name: BLUE
-@@ -8453,13 +8462,13 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+@@ -8453,13 +8460,13 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
  - Bite
  - Thrash
  
@@ -1980,7 +1993,7 @@ index c7b4c053..5fc9bdf1 100644
  
  === TRAINER_CHANNELER_PATRICIA ===
  Name: PATRICIA
-@@ -14420,7 +14429,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+@@ -14420,7 +14427,7 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
  - Sleep Powder
  - Light Screen
  
@@ -1989,7 +2002,7 @@ index c7b4c053..5fc9bdf1 100644
  Level: 75
  IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
  - Hydro Pump
-@@ -14485,11 +14494,11 @@ Ability: Chlorophyll
+@@ -14485,11 +14492,11 @@ Ability: Chlorophyll
  - Sludge Bomb
  - Sleep Powder
  
@@ -2003,7 +2016,7 @@ index c7b4c053..5fc9bdf1 100644
  - Hydro Pump
  - Ice Beam
  - Earthquake
-@@ -14670,11 +14679,11 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+@@ -14670,11 +14677,11 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
  - Earthquake
  - Hyper Beam
  
@@ -2017,7 +2030,7 @@ index c7b4c053..5fc9bdf1 100644
  - Aerial Ace
  - Earthquake
  
-@@ -14735,13 +14744,13 @@ Ability: Moxie
+@@ -14735,13 +14742,13 @@ Ability: Moxie
  - Earthquake
  - Ice Fang
  
