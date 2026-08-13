@@ -1,0 +1,57 @@
+name: Build PokeMan Journey
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build playable GBA
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Check out PKMN-World source
+        uses: actions/checkout@v4
+
+      - name: Apply PokeMan Journey v0.1 changes
+        run: git apply --verbose pokeman-journey-v0.1.patch
+
+      - name: Install GBA compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            binutils-arm-none-eabi \
+            gcc-arm-none-eabi \
+            libnewlib-arm-none-eabi \
+            libpng-dev \
+            libelf1 \
+            python3
+
+      - name: Validate edited content
+        run: |
+          python3 Testing/ValidateGen13.py
+          python3 Testing/ValidateScripts.py
+          python3 Testing/ValidateOwMonPlacements.py
+          python3 Testing/ValidateMapEvents.py
+
+      - name: Build PokeMan Journey
+        env:
+          GAME_VERSION: EMERALD
+        run: make -j$(nproc)
+
+      - name: Confirm ROM exists
+        run: |
+          test -f pokeman_journey.gba
+          ls -lh pokeman_journey.gba
+          sha256sum pokeman_journey.gba
+
+      - name: Upload playable ROM
+        uses: actions/upload-artifact@v4
+        with:
+          name: PokeMan-Journey-v0.1
+          path: pokeman_journey.gba
+          if-no-files-found: error
+          retention-days: 7
