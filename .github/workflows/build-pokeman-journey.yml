@@ -1,5 +1,5 @@
 name: Build PokeMan Journey
-# v0.5.0 retry after patch-context fix
+# v0.5.0 full playtest build
 
 on:
   workflow_dispatch:
@@ -38,6 +38,19 @@ jobs:
 
       - name: Apply v0.5.0 polish
         run: git apply --verbose pokeman-journey-v0.5.0.patch
+
+      - name: Stamp v0.5.0 playtest version
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("src/main_menu.c")
+          text = path.read_text()
+          old = 'static const u8 gText_MainMenuNewGame[] = _("NEW GAME  V0.4.4");'
+          new = 'static const u8 gText_MainMenuNewGame[] = _("NEW GAME  V0.5.0");'
+          if old not in text:
+              raise SystemExit("Expected v0.4.4 menu version marker not found")
+          path.write_text(text.replace(old, new, 1))
+          PY
 
       - name: Confirm v0.5.0 final playtest settings
         run: |
