@@ -1,0 +1,49 @@
+diff --git a/Makefile b/Makefile
+--- a/Makefile
++++ b/Makefile
+@@ -1,5 +1,5 @@
+ GAME_VERSION ?= EMERALD
+-TITLE        ?= POKEMAN V044
++TITLE        ?= POKEMAN V050
+ GAME_CODE    ?= BPEE
+ BUILD_NAME   ?= emerald
+ MAP_VERSION  ?= emerald
+@@ -33,11 +33,11 @@ endif
+ 
+ # GBA rom header
+ MAKER_CODE  := 01
+-REVISION    := 10
++REVISION    := 11
+ KEEP_TEMPS  ?= 0
+ 
+ # `File name`.gba
+-FILE_NAME := pokeman_journey_v044_complete
++FILE_NAME := pokeman_journey_v050_fulltest
+ BUILD_DIR := build
+ 
+ # Executes the Test Runner System that checks that all mechanics work as expected
+diff --git a/data/maps/ViridianForest_Frlg/map.json b/data/maps/ViridianForest_Frlg/map.json
+--- a/data/maps/ViridianForest_Frlg/map.json
++++ b/data/maps/ViridianForest_Frlg/map.json
+@@ -5,7 +5,7 @@
+   "music": "MUS_RG_VIRIDIAN_FOREST",
+   "region": "REGION_KANTO",
+   "region_map_section": "MAPSEC_VIRIDIAN_FOREST",
+   "requires_flash": false,
+-  "weather": "WEATHER_SHADE",
++  "weather": "WEATHER_NONE",
+   "map_type": "MAP_TYPE_ROUTE",
+   "allow_cycling": true,
+   "allow_escaping": true,
+diff --git a/src/main_menu.c b/src/main_menu.c
+--- a/src/main_menu.c
++++ b/src/main_menu.c
+@@ -269,7 +269,7 @@ static const u8 gText_RegionSaveDamaged[] = _("Part of this save file's region\nprogress data may be damaged.\pStory progress in another region\ncould be missing or altered.");
+ static const u8 gJPText_No1MSubCircuit[] = _("1Mサブきばんが ささっていません！");
+ static const u8 gText_BatteryRunDry[] = _("The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.");
+ 
+-static const u8 gText_MainMenuNewGame[] = _("NEW GAME  V0.4.4");
++static const u8 gText_MainMenuNewGame[] = _("NEW GAME  V0.5.0");
+ static const u8 gText_MainMenuContinue[] = _("CONTINUE");
+ static const u8 gText_MainMenuOption[] = _("OPTION");
+ static const u8 gText_MainMenuMysteryGift[] = _("MYSTERY GIFT");
