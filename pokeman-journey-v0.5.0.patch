@@ -35,9 +35,3 @@ diff --git a/data/maps/ViridianForest_Frlg/map.json b/data/maps/ViridianForest_F
    "map_type": "MAP_TYPE_ROUTE",
    "allow_cycling": true,
    "allow_escaping": true,
-diff --git a/src/main_menu.c b/src/main_menu.c
---- a/src/main_menu.c
-+++ b/src/main_menu.c
-@@ -272 +272 @@
--static const u8 gText_MainMenuNewGame[] = _("NEW GAME  V0.4.4");
-+static const u8 gText_MainMenuNewGame[] = _("NEW GAME  V0.5.0");
