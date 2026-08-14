@@ -38,12 +38,6 @@ diff --git a/data/maps/ViridianForest_Frlg/map.json b/data/maps/ViridianForest_F
 diff --git a/src/main_menu.c b/src/main_menu.c
 --- a/src/main_menu.c
 +++ b/src/main_menu.c
-@@ -269,7 +269,7 @@ static const u8 gText_RegionSaveDamaged[] = _("Part of this save file's region\nprogress data may be damaged.\pStory progress in another region\ncould be missing or altered.");
- static const u8 gJPText_No1MSubCircuit[] = _("1Mサブきばんが ささっていません！");
- static const u8 gText_BatteryRunDry[] = _("The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.");
- 
+@@ -272 +272 @@
 -static const u8 gText_MainMenuNewGame[] = _("NEW GAME  V0.4.4");
 +static const u8 gText_MainMenuNewGame[] = _("NEW GAME  V0.5.0");
- static const u8 gText_MainMenuContinue[] = _("CONTINUE");
- static const u8 gText_MainMenuOption[] = _("OPTION");
- static const u8 gText_MainMenuMysteryGift[] = _("MYSTERY GIFT");
