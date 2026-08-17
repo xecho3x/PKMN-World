@@ -30,11 +30,8 @@ def replace_field(block, field, value):
     return new_block
 
 
-# -----------------------------------------------------------------------------
-# 1) Turn Lucario / Mega Lucario into the first PokeMan Journey original line.
-#    The Lucario IDs are deliberately used as hidden prototype plumbing because
-#    they already have a stable temporary battle-form pair in the engine.
-# -----------------------------------------------------------------------------
+# Use Lucario / Mega Lucario as hidden prototype plumbing for the first
+# PokeMan Journey original creature and its temporary battle form.
 species_path = ROOT / "src/data/pokemon/species_info/gen_4_families.h"
 text = species_path.read_text()
 
@@ -49,19 +46,9 @@ base = re.sub(r"\.types\s*=\s*MON_TYPES\([^\n]+", ".types = MON_TYPES(TYPE_FIRE)
 base = re.sub(r"\.abilities\s*=\s*\{[^\n]+", ".abilities = { ABILITY_BLAZE, ABILITY_FLAME_BODY, ABILITY_FLASH_FIRE },", base, count=1)
 base = re.sub(r'\.speciesName\s*=\s*_\("[^"]+"\),', '.speciesName = _("Embercub"),', base, count=1)
 base = re.sub(r'\.categoryName\s*=\s*_\("[^"]+"\),', '.categoryName = _("Flame Cub"),', base, count=1)
-base = re.sub(
-    r"\.description\s*=\s*COMPOUND_STRING\(.*?\),\n",
-    '.description = COMPOUND_STRING(\n'
-    '            "Warm embers glow beneath the fur\\n"\n'
-    '            "around its eyes and paws. When its\\n"\n'
-    '            "trainer is threatened, those embers\\n"\n'
-    '            "flare into a protective blaze."),\n',
-    base,
-    count=1,
-    flags=re.S,
-)
-# Bear-cub stand-in pixel art for the first technical ROM. The original concept
-# art can replace these pointers later without changing the battle mechanic.
+# Keep the stock description field for this mechanics build. The previous
+# generated multiline description used replacement-string escapes that became
+# literal LF characters inside a C string and prevented pokemon.c compiling.
 base = re.sub(r"\.frontPic\s*=\s*[^,]+,", ".frontPic = gMonFrontPic_Teddiursa,", base, count=1)
 base = re.sub(r"\.frontPicSize\s*=\s*[^\n]+", ".frontPicSize = MON_COORDS_SIZE(40, 40),", base, count=1)
 base = re.sub(r"\.frontPicYOffset\s*=\s*[^,\n]+,", ".frontPicYOffset = 12,", base, count=1)
@@ -76,7 +63,6 @@ base = re.sub(r"\.levelUpLearnset\s*=\s*sLucarioLevelUpLearnset,", ".levelUpLear
 base = re.sub(r"\.teachableLearnset\s*=\s*sLucarioTeachableLearnset,", ".teachableLearnset = sCyndaquilTeachableLearnset,", base, count=1)
 text = text[:start] + base + text[end:]
 
-# Re-find after base length changed.
 start, end, mega = species_block(text, "LUCARIO_MEGA", "#endif //P_MEGA_EVOLUTIONS")
 mega = replace_field(mega, "baseHP", "100")
 mega = replace_field(mega, "baseAttack", "128")
@@ -88,17 +74,6 @@ mega = re.sub(r"\.types\s*=\s*MON_TYPES\([^\n]+", ".types = MON_TYPES(TYPE_FIRE,
 mega = re.sub(r"\.abilities\s*=\s*\{[^\n]+", ".abilities = { ABILITY_FLAME_BODY, ABILITY_FLAME_BODY, ABILITY_FLAME_BODY },", mega, count=1)
 mega = re.sub(r'\.speciesName\s*=\s*_\("[^"]+"\),', '.speciesName = _("Blazebear"),', mega, count=1)
 mega = re.sub(r'\.categoryName\s*=\s*_\("[^"]+"\),', '.categoryName = _("Blaze Bear"),', mega, count=1)
-mega = re.sub(
-    r"\.description\s*=\s*COMPOUND_STRING\(.*?\),\n",
-    '.description = COMPOUND_STRING(\n'
-    '            "Battle energy engulfs its coat in\\n"\n'
-    '            "living flame. Its larger body burns\\n"\n'
-    '            "hotter until the fight ends, then it\\n"\n'
-    '            "returns to its cub form."),\n',
-    mega,
-    count=1,
-    flags=re.S,
-)
 mega = re.sub(r"\.frontPic\s*=\s*[^,]+,", ".frontPic = gMonFrontPic_Ursaring,", mega, count=1)
 mega = re.sub(r"\.frontPicSize\s*=\s*[^\n]+", ".frontPicSize = MON_COORDS_SIZE(64, 64),", mega, count=1)
 mega = re.sub(r"\.frontPicYOffset\s*=\s*[^,\n]+,", ".frontPicYOffset = 0,", mega, count=1)
@@ -114,11 +89,8 @@ mega = re.sub(r"\.teachableLearnset\s*=\s*sLucarioTeachableLearnset,", ".teachab
 text = text[:start] + mega + text[end:]
 species_path.write_text(text)
 
-# -----------------------------------------------------------------------------
-# 2) Let Embercub trigger the existing temporary battle-form system without a
-#    Mega Ring or held stone. This is prototype-only plumbing: the normal item
-#    is restored immediately after the engine resolves the form change.
-# -----------------------------------------------------------------------------
+# Cindursa can trigger the existing temporary Mega-style form-change engine
+# without a held stone. The original held item is restored after form change.
 battle_path = ROOT / "src/battle_util.c"
 battle = battle_path.read_text()
 needle = "bool32 CanMegaEvolve(enum BattlerId battler)\n{\n"
@@ -150,9 +122,6 @@ injection = (
 battle = replace_once(battle, needle, injection, "ActivateMegaEvolution injection")
 battle_path.write_text(battle)
 
-# -----------------------------------------------------------------------------
-# 3) Put Embercub directly in the opening Kanto starter selection for easy test.
-# -----------------------------------------------------------------------------
 starter_path = ROOT / "src/starter_choose.c"
 starter = starter_path.read_text()
 starter = replace_once(
@@ -163,7 +132,6 @@ starter = replace_once(
 )
 starter_path.write_text(starter)
 
-# Make the test build unmistakable on the title menu after the normal v0.5 stamp.
 menu_path = ROOT / "src/main_menu.c"
 menu = menu_path.read_text()
 menu = replace_once(menu, "NEW GAME  V0.5.0", "NEW GAME  EVO TEST", "menu test stamp")
