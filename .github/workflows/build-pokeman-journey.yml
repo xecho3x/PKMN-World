@@ -132,6 +132,32 @@ jobs:
           path.write_text(text)
           PY
 
+      - name: Wire Cindursa into Professor Oak's third starter ball
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc")
+          text = path.read_text()
+          replacements = [
+              (
+                  "\tsetvar PLAYER_STARTER_SPECIES, SPECIES_CYNDAQUIL\n\tsetvar RIVAL_STARTER_SPECIES, SPECIES_MUDKIP",
+                  "\tsetvar PLAYER_STARTER_SPECIES, SPECIES_LUCARIO\n\tsetvar RIVAL_STARTER_SPECIES, SPECIES_MUDKIP",
+              ),
+              (
+                  "\tsetvar PLAYER_STARTER_SPECIES, SPECIES_BULBASAUR\n\tsetvar RIVAL_STARTER_SPECIES, SPECIES_CYNDAQUIL",
+                  "\tsetvar PLAYER_STARTER_SPECIES, SPECIES_BULBASAUR\n\tsetvar RIVAL_STARTER_SPECIES, SPECIES_LUCARIO",
+              ),
+              ('\t.string "Ah! CYNDAQUIL is your choice.\\n"', '\t.string "Ah! CINDURSA is your choice.\\n"'),
+              ('\t.string "FIRE POKéMON CYNDAQUIL?$"', '\t.string "FIRE POKéMON CINDURSA?$"'),
+          ]
+          for old, new in replacements:
+              if old not in text:
+                  raise SystemExit(f"Expected Oak-lab starter text not found: {old!r}")
+              text = text.replace(old, new, 1)
+          path.write_text(text)
+          PY
+
       - name: Confirm evolution prototype
         run: |
           grep -Fq 'Cindursa' src/data/pokemon/species_info/gen_4_families.h
@@ -139,6 +165,13 @@ jobs:
           grep -Fq '[REGION_KANTO] = { SPECIES_BULBASAUR,  SPECIES_MUDKIP,    SPECIES_LUCARIO}' src/starter_choose.c
           grep -Fq 'NEW GAME  EVO TEST' src/main_menu.c
           grep -Fq 'PokeMan Journey prototype: Cindursa can battle-evolve on command' src/battle_util.c
+          grep -Fq 'setvar PLAYER_STARTER_SPECIES, SPECIES_LUCARIO' data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
+          grep -Fq 'setvar RIVAL_STARTER_SPECIES, SPECIES_LUCARIO' data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
+          grep -Fq 'Ah! CINDURSA is your choice.' data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
+          if grep -A4 -F 'PalletTown_ProfessorOaksLab_EventScript_CharmanderBall::' data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc | grep -Fq 'SPECIES_CYNDAQUIL'; then
+            echo 'Third Oak starter still resolves to Cyndaquil' >&2
+            exit 1
+          fi
 
       - name: Build PokeMan Journey v0.5.0 evolution test
         env:
