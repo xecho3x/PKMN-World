@@ -6,6 +6,7 @@ on:
     paths:
       - pokeman-journey-current.patch
       - pokeman-journey-v0.3.1.patch
+      - pokeman-journey-cindursa.patch
       - .github/workflows/build-pokeman-journey.yml
 
 permissions:
@@ -27,7 +28,13 @@ jobs:
       - name: Apply PokeMan Journey version 0.3.1
         run: git apply --verbose pokeman-journey-current.patch
 
-      - name: Confirm Emerald menu and Gary starter mapping
+      - name: Verify Cindursa family patch
+        run: git apply --check pokeman-journey-cindursa.patch
+
+      - name: Apply Cindursa family scaffold
+        run: git apply --verbose pokeman-journey-cindursa.patch
+
+      - name: Confirm Emerald menu, Gary starter mapping, and custom species scaffold
         run: |
           grep -Eq '^#define PW_GRAPHICAL_START_MENU[[:space:]]+FALSE' include/config/start_menu.h
           grep -Eq '^#define POKEDEX_PLUS_HGSS[[:space:]]+FALSE' include/config/pokedex_plus_hgss.h
@@ -40,6 +47,12 @@ jobs:
           grep -Fq 'setvar RIVAL_STARTER_ID, LOCALID_SQUIRTLE_BALL' data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
           grep -Fq 'setvar RIVAL_STARTER_ID, LOCALID_CHARMANDER_BALL' data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
           grep -Fq 'setvar RIVAL_STARTER_ID, LOCALID_BULBASAUR_BALL' data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
+          grep -Fq 'SPECIES_CINDURSA' include/constants/species.h
+          grep -Fq 'SPECIES_PYROGRIZZ' include/constants/species.h
+          grep -Fq 'SPECIES_INFERURSA' include/constants/species.h
+          grep -Fq '.speciesName = _("Cindursa")' src/data/pokemon/species_info.h
+          grep -Fq '.speciesName = _("Pyrogrizz")' src/data/pokemon/species_info.h
+          grep -Fq '.speciesName = _("Inferursa")' src/data/pokemon/species_info.h
 
       - name: Install GBA compiler
         run: |
@@ -87,7 +100,7 @@ jobs:
       - name: Upload playable ROM
         uses: actions/upload-artifact@v4
         with:
-          name: PokeMan-Journey-v0.3.1-Gary-Fix
+          name: PokeMan-Journey-Cindursa-Scaffold
           path: pokeman_journey_v031_fixed.gba
           if-no-files-found: error
           retention-days: 7
