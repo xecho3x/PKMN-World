@@ -1,5 +1,5 @@
-name: Build PokeMan Journey
-# v0.5.0 full playtest build
+name: Build PokeMan Journey Evolution Test
+# v0.5.0 battle-evolution prototype
 
 on:
   workflow_dispatch:
@@ -7,11 +7,13 @@ on:
     paths:
       - pokeman-journey-current.patch
       - pokeman-journey-v0.5.0.patch
+      - Testing/ApplyJourneyEvolutionPrototype.py
       - .github/workflows/build-pokeman-journey.yml
   push:
     paths:
       - pokeman-journey-current.patch
       - pokeman-journey-v0.5.0.patch
+      - Testing/ApplyJourneyEvolutionPrototype.py
       - .github/workflows/build-pokeman-journey.yml
 
 permissions:
@@ -19,7 +21,7 @@ permissions:
 
 jobs:
   build:
-    name: Build playable v0.5.0 GBA
+    name: Build playable v0.5.0 evolution test GBA
     runs-on: ubuntu-latest
     timeout-minutes: 120
 
@@ -90,7 +92,108 @@ jobs:
           python3 Testing/GenObstacleTable.py --check
           python3 Testing/SavePatch.py --check
 
-      - name: Build PokeMan Journey v0.5.0
+      - name: Enable Cindursa internal species family
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("include/config/species_enabled.h")
+          text = path.read_text()
+          old = '#define P_FAMILY_RIOLU                   FALSE // world-strip: unreferenced in all 3 campaigns (was P_GEN_4_POKEMON)'
+          new = '#define P_FAMILY_RIOLU                   TRUE // PokeMan Journey: Cindursa/Pyrogrizz internal species family'
+          if old not in text:
+              raise SystemExit("Expected disabled Riolu/Lucario family setting not found")
+          text = text.replace(old, new, 1)
+          if '#define P_MEGA_EVOLUTIONS                TRUE' not in text:
+              raise SystemExit("Mega-form plumbing is disabled")
+          path.write_text(text)
+          PY
+          grep -Eq '^#define P_FAMILY_RIOLU[[:space:]]+TRUE' include/config/species_enabled.h
+          grep -Eq '^#define P_MEGA_EVOLUTIONS[[:space:]]+TRUE' include/config/species_enabled.h
+
+      - name: Apply battle-evolution prototype
+        run: python3 Testing/ApplyJourneyEvolutionPrototype.py
+
+      - name: Apply Cindursa and Pyrogrizz identity
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("src/data/pokemon/species_info/gen_4_families.h")
+          text = path.read_text()
+          pairs = [
+              ('_("Embercub")', '_("Cindursa")'),
+              ('_("Blazebear")', '_("Pyrogrizz")'),
+              ('_("Flame Cub")', '_("Ember Cub")'),
+              ('_("Blaze Bear")', '_("Flame Bear")'),
+          ]
+          for old, new in pairs:
+              if old not in text:
+                  raise SystemExit(f"Expected prototype identity not found: {old}")
+              text = text.replace(old, new, 1)
+
+          start = text.index("[SPECIES_LUCARIO_MEGA]")
+          end = text.index("#endif //P_MEGA_EVOLUTIONS", start)
+          block = text[start:end]
+          old_type = ".types = MON_TYPES(TYPE_FIRE, TYPE_FIGHTING),"
+          if old_type not in block:
+              raise SystemExit("Expected prototype Pyrogrizz type not found")
+          block = block.replace(old_type, ".types = MON_TYPES(TYPE_FIRE),", 1)
+          text = text[:start] + block + text[end:]
+          path.write_text(text)
+
+          path = Path("src/battle_util.c")
+          text = path.read_text().replace(
+              "PokeMan Journey prototype: Embercub can battle-evolve on command",
+              "PokeMan Journey prototype: Cindursa can battle-evolve on command",
+              1,
+          )
+          path.write_text(text)
+          PY
+
+      - name: Wire Cindursa into Professor Oak's third starter ball
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc")
+          text = path.read_text()
+          replacements = [
+              (
+                  "\tsetvar PLAYER_STARTER_SPECIES, SPECIES_CYNDAQUIL\n\tsetvar RIVAL_STARTER_SPECIES, SPECIES_MUDKIP",
+                  "\tsetvar PLAYER_STARTER_SPECIES, SPECIES_LUCARIO\n\tsetvar RIVAL_STARTER_SPECIES, SPECIES_MUDKIP",
+              ),
+              (
+                  "\tsetvar PLAYER_STARTER_SPECIES, SPECIES_BULBASAUR\n\tsetvar RIVAL_STARTER_SPECIES, SPECIES_CYNDAQUIL",
+                  "\tsetvar PLAYER_STARTER_SPECIES, SPECIES_BULBASAUR\n\tsetvar RIVAL_STARTER_SPECIES, SPECIES_LUCARIO",
+              ),
+              ('\t.string "Ah! CYNDAQUIL is your choice.\\n"', '\t.string "Ah! CINDURSA is your choice.\\n"'),
+              ('\t.string "FIRE POKéMON CYNDAQUIL?$"', '\t.string "FIRE POKéMON CINDURSA?$"'),
+          ]
+          for old, new in replacements:
+              if old not in text:
+                  raise SystemExit(f"Expected Oak-lab starter text not found: {old!r}")
+              text = text.replace(old, new, 1)
+          path.write_text(text)
+          PY
+
+      - name: Confirm evolution prototype
+        run: |
+          grep -Eq '^#define P_FAMILY_RIOLU[[:space:]]+TRUE' include/config/species_enabled.h
+          grep -Eq '^#define P_MEGA_EVOLUTIONS[[:space:]]+TRUE' include/config/species_enabled.h
+          grep -Fq 'Cindursa' src/data/pokemon/species_info/gen_4_families.h
+          grep -Fq 'Pyrogrizz' src/data/pokemon/species_info/gen_4_families.h
+          grep -Fq '[REGION_KANTO] = { SPECIES_BULBASAUR,  SPECIES_MUDKIP,    SPECIES_LUCARIO}' src/starter_choose.c
+          grep -Fq 'NEW GAME  EVO TEST' src/main_menu.c
+          grep -Fq 'PokeMan Journey prototype: Cindursa can battle-evolve on command' src/battle_util.c
+          grep -Fq 'setvar PLAYER_STARTER_SPECIES, SPECIES_LUCARIO' data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
+          grep -Fq 'setvar RIVAL_STARTER_SPECIES, SPECIES_LUCARIO' data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
+          grep -Fq 'Ah! CINDURSA is your choice.' data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc
+          if grep -A4 -F 'PalletTown_ProfessorOaksLab_EventScript_CharmanderBall::' data/maps/PalletTown_ProfessorOaksLab_Frlg/scripts.inc | grep -Fq 'SPECIES_CYNDAQUIL'; then
+            echo 'Third Oak starter still resolves to Cyndaquil' >&2
+            exit 1
+          fi
+
+      - name: Build PokeMan Journey v0.5.0 evolution test
         env:
           GAME_VERSION: EMERALD
         run: make -j$(nproc)
@@ -110,13 +213,16 @@ jobs:
           assert b"FLASH1M_V" in rom
           expected = (-(sum(rom[0xA0:0xBD]) + 0x19)) & 0xFF
           assert rom[0xBD] == expected
-          print("Verified v0.5.0 Emerald ID, Flash1M signature, revision, and checksum")
+          print("Verified v0.5 evolution test ROM header, Flash1M signature, revision, and checksum")
           PY
 
-      - name: Upload playable v0.5.0 ROM
+      - name: Prepare evolution test ROM
+        run: cp pokeman_journey_v050_fulltest.gba pokeman_journey_v050_evolution_test.gba
+
+      - name: Upload playable evolution test ROM
         uses: actions/upload-artifact@v4
         with:
-          name: PokeMan-Journey-v0.5.0-Full-Playtest
-          path: pokeman_journey_v050_fulltest.gba
+          name: PokeMan-Journey-v0.5.0-Evolution-Test
+          path: pokeman_journey_v050_evolution_test.gba
           if-no-files-found: error
           retention-days: 14
