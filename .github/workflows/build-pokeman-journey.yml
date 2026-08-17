@@ -92,16 +92,53 @@ jobs:
           python3 Testing/GenObstacleTable.py --check
           python3 Testing/SavePatch.py --check
 
-      - name: Apply Embercub battle-evolution prototype
+      - name: Apply battle-evolution prototype
         run: python3 Testing/ApplyJourneyEvolutionPrototype.py
+
+      - name: Apply Cindursa and Pyrogrizz identity
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path("src/data/pokemon/species_info/gen_4_families.h")
+          text = path.read_text()
+          pairs = [
+              ('_("Embercub")', '_("Cindursa")'),
+              ('_("Blazebear")', '_("Pyrogrizz")'),
+              ('_("Flame Cub")', '_("Ember Cub")'),
+              ('_("Blaze Bear")', '_("Flame Bear")'),
+          ]
+          for old, new in pairs:
+              if old not in text:
+                  raise SystemExit(f"Expected prototype identity not found: {old}")
+              text = text.replace(old, new, 1)
+
+          start = text.index("[SPECIES_LUCARIO_MEGA]")
+          end = text.index("#endif //P_MEGA_EVOLUTIONS", start)
+          block = text[start:end]
+          old_type = ".types = MON_TYPES(TYPE_FIRE, TYPE_FIGHTING),"
+          if old_type not in block:
+              raise SystemExit("Expected prototype Pyrogrizz type not found")
+          block = block.replace(old_type, ".types = MON_TYPES(TYPE_FIRE),", 1)
+          text = text[:start] + block + text[end:]
+          path.write_text(text)
+
+          path = Path("src/battle_util.c")
+          text = path.read_text().replace(
+              "PokeMan Journey prototype: Embercub can battle-evolve on command",
+              "PokeMan Journey prototype: Cindursa can battle-evolve on command",
+              1,
+          )
+          path.write_text(text)
+          PY
 
       - name: Confirm evolution prototype
         run: |
-          grep -Fq 'Embercub' src/data/pokemon/species_info/gen_4_families.h
-          grep -Fq 'Blazebear' src/data/pokemon/species_info/gen_4_families.h
+          grep -Fq 'Cindursa' src/data/pokemon/species_info/gen_4_families.h
+          grep -Fq 'Pyrogrizz' src/data/pokemon/species_info/gen_4_families.h
           grep -Fq '[REGION_KANTO] = { SPECIES_BULBASAUR,  SPECIES_MUDKIP,    SPECIES_LUCARIO}' src/starter_choose.c
           grep -Fq 'NEW GAME  EVO TEST' src/main_menu.c
-          grep -Fq 'PokeMan Journey prototype: Embercub can battle-evolve on command' src/battle_util.c
+          grep -Fq 'PokeMan Journey prototype: Cindursa can battle-evolve on command' src/battle_util.c
 
       - name: Build PokeMan Journey v0.5.0 evolution test
         env:
