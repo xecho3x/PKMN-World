@@ -1,5 +1,5 @@
-name: Build PokeMan Journey
-# v0.5.0 full playtest build
+name: Build PokeMan Journey Evolution Test
+# v0.5.0 battle-evolution prototype
 
 on:
   workflow_dispatch:
@@ -7,11 +7,13 @@ on:
     paths:
       - pokeman-journey-current.patch
       - pokeman-journey-v0.5.0.patch
+      - Testing/ApplyJourneyEvolutionPrototype.py
       - .github/workflows/build-pokeman-journey.yml
   push:
     paths:
       - pokeman-journey-current.patch
       - pokeman-journey-v0.5.0.patch
+      - Testing/ApplyJourneyEvolutionPrototype.py
       - .github/workflows/build-pokeman-journey.yml
 
 permissions:
@@ -19,7 +21,7 @@ permissions:
 
 jobs:
   build:
-    name: Build playable v0.5.0 GBA
+    name: Build playable v0.5.0 evolution test GBA
     runs-on: ubuntu-latest
     timeout-minutes: 120
 
@@ -90,7 +92,18 @@ jobs:
           python3 Testing/GenObstacleTable.py --check
           python3 Testing/SavePatch.py --check
 
-      - name: Build PokeMan Journey v0.5.0
+      - name: Apply Embercub battle-evolution prototype
+        run: python3 Testing/ApplyJourneyEvolutionPrototype.py
+
+      - name: Confirm evolution prototype
+        run: |
+          grep -Fq 'Embercub' src/data/pokemon/species_info/gen_4_families.h
+          grep -Fq 'Blazebear' src/data/pokemon/species_info/gen_4_families.h
+          grep -Fq '[REGION_KANTO] = { SPECIES_BULBASAUR,  SPECIES_MUDKIP,    SPECIES_LUCARIO}' src/starter_choose.c
+          grep -Fq 'NEW GAME  EVO TEST' src/main_menu.c
+          grep -Fq 'PokeMan Journey prototype: Embercub can battle-evolve on command' src/battle_util.c
+
+      - name: Build PokeMan Journey v0.5.0 evolution test
         env:
           GAME_VERSION: EMERALD
         run: make -j$(nproc)
@@ -110,13 +123,16 @@ jobs:
           assert b"FLASH1M_V" in rom
           expected = (-(sum(rom[0xA0:0xBD]) + 0x19)) & 0xFF
           assert rom[0xBD] == expected
-          print("Verified v0.5.0 Emerald ID, Flash1M signature, revision, and checksum")
+          print("Verified v0.5 evolution test ROM header, Flash1M signature, revision, and checksum")
           PY
 
-      - name: Upload playable v0.5.0 ROM
+      - name: Prepare evolution test ROM
+        run: cp pokeman_journey_v050_fulltest.gba pokeman_journey_v050_evolution_test.gba
+
+      - name: Upload playable evolution test ROM
         uses: actions/upload-artifact@v4
         with:
-          name: PokeMan-Journey-v0.5.0-Full-Playtest
-          path: pokeman_journey_v050_fulltest.gba
+          name: PokeMan-Journey-v0.5.0-Evolution-Test
+          path: pokeman_journey_v050_evolution_test.gba
           if-no-files-found: error
           retention-days: 14
