@@ -92,6 +92,24 @@ jobs:
           python3 Testing/GenObstacleTable.py --check
           python3 Testing/SavePatch.py --check
 
+      - name: Enable Cindursa internal species family
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path("include/config/species_enabled.h")
+          text = path.read_text()
+          old = '#define P_FAMILY_RIOLU                   FALSE // world-strip: unreferenced in all 3 campaigns (was P_GEN_4_POKEMON)'
+          new = '#define P_FAMILY_RIOLU                   TRUE // PokeMan Journey: Cindursa/Pyrogrizz internal species family'
+          if old not in text:
+              raise SystemExit("Expected disabled Riolu/Lucario family setting not found")
+          text = text.replace(old, new, 1)
+          if '#define P_MEGA_EVOLUTIONS                TRUE' not in text:
+              raise SystemExit("Mega-form plumbing is disabled")
+          path.write_text(text)
+          PY
+          grep -Eq '^#define P_FAMILY_RIOLU[[:space:]]+TRUE' include/config/species_enabled.h
+          grep -Eq '^#define P_MEGA_EVOLUTIONS[[:space:]]+TRUE' include/config/species_enabled.h
+
       - name: Apply battle-evolution prototype
         run: python3 Testing/ApplyJourneyEvolutionPrototype.py
 
@@ -160,6 +178,8 @@ jobs:
 
       - name: Confirm evolution prototype
         run: |
+          grep -Eq '^#define P_FAMILY_RIOLU[[:space:]]+TRUE' include/config/species_enabled.h
+          grep -Eq '^#define P_MEGA_EVOLUTIONS[[:space:]]+TRUE' include/config/species_enabled.h
           grep -Fq 'Cindursa' src/data/pokemon/species_info/gen_4_families.h
           grep -Fq 'Pyrogrizz' src/data/pokemon/species_info/gen_4_families.h
           grep -Fq '[REGION_KANTO] = { SPECIES_BULBASAUR,  SPECIES_MUDKIP,    SPECIES_LUCARIO}' src/starter_choose.c
