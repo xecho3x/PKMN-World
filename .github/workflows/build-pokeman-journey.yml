@@ -7,6 +7,7 @@ on:
       - pokeman-journey-current.patch
       - pokeman-journey-v0.3.1.patch
       - pokeman-journey-cindursa.patch
+      - src/data/pokemon/species_info/pokeman_journey_custom.h
       - .github/workflows/build-pokeman-journey.yml
 
 permissions:
@@ -50,9 +51,10 @@ jobs:
           grep -Fq 'SPECIES_CINDURSA' include/constants/species.h
           grep -Fq 'SPECIES_PYROGRIZZ' include/constants/species.h
           grep -Fq 'SPECIES_INFERURSA' include/constants/species.h
-          grep -Fq '.speciesName = _("Cindursa")' src/data/pokemon/species_info.h
-          grep -Fq '.speciesName = _("Pyrogrizz")' src/data/pokemon/species_info.h
-          grep -Fq '.speciesName = _("Inferursa")' src/data/pokemon/species_info.h
+          grep -Fq 'pokeman_journey_custom.h' src/data/pokemon/species_info.h
+          grep -Fq '.speciesName = _("Cindursa")' src/data/pokemon/species_info/pokeman_journey_custom.h
+          grep -Fq '.speciesName = _("Pyrogrizz")' src/data/pokemon/species_info/pokeman_journey_custom.h
+          grep -Fq '.speciesName = _("Inferursa")' src/data/pokemon/species_info/pokeman_journey_custom.h
 
       - name: Install GBA compiler
         run: |
