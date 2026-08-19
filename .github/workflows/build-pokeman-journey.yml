@@ -1,16 +1,16 @@
-name: Build PokeMan Journey v5.0
+name: Build PokeMan Journey v5.1
 
 on:
   workflow_dispatch:
   pull_request:
     paths:
       - pokeman-journey-current.patch
-      - pokeman-journey-v5.0.patch
+      - pokeman-journey-v5.1.patch
       - .github/workflows/build-pokeman-journey.yml
   push:
     paths:
       - pokeman-journey-current.patch
-      - pokeman-journey-v5.0.patch
+      - pokeman-journey-v5.1.patch
       - .github/workflows/build-pokeman-journey.yml
 
 permissions:
@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   build:
-    name: Build complete 386 GBA ROM
+    name: Build complete 386 + Phycub line GBA ROM
     runs-on: ubuntu-latest
     timeout-minutes: 120
 
@@ -26,18 +26,18 @@ jobs:
       - name: Check out PKMN-World source
         uses: actions/checkout@v4
 
-      - name: Verify v5.0 patch
+      - name: Verify v5.1 patch
         run: git apply --check pokeman-journey-current.patch
 
-      - name: Apply PokeMan Journey v5.0
+      - name: Apply PokeMan Journey v5.1
         run: git apply --verbose pokeman-journey-current.patch
 
-      - name: Confirm v5.0 identity and regional starter order
+      - name: Confirm v5.1 identity and regional starter order
         run: |
-          grep -Fq 'TITLE        ?= POKEMAN V500' Makefile
-          grep -Fq 'REVISION    := 11' Makefile
-          grep -Fq 'FILE_NAME := pokeman_journey_v500_complete' Makefile
-          grep -Fq 'NEW GAME  V5.0' src/main_menu.c
+          grep -Fq 'TITLE        ?= POKEMAN V510' Makefile
+          grep -Fq 'REVISION    := 12' Makefile
+          grep -Fq 'FILE_NAME := pokeman_journey_v510_phycub' Makefile
+          grep -Fq 'NEW GAME  V5.1' src/main_menu.c
           grep -Eq '\[REGION_KANTO\][[:space:]]*=[[:space:]]*\{[[:space:]]*SPECIES_BULBASAUR,[[:space:]]*SPECIES_MUDKIP,[[:space:]]*SPECIES_CYNDAQUIL[[:space:]]*\}' src/starter_choose.c
           grep -Fq '[REGION_HOENN] = { SPECIES_CHIKORITA,  SPECIES_TORCHIC,   SPECIES_SQUIRTLE }' src/starter_choose.c
 
@@ -50,7 +50,8 @@ jobs:
             libnewlib-arm-none-eabi \
             libpng-dev \
             libelf1 \
-            python3
+            python3 \
+            python3-pil
 
       - name: Validate edited content and all 386 acquisition paths
         run: |
@@ -60,36 +61,37 @@ jobs:
           python3 Testing/ValidateMapEvents.py
           python3 Testing/ValidateV04Kanto.py
           python3 Testing/ValidateRegional386.py
+          python3 Testing/ValidatePhycubLine.py
           python3 Testing/GenObstacleTable.py --check
           python3 Testing/SavePatch.py --check
 
-      - name: Build PokeMan Journey v5.0
+      - name: Build PokeMan Journey v5.1
         env:
           GAME_VERSION: EMERALD
         run: make -j$(nproc)
 
-      - name: Verify Android-compatible v5.0 ROM
+      - name: Verify Android-compatible v5.1 ROM
         run: |
-          test -f pokeman_journey_v500_complete.gba
-          ls -lh pokeman_journey_v500_complete.gba
-          sha256sum pokeman_journey_v500_complete.gba
+          test -f pokeman_journey_v510_phycub.gba
+          ls -lh pokeman_journey_v510_phycub.gba
+          sha256sum pokeman_journey_v510_phycub.gba
           python3 - <<'PY'
           from pathlib import Path
-          rom = Path("pokeman_journey_v500_complete.gba").read_bytes()
+          rom = Path("pokeman_journey_v510_phycub.gba").read_bytes()
           assert len(rom) == 32 * 1024 * 1024
-          assert rom[0xA0:0xAC] == b"POKEMAN V500"
+          assert rom[0xA0:0xAC] == b"POKEMAN V510"
           assert rom[0xAC:0xB0] == b"BPEE"
-          assert rom[0xBC] == 11
+          assert rom[0xBC] == 12
           assert b"FLASH1M_V" in rom
           expected = (-(sum(rom[0xA0:0xBD]) + 0x19)) & 0xFF
           assert rom[0xBD] == expected
-          print("Verified Emerald ID, Flash1M signature, v5.0 revision, and header checksum")
+          print("Verified Emerald ID, Flash1M signature, v5.1 revision, and header checksum")
           PY
 
-      - name: Upload playable v5.0 ROM
+      - name: Upload playable v5.1 ROM
         uses: actions/upload-artifact@v4
         with:
-          name: PokeMan-Journey-v5.0-Complete-386
-          path: pokeman_journey_v500_complete.gba
+          name: PokeMan-Journey-v5.1-Phycub-Line
+          path: pokeman_journey_v510_phycub.gba
           if-no-files-found: error
           retention-days: 14
