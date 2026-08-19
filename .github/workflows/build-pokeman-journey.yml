@@ -42,9 +42,10 @@ jobs:
           grep -Fq '[REGION_HOENN] = { SPECIES_CHIKORITA,  SPECIES_TORCHIC,   SPECIES_SQUIRTLE }' src/starter_choose.c
 
       - name: Install GBA compiler
+        timeout-minutes: 15
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
+          sudo apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 update
+          sudo apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 install -y --no-install-recommends \
             binutils-arm-none-eabi \
             gcc-arm-none-eabi \
             libnewlib-arm-none-eabi \
