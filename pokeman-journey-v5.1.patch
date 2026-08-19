@@ -34,10 +34,10 @@ index 13a003ed..8a01f977 100644
  $(DATA_SRC_SUBDIR)/pokemon/teachable_learnsets.h: $(TEACHABLE_DEPS) | $(ALL_TUTORS_JSON) $(ALL_TEACHING_TYPES_JSON)
 diff --git a/Testing/ValidatePhycubLine.py b/Testing/ValidatePhycubLine.py
 new file mode 100644
-index 00000000..0c07152d
+index 00000000..622fcc20
 --- /dev/null
 +++ b/Testing/ValidatePhycubLine.py
-@@ -0,0 +1,146 @@
+@@ -0,0 +1,161 @@
 +#!/usr/bin/env python3
 +"""Structural release gate for the Pokémon Journey v5.1 Phycub line."""
 +
@@ -136,10 +136,25 @@ index 00000000..0c07152d
 +
 +def validate_obtainability_and_dex_order() -> None:
 +    encounters = json.loads(read("src/data/wild_encounters.json"))
-+    raw = json.dumps(encounters)
-+    require(raw.count("SPECIES_PHYCUB") == 2,
-+            "Phycub must appear in both FireRed and LeafGreen Mt. Moon tables")
-+    require("MAP_MT_MOON_1F" in raw, "Phycub is not placed in Mt. Moon")
++    slot_weights = (20, 20, 10, 10, 10, 10, 5, 5, 4, 4, 1, 1)
++    mt_moon_tables = []
++    for group in encounters["wild_encounter_groups"]:
++        for encounter in group["encounters"]:
++            if encounter.get("map") == "MAP_MT_MOON_1F" and "land_mons" in encounter:
++                mt_moon_tables.append(encounter)
++
++    require({table["base_label"] for table in mt_moon_tables}
++            == {"sMtMoon1F_FireRed", "sMtMoon1F_LeafGreen"},
++            "Phycub must be configured for both Mt. Moon version tables")
++    for table in mt_moon_tables:
++        mons = table["land_mons"]["mons"]
++        phycub_rate = sum(weight for weight, mon in zip(slot_weights, mons)
++                          if mon["species"] == "SPECIES_PHYCUB")
++        require(phycub_rate == 80,
++                f"{table['base_label']} Phycub rate is {phycub_rate}%, expected 80%")
++        require(all(mon["min_level"] == 9 and mon["max_level"] == 10
++                    for mon in mons if mon["species"] == "SPECIES_PHYCUB"),
++                f"{table['base_label']} Phycub levels must remain 9-10")
 +
 +    orders = read("src/data/pokemon/pokedex_orders.h")
 +    for name in ("PHYCUB", "EMBRUIN", "INFERNURSA"):
@@ -5198,7 +5213,7 @@ index c7b4c053..19912f6a 100644
  
  === TRAINER_CUE_BALL_PAXTON ===
 diff --git a/src/data/wild_encounters.json b/src/data/wild_encounters.json
-index 84046ec1..d10481f0 100755
+index 84046ec1..e4da7711 100755
 --- a/src/data/wild_encounters.json
 +++ b/src/data/wild_encounters.json
 @@ -103,17 +103,17 @@
@@ -5335,6 +5350,57 @@ index 84046ec1..d10481f0 100755
                }
              ]
            },
+@@ -14831,34 +14831,34 @@
+             "encounter_rate": 7,
+             "mons": [
+               {
+-                "min_level": 7,
+-                "max_level": 7,
+-                "species": "SPECIES_ZUBAT"
++                "min_level": 9,
++                "max_level": 10,
++                "species": "SPECIES_PHYCUB"
+               },
+               {
+-                "min_level": 8,
+-                "max_level": 8,
+-                "species": "SPECIES_ZUBAT"
++                "min_level": 9,
++                "max_level": 10,
++                "species": "SPECIES_PHYCUB"
+               },
+               {
+-                "min_level": 7,
+-                "max_level": 7,
+-                "species": "SPECIES_GEODUDE"
++                "min_level": 9,
++                "max_level": 10,
++                "species": "SPECIES_PHYCUB"
+               },
+               {
+                 "min_level": 9,
+-                "max_level": 9,
+-                "species": "SPECIES_ZUBAT"
++                "max_level": 10,
++                "species": "SPECIES_PHYCUB"
+               },
+               {
+-                "min_level": 10,
++                "min_level": 9,
+                 "max_level": 10,
+-                "species": "SPECIES_ZUBAT"
++                "species": "SPECIES_PHYCUB"
+               },
+               {
+-                "min_level": 8,
+-                "max_level": 8,
+-                "species": "SPECIES_GEODUDE"
++                "min_level": 9,
++                "max_level": 10,
++                "species": "SPECIES_PHYCUB"
+               },
+               {
+                 "min_level": 9,
 @@ -14866,9 +14866,9 @@
                  "species": "SPECIES_GEODUDE"
                },
@@ -5344,10 +5410,61 @@ index 84046ec1..d10481f0 100755
 -                "species": "SPECIES_PARAS"
 +                "min_level": 9,
 +                "max_level": 10,
-+                "species": "SPECIES_PHYCUB"
++                "species": "SPECIES_ZUBAT"
                },
                {
                  "min_level": 7,
+@@ -14920,34 +14920,34 @@
+             "encounter_rate": 7,
+             "mons": [
+               {
+-                "min_level": 7,
+-                "max_level": 7,
+-                "species": "SPECIES_ZUBAT"
++                "min_level": 9,
++                "max_level": 10,
++                "species": "SPECIES_PHYCUB"
+               },
+               {
+-                "min_level": 8,
+-                "max_level": 8,
+-                "species": "SPECIES_ZUBAT"
++                "min_level": 9,
++                "max_level": 10,
++                "species": "SPECIES_PHYCUB"
+               },
+               {
+-                "min_level": 7,
+-                "max_level": 7,
+-                "species": "SPECIES_GEODUDE"
++                "min_level": 9,
++                "max_level": 10,
++                "species": "SPECIES_PHYCUB"
+               },
+               {
+                 "min_level": 9,
+-                "max_level": 9,
+-                "species": "SPECIES_ZUBAT"
++                "max_level": 10,
++                "species": "SPECIES_PHYCUB"
+               },
+               {
+-                "min_level": 10,
++                "min_level": 9,
+                 "max_level": 10,
+-                "species": "SPECIES_ZUBAT"
++                "species": "SPECIES_PHYCUB"
+               },
+               {
+-                "min_level": 8,
+-                "max_level": 8,
+-                "species": "SPECIES_GEODUDE"
++                "min_level": 9,
++                "max_level": 10,
++                "species": "SPECIES_PHYCUB"
+               },
+               {
+                 "min_level": 9,
 @@ -14955,9 +14955,9 @@
                  "species": "SPECIES_GEODUDE"
                },
@@ -5357,7 +5474,7 @@ index 84046ec1..d10481f0 100755
 -                "species": "SPECIES_PARAS"
 +                "min_level": 9,
 +                "max_level": 10,
-+                "species": "SPECIES_PHYCUB"
++                "species": "SPECIES_ZUBAT"
                },
                {
                  "min_level": 7,
