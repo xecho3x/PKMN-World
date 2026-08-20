@@ -5436,10 +5436,10 @@ index d4f9f3ea1acb30dca932c9559597048a0eb8348e..91255d9924eba3f6281489e8dbb5042c
      },
 diff --git a/src/data/pokemon/species_info/journey_custom.h b/src/data/pokemon/species_info/journey_custom.h
 new file mode 100644
-index 0000000000000000000000000000000000000000..de88e2c2b23f3f90f00ad395f8b48f4eb383967c
+index 0000000000000000000000000000000000000000..0b2bf850bf964afd13633e751ea85f905e6f3a04
 --- /dev/null
 +++ b/src/data/pokemon/species_info/journey_custom.h
-@@ -0,0 +1,631 @@
+@@ -0,0 +1,870 @@
 +// Pokémon Journey v5.1: Phycub's stronger bodies are temporary battle forms.
 +[SPECIES_PHYCUB] =
 +{
@@ -5670,7 +5670,7 @@ index 0000000000000000000000000000000000000000..de88e2c2b23f3f90f00ad395f8b48f4e
 +    .abilities = {ABILITY_OVERGROW, ABILITY_OVERGROW, ABILITY_MAGIC_GUARD},
 +    .bodyColor = BODY_COLOR_PURPLE,
 +    .speciesName = _("Psyshell"),
-+    .cryId = CRY_TURTWIG,
++    .cryId = CRY_TEDDIURSA,
 +    .natDexNum = NATIONAL_DEX_PSYSHELL,
 +    .categoryName = _("Sprout Shell"),
 +    .height = 5,
@@ -5739,7 +5739,7 @@ index 0000000000000000000000000000000000000000..de88e2c2b23f3f90f00ad395f8b48f4e
 +    .abilities = {ABILITY_OVERGROW, ABILITY_OVERGROW, ABILITY_MAGIC_GUARD},
 +    .bodyColor = BODY_COLOR_PURPLE,
 +    .speciesName = _("Verdachell"),
-+    .cryId = CRY_GROTLE,
++    .cryId = CRY_URSARING,
 +    .natDexNum = NATIONAL_DEX_VERDACHELL,
 +    .categoryName = _("Garden Shell"),
 +    .height = 13,
@@ -5808,7 +5808,7 @@ index 0000000000000000000000000000000000000000..de88e2c2b23f3f90f00ad395f8b48f4e
 +    .abilities = {ABILITY_OVERGROW, ABILITY_OVERGROW, ABILITY_MAGIC_GUARD},
 +    .bodyColor = BODY_COLOR_PURPLE,
 +    .speciesName = _("Astrachell"),
-+    .cryId = CRY_TORTERRA,
++    .cryId = CRY_HOUNDOOM,
 +    .natDexNum = NATIONAL_DEX_ASTRACHELL,
 +    .categoryName = _("Astral Shell"),
 +    .height = 24,
@@ -5855,26 +5855,6 @@ index 0000000000000000000000000000000000000000..de88e2c2b23f3f90f00ad395f8b48f4e
 +    .eggMoveLearnset = sPsyshellEggMoveLearnset,
 +},
 +
-+#define JOURNEY_PERMANENT_VISUALS(Name, Size, YOffset, IconPal, Cry, Jump, ShadowY, ShadowSize) \
-+    .cryId = Cry, \
-+    .frontPic = gMonFrontPic_##Name, \
-+    .frontPicSize = MON_COORDS_SIZE(Size, Size), \
-+    .frontPicYOffset = YOffset, \
-+    .frontAnimFrames = ANIM_FRAMES(ANIMCMD_FRAME(0, 18), ANIMCMD_FRAME(1, 22), ANIMCMD_FRAME(0, 10)), \
-+    .frontAnimId = ANIM_V_STRETCH, \
-+    .backPic = gMonBackPic_##Name, \
-+    .backPicSize = MON_COORDS_SIZE(Size, Size), \
-+    .backPicYOffset = YOffset, \
-+    .backAnimId = BACK_ANIM_H_VIBRATE, \
-+    .palette = gMonPalette_##Name, \
-+    .shinyPalette = gMonShinyPalette_##Name, \
-+    .iconSprite = gMonIcon_##Name, \
-+    .iconPalIndex = IconPal, \
-+    .pokemonJumpType = Jump, \
-+    SHADOW(0, ShadowY, ShadowSize) \
-+    FOOTPRINT(Name) \
-+    OVERWORLD(sPicTable_##Name, SIZE_32x32, SHADOW_SIZE_M, TRACKS_FOOT, sAnimTable_Following, gOverworldPalette_##Name, gShinyOverworldPalette_##Name)
-+
 +[SPECIES_AMPHID] =
 +{
 +    .baseHP = 50, .baseAttack = 45, .baseDefense = 55, .baseSpeed = 40,
@@ -5890,7 +5870,36 @@ index 0000000000000000000000000000000000000000..de88e2c2b23f3f90f00ad395f8b48f4e
 +    .height = 4, .weight = 82,
 +    .description = COMPOUND_STRING("Its featherlike gills sense every current.\nIt shapes water into playful coils that\nbecome fierce when a friend is threatened."),
 +    .pokemonScale = 450, .pokemonOffset = 18, .trainerScale = 256, .trainerOffset = 0,
-+    JOURNEY_PERMANENT_VISUALS(Amphid, 54, 7, 3, CRY_WOOPER, PKMN_JUMP_TYPE_FAST, 2, SHADOW_SIZE_S)
++    .cryId = CRY_WOOPER,
++    .frontPic = gMonFrontPic_Amphid,
++    .frontPicSize = MON_COORDS_SIZE(54, 54),
++    .frontPicYOffset = 7,
++    .frontAnimFrames = ANIM_FRAMES(
++        ANIMCMD_FRAME(0, 18),
++        ANIMCMD_FRAME(1, 22),
++        ANIMCMD_FRAME(0, 10),
++    ),
++    .frontAnimId = ANIM_V_STRETCH,
++    .backPic = gMonBackPic_Amphid,
++    .backPicSize = MON_COORDS_SIZE(54, 54),
++    .backPicYOffset = 7,
++    .backAnimId = BACK_ANIM_H_VIBRATE,
++    .palette = gMonPalette_Amphid,
++    .shinyPalette = gMonShinyPalette_Amphid,
++    .iconSprite = gMonIcon_Amphid,
++    .iconPalIndex = 3,
++    .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
++    SHADOW(0, 2, SHADOW_SIZE_S)
++    FOOTPRINT(Amphid)
++    OVERWORLD(
++        sPicTable_Amphid,
++        SIZE_32x32,
++        SHADOW_SIZE_M,
++        TRACKS_FOOT,
++        sAnimTable_Following,
++        gOverworldPalette_Amphid,
++        gShinyOverworldPalette_Amphid
++    )
 +    .levelUpLearnset = sAmphidLevelUpLearnset,
 +    .teachableLearnset = sKingdraTeachableLearnset,
 +    .eggMoveLearnset = sAmphidEggMoveLearnset,
@@ -5912,7 +5921,36 @@ index 0000000000000000000000000000000000000000..de88e2c2b23f3f90f00ad395f8b48f4e
 +    .height = 11, .weight = 340,
 +    .description = COMPOUND_STRING("The plumes around its neck read distant tides.\nIt rides a ribbon of water and never loses\nits balance, even inside a roaring storm."),
 +    .pokemonScale = 320, .pokemonOffset = 9, .trainerScale = 256, .trainerOffset = 0,
-+    JOURNEY_PERMANENT_VISUALS(Amphlume, 60, 2, 3, CRY_DRAGONAIR, PKMN_JUMP_TYPE_NONE, 6, SHADOW_SIZE_M)
++    .cryId = CRY_DRAGONAIR,
++    .frontPic = gMonFrontPic_Amphlume,
++    .frontPicSize = MON_COORDS_SIZE(60, 60),
++    .frontPicYOffset = 2,
++    .frontAnimFrames = ANIM_FRAMES(
++        ANIMCMD_FRAME(0, 18),
++        ANIMCMD_FRAME(1, 22),
++        ANIMCMD_FRAME(0, 10),
++    ),
++    .frontAnimId = ANIM_V_STRETCH,
++    .backPic = gMonBackPic_Amphlume,
++    .backPicSize = MON_COORDS_SIZE(60, 60),
++    .backPicYOffset = 2,
++    .backAnimId = BACK_ANIM_H_VIBRATE,
++    .palette = gMonPalette_Amphlume,
++    .shinyPalette = gMonShinyPalette_Amphlume,
++    .iconSprite = gMonIcon_Amphlume,
++    .iconPalIndex = 3,
++    .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
++    SHADOW(0, 6, SHADOW_SIZE_M)
++    FOOTPRINT(Amphlume)
++    OVERWORLD(
++        sPicTable_Amphlume,
++        SIZE_32x32,
++        SHADOW_SIZE_M,
++        TRACKS_FOOT,
++        sAnimTable_Following,
++        gOverworldPalette_Amphlume,
++        gShinyOverworldPalette_Amphlume
++    )
 +    .levelUpLearnset = sAmphidLevelUpLearnset,
 +    .teachableLearnset = sKingdraTeachableLearnset,
 +    .eggMoveLearnset = sAmphidEggMoveLearnset,
@@ -5934,7 +5972,36 @@ index 0000000000000000000000000000000000000000..de88e2c2b23f3f90f00ad395f8b48f4e
 +    .height = 19, .weight = 980,
 +    .description = COMPOUND_STRING("It swims through air on a self-made current.\nSailors say its luminous fins guide worthy\nships safely across impossible waves."),
 +    .pokemonScale = 270, .pokemonOffset = 2, .trainerScale = 280, .trainerOffset = 1,
-+    JOURNEY_PERMANENT_VISUALS(Amphidrake, 64, 0, 3, CRY_KINGDRA, PKMN_JUMP_TYPE_NONE, 10, SHADOW_SIZE_L)
++    .cryId = CRY_KINGDRA,
++    .frontPic = gMonFrontPic_Amphidrake,
++    .frontPicSize = MON_COORDS_SIZE(64, 64),
++    .frontPicYOffset = 0,
++    .frontAnimFrames = ANIM_FRAMES(
++        ANIMCMD_FRAME(0, 18),
++        ANIMCMD_FRAME(1, 22),
++        ANIMCMD_FRAME(0, 10),
++    ),
++    .frontAnimId = ANIM_V_STRETCH,
++    .backPic = gMonBackPic_Amphidrake,
++    .backPicSize = MON_COORDS_SIZE(64, 64),
++    .backPicYOffset = 0,
++    .backAnimId = BACK_ANIM_H_VIBRATE,
++    .palette = gMonPalette_Amphidrake,
++    .shinyPalette = gMonShinyPalette_Amphidrake,
++    .iconSprite = gMonIcon_Amphidrake,
++    .iconPalIndex = 3,
++    .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
++    SHADOW(0, 10, SHADOW_SIZE_L)
++    FOOTPRINT(Amphidrake)
++    OVERWORLD(
++        sPicTable_Amphidrake,
++        SIZE_32x32,
++        SHADOW_SIZE_M,
++        TRACKS_FOOT,
++        sAnimTable_Following,
++        gOverworldPalette_Amphidrake,
++        gShinyOverworldPalette_Amphidrake
++    )
 +    .levelUpLearnset = sAmphidLevelUpLearnset,
 +    .teachableLearnset = sKingdraTeachableLearnset,
 +    .eggMoveLearnset = sAmphidEggMoveLearnset,
@@ -5955,7 +6022,36 @@ index 0000000000000000000000000000000000000000..de88e2c2b23f3f90f00ad395f8b48f4e
 +    .height = 5, .weight = 105,
 +    .description = COMPOUND_STRING("Its tail flame flares whenever it practices.\nIt challenges its own shadow to footwork\ncontests until every step is perfect."),
 +    .pokemonScale = 430, .pokemonOffset = 17, .trainerScale = 256, .trainerOffset = 0,
-+    JOURNEY_PERMANENT_VISUALS(Joeyro, 54, 7, 0, CRY_TORCHIC, PKMN_JUMP_TYPE_FAST, 2, SHADOW_SIZE_S)
++    .cryId = CRY_TORCHIC,
++    .frontPic = gMonFrontPic_Joeyro,
++    .frontPicSize = MON_COORDS_SIZE(54, 54),
++    .frontPicYOffset = 7,
++    .frontAnimFrames = ANIM_FRAMES(
++        ANIMCMD_FRAME(0, 18),
++        ANIMCMD_FRAME(1, 22),
++        ANIMCMD_FRAME(0, 10),
++    ),
++    .frontAnimId = ANIM_V_STRETCH,
++    .backPic = gMonBackPic_Joeyro,
++    .backPicSize = MON_COORDS_SIZE(54, 54),
++    .backPicYOffset = 7,
++    .backAnimId = BACK_ANIM_H_VIBRATE,
++    .palette = gMonPalette_Joeyro,
++    .shinyPalette = gMonShinyPalette_Joeyro,
++    .iconSprite = gMonIcon_Joeyro,
++    .iconPalIndex = 0,
++    .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
++    SHADOW(0, 2, SHADOW_SIZE_S)
++    FOOTPRINT(Joeyro)
++    OVERWORLD(
++        sPicTable_Joeyro,
++        SIZE_32x32,
++        SHADOW_SIZE_M,
++        TRACKS_FOOT,
++        sAnimTable_Following,
++        gOverworldPalette_Joeyro,
++        gShinyOverworldPalette_Joeyro
++    )
 +    .levelUpLearnset = sJoeyroLevelUpLearnset,
 +    .teachableLearnset = sBlazikenTeachableLearnset,
 +    .eggMoveLearnset = sJoeyroEggMoveLearnset,
@@ -5977,7 +6073,36 @@ index 0000000000000000000000000000000000000000..de88e2c2b23f3f90f00ad395f8b48f4e
 +    .height = 12, .weight = 390,
 +    .description = COMPOUND_STRING("A heated sprint turns its legs into springs.\nKickaroo can change direction in mid-kick\nand land before its opponent sees the feint."),
 +    .pokemonScale = 315, .pokemonOffset = 8, .trainerScale = 256, .trainerOffset = 0,
-+    JOURNEY_PERMANENT_VISUALS(Kickaroo, 60, 2, 0, CRY_COMBUSKEN, PKMN_JUMP_TYPE_NONE, 6, SHADOW_SIZE_M)
++    .cryId = CRY_COMBUSKEN,
++    .frontPic = gMonFrontPic_Kickaroo,
++    .frontPicSize = MON_COORDS_SIZE(60, 60),
++    .frontPicYOffset = 2,
++    .frontAnimFrames = ANIM_FRAMES(
++        ANIMCMD_FRAME(0, 18),
++        ANIMCMD_FRAME(1, 22),
++        ANIMCMD_FRAME(0, 10),
++    ),
++    .frontAnimId = ANIM_V_STRETCH,
++    .backPic = gMonBackPic_Kickaroo,
++    .backPicSize = MON_COORDS_SIZE(60, 60),
++    .backPicYOffset = 2,
++    .backAnimId = BACK_ANIM_H_VIBRATE,
++    .palette = gMonPalette_Kickaroo,
++    .shinyPalette = gMonShinyPalette_Kickaroo,
++    .iconSprite = gMonIcon_Kickaroo,
++    .iconPalIndex = 0,
++    .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
++    SHADOW(0, 6, SHADOW_SIZE_M)
++    FOOTPRINT(Kickaroo)
++    OVERWORLD(
++        sPicTable_Kickaroo,
++        SIZE_32x32,
++        SHADOW_SIZE_M,
++        TRACKS_FOOT,
++        sAnimTable_Following,
++        gOverworldPalette_Kickaroo,
++        gShinyOverworldPalette_Kickaroo
++    )
 +    .levelUpLearnset = sJoeyroLevelUpLearnset,
 +    .teachableLearnset = sBlazikenTeachableLearnset,
 +    .eggMoveLearnset = sJoeyroEggMoveLearnset,
@@ -5999,7 +6124,36 @@ index 0000000000000000000000000000000000000000..de88e2c2b23f3f90f00ad395f8b48f4e
 +    .height = 20, .weight = 910,
 +    .description = COMPOUND_STRING("Its blazing mane measures fighting spirit.\nOne earthshaking kick leaves a ring of glass\nwhere sand was fused by the sudden heat."),
 +    .pokemonScale = 270, .pokemonOffset = 1, .trainerScale = 285, .trainerOffset = 1,
-+    JOURNEY_PERMANENT_VISUALS(Kangarooze, 64, 0, 0, CRY_BLAZIKEN, PKMN_JUMP_TYPE_NONE, 10, SHADOW_SIZE_L)
++    .cryId = CRY_BLAZIKEN,
++    .frontPic = gMonFrontPic_Kangarooze,
++    .frontPicSize = MON_COORDS_SIZE(64, 64),
++    .frontPicYOffset = 0,
++    .frontAnimFrames = ANIM_FRAMES(
++        ANIMCMD_FRAME(0, 18),
++        ANIMCMD_FRAME(1, 22),
++        ANIMCMD_FRAME(0, 10),
++    ),
++    .frontAnimId = ANIM_V_STRETCH,
++    .backPic = gMonBackPic_Kangarooze,
++    .backPicSize = MON_COORDS_SIZE(64, 64),
++    .backPicYOffset = 0,
++    .backAnimId = BACK_ANIM_H_VIBRATE,
++    .palette = gMonPalette_Kangarooze,
++    .shinyPalette = gMonShinyPalette_Kangarooze,
++    .iconSprite = gMonIcon_Kangarooze,
++    .iconPalIndex = 0,
++    .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
++    SHADOW(0, 10, SHADOW_SIZE_L)
++    FOOTPRINT(Kangarooze)
++    OVERWORLD(
++        sPicTable_Kangarooze,
++        SIZE_32x32,
++        SHADOW_SIZE_M,
++        TRACKS_FOOT,
++        sAnimTable_Following,
++        gOverworldPalette_Kangarooze,
++        gShinyOverworldPalette_Kangarooze
++    )
 +    .levelUpLearnset = sJoeyroLevelUpLearnset,
 +    .teachableLearnset = sBlazikenTeachableLearnset,
 +    .eggMoveLearnset = sJoeyroEggMoveLearnset,
@@ -6020,7 +6174,36 @@ index 0000000000000000000000000000000000000000..de88e2c2b23f3f90f00ad395f8b48f4e
 +    .height = 7, .weight = 1,
 +    .description = COMPOUND_STRING("A shark's lost wish gathered seawater into\nthis playful shape. Its fins vanish into mist\nwhenever it swims through a solid wall."),
 +    .pokemonScale = 400, .pokemonOffset = 15, .trainerScale = 256, .trainerOffset = 0,
-+    JOURNEY_PERMANENT_VISUALS(Fintom, 54, 7, 3, CRY_SHUPPET, PKMN_JUMP_TYPE_FAST, 2, SHADOW_SIZE_S)
++    .cryId = CRY_SHUPPET,
++    .frontPic = gMonFrontPic_Fintom,
++    .frontPicSize = MON_COORDS_SIZE(54, 54),
++    .frontPicYOffset = 7,
++    .frontAnimFrames = ANIM_FRAMES(
++        ANIMCMD_FRAME(0, 18),
++        ANIMCMD_FRAME(1, 22),
++        ANIMCMD_FRAME(0, 10),
++    ),
++    .frontAnimId = ANIM_V_STRETCH,
++    .backPic = gMonBackPic_Fintom,
++    .backPicSize = MON_COORDS_SIZE(54, 54),
++    .backPicYOffset = 7,
++    .backAnimId = BACK_ANIM_H_VIBRATE,
++    .palette = gMonPalette_Fintom,
++    .shinyPalette = gMonShinyPalette_Fintom,
++    .iconSprite = gMonIcon_Fintom,
++    .iconPalIndex = 3,
++    .pokemonJumpType = PKMN_JUMP_TYPE_FAST,
++    SHADOW(0, 2, SHADOW_SIZE_S)
++    FOOTPRINT(Fintom)
++    OVERWORLD(
++        sPicTable_Fintom,
++        SIZE_32x32,
++        SHADOW_SIZE_M,
++        TRACKS_FOOT,
++        sAnimTable_Following,
++        gOverworldPalette_Fintom,
++        gShinyOverworldPalette_Fintom
++    )
 +    .levelUpLearnset = sFintomLevelUpLearnset,
 +    .teachableLearnset = sSharpedoTeachableLearnset,
 +    .eggMoveLearnset = sFintomEggMoveLearnset,
@@ -6042,7 +6225,36 @@ index 0000000000000000000000000000000000000000..de88e2c2b23f3f90f00ad395f8b48f4e
 +    .height = 14, .weight = 120,
 +    .description = COMPOUND_STRING("Spectral limbs let it stalk both shore and sea.\nThe lights on abandoned ships flicker blue\nwhen Hauntide silently passes underneath."),
 +    .pokemonScale = 315, .pokemonOffset = 8, .trainerScale = 256, .trainerOffset = 0,
-+    JOURNEY_PERMANENT_VISUALS(Hauntide, 60, 2, 3, CRY_BANETTE, PKMN_JUMP_TYPE_NONE, 6, SHADOW_SIZE_M)
++    .cryId = CRY_BANETTE,
++    .frontPic = gMonFrontPic_Hauntide,
++    .frontPicSize = MON_COORDS_SIZE(60, 60),
++    .frontPicYOffset = 2,
++    .frontAnimFrames = ANIM_FRAMES(
++        ANIMCMD_FRAME(0, 18),
++        ANIMCMD_FRAME(1, 22),
++        ANIMCMD_FRAME(0, 10),
++    ),
++    .frontAnimId = ANIM_V_STRETCH,
++    .backPic = gMonBackPic_Hauntide,
++    .backPicSize = MON_COORDS_SIZE(60, 60),
++    .backPicYOffset = 2,
++    .backAnimId = BACK_ANIM_H_VIBRATE,
++    .palette = gMonPalette_Hauntide,
++    .shinyPalette = gMonShinyPalette_Hauntide,
++    .iconSprite = gMonIcon_Hauntide,
++    .iconPalIndex = 3,
++    .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
++    SHADOW(0, 6, SHADOW_SIZE_M)
++    FOOTPRINT(Hauntide)
++    OVERWORLD(
++        sPicTable_Hauntide,
++        SIZE_32x32,
++        SHADOW_SIZE_M,
++        TRACKS_FOOT,
++        sAnimTable_Following,
++        gOverworldPalette_Hauntide,
++        gShinyOverworldPalette_Hauntide
++    )
 +    .levelUpLearnset = sFintomLevelUpLearnset,
 +    .teachableLearnset = sSharpedoTeachableLearnset,
 +    .eggMoveLearnset = sFintomEggMoveLearnset,
@@ -6064,13 +6276,40 @@ index 0000000000000000000000000000000000000000..de88e2c2b23f3f90f00ad395f8b48f4e
 +    .height = 22, .weight = 666,
 +    .description = COMPOUND_STRING("It walks from the deepest water at midnight.\nThough its body can crush steel, its ghostly\nclaws pass gently through those it protects."),
 +    .pokemonScale = 265, .pokemonOffset = 1, .trainerScale = 290, .trainerOffset = 2,
-+    JOURNEY_PERMANENT_VISUALS(Sharkraith, 64, 0, 3, CRY_DUSKNOIR, PKMN_JUMP_TYPE_NONE, 10, SHADOW_SIZE_L)
++    .cryId = CRY_DUSKNOIR,
++    .frontPic = gMonFrontPic_Sharkraith,
++    .frontPicSize = MON_COORDS_SIZE(64, 64),
++    .frontPicYOffset = 0,
++    .frontAnimFrames = ANIM_FRAMES(
++        ANIMCMD_FRAME(0, 18),
++        ANIMCMD_FRAME(1, 22),
++        ANIMCMD_FRAME(0, 10),
++    ),
++    .frontAnimId = ANIM_V_STRETCH,
++    .backPic = gMonBackPic_Sharkraith,
++    .backPicSize = MON_COORDS_SIZE(64, 64),
++    .backPicYOffset = 0,
++    .backAnimId = BACK_ANIM_H_VIBRATE,
++    .palette = gMonPalette_Sharkraith,
++    .shinyPalette = gMonShinyPalette_Sharkraith,
++    .iconSprite = gMonIcon_Sharkraith,
++    .iconPalIndex = 3,
++    .pokemonJumpType = PKMN_JUMP_TYPE_NONE,
++    SHADOW(0, 10, SHADOW_SIZE_L)
++    FOOTPRINT(Sharkraith)
++    OVERWORLD(
++        sPicTable_Sharkraith,
++        SIZE_32x32,
++        SHADOW_SIZE_M,
++        TRACKS_FOOT,
++        sAnimTable_Following,
++        gOverworldPalette_Sharkraith,
++        gShinyOverworldPalette_Sharkraith
++    )
 +    .levelUpLearnset = sFintomLevelUpLearnset,
 +    .teachableLearnset = sSharpedoTeachableLearnset,
 +    .eggMoveLearnset = sFintomEggMoveLearnset,
 +},
-+
-+#undef JOURNEY_PERMANENT_VISUALS
 diff --git a/src/data/trainers.party b/src/data/trainers.party
 index 60ffe29f212b598554247a73b92f4139bda379aa..806a29cb5cf0dd130344c33bb28f16e4d2ccf4c6 100644
 --- a/src/data/trainers.party
