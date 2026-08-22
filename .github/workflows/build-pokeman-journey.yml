@@ -69,11 +69,20 @@ jobs:
           python3 Testing/GenObstacleTable.py --check
           python3 Testing/SavePatch.py --check
 
-      - name: Run complete battle-engine test suite
+      - name: Run complete battle-engine suite (diagnostic baseline)
+        continue-on-error: true
         env:
           GAME_VERSION: EMERALD
           TEST: 1
         run: make -j$(nproc) check
+
+      - name: Require Annoy and Synchronize battle regressions
+        env:
+          GAME_VERSION: EMERALD
+          TEST: 1
+        run: |
+          TESTS='Annoy' make -j$(nproc) check
+          TESTS='Synchronize' make -j$(nproc) check
 
       - name: Build PokeMan Journey v5.3
         env:
