@@ -12849,7 +12849,7 @@ index 0000000000000000000000000000000000000000..3f3e6fdaa15636ebc5dc979c98f8914c
 +241 255 248
 diff --git a/test/battle/ability/annoy.c b/test/battle/ability/annoy.c
 new file mode 100644
-index 0000000000000000000000000000000000000000..7995d225798912f72a55f7066857a8bebe4a2c3a
+index 0000000000000000000000000000000000000000..64196c922b457be35f60fee10d1e6cde7d4faa47
 --- /dev/null
 +++ b/test/battle/ability/annoy.c
 @@ -0,0 +1,219 @@
@@ -12913,7 +12913,7 @@ index 0000000000000000000000000000000000000000..7995d225798912f72a55f7066857a8be
 +        }
 +    } THEN {
 +        EXPECT(player->status1 & STATUS1_SLEEP);
-+        EXPECT_EQ(opponent->volatiles.confusionTurns, 0);
++        EXPECT(opponent->volatiles.confusionTurns == 0);
 +    }
 +}
 +
@@ -12934,7 +12934,7 @@ index 0000000000000000000000000000000000000000..7995d225798912f72a55f7066857a8be
 +        }
 +    } THEN {
 +        EXPECT(player->status1 & STATUS1_POISON);
-+        EXPECT_EQ(opponent->volatiles.confusionTurns, 0);
++        EXPECT(opponent->volatiles.confusionTurns == 0);
 +    }
 +}
 +
@@ -12957,7 +12957,7 @@ index 0000000000000000000000000000000000000000..7995d225798912f72a55f7066857a8be
 +        }
 +    } THEN {
 +        EXPECT(player->status1 & STATUS1_ANY);
-+        EXPECT_EQ(opponent->volatiles.confusionTurns, 0);
++        EXPECT(opponent->volatiles.confusionTurns == 0);
 +    }
 +}
 +
@@ -12975,7 +12975,7 @@ index 0000000000000000000000000000000000000000..7995d225798912f72a55f7066857a8be
 +            ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponent);
 +        }
 +    } THEN {
-+        EXPECT_EQ(opponent->volatiles.confusionTurns, 0);
++        EXPECT(opponent->volatiles.confusionTurns == 0);
 +    }
 +}
 +
@@ -12996,7 +12996,7 @@ index 0000000000000000000000000000000000000000..7995d225798912f72a55f7066857a8be
 +        }
 +    } THEN {
 +        EXPECT(playerLeft->status1 & STATUS1_BURN);
-+        EXPECT_EQ(playerRight->volatiles.confusionTurns, 0);
++        EXPECT(playerRight->volatiles.confusionTurns == 0);
 +    }
 +}
 +
@@ -13015,7 +13015,7 @@ index 0000000000000000000000000000000000000000..7995d225798912f72a55f7066857a8be
 +        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponentRight);
 +        NOT ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponentLeft);
 +    } THEN {
-+        EXPECT_EQ(opponentLeft->volatiles.confusionTurns, 0);
++        EXPECT(opponentLeft->volatiles.confusionTurns == 0);
 +        EXPECT(opponentRight->volatiles.confusionTurns > 0);
 +    }
 +}
@@ -13032,7 +13032,7 @@ index 0000000000000000000000000000000000000000..7995d225798912f72a55f7066857a8be
 +        ABILITY_POPUP(player, ABILITY_ANNOY);
 +        NOT ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponent);
 +    } THEN {
-+        EXPECT_EQ(opponent->volatiles.confusionTurns, 0);
++        EXPECT(opponent->volatiles.confusionTurns == 0);
 +    }
 +}
 +
@@ -13049,7 +13049,7 @@ index 0000000000000000000000000000000000000000..7995d225798912f72a55f7066857a8be
 +        ABILITY_POPUP(player, ABILITY_ANNOY);
 +        NOT ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponent);
 +    } THEN {
-+        EXPECT_EQ(opponent->volatiles.confusionTurns, 0);
++        EXPECT(opponent->volatiles.confusionTurns == 0);
 +    }
 +}
 +
