@@ -5919,14 +5919,20 @@ index b2f5f3cc02d1c9d7c9053ef05267a49e804a42ac..a55ccf183b32175cde28dc43960de7c2
      NATIONAL_DEX_DUSKNOIR,
      NATIONAL_DEX_JELLICENT,
 diff --git a/src/data/pokemon/species_info.h b/src/data/pokemon/species_info.h
-index f7616e53dc8a3f39a71518f85c3f431880c147d2..189acd3aa9da3cf5ee607632683d8a6bc17cbfcd 100644
+index f7616e53dc8a3f39a71518f85c3f431880c147d2..8acbfd506b956fa5646231ec6f51af0d51258f73 100644
 --- a/src/data/pokemon/species_info.h
 +++ b/src/data/pokemon/species_info.h
-@@ -159,6 +159,7 @@ const struct SpeciesInfo gSpeciesInfo[] =
+@@ -159,6 +159,13 @@ const struct SpeciesInfo gSpeciesInfo[] =
      #include "species_info/gen_7_families.h"
      #include "species_info/gen_8_families.h"
      #include "species_info/gen_9_families.h"
++    // The battle-test configuration deliberately enables every canonical
++    // family, including the dormant Sinnoh IDs reused by Journey's custom
++    // species. Keep the canonical test fixtures in that build and install the
++    // Journey replacements only in the shipping ROM.
++    #if !TESTING
 +    #include "species_info/journey_custom.h"
++    #endif
  
      [SPECIES_EGG] =
      {
@@ -6001,7 +6007,7 @@ index d4f9f3ea1acb30dca932c9559597048a0eb8348e..91255d9924eba3f6281489e8dbb5042c
      },
 diff --git a/src/data/pokemon/species_info/journey_custom.h b/src/data/pokemon/species_info/journey_custom.h
 new file mode 100644
-index 0000000000000000000000000000000000000000..3885199a528abc986213d25688b9eae3b5dd05e5
+index 0000000000000000000000000000000000000000..23084ee923a89d76e81bc56ac3482513a52aeff7
 --- /dev/null
 +++ b/src/data/pokemon/species_info/journey_custom.h
 @@ -0,0 +1,990 @@
@@ -6899,7 +6905,7 @@ index 0000000000000000000000000000000000000000..3885199a528abc986213d25688b9eae3
 +    .frontPic = gMonFrontPic_Danyip,
 +    .frontPicSize = MON_COORDS_SIZE(52, 52), .frontPicYOffset = 8,
 +    .frontAnimFrames = ANIM_FRAMES(
-+        ANIMCMD_FRAME(0, 22), ANIMCMD_FRAME(1, 22), ANIMCMD_FRAME(0, 10)),
++        ANIMCMD_FRAME(0, 22), ANIMCMD_FRAME(1, 22), ANIMCMD_FRAME(0, 10),),
 +    .frontAnimId = ANIM_V_SQUISH_AND_BOUNCE,
 +    .backPic = gMonBackPic_Danyip,
 +    .backPicSize = MON_COORDS_SIZE(52, 52), .backPicYOffset = 8,
@@ -6939,7 +6945,7 @@ index 0000000000000000000000000000000000000000..3885199a528abc986213d25688b9eae3
 +    .frontPic = gMonFrontPic_Danny,
 +    .frontPicSize = MON_COORDS_SIZE(59, 59), .frontPicYOffset = 3,
 +    .frontAnimFrames = ANIM_FRAMES(
-+        ANIMCMD_FRAME(0, 22), ANIMCMD_FRAME(1, 22), ANIMCMD_FRAME(0, 10)),
++        ANIMCMD_FRAME(0, 22), ANIMCMD_FRAME(1, 22), ANIMCMD_FRAME(0, 10),),
 +    .frontAnimId = ANIM_V_JUMPS_H_JUMPS,
 +    .backPic = gMonBackPic_Danny,
 +    .backPicSize = MON_COORDS_SIZE(59, 59), .backPicYOffset = 3,
@@ -6980,7 +6986,7 @@ index 0000000000000000000000000000000000000000..3885199a528abc986213d25688b9eae3
 +    .frontPic = gMonFrontPic_Danimal,
 +    .frontPicSize = MON_COORDS_SIZE(64, 64), .frontPicYOffset = 0,
 +    .frontAnimFrames = ANIM_FRAMES(
-+        ANIMCMD_FRAME(0, 22), ANIMCMD_FRAME(1, 22), ANIMCMD_FRAME(0, 10)),
++        ANIMCMD_FRAME(0, 22), ANIMCMD_FRAME(1, 22), ANIMCMD_FRAME(0, 10),),
 +    .frontAnimId = ANIM_GROW_VIBRATE,
 +    .backPic = gMonBackPic_Danimal,
 +    .backPicSize = MON_COORDS_SIZE(64, 64), .backPicYOffset = 0,
