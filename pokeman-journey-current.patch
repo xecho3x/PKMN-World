@@ -1852,7 +1852,7 @@ index df16d25d128200d04ef8f755028bb1a5de83af5c..4a33600205017ba88f1879780aa5200e
  	end
  
 diff --git a/data/maps/CinnabarIsland_Gym_Frlg/scripts.inc b/data/maps/CinnabarIsland_Gym_Frlg/scripts.inc
-index 8426b1cbe1e62b7242208a1f546e1c0a3a8e43b1..cbaf0966e1af8f028fed8c9ec4485ae558ce46d6 100644
+index 8426b1cbe1e62b7242208a1f546e1c0a3a8e43b1..640787a9e58af026db99b6d0e3b5b5e089826a8b 100644
 --- a/data/maps/CinnabarIsland_Gym_Frlg/scripts.inc
 +++ b/data/maps/CinnabarIsland_Gym_Frlg/scripts.inc
 @@ -49,6 +49,7 @@ CinnabarIsland_Gym_EventScript_Blaine::
@@ -1863,7 +1863,7 @@ index 8426b1cbe1e62b7242208a1f546e1c0a3a8e43b1..cbaf0966e1af8f028fed8c9ec4485ae5
  	goto_if_set FLAG_KANTO_CHAMPION, CinnabarIsland_Gym_EventScript_OfferRematch
  	msgbox CinnabarIsland_Gym_Text_BlainePostBattle
  	release
-@@ -72,6 +73,12 @@ CinnabarIsland_Gym_EventScript_GiveTM38::
+@@ -72,6 +73,29 @@ CinnabarIsland_Gym_EventScript_GiveTM38::
  	giveitem_msg CinnabarIsland_Gym_Text_ReceivedTM38FromBlaine, ITEM_TM38
  	setflag FLAG_GOT_TM38_FROM_BLAINE
  	msgbox CinnabarIsland_Gym_Text_FireBlastIsUltimateFireMove
@@ -1871,20 +1871,32 @@ index 8426b1cbe1e62b7242208a1f546e1c0a3a8e43b1..cbaf0966e1af8f028fed8c9ec4485ae5
 +	end
 +
 +CinnabarIsland_Gym_EventScript_GiveStarter::
++	goto_if_eq VAR_STARTER_MON_FRLG, 0, CinnabarIsland_Gym_EventScript_GiveCyndaquil
++	goto_if_eq VAR_STARTER_MON_FRLG, 1, CinnabarIsland_Gym_EventScript_GiveBulbasaur
++	setvar VAR_0x8004, SPECIES_MUDKIP
++	goto CinnabarIsland_Gym_EventScript_GiveStarterMon
++
++CinnabarIsland_Gym_EventScript_GiveCyndaquil::
++	setvar VAR_0x8004, SPECIES_CYNDAQUIL
++	goto CinnabarIsland_Gym_EventScript_GiveStarterMon
++
++CinnabarIsland_Gym_EventScript_GiveBulbasaur::
++	setvar VAR_0x8004, SPECIES_BULBASAUR
++
++CinnabarIsland_Gym_EventScript_GiveStarterMon::
++	bufferspeciesname STR_VAR_1, VAR_0x8004
++	msgbox CinnabarIsland_Gym_Text_StarterGift
++	givemon VAR_0x8004, 40
++	goto_if_eq VAR_RESULT, MON_CANT_GIVE, Common_EventScript_NoMoreRoomForPokemon
 +	setflag FLAG_V04_KANTO_STARTER_BADGE7
-+	msgbox CinnabarIsland_Gym_Text_MtEmberStarterHint
++	msgbox CinnabarIsland_Gym_Text_StarterEntrusted
  	release
  	end
  
-@@ -749,6 +756,20 @@ CinnabarIsland_Gym_Text_BlainePostBattle::
+@@ -749,6 +773,15 @@ CinnabarIsland_Gym_Text_BlainePostBattle::
  CinnabarIsland_Gym_Text_MakeSpaceForThis::
  	.string "Make space for this, child!$"
  
-+CinnabarIsland_Gym_Text_MtEmberStarterHint::
-+	.string "Your VOLCANO BADGE has stirred a rare\n"
-+	.string "flame on MT. EMBER. Seek the old tutor\n"
-+	.string "there if JOEYRO is not already yours.$"
-+
 +CinnabarIsland_Gym_Text_StarterGift::
 +	.string "Your VOLCANOBADGE proves your fire!\p"
 +	.string "Raise this {STR_VAR_1} with that\n"
@@ -1897,7 +1909,7 @@ index 8426b1cbe1e62b7242208a1f546e1c0a3a8e43b1..cbaf0966e1af8f028fed8c9ec4485ae5
  CinnabarIsland_Gym_Text_ErikIntro::
  	.string "Do you know how hot POKéMON fire\n"
  	.string "breath can get?$"
-@@ -933,4 +954,3 @@ CinnabarIsland_Gym_Text_RematchPost::
+@@ -933,4 +966,3 @@ CinnabarIsland_Gym_Text_RematchPost::
  CinnabarIsland_Gym_Text_RematchDecline::
  	.string "Cooled your feet, hm?\n"
  	.string "My fire will wait!$"
