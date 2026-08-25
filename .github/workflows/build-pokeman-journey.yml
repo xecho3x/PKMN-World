@@ -1,16 +1,16 @@
-name: Build PokeMan Journey v5.3
+name: Build PokeMan Journey v5.4 Canonical
 
 on:
   workflow_dispatch:
   pull_request:
     paths:
       - pokeman-journey-current.patch
-      - pokeman-journey-v5.3.patch
+      - pokeman-journey-v5.4.patch
       - .github/workflows/build-pokeman-journey.yml
   push:
     paths:
       - pokeman-journey-current.patch
-      - pokeman-journey-v5.3.patch
+      - pokeman-journey-v5.4.patch
       - .github/workflows/build-pokeman-journey.yml
 
 permissions:
@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   build:
-    name: Build complete 386 + custom families GBA ROM
+    name: Build canonical-roster three-region GBA ROM
     runs-on: ubuntu-latest
     timeout-minutes: 120
 
@@ -26,19 +26,19 @@ jobs:
       - name: Check out PKMN-World source
         uses: actions/checkout@v4
 
-      - name: Verify v5.3 patch
+      - name: Verify v5.4 patch
         run: git apply --check pokeman-journey-current.patch
 
-      - name: Apply PokeMan Journey v5.3
+      - name: Apply PokeMan Journey v5.4
         run: git apply --verbose pokeman-journey-current.patch
 
-      - name: Confirm v5.3 identity and regional starter order
+      - name: Confirm v5.4 identity and regional starter order
         run: |
-          grep -Fq 'TITLE        ?= POKEMAN V530' Makefile
-          grep -Fq 'REVISION    := 14' Makefile
-          grep -Fq 'FILE_NAME := pokeman_journey_v530_danyip' Makefile
-          grep -Fq 'NEW GAME  V5.3' src/main_menu.c
-          grep -Eq '\[REGION_KANTO\][[:space:]]*=[[:space:]]*\{[[:space:]]*SPECIES_PSYSHELL,[[:space:]]*SPECIES_AMPHID,[[:space:]]*SPECIES_JOEYRO[[:space:]]*\}' src/starter_choose.c
+          grep -Fq 'TITLE        ?= POKEMAN V540' Makefile
+          grep -Fq 'REVISION    := 15' Makefile
+          grep -Fq 'FILE_NAME := pokeman_journey_v540_canonical' Makefile
+          grep -Fq 'NEW GAME  V5.4' src/main_menu.c
+          grep -Eq '\[REGION_KANTO\][[:space:]]*=[[:space:]]*\{[[:space:]]*SPECIES_BULBASAUR,[[:space:]]*SPECIES_MUDKIP,[[:space:]]*SPECIES_CYNDAQUIL[[:space:]]*\}' src/starter_choose.c
           grep -Fq '[REGION_HOENN] = { SPECIES_CHIKORITA,  SPECIES_TORCHIC,   SPECIES_SQUIRTLE }' src/starter_choose.c
 
       - name: Install GBA compiler
@@ -60,11 +60,8 @@ jobs:
           python3 Testing/ValidateScripts.py
           python3 Testing/ValidateOwMonPlacements.py
           python3 Testing/ValidateMapEvents.py
-          python3 Testing/ValidateV04Kanto.py
           python3 Testing/ValidateRegional386.py
-          python3 Testing/ValidatePhycubLine.py
-          python3 Testing/ValidateV52CustomSpecies.py
-          python3 Testing/ValidateDanyipLine.py
+          python3 Testing/ValidateCanonicalV54.py
           python3 Testing/ValidateAlwaysObey.py
           python3 Testing/GenObstacleTable.py --check
           python3 Testing/SavePatch.py --check
@@ -76,41 +73,40 @@ jobs:
           TEST: 1
         run: make -j$(nproc) check
 
-      - name: Require Annoy and Synchronize battle regressions
+      - name: Require Synchronize battle regressions
         env:
           GAME_VERSION: EMERALD
           TEST: 1
         run: |
-          TESTS='Annoy' make -j$(nproc) check
           TESTS='Synchronize' make -j$(nproc) check
 
-      - name: Build PokeMan Journey v5.3
+      - name: Build PokeMan Journey v5.4
         env:
           GAME_VERSION: EMERALD
         run: make -j$(nproc)
 
-      - name: Verify Android-compatible v5.3 ROM
+      - name: Verify Android-compatible v5.4 ROM
         run: |
-          test -f pokeman_journey_v530_danyip.gba
-          ls -lh pokeman_journey_v530_danyip.gba
-          sha256sum pokeman_journey_v530_danyip.gba
+          test -f pokeman_journey_v540_canonical.gba
+          ls -lh pokeman_journey_v540_canonical.gba
+          sha256sum pokeman_journey_v540_canonical.gba
           python3 - <<'PY'
           from pathlib import Path
-          rom = Path("pokeman_journey_v530_danyip.gba").read_bytes()
+          rom = Path("pokeman_journey_v540_canonical.gba").read_bytes()
           assert len(rom) == 32 * 1024 * 1024
-          assert rom[0xA0:0xAC] == b"POKEMAN V530"
+          assert rom[0xA0:0xAC] == b"POKEMAN V540"
           assert rom[0xAC:0xB0] == b"BPEE"
-          assert rom[0xBC] == 14
+          assert rom[0xBC] == 15
           assert b"FLASH1M_V" in rom
           expected = (-(sum(rom[0xA0:0xBD]) + 0x19)) & 0xFF
           assert rom[0xBD] == expected
-          print("Verified Emerald ID, Flash1M signature, v5.3 revision, and header checksum")
+          print("Verified Emerald ID, Flash1M signature, v5.4 revision, and header checksum")
           PY
 
-      - name: Upload playable v5.3 ROM
+      - name: Upload playable v5.4 ROM
         uses: actions/upload-artifact@v4
         with:
-          name: PokeMan-Journey-v5.3-Danyip
-          path: pokeman_journey_v530_danyip.gba
+          name: PokeMan-Journey-v5.4-Canonical
+          path: pokeman_journey_v540_canonical.gba
           if-no-files-found: error
           retention-days: 14
