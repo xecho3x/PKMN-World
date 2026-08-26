@@ -1,11 +1,22 @@
 diff --git a/CHANGELOG.md b/CHANGELOG.md
-index 1738229202dc4aea3c5409b4c92c019beb1622d5..c7b136cf55f55a78e8c40f12fc365095ceecd0b0 100644
+index 1738229202dc4aea3c5409b4c92c019beb1622d5..8a2b36afcc4b974f9eca1127dfb526b2ee80136a 100644
 --- a/CHANGELOG.md
 +++ b/CHANGELOG.md
-@@ -5,6 +5,77 @@ All notable player-facing changes. For the full feature reference see
+@@ -5,6 +5,88 @@ All notable player-facing changes. For the full feature reference see
  
  ## Unreleased
  
++### PokeMan Journey v5.4.1 — early Kanto return
++
++- Added the intended early regional round trip: immediately after receiving
++  the Johto starter, speaking with Professor Elm can return the player to
++  Cinnabar Island to finish Kanto without defeating either region's Elite
++  Four. The Johto party is stored safely using the existing region-transfer
++  rules, and an early HUB PASS return resumes at New Bark Town until Goldenrod
++  City has actually been visited.
++- This is a save-compatible follow-up to v5.4; no new save is required when
++  continuing a clean canonical-roster playthrough.
++
 +### PokeMan Journey v5.4 — canonical roster reset
 +
 +- Removed every custom Pokémon from the **playable roster**: Phycub, Embruin,
@@ -80,7 +91,7 @@ index 1738229202dc4aea3c5409b4c92c019beb1622d5..c7b136cf55f55a78e8c40f12fc365095
  > **Save format is now v9** (from v1.4's v7). v1.4 saves migrate forward
  > automatically on load — v8 for the reworked Pokémon Center 1F layouts, v9
  > for the Johto work below. Saves from v1.3.6 or earlier are still refused —
-@@ -29,6 +100,9 @@ All notable player-facing changes. For the full feature reference see
+@@ -29,6 +111,9 @@ All notable player-facing changes. For the full feature reference see
  
  ### World & systems
  
@@ -130,13 +141,13 @@ index 0f9a50116a2d0b0f509c529aae98d85c969894f2..3866a159555adf40de1a38d2e782ed20
  The **trainer card has three badge pages** — L and R flip between Hoenn, Kanto and Johto.
  
 diff --git a/Makefile b/Makefile
-index 13a003ed652947f5c0b749ed7e1cf615a50d5e1c..bd4a1c25a1a26a4c65e7f67199e782c9ec23b773 100644
+index 13a003ed652947f5c0b749ed7e1cf615a50d5e1c..973603d38ad655e73ca835836f775cb48c114b96 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -1,5 +1,5 @@
  GAME_VERSION ?= EMERALD
 -TITLE        ?= POKEMON WRLD
-+TITLE        ?= POKEMAN V540
++TITLE        ?= POKEMAN V541
  GAME_CODE    ?= BPEE
  BUILD_NAME   ?= emerald
  MAP_VERSION  ?= emerald
@@ -145,12 +156,12 @@ index 13a003ed652947f5c0b749ed7e1cf615a50d5e1c..bd4a1c25a1a26a4c65e7f67199e782c9
  # GBA rom header
  MAKER_CODE  := 01
 -REVISION    := 0
-+REVISION    := 15
++REVISION    := 16
  KEEP_TEMPS  ?= 0
  
  # `File name`.gba
 -FILE_NAME := pokemonworld
-+FILE_NAME := pokeman_journey_v540_canonical
++FILE_NAME := pokeman_journey_v541_early_return
  BUILD_DIR := build
  
  # Executes the Test Runner System that checks that all mechanics work as expected
@@ -2426,10 +2437,76 @@ index 59de1d10fbef337fa0936abd74a92f5e452b1954..ac1cb989a2016af2314e7061444f1d14
  	.string "of the guy who dumped me…$"
 -
 diff --git a/data/maps/NewBarkTown_Lab/scripts.inc b/data/maps/NewBarkTown_Lab/scripts.inc
-index 227b930ba9717a33eba567faab5e2357dd748f6a..24e634a51328033fadf822ef45d8c539ca2bd3f6 100644
+index 227b930ba9717a33eba567faab5e2357dd748f6a..f1955956147c6929544e2ea054d85266ba744b11 100644
 --- a/data/maps/NewBarkTown_Lab/scripts.inc
 +++ b/data/maps/NewBarkTown_Lab/scripts.inc
-@@ -178,8 +178,8 @@ NewBarkTown_Lab_EventScript_ChikoritaBall::
+@@ -83,7 +83,10 @@ NewBarkTown_Lab_EventScript_Elm::
+ 	goto_if_eq VAR_NEWBARKTOWN_LABSTATE, 8, NewBarkTown_Lab_EventScript_ElmKimono
+ 	goto_if_eq VAR_NEWBARKTOWN_LABSTATE, 9, NewBarkTown_Lab_EventScript_ElmLeague
+ 	goto_if_eq VAR_NEWBARKTOWN_LABSTATE, 10, NewBarkTown_Lab_EventScript_ElmSSTicket
++	goto_if_unset FLAG_JOHTO_STARTER_CHOSEN, NewBarkTown_Lab_EventScript_ElmContinueJohtoStory
++	goto_if_unset FLAG_KANTO_CHAMPION, NewBarkTown_Lab_EventScript_ElmOfferEarlyKantoReturn
+ 
++NewBarkTown_Lab_EventScript_ElmContinueJohtoStory::
+ 	goto_if_set FLAG_SHOWN_ELM_TOGEPI, NewBarkTown_Lab_EventScript_Elm_CallMe
+ 	call_if_unset FLAG_SHOWN_ELM_TOGEPI, NewBarkTown_Lab_EventScript_Elm_Check_Togepi
+ 	goto_if_ge VAR_GOLDENROD_CITY_STATE, 1, NewBarkTown_Lab_EventScript_Elm_Check_WhereIsEgg
+@@ -96,6 +99,32 @@ NewBarkTown_Lab_EventScript_Elm::
+ 	goto_if_eq VAR_NEWBARKTOWN_LABSTATE, 1, NewBarkTown_Lab_EventScript_ElmChoosePokemon
+ 	end
+ 
++@ Journey regional progression: Kanto is not complete when the Volcano Badge
++@ opens Johto. Once the player has accepted Elm's starter, talking to Elm must
++@ provide an immediate route back to Cinnabar rather than waiting for the Johto
++@ League / S.S. Ticket scene. A declined trip falls through to Elm's normal
++@ Johto story dialogue so this convenience route cannot block progression.
++NewBarkTown_Lab_EventScript_ElmOfferEarlyKantoReturn::
++	msgbox NewBarkTown_Lab_Text_ElmEarlyKantoReturn, MSGBOX_YESNO
++	goto_if_eq VAR_RESULT, NO, NewBarkTown_Lab_EventScript_ElmContinueJohtoStory
++	setvar VAR_0x8008, 0 @ REGION_KANTO, for the storage-capacity probe
++	callnative RegionHub_ScrCanDepositParty
++	goto_if_eq VAR_RESULT, FALSE, NewBarkTown_Lab_EventScript_ElmEarlyKantoNoRoom
++	setvar VAR_RESULT, 0 @ REGION_KANTO
++	callnative RegionHub_ScrEnterRegion
++	setrespawn HEAL_LOCATION_CINNABAR_ISLAND
++	closemessage
++	warp MAP_CINNABAR_ISLAND, 14, 12
++	waitstate
++	release
++	end
++
++NewBarkTown_Lab_EventScript_ElmEarlyKantoNoRoom::
++	msgbox NewBarkTown_Lab_Text_ElmEarlyKantoNoRoom, MSGBOX_DEFAULT
++	closemessage
++	release
++	end
++
+ NewBarkTown_Lab_EventScript_ElmAideIsWaiting::
+ 	msgbox NewBarkTown_Lab_Text_ElmAideIsWaiting, MSGBOX_DEFAULT
+ 	closemessage
+@@ -108,6 +137,21 @@ NewBarkTown_Lab_Text_ElmAideIsWaiting:
+ 	.string "My aide is still waiting for you\n"
+ 	.string "In VIOLET CITY!$"
+ 
++NewBarkTown_Lab_Text_ElmEarlyKantoReturn:
++	.string "ELM: KANTO still needs you,\n"
++	.string "doesn't it?\p"
++	.string "I can send you straight to\n"
++	.string "CINNABAR ISLAND right away.\p"
++	.string "Your JOHTO team will wait in\n"
++	.string "the PC while you're away.\p"
++	.string "Return to KANTO now?$"
++
++NewBarkTown_Lab_Text_ElmEarlyKantoNoRoom:
++	.string "ELM: Your PC or MAILBOX can't\n"
++	.string "hold your whole team.\p"
++	.string "Make some room, then ask me\n"
++	.string "again about the KANTO trip.$"
++
+ NewBarkTown_Lab_EventScript_ElmIntro::
+ 	msgbox NewBarkTown_Lab_Text_ElmIntro, MSGBOX_YESNO
+ 	goto_if_eq VAR_RESULT, YES, NewBarkTown_Lab_EventScript_ElmAccepted
+@@ -178,8 +222,8 @@ NewBarkTown_Lab_EventScript_ChikoritaBall::
  
  NewBarkTown_Lab_EventScript_ChikoritaBall_Choice::
  	callnative DisableStaticRandomizer
@@ -2440,7 +2517,7 @@ index 227b930ba9717a33eba567faab5e2357dd748f6a..24e634a51328033fadf822ef45d8c539
  	showmonpic PLAYER_STARTER_SPECIES, 10, 3
  	playmoncry PLAYER_STARTER_SPECIES, CRY_MODE_NORMAL
  	bufferspeciesname STR_VAR_1, PLAYER_STARTER_SPECIES
-@@ -200,8 +200,8 @@ NewBarkTown_Lab_EventScript_CyndaquilBall::
+@@ -200,8 +244,8 @@ NewBarkTown_Lab_EventScript_CyndaquilBall::
  
  NewBarkTown_Lab_EventScript_CyndaquilBall_Choice::
  	callnative DisableStaticRandomizer
@@ -2451,7 +2528,7 @@ index 227b930ba9717a33eba567faab5e2357dd748f6a..24e634a51328033fadf822ef45d8c539
  	showmonpic PLAYER_STARTER_SPECIES, 10, 3
  	playmoncry PLAYER_STARTER_SPECIES, CRY_MODE_NORMAL
  	bufferspeciesname STR_VAR_1, PLAYER_STARTER_SPECIES
-@@ -222,8 +222,8 @@ NewBarkTown_Lab_EventScript_TotodileBall::
+@@ -222,8 +266,8 @@ NewBarkTown_Lab_EventScript_TotodileBall::
  
  NewBarkTown_Lab_EventScript_TotodileBall_Choice::
  	callnative DisableStaticRandomizer
@@ -2462,7 +2539,7 @@ index 227b930ba9717a33eba567faab5e2357dd748f6a..24e634a51328033fadf822ef45d8c539
  	showmonpic PLAYER_STARTER_SPECIES, 10, 3
  	playmoncry PLAYER_STARTER_SPECIES, CRY_MODE_NORMAL
  	bufferspeciesname STR_VAR_1, PLAYER_STARTER_SPECIES
-@@ -356,9 +356,9 @@ NewBarkTown_Lab_EventScript_HideChikorita::
+@@ -356,9 +400,9 @@ NewBarkTown_Lab_EventScript_HideChikorita::
  NewBarkTown_Lab_EventScript_PoliceEpisode::
  	lock
  	setmetatile 7, 1, METATILE_R26_21_Broken_Window, TRUE
@@ -2780,10 +2857,32 @@ index 5c0d880b555d6ed74b625012143bb913176f484f..c64a298273a953bf2b702a8e2177b6d3
  	.string "unmask them.$"
 -
 diff --git a/data/maps/RegionHub/scripts.inc b/data/maps/RegionHub/scripts.inc
-index d74f8bab8a4e5f623467a7038d53bf4152d8e6d4..bf8cf58dda103d5e1ae5fabd8ac1d1e5df20c47f 100644
+index d74f8bab8a4e5f623467a7038d53bf4152d8e6d4..5538c8ccdf7c954d83f4c7359254b962b3cfc52f 100644
 --- a/data/maps/RegionHub/scripts.inc
 +++ b/data/maps/RegionHub/scripts.inc
-@@ -304,12 +304,8 @@ RegionHub_EventScript_HubPassBagFull::
+@@ -189,11 +189,21 @@ RegionHub_EventScript_AttendantJohtoBoard::
+ 	end
+ 
+ RegionHub_EventScript_ReturnJohto::
++	@ Before the player has actually reached Goldenrod, a hub return must not
++	@ skip the early Johto story. This covers players who accepted Elm's starter,
++	@ returned to unfinished Kanto, then used the HUB PASS to resume Johto.
++	goto_if_unset FLAG_VISITED_GOLDENROD_CITY, RegionHub_EventScript_ReturnJohtoNewBark
+ 	warp MAP_GOLDENROD_CITY_TRAIN_STATION, 0
+ 	waitstate
+ 	release
+ 	end
+ 
++RegionHub_EventScript_ReturnJohtoNewBark::
++	warp MAP_NEW_BARK_TOWN, 0
++	waitstate
++	release
++	end
++
+ RegionHub_EventScript_AttendantHoenn::
+ 	lock
+ 	faceplayer
+@@ -304,12 +314,8 @@ RegionHub_EventScript_HubPassBagFull::
  	setvar VAR_RESULT, FALSE
  	return
  
@@ -2798,7 +2897,7 @@ index d74f8bab8a4e5f623467a7038d53bf4152d8e6d4..bf8cf58dda103d5e1ae5fabd8ac1d1e5
  @ (return warps exist at :71-75, :93-97, :127-131), and a cautious player can freeze on a
  @ decision that does not actually matter. The question goes LAST so it sits above the YES/NO box.
  RegionHub_Text_TravelKanto:
-@@ -318,9 +314,9 @@ RegionHub_Text_TravelKanto:
+@@ -318,9 +324,9 @@ RegionHub_Text_TravelKanto:
  	.string "the PC BOXES when you switch\l"
  	.string "regions, and any MAIL they hold\l"
  	.string "moves to your PC mailbox.\p"
@@ -2811,7 +2910,7 @@ index d74f8bab8a4e5f623467a7038d53bf4152d8e6d4..bf8cf58dda103d5e1ae5fabd8ac1d1e5
  	.string "You can return to WORLD TRANSIT\n"
  	.string "and try another region anytime.\p"
  	.string "Travel to KANTO?$"
-@@ -331,9 +327,9 @@ RegionHub_Text_TravelJohto:
+@@ -331,9 +337,9 @@ RegionHub_Text_TravelJohto:
  	.string "the PC BOXES when you switch\l"
  	.string "regions, and any MAIL they hold\l"
  	.string "moves to your PC mailbox.\p"
@@ -2824,7 +2923,7 @@ index d74f8bab8a4e5f623467a7038d53bf4152d8e6d4..bf8cf58dda103d5e1ae5fabd8ac1d1e5
  	.string "You can return to WORLD TRANSIT\n"
  	.string "and try another region anytime.\p"
  	.string "Travel to JOHTO?$"
-@@ -344,9 +340,9 @@ RegionHub_Text_TravelHoenn:
+@@ -344,9 +350,9 @@ RegionHub_Text_TravelHoenn:
  	.string "the PC BOXES when you switch\l"
  	.string "regions, and any MAIL they hold\l"
  	.string "moves to your PC mailbox.\p"
@@ -2837,7 +2936,7 @@ index d74f8bab8a4e5f623467a7038d53bf4152d8e6d4..bf8cf58dda103d5e1ae5fabd8ac1d1e5
  	.string "You can return to WORLD TRANSIT\n"
  	.string "and try another region anytime.\p"
  	.string "Travel to HOENN?$"
-@@ -1649,9 +1645,9 @@ RegionHub_Text_TourJohto:
+@@ -1649,9 +1655,9 @@ RegionHub_Text_TourJohto:
  	.string "whenever you switch regions. The\l"
  	.string "BOXES are shared, so nothing is\l"
  	.string "ever lost.\p"
@@ -8234,7 +8333,7 @@ index 0000000000000000000000000000000000000000..02374e96cef176b722dc1ff0fd33016f
 +    CalculateMonStats(mew);
 +}
 diff --git a/src/main_menu.c b/src/main_menu.c
-index 36e1046765f80574154613e954c60d2251c3a04a..ea3f48a2ba672061dfc438551273c68884951e03 100644
+index 36e1046765f80574154613e954c60d2251c3a04a..c6ebdee73de76ff510d16d7f5478104c3132d39c 100644
 --- a/src/main_menu.c
 +++ b/src/main_menu.c
 @@ -269,7 +269,9 @@ static const u8 gText_RegionSaveDamaged[] = _("Part of this save file's region\n
@@ -8244,7 +8343,7 @@ index 36e1046765f80574154613e954c60d2251c3a04a..ea3f48a2ba672061dfc438551273c688
 -static const u8 gText_MainMenuNewGame[] = _("NEW GAME");
 +// Keep the playtest version visible in-game so testers cannot mistake an older
 +// cached ROM for the current build.
-+static const u8 gText_MainMenuNewGame[] = _("NEW GAME  V5.4");
++static const u8 gText_MainMenuNewGame[] = _("NEW GAME  V5.4.1");
  static const u8 gText_MainMenuContinue[] = _("CONTINUE");
  static const u8 gText_MainMenuOption[] = _("OPTION");
  static const u8 gText_MainMenuMysteryGift[] = _("MYSTERY GIFT");
@@ -224335,10 +224434,10 @@ index 0000000000000000000000000000000000000000..64196c922b457be35f60fee10d1e6cde
 +}
 diff --git a/Testing/ValidateCanonicalV54.py b/Testing/ValidateCanonicalV54.py
 new file mode 100644
-index 0000000000000000000000000000000000000000..b8a04d5bbbbdf8a9b34ffa178eaa4acbe1bc09a1
+index 0000000000000000000000000000000000000000..cda681ee1d9943fd01bf9bddaf866960851401f6
 --- /dev/null
 +++ b/Testing/ValidateCanonicalV54.py
-@@ -0,0 +1,76 @@
+@@ -0,0 +1,103 @@
 +#!/usr/bin/env python3
 +"""Static release checks for PokeMan Journey v5.4's canonical-roster reset."""
 +
@@ -224411,8 +224510,35 @@ index 0000000000000000000000000000000000000000..b8a04d5bbbbdf8a9b34ffa178eaa4acb
 +for species in ("SPECIES_BULBASAUR", "SPECIES_MUDKIP", "SPECIES_CYNDAQUIL"):
 +    require(species in erika, f"Erika's official starter recovery is missing {species}")
 +
-+require("NEW GAME  V5.4" in read("src/main_menu.c"), "main menu version is not v5.4")
-+require("POKEMAN V540" in read("Makefile"), "ROM header title is not v5.4")
++elm = read("data/maps/NewBarkTown_Lab/scripts.inc")
++for expected in (
++    "goto_if_unset FLAG_JOHTO_STARTER_CHOSEN, NewBarkTown_Lab_EventScript_ElmContinueJohtoStory",
++    "goto_if_unset FLAG_KANTO_CHAMPION, NewBarkTown_Lab_EventScript_ElmOfferEarlyKantoReturn",
++    "goto_if_eq VAR_RESULT, NO, NewBarkTown_Lab_EventScript_ElmContinueJohtoStory",
++    "callnative RegionHub_ScrCanDepositParty",
++    "callnative RegionHub_ScrEnterRegion",
++    "setrespawn HEAL_LOCATION_CINNABAR_ISLAND",
++    "warp MAP_CINNABAR_ISLAND, 14, 12",
++):
++    require(expected in elm, f"early Elm return is missing: {expected}")
++
++hub = read("data/maps/RegionHub/scripts.inc")
++require(
++    "goto_if_unset FLAG_VISITED_GOLDENROD_CITY, RegionHub_EventScript_ReturnJohtoNewBark" in hub,
++    "an early HUB PASS return can skip ahead to Goldenrod",
++)
++require(
++    "RegionHub_EventScript_ReturnJohtoNewBark::\n\twarp MAP_NEW_BARK_TOWN, 0" in hub,
++    "the early Johto resume does not return to New Bark Town",
++)
++
++require("NEW GAME  V5.4.1" in read("src/main_menu.c"), "main menu version is not v5.4.1")
++require("POKEMAN V541" in read("Makefile"), "ROM header title is not v5.4.1")
++require("REVISION    := 16" in read("Makefile"), "ROM revision is not v5.4.1 revision 16")
++require(
++    "FILE_NAME := pokeman_journey_v541_early_return" in read("Makefile"),
++    "ROM output filename is not the v5.4.1 early-return build",
++)
 +
 +print("v5.4 canonical roster validation passed")
 diff --git a/Testing/ValidateDanyipLine.py b/Testing/ValidateDanyipLine.py
