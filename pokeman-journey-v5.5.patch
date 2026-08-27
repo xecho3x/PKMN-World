@@ -4710,7 +4710,7 @@ index a6d496120d1b84757df35810b9b876e278e3a365..18c980bb39e266e6a534444ce38ab700
  }
 -
 diff --git a/src/battle_util.c b/src/battle_util.c
-index e76869b5e29d5d07e2fdb336094cecdd198514e1..030312da9a9d04ecdc8d1174f0d045b40ce76b7f 100644
+index e76869b5e29d5d07e2fdb336094cecdd198514e1..6ed0a86e991a018f58b9d119e3a9b49c66ea8485 100644
 --- a/src/battle_util.c
 +++ b/src/battle_util.c
 @@ -3772,6 +3772,23 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
@@ -4721,9 +4721,9 @@ index e76869b5e29d5d07e2fdb336094cecdd198514e1..030312da9a9d04ecdc8d1174f0d045b4
 +            if (IsBattlerTurnDamaged(battler, EXCLUDING_SUBSTITUTES)
 +             && IsBattlerAlive(battler)
 +             && HadMoreThanHalfHpNowDoesnt(battler)
-+             && !(gBattleStruct->rekindleActivated & gBitTable[battler]))
++             && !(gBattleStruct->rekindleActivated & (1u << battler)))
 +            {
-+                gBattleStruct->rekindleActivated |= gBitTable[battler];
++                gBattleStruct->rekindleActivated |= (1u << battler);
 +                gEffectBattler = gBattlerAbility = battler;
 +                SetHealAmount(battler, GetNonDynamaxMaxHP(battler) / 4);
 +                if (CompareStat(battler, STAT_ATK, MAX_STAT_STAGE, CMP_LESS_THAN, ABILITY_NONE))
