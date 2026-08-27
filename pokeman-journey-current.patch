@@ -4375,10 +4375,10 @@ index a7db271744d34121f6394886318236fbcb66ea10..9f1529094c441077f882c54abbf61f23
  
  #if P_NEW_EVOS_IN_REGIONAL_DEX
 diff --git a/include/constants/species.h b/include/constants/species.h
-index bf5122e13ff4beb871550ad284bfbf45e3dfed2b..d334528eba42ed2cac0de768a2a703efcbea6da0 100644
+index bf5122e13ff4beb871550ad284bfbf45e3dfed2b..3c92ffe5a4a3cce674db71d71f87a074da3d9619 100644
 --- a/include/constants/species.h
 +++ b/include/constants/species.h
-@@ -1698,6 +1698,48 @@ enum __attribute__((packed)) Species
+@@ -1698,6 +1698,49 @@ enum __attribute__((packed)) Species
      NUM_SPECIES = SPECIES_EGG,
  };
  
@@ -4411,12 +4411,13 @@ index bf5122e13ff4beb871550ad284bfbf45e3dfed2b..d334528eba42ed2cac0de768a2a703ef
 +#define SPECIES_DANNY        SPECIES_SHINX
 +#define SPECIES_DANIMAL      SPECIES_LUXIO
 +
-+// Pokémon Journey v5.5 permanent custom families. These nine consecutive
-+// dormant Sinnoh IDs follow the v5.3 compatibility range without changing the
-+// species-table size or any existing save identifiers.
++// Pokémon Journey v5.5 permanent custom families. They reuse disabled Sinnoh
++// compatibility slots without changing the species-table size or any existing
++// save identifiers. Riptalon and Tsunamight use the adjacent Mothim/Combee
++// slots because this fork enables Budew and Roserade as cross-generation evos.
 +#define SPECIES_FINRUSH      SPECIES_LUXRAY
-+#define SPECIES_RIPTALON     SPECIES_BUDEW
-+#define SPECIES_TSUNAMIGHT   SPECIES_ROSERADE
++#define SPECIES_RIPTALON     SPECIES_MOTHIM_PLANT
++#define SPECIES_TSUNAMIGHT   SPECIES_COMBEE
 +#define SPECIES_GECKORE      SPECIES_CRANIDOS
 +#define SPECIES_CRAGUAN      SPECIES_RAMPARDOS
 +#define SPECIES_MONOLISK     SPECIES_SHIELDON
@@ -115386,7 +115387,7 @@ index 0000000000000000000000000000000000000000..2397b9cde429f103413e474202ee7b1e
 +    main()
 diff --git a/Testing/ValidateV55CustomFamilies.py b/Testing/ValidateV55CustomFamilies.py
 new file mode 100644
-index 0000000000000000000000000000000000000000..9bd79eb7367c4ff6b5ff45c41574c521b8d9cfbe
+index 0000000000000000000000000000000000000000..4a8eccfed996a9960fcfa15e882b8cb9e0e6b670
 --- /dev/null
 +++ b/Testing/ValidateV55CustomFamilies.py
 @@ -0,0 +1,120 @@
@@ -115425,8 +115426,8 @@ index 0000000000000000000000000000000000000000..9bd79eb7367c4ff6b5ff45c41574c521
 +
 +families = {
 +    "FINRUSH": ("LUXRAY", "WATER", "LIGHTSPEED", "RIPTALON", 42),
-+    "RIPTALON": ("BUDEW", "WATER", "LIGHTSPEED", "TSUNAMIGHT", 54),
-+    "TSUNAMIGHT": ("ROSERADE", "WATER, TYPE_FIGHTING", "LIGHTSPEED", None, 64),
++    "RIPTALON": ("MOTHIM_PLANT", "WATER", "LIGHTSPEED", "TSUNAMIGHT", 54),
++    "TSUNAMIGHT": ("COMBEE", "WATER, TYPE_FIGHTING", "LIGHTSPEED", None, 64),
 +    "GECKORE": ("CRANIDOS", "GRASS", "STONEHEART", "CRAGUAN", 42),
 +    "CRAGUAN": ("RAMPARDOS", "GRASS", "STONEHEART", "MONOLISK", 54),
 +    "MONOLISK": ("SHIELDON", "GRASS, TYPE_ROCK", "STONEHEART", None, 64),
